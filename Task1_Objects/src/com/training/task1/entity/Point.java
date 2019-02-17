@@ -1,7 +1,4 @@
 package com.training.task1.entity;
-import java.util.Objects;
-
-// TODO: find an alternative way for hashCode method
 
 public final class Point {
     private double x;
@@ -16,7 +13,7 @@ public final class Point {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(final double x) {
         this.x = x;
     }
 
@@ -24,29 +21,34 @@ public final class Point {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(final double y) {
         this.y = y;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return Double.compare(point.getX(), getX()) == 0 &&
-                Double.compare(point.getY(), getY()) == 0;
+        return Double.compare(point.getX(), getX()) == 0
+                && Double.compare(point.getY(), getY()) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getX(), getY());
+        int hash = 7;
+        hash = 31 * hash + (int) x;
+        hash = 31 * hash + (int) y;
+        return hash;
     }
 
     @Override
     public String toString() {
         return "Point{"
-                + "x=" + x +
-                ", y=" + y +
-                '}';
+                + "x=" + x
+                + ", y=" + y
+                + '}';
     }
 }

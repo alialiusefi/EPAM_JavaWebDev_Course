@@ -8,13 +8,11 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-//https://habr.com/ru/post/121234/
-
-public class AreaCalculatorTest {
+public class PerimeterCalculatorTest {
 
     private Quadrilateral[] quadrilateral;
     private Point[][] points;
-    private AreaCalculator areaCalculator = new AreaCalculator();
+    private PerimeterCalculator perimeterCalculator = new PerimeterCalculator();
 
     @BeforeClass
     public void setUp()
@@ -39,25 +37,27 @@ public class AreaCalculatorTest {
                 new Point(0.0,-5.5)
         };
         quadrilateral = new Quadrilateral[]
-        {
-                new Quadrilateral(points[0]),
-                new Quadrilateral(points[1]),
-                new Quadrilateral(points[2])
-        };
+                {
+                        new Quadrilateral(points[0]),
+                        new Quadrilateral(points[1]),
+                        new Quadrilateral(points[2])
+                };
     }
+
     @DataProvider
-    public Object[][] calculateAreaData()
+    public Object[][] calculatePerimeterData()
     {
         return new Object[][]
                 {
-                        {quadrilateral[0],4},
-                        {quadrilateral[1],12},
-                        {quadrilateral[2],11}
+                        {quadrilateral[0],8},
+                        {quadrilateral[1],21.5406},
+                        {quadrilateral[2],38.8329}
                 };
     }
-    @Test(dataProvider = "calculateAreaData")
-    public void testCalculateArea(Quadrilateral quadrilateral,double expected) {
-        final double actual = areaCalculator.calculateArea(quadrilateral);
-        assertEquals(actual,expected);
+
+    @Test(dataProvider = "calculatePerimeterData")
+    public void testCalculatePerimeter(Quadrilateral quadrilateral, double expected) {
+        double res = perimeterCalculator.calculatePerimeter(quadrilateral);
+        assertEquals(res,expected,0.0001);
     }
 }
