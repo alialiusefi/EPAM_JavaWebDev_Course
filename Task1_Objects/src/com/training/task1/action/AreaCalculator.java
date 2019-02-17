@@ -1,16 +1,26 @@
 package com.training.task1.action;
 
+import com.training.task1.entity.Point;
 import com.training.task1.entity.Quadrilateral;
 
-public class AreaCalculator {
+public final class AreaCalculator {
 
-    public double calculateArea(Quadrilateral obj)
-    {
-        double res = (obj.getX1().getX() - obj.getX2().getX()) * (obj.getX1().getY() + obj.getX2().getY());
-        res = res + (obj.getX2().getX() - obj.getX3().getX()) * (obj.getX2().getY() + obj.getX3().getY());
-        res = res + (obj.getX3().getX() - obj.getX4().getX()) * (obj.getX3().getY() + obj.getX4().getY());
-        res = res + (obj.getX4().getX() - obj.getX1().getX()) * (obj.getX4().getY() + obj.getX1().getY());
-        return res / 2;
+    public double calculateArea(final Quadrilateral obj) {
+        double res = 0;
+        int amountOfCoordinates = 4;
+        Point[] points = obj.getPoints();
+        double[] xCoord = new double[amountOfCoordinates];
+        double[] yCoord = new double[amountOfCoordinates];
+        for (int i = 0; i < points.length; i++) {
+            xCoord[i] = points[i].getX();
+            yCoord[i] = points[i].getY();
+        }
+        int j = points.length - 1;
+        for (int i = 0; i < points.length; i++) {
+            res += (xCoord[j] + xCoord[i]) * (yCoord[j] - yCoord[i]);
+            j = i;
+        }
+        return Math.abs(res / 2);
     }
 
 
