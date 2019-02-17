@@ -14,9 +14,7 @@ public final class PropertyChecker {
         }
         return true;
     }
-
-    //public boolean isConcave(Quadrilateral quadrilateral)
-
+    
     public boolean isSquare(final Quadrilateral obj) {
         return isSidesEqual(obj);
     }
