@@ -8,8 +8,6 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-//https://habr.com/ru/post/121234/
-
 public class AreaCalculatorTest {
 
     private Quadrilateral[] quadrilateral;

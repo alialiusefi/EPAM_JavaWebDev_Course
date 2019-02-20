@@ -55,17 +55,28 @@ public class PropertyCheckerTest {
     {
          return new Object[][]
         {
-                {quadrilateral[0],true},
-                {quadrilateral[1],true},
-                {quadrilateral[2],false},
-                {quadrilateral[3],true}
+                {points[0],true},
+                {points[1],true},
+                {points[2],false},
+                {points[3],true}
 
         };
     }
-
+    @DataProvider
+    public Object[][] testIsConcaveData() {
+        return new Object[][]
+                {
+                        {new Quadrilateral(new Point[]{
+                                new Point(1.5, 1.5),
+                                new Point(2.5, 5.5),
+                                new Point(5.5, 5.5),
+                                new Point(5.5, 2.5)
+                        }), false}
+                };
+    }
     @Test(dataProvider = "testIsQuadrilateralData")
-    public void testIsQuadrilateral(Quadrilateral quadrilateral, boolean expected) {
-        boolean actual = propertyChecker.isQuadrilateral(quadrilateral);
+    public void testIsQuadrilateral(Point[] points, boolean expected) {
+        boolean actual = propertyChecker.isQuadrilateral(points);
         assertEquals(actual,expected);
     }
 
@@ -84,5 +95,11 @@ public class PropertyCheckerTest {
     public void testIsTrapezoid() {
         boolean actual = propertyChecker.isTrapezoid(quadrilateral[3]);
         assertTrue(actual);
+    }
+
+    @Test(dataProvider = "testIsConcaveData")
+    public void testIsConcave(Quadrilateral quadrilateral, boolean expected) {
+        boolean actual = propertyChecker.isConcave(quadrilateral);
+        assertEquals(actual,expected);
     }
 }

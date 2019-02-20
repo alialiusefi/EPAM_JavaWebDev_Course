@@ -1,5 +1,8 @@
 package com.training.task1.entity;
 
+/**
+ * Represents a coordinate/point in coordinate geometry
+ */
 public final class Point {
     private double x;
     private double y;
