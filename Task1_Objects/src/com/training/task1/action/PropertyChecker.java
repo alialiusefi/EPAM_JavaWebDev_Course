@@ -20,7 +20,6 @@ public final class PropertyChecker {
         }
         return true;
     }
-
     /**
      * @param quadrilateral
      * @return returns true if a quadrilateral is concave, otherwise false
@@ -42,8 +41,7 @@ public final class PropertyChecker {
         }
         return c;
     }
-
-    /**
+   /**
      * @param obj
      * @return returns true if the quadrilateral is a square, otherwise false
      */
