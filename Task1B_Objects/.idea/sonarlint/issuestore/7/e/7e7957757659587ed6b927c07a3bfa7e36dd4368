@@ -1,0 +1,5 @@
+
+esquid:S2094"BRemove this empty class, write its code or make it an "interface".(ãıºØúÿÿÿÿ8­Ãöú’-
+>squid:S2326"T is not used in the class.(ãıºØúÿÿÿÿ8ÓñâÍ’-
+`squid:S1610"=Convert the abstract class "Specification" into an interface.(ãıºØúÿÿÿÿ8­Ãöú’-
+\squid:UselessImportCheck"1Remove this unused import 'java.util.Comparator'.(î¹ó¹8­Ãöú’-

@@ -2,6 +2,9 @@ package com.training.task1.action;
 
 import com.training.task1.entity.Point;
 import com.training.task1.entity.Quadrilateral;
+import com.training.task1.exception.InvalidDataException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -13,6 +16,7 @@ public class PerimeterCalculatorTest {
     private Quadrilateral[] quadrilateral;
     private Point[][] points;
     private PerimeterCalculator perimeterCalculator = new PerimeterCalculator();
+    public static Logger LOGGER = LogManager.getLogger(PerimeterCalculatorTest.class);
 
     @BeforeClass
     public void setUp()
@@ -36,12 +40,18 @@ public class PerimeterCalculatorTest {
                 new Point(0.0,4.7),
                 new Point(0.0,-5.5)
         };
-        quadrilateral = new Quadrilateral[]
-                {
-                        new Quadrilateral(points[0]),
-                        new Quadrilateral(points[1]),
-                        new Quadrilateral(points[2])
-                };
+        try{
+            quadrilateral = new Quadrilateral[]
+                    {
+                            new Quadrilateral(points[0]),
+                            new Quadrilateral(points[1]),
+                            new Quadrilateral(points[2])
+                    };
+        }
+        catch (InvalidDataException e)
+        {
+            LOGGER.warn(e.getMessage(),e);
+        }
     }
 
     @DataProvider
