@@ -1,0 +1,2 @@
+//0<amount of cashiers>
+//1<amount of customers> 2<time from> 3<time to>
