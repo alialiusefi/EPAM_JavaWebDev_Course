@@ -1,5 +1,7 @@
 package com.training.task1.entity;
 
+import com.training.task1.exception.InvalidDataException;
+
 import java.util.Arrays;
 
 /**
@@ -9,8 +11,12 @@ public final class Quadrilateral {
 
     private Point[] points;
 
-    public Quadrilateral(Point[] points) {
-        this.points = points;
+    public Quadrilateral(Point[] points) throws InvalidDataException {
+        if (points.length == 4) {
+            this.points = points;
+        } else {
+            throw new InvalidDataException("Point array length is not equal to 4");
+        }
     }
 
     private Point[] getPoints() {
@@ -25,7 +31,7 @@ public final class Quadrilateral {
     }
 
     public void setPoints(final int index, final Point point) {
-        if (index < points.length && index >= 0) {
+        if (index < points.length && index >= 0 && point != null) {
             this.points[index] = point;
         }
     }

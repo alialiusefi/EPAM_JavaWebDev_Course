@@ -1,41 +1,36 @@
 package com.training.task1.validator;
 
-import com.training.task1.exception.InvalidDataInputException;
+import com.training.task1.exception.InvalidDataException;
+import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 /**
- * Validates data, that is a line, given and should match the parsing structure
+ * Validates list of pair of points.
  */
 public final class DataValidator {
-
-    public static final Logger logger = LogManager.getLogger(DataValidator.class);
-    private static final String STRUCTURE_REGEX = "\\d+(\\.\\d+)?,\\d+(\\.\\d+)?";
-    private static final int AMOUNT_OF_POINTS = 4;
-
+    public static final String POINT_REGEX = "^-?\\d+(\\.\\d+)?$";
+    public static final Logger LOGGER = LogManager.getLogger(DataValidator.class);
     /**
-     *
-     * @param line points/coordinates to create quadrilateral "x.x,y.y x.x,y.y x.x,y.y x.x,y.y"
-     * @return returns an array of 4 elements that each one of them contains an x and y coordinate
-     * @throws InvalidDataInputException thrown if line inputed has incorrect data or structure
+     * @param pointList list of pair of points to validate
+     * @return returns the same list of the data is correct else throws exception
+     * @throws InvalidDataException exception is thrown when data is incorrect.
      */
-    public String[][] validatePoints(final String line) throws InvalidDataInputException {
-        String[][] validatedData = new String[AMOUNT_OF_POINTS][2];
-        String[] tokens = line.trim().split(" ");
-        int count = 0;
-        if (tokens.length == AMOUNT_OF_POINTS) {
-            for (String token : tokens) {
-                if (token.matches(STRUCTURE_REGEX)) {
-                    String[] points = token.split(",");
-                    validatedData[count++] = points;
-                } else {
-                    throw new InvalidDataInputException(token
-                            + " has Incorrect structure or Invalid coordinates!");
+    public List<Pair<String, String>> validatePoints
+    (List<Pair<String, String>> pointList) throws InvalidDataException {
+        if (pointList.size() == 4) {
+            for (Pair<String, String> pair : pointList) {
+                if (!(pair.getKey().matches(POINT_REGEX)
+                        && pair.getValue().matches(POINT_REGEX))) {
+                    throw new InvalidDataException("Incorrect Point Structure or Data!");
                 }
             }
-        } else {
-            throw new InvalidDataInputException("Incorrect amount of points!");
+        } else {            throw new InvalidDataException("Incorrect amount of points!");
         }
-        return validatedData;
+        return pointList;
     }
+
+
 }

@@ -2,6 +2,9 @@ package com.training.task1.action;
 
 import com.training.task1.entity.Point;
 import com.training.task1.entity.Quadrilateral;
+import com.training.task1.exception.InvalidDataException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,13 +14,13 @@ import static org.testng.Assert.*;
 public class AreaCalculatorTest {
 
     private Quadrilateral[] quadrilateral;
-    private Point[][] points;
-    private AreaCalculator areaCalculator = new AreaCalculator();
 
+    private AreaCalculator areaCalculator = new AreaCalculator();
+    public static Logger LOGGER = LogManager.getLogger(AreaCalculatorTest.class);
     @BeforeClass
     public void setUp()
     {
-        points = new Point[3][4];
+        Point[][] points = new Point[3][4];
         points[0] = new Point[]{
                 new Point(0.0,0.0),
                 new Point(0.0,2.0),
@@ -36,12 +39,18 @@ public class AreaCalculatorTest {
                 new Point(0.0,4.7),
                 new Point(0.0,-5.5)
         };
-        quadrilateral = new Quadrilateral[]
+        try {
+            quadrilateral = new Quadrilateral[]
+                    {
+                            new Quadrilateral(points[0]),
+                            new Quadrilateral(points[1]),
+                            new Quadrilateral(points[2])
+                    };
+        }
+        catch (InvalidDataException e)
         {
-                new Quadrilateral(points[0]),
-                new Quadrilateral(points[1]),
-                new Quadrilateral(points[2])
-        };
+           LOGGER.warn(e.getMessage(),e);
+        }
     }
     @DataProvider
     public Object[][] calculateAreaData()
