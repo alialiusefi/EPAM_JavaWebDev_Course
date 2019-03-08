@@ -31,7 +31,6 @@ public final class PropertyChecker {
         }
         return true;
     }
-
     /**
      * @param quadrilateral Quadrilateral Shape Object
      * @return returns true if a quadrilateral is concave, otherwise false
@@ -53,9 +52,14 @@ public final class PropertyChecker {
         }
         return flag;
     }
+<<<<<<< HEAD
 
     /**
      * @param quadrilateral Quadrilateral Shape Object
+=======
+   /**
+     * @param obj
+>>>>>>> Task1
      * @return returns true if the quadrilateral is a square, otherwise false
      */
     public boolean isSquare(final Quadrilateral quadrilateral) {
