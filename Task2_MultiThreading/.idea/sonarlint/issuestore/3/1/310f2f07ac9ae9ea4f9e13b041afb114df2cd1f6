@@ -1,2 +1,15 @@
 
-Ysquid:S2094"BRemove this empty class, write its code or make it an "interface".(àªÅö
+Ssquid:S1481"5Remove this unused "futureRestaurant" local variable.(¬”…Ö8É”±œ–-
+Qsquid:S1481"3Remove this unused "cashierFutures" local variable.(÷¸Èë8§Ê°œ–-
+hsquid:UselessImportCheck"=Remove this unused import 'by.training.task2.entity.Cashier'.(¿»Ž¨8ÉÅµ›–-
+V
+squid:S106!"9Replace this use of System.out or System.err by a logger.(¯ï÷¼8÷¼›–-
+`squid:S1854"BRemove this useless assignment to local variable "cashierFutures".(÷¸Èë8§Ê°œ–-
+bsquid:S1854"DRemove this useless assignment to local variable "futureRestaurant".(¬”…Ö8§¶Ÿœ–-
+dsquid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(­ï­Î8—Õ¶›–-
+jsquid:UselessImportCheck
+":Remove this unused import 'java.util.concurrent.Executor'.(÷ý¶Œúÿÿÿÿ8¸”—œ–-
+Xsquid:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8—Õ¶›–-
+isquid:UselessImportCheck">Remove this unused import 'by.training.task2.entity.Customer'.(Îç…ø8Ãõ±œ–-
+V
+squid:S106"9Replace this use of System.out or System.err by a logger.(¯ï÷¼8—Õ¶›–-

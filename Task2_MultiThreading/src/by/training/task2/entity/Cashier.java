@@ -1,9 +1,9 @@
 package by.training.task2.entity;
 
-<<<<<<< HEAD
 import by.training.task2.exception.IncorrectDataException;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
@@ -36,22 +36,26 @@ public class Cashier implements Callable<Integer> {
     public Integer call() throws Exception {
         System.out.println(this.toString() + " initialized!");
         while (Restaurant.getInstance().totalUnServedCustomersCounter != 0) {
-            Customer customer;
+            Customer unOrderedcustomer;
             //unordered customer stands in the queue
-            if ((customer = getCustomerFromRestaurant()) != null) {
-                customersQueue.add(customer);
-                System.out.println(customer + " was added in queue of: " + this.toString());
+            if ((unOrderedcustomer = getCustomerFromRestaurant()) != null) {
+                customersQueue.add(unOrderedcustomer);
+                System.out.println(unOrderedcustomer + " was added in queue of: " + this.toString());
+                TimeUnit.MILLISECONDS.sleep(unOrderedcustomer.getTimeMilli());
             } else {
                 //no more unordered customers, time to serve
-                Customer customer1 = Restaurant.getInstance().getOrderedCustomer();
-                prepareFood(customer1);
-                System.out.println(this.toString() + " served " + customer1);
+                Customer orderedCustomer;
+                if((orderedCustomer = Restaurant.getInstance().getOrderedCustomer())!=null)
+                {
+                    prepareFood(orderedCustomer);
+                    System.out.println(this.toString() + " served " + orderedCustomer);
+                }
             }
             //send already ordered customers into restaurant
             if (!customersQueue.isEmpty()) {
-                Customer customer1 = customersQueue.poll();
-                Restaurant.getInstance().addOrderedCustomer(customer1);
-                System.out.println(this.toString() + "received order of" + customer1+ " and sent back to restaurant");
+                Customer unOrderedCustomerFromQueue = customersQueue.poll();
+                Restaurant.getInstance().addOrderedCustomer(unOrderedCustomerFromQueue);
+                System.out.println(this.toString() + "received order of" + unOrderedCustomerFromQueue + " and sent back to restaurant");
             }
         }
         System.out.println(this.toString() + " stopped!");
@@ -61,33 +65,9 @@ public class Cashier implements Callable<Integer> {
     private void prepareFood(Customer customer) {
         try {
             TimeUnit.MILLISECONDS.sleep(customer.getTimeMilli());
-            System.out.println(customer + " served!");
         } catch (InterruptedException r) {
             System.out.println(r.getMessage());
         }
     }
-=======
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-//Observable, State
-public class Cashier implements Runnable{
-
-    ConcurrentLinkedQueue<Customer> customersQueue;
-    //State isServing;
-    //State isAccepting;
-    //Obeserver restaurant;
-
-    //public void serveCustomer(Customer customer);
-    //public void acceptCustomer(Customer customer)
-
-    @Override
-    public void run() {
-    //serve customers one by one using certain methods
-    // acceptCustomer() , serveCustomer()
-    //
-    }
-
-
->>>>>>> master
 }
 

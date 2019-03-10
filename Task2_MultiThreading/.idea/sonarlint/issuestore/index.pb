@@ -1,8 +1,6 @@
 
 Y
 )src/by/training/task2/entity/Cashier.java,f\a\fa06d00f9ad7920ce4a1d75facf5209700f6c071
-W
-'src/by/training/task2/entity/Order.java,3\8\3825f40c35f5fb99ea8344b21fba0e238ddb934e
 Z
 *src/by/training/task2/entity/Customer.java,e\9\e943230cbbb6190fae3c370d4744ed3ccc4d8111
 V
@@ -25,3 +23,5 @@ f
 6src/by/training/task2/generator/CustomerGenerator.java,2\d\2d8a66aeb94af3247215cfa5043651603abcb39b
 _
 /src/by/training/task2/entity/Configuration.java,4\9\49a7a5339161c2bc0d86d1681fa64c45de807055
+e
+5src/by/training/task2/generator/CashierGenerator.java,7\6\769d9264cd32a07e864f721bcd15569e4222a70b
