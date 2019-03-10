@@ -1,5 +1,6 @@
 package by.training.task2.runner;
 
+<<<<<<< HEAD
 import by.training.task2.entity.Cashier;
 import by.training.task2.entity.Customer;
 import by.training.task2.entity.Restaurant;
@@ -34,4 +35,7 @@ public class Main {
     }
 
 
+=======
+public class Main {
+>>>>>>> master
 }
