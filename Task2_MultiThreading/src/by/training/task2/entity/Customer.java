@@ -5,11 +5,11 @@ import java.util.Objects;
 public class Customer {
 
     private int ID;
-    private int timeToPrepareInMilliSeconds;
+    private int timeMilli;
 
-    public Customer(int ID, int timeToPrepareInMilliSeconds) {
+    public Customer(int ID, int timeMilli) {
         this.ID = ID;
-        this.timeToPrepareInMilliSeconds = timeToPrepareInMilliSeconds;
+        this.timeMilli = timeMilli;
     }
 
     public int getID() {
@@ -20,12 +20,12 @@ public class Customer {
         this.ID = ID;
     }
 
-    public int getTimeToPrepareInMilliSeconds() {
-        return timeToPrepareInMilliSeconds;
+    public int getTimeMilli() {
+        return timeMilli;
     }
 
-    public void setTimeToPrepareInMilliSeconds(int timeToPrepareInMilliSeconds) {
-        this.timeToPrepareInMilliSeconds = timeToPrepareInMilliSeconds;
+    public void setTimeMilli(int timeMilli) {
+        this.timeMilli = timeMilli;
     }
 
     @Override
@@ -34,19 +34,19 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return getID() == customer.getID() &&
-                getTimeToPrepareInMilliSeconds() == customer.getTimeToPrepareInMilliSeconds();
+                getTimeMilli() == customer.getTimeMilli();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getID(), getTimeToPrepareInMilliSeconds());
+        return Objects.hash(getID(), getTimeMilli());
     }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "ID=" + ID +
-                ", timeToPrepareInMilliSeconds=" + timeToPrepareInMilliSeconds +
+                ", timeMilli=" + timeMilli +
                 '}';
     }
 }
