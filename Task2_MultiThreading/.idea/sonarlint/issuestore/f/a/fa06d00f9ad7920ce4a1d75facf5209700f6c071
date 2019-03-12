@@ -1,10 +1,0 @@
-
-[
-squid:S1069"9Replace this use of System.out or System.err by a logger.(ş ” ùÿÿÿÿ8Øîîœ–-
-Nsquid:S2446D"0"notify" may not wake up the appropriate thread.( ’²8æÆ›–-
-lsquid:S00116"MRename this field "ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÒŸ8ïúŒ’–-
-V
-squid:S106 "9Replace this use of System.out or System.err by a logger.(•‹›¦8¥”ƒ’–-
-„squid:S2273D"fMove this call to "notify()" into a synchronized block to be sure the monitor on "Restaurant" is held.( ’²8æÆ›–-
-V
-squid:S106?"9Replace this use of System.out or System.err by a logger.(ö©üŸ8ü®´œ–-

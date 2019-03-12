@@ -3,71 +3,75 @@ package by.training.task2.entity;
 import by.training.task2.exception.IncorrectDataException;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-public class Cashier implements Callable<Integer> {
+public final class Cashier implements Callable<Integer> {
 
-    int ID;
-    Queue<Customer> customersQueue;
-    Lock lock = new ReentrantLock();
+    private int ID;
+    private Queue<Customer> customersQueue;
 
-
-    public Cashier(int id, Queue<Customer> customersQueue) {
+    public Cashier(final int id, final Queue<Customer> queue) {
         this.ID = id;
-        this.customersQueue = customersQueue;
+        this.customersQueue = queue;
 
     }
 
-    public Customer getCustomerFromRestaurant() throws IOException, IncorrectDataException {
+    public Customer getCustomerFromRestaurant()
+            throws IOException, IncorrectDataException {
         return Restaurant.getInstance().getUnorderedCustomer();
     }
 
-    @Override
-    public String toString() {
-        return "Cashier NO: " + ID;
+    public Queue<Customer> getCustomersQueue() {
+        return customersQueue;
     }
 
     @Override
     public Integer call() throws Exception {
         System.out.println(this.toString() + " initialized!");
-        while (Restaurant.getInstance().totalUnServedCustomersCounter != 0) {
-            Customer unOrderedcustomer;
-            //unordered customer stands in the queue
-            if ((unOrderedcustomer = getCustomerFromRestaurant()) != null) {
-                customersQueue.add(unOrderedcustomer);
-                System.out.println(unOrderedcustomer + " was added in queue of: " + this.toString());
-                TimeUnit.MILLISECONDS.sleep(unOrderedcustomer.getTimeMilli());
+        while (Restaurant.getInstance().getTotalUnServedCustomersCounter() != 0) {
+            Customer unOrderedCustomer = getCustomerFromRestaurant();
+            if (unOrderedCustomer != null) {
+                customersQueue.add(unOrderedCustomer);
+                System.out.println(unOrderedCustomer
+                        + " was added in queue of: " + this.toString());
+                TimeUnit.MILLISECONDS.sleep(unOrderedCustomer.getTimeMilli());
             } else {
-                //no more unordered customers, time to serve
-                Customer orderedCustomer;
-                if((orderedCustomer = Restaurant.getInstance().getOrderedCustomer())!=null)
-                {
+                Customer orderedCustomer =
+                        Restaurant.getInstance().getOrderedCustomer();
+                if (orderedCustomer != null) {
                     prepareFood(orderedCustomer);
-                    System.out.println(this.toString() + " served " + orderedCustomer);
+                    System.out.println(this.toString()
+                            + " served " + orderedCustomer);
                 }
             }
-            //send already ordered customers into restaurant
             if (!customersQueue.isEmpty()) {
-                Customer unOrderedCustomerFromQueue = customersQueue.poll();
-                Restaurant.getInstance().addOrderedCustomer(unOrderedCustomerFromQueue);
-                System.out.println(this.toString() + "received order of" + unOrderedCustomerFromQueue + " and sent back to restaurant");
+                Customer unOrderedCustomerFromQueue
+                        = customersQueue.poll();
+                Restaurant.getInstance().addOrderedCustomer(
+                        unOrderedCustomerFromQueue);
+                System.out.println(this.toString()
+                        + " received order of " + unOrderedCustomerFromQueue
+                        + " and customer is waiting in OrderedCustomerList to get served");
             }
         }
         System.out.println(this.toString() + " stopped!");
         return 1;
     }
 
-    private void prepareFood(Customer customer) {
+    private void prepareFood(final Customer customer) {
         try {
+            System.out.println(this.toString() + " is now serving " + customer + " for " + customer.getTimeMilli());
             TimeUnit.MILLISECONDS.sleep(customer.getTimeMilli());
         } catch (InterruptedException r) {
             System.out.println(r.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Cashier NO: " + ID;
     }
 }
 

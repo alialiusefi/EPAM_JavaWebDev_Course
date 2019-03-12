@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Restaurant {
+public final class Restaurant {
 
     private static ReentrantLock lock = new ReentrantLock();
     private static Restaurant INSTANCE;
@@ -17,11 +17,12 @@ public class Restaurant {
     private List<Customer> listOfUnOrderedCustomers;
     private List<Cashier> listOfCashiers;
     private List<Customer> listOfOrderedCustomers;
-    public int totalUnServedCustomersCounter;
+    private int totalUnServedCustomersCounter;
 
     private Restaurant() throws IOException, IncorrectDataException {
         configuration = new Configuration();
-        listOfUnOrderedCustomers = new CustomerGenerator().generateCustomers(configuration);
+        listOfUnOrderedCustomers =
+                new CustomerGenerator().generateCustomers(configuration);
         listOfCashiers = new CashierGenerator().generateCashiers(configuration);
         listOfOrderedCustomers = new ArrayList<>();
         totalUnServedCustomersCounter = listOfUnOrderedCustomers.size();
@@ -48,6 +49,10 @@ public class Restaurant {
         return listOfOrderedCustomers;
     }
 
+    public int getTotalUnServedCustomersCounter() {
+        return totalUnServedCustomersCounter;
+    }
+
     public Customer getOrderedCustomer() {
         Customer customer = null;
         lock.lock();
@@ -71,7 +76,7 @@ public class Restaurant {
         return customer;
     }
 
-    public void addOrderedCustomer(Customer customer) {
+    public void addOrderedCustomer(final Customer customer) {
         lock.lock();
         listOfOrderedCustomers.add(customer);
         lock.unlock();
@@ -86,7 +91,7 @@ public class Restaurant {
                 }
                 Customer customer = listOfUnOrderedCustomers.get(i);
                 Cashier cashier = listOfCashiers.get(k++);
-                cashier.customersQueue.add(customer);
+                cashier.getCustomersQueue().add(customer);
             }
         }
     }

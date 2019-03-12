@@ -10,9 +10,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class Configuration {
+public final class Configuration {
 
     private static final String FILE_PATH = "data\\config.txt";
+    private static final int LIST_IDX_AMOUNTOFCASHIERS = 0;
+    private static final int LIST_IDX_AMOUNTOFCUSTOMERS = 1;
+    private static final int LIST_IDX_FROMRANGE = 2;
+    private static final int LIST_IDX_TORANGE = 3;
     private int amountOfCashiers;
     private int amountOfCustomers;
     private int fromRange;
@@ -22,20 +26,23 @@ public class Configuration {
 
         File file = new File(FILE_PATH);
         List<String> readStrings = new DataReader().readData(file);
-        List<String> parsedStrings = new DataParser().parseListOfString(readStrings);
-        List<String> validatedStrings = new DataValidator().validateData(parsedStrings);
-        List<Integer> integerList = new DataParser().parseToListOfInt(validatedStrings);
-        this.amountOfCashiers = integerList.get(0);
-        this.amountOfCustomers = integerList.get(1);
-        this.fromRange = integerList.get(2);
-        this.toRange = integerList.get(3);
+        List<String> parsedStrings =
+                new DataParser().parseListOfString(readStrings);
+        List<String> validatedStrings =
+                new DataValidator().validateData(parsedStrings);
+        List<Integer> integerList =
+                new DataParser().parseToListOfInt(validatedStrings);
+        this.amountOfCashiers = integerList.get(LIST_IDX_AMOUNTOFCASHIERS);
+        this.amountOfCustomers = integerList.get(LIST_IDX_AMOUNTOFCUSTOMERS);
+        this.fromRange = integerList.get(LIST_IDX_FROMRANGE);
+        this.toRange = integerList.get(LIST_IDX_TORANGE);
     }
 
     public int getAmountOfCashiers() {
         return amountOfCashiers;
     }
 
-    public void setAmountOfCashiers(int amountOfCashiers) {
+    public void setAmountOfCashiers(final int amountOfCashiers) {
         this.amountOfCashiers = amountOfCashiers;
     }
 
@@ -43,7 +50,7 @@ public class Configuration {
         return amountOfCustomers;
     }
 
-    public void setAmountOfCustomers(int amountOfCustomers) {
+    public void setAmountOfCustomers(final int amountOfCustomers) {
         this.amountOfCustomers = amountOfCustomers;
     }
 
@@ -51,7 +58,7 @@ public class Configuration {
         return fromRange;
     }
 
-    public void setFromRange(int fromRange) {
+    public void setFromRange(final int fromRange) {
         this.fromRange = fromRange;
     }
 
@@ -59,7 +66,7 @@ public class Configuration {
         return toRange;
     }
 
-    public void setToRange(int toRange) {
+    public void setToRange(final int toRange) {
         this.toRange = toRange;
     }
 
@@ -68,21 +75,22 @@ public class Configuration {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Configuration that = (Configuration) o;
-        return getAmountOfCashiers() == that.getAmountOfCashiers() &&
-                getAmountOfCustomers() == that.getAmountOfCustomers() &&
-                getFromRange() == that.getFromRange() &&
-                getToRange() == that.getToRange();
+        return getAmountOfCashiers() == that.getAmountOfCashiers()
+                && getAmountOfCustomers() == that.getAmountOfCustomers()
+                && getFromRange() == that.getFromRange()
+                && getToRange() == that.getToRange();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAmountOfCashiers(), getAmountOfCustomers(), getFromRange(), getToRange());
+        return Objects.hash(getAmountOfCashiers(),
+                getAmountOfCustomers(), getFromRange(), getToRange());
     }
 
     @Override
     public String toString() {
-        return "Configuration1{" +
-                "amountOfCashiers=" + amountOfCashiers +
+        return "Configuration1{"
+                + "amountOfCashiers=" + amountOfCashiers +
                 ", amountOfCustomers=" + amountOfCustomers +
                 ", fromRange=" + fromRange +
                 ", toRange=" + toRange +

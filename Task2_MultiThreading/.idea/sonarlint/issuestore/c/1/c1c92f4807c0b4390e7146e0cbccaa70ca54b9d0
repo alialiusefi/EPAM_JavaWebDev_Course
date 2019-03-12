@@ -1,7 +1,0 @@
-
-qsquid:S3008"SRename this field "INSTANCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ¥õ„8”ÌË–-
-[
-squid:S1067"9Replace this use of System.out or System.err by a logger.(¬­Á„üÿÿÿÿ8’è½œ–-
-{squid:S2273D"^Move this call to "wait()" into a synchronized block to be sure the monitor on "this" is held.(ç£ŠM8ãóÉœ–-
-U
-squid:S106K"9Replace this use of System.out or System.err by a logger.(İ½º@8‡³œ–-
