@@ -3,7 +3,7 @@ CustomerGenerator and CashierGenerator using the
 configuration data located in config.txt
 
 config.txt:\
-"amountOfCashiers"
+"amountOfCashiers"\
 "amountOfCustomers" "fromRange" "toRange"
 
 Each customer has a time field that will be generated 
