@@ -1,7 +1,6 @@
 package by.training.task3.parser;
 
 import by.training.task3.entity.Expression;
-import by.training.task3.entity.Lexeme;
 import by.training.task3.entity.Punctuation;
 import by.training.task3.entity.Word;
 import by.training.task3.pattern.Component;
@@ -28,20 +27,16 @@ public class LexemeParser {
     // TODO: split lexeme to word and punctuation else to an expression
     public List<Component> parse(String lexeme) {
         List<Component> componentList = new ArrayList<>();
-        if(lexeme.matches(PUNCTUATION_PATTERN))
-        {
-            componentList.add(new Punctuation(lexeme));
-        }
-        else if(lexeme.matches(EXPRESSION_PATTERN)){
+        if (lexeme.matches(EXPRESSION_PATTERN)) {
             componentList.add(new Expression(lexeme));
+        } else if (lexeme.matches(PUNCTUATION_PATTERN)) {
+            componentList.add(new Punctuation(lexeme));
         } else {
             componentList.add(new Word(lexeme));
         }
         return componentList;
 
     }
-
-
 
 
 }

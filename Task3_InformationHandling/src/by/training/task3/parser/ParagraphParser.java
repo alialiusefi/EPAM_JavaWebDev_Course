@@ -3,7 +3,6 @@ package by.training.task3.parser;
 import by.training.task3.entity.Sentence;
 import by.training.task3.pattern.Component;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

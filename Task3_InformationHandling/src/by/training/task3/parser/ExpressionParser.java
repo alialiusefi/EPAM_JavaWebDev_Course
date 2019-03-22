@@ -1,7 +1,7 @@
 package by.training.task3.parser;
 
-import by.training.task3.entity.Expression;
-import by.training.task3.entity.Lexeme;
+import by.training.task3.entity.Symbol;
+import by.training.task3.pattern.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,13 @@ public class ExpressionParser {
         return instance;
     }
 
-    public List<Character> parse(Expression expression) {
-        ArrayList<Character> charArrayList = new ArrayList<>();
-        //Implementation Here
-        return charArrayList;
+    public List<Component> parse(String expression) {
+        List<Component> symbolArrayList = new ArrayList<>();
+        char[] symbolArray = expression.toCharArray();
+        for (char i : symbolArray) {
+            symbolArrayList.add(new Symbol(i));
+        }
+        return symbolArrayList;
 
     }
 

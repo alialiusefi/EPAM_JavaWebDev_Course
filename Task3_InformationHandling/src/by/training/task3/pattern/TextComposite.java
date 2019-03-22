@@ -3,11 +3,11 @@ package by.training.task3.pattern;
 
 import java.util.List;
 
-public abstract class Composite {
+public abstract class TextComposite {
 
     protected List<Component> textComponents;
 
-    protected Composite(List<Component> textComponents)
+    protected TextComposite(List<Component> textComponents)
     {
         this.textComponents = textComponents;
     }
@@ -15,7 +15,7 @@ public abstract class Composite {
     public void addComponent(Component component){
         this.textComponents.add(component);
     }
-    public Component getChild(int idx){
+    public Component getComponent(int idx){
         if(idx >= 0)
         {
             return this.textComponents.get(idx);
@@ -24,6 +24,16 @@ public abstract class Composite {
     }
     public void remove(Component component){
         this.textComponents.remove(component);
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        StringBuffer buffer = new StringBuffer(str);
+        for(Component i : this.textComponents) {
+            buffer.append(i.toString());
+        }
+        return buffer.toString();
     }
 
 

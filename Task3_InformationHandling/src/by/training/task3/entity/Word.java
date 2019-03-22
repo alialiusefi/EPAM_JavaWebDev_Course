@@ -1,10 +1,15 @@
 package by.training.task3.entity;
 
-import java.util.List;
+import by.training.task3.parser.WordParser;
+import by.training.task3.pattern.Component;
+import by.training.task3.pattern.TextComposite;
 
-public class Word extends Lexeme{
+public class Word extends TextComposite implements Component {
 
-    List<Character> characterList;
+    public Word(String word) {
+        super(WordParser.getInstance().parse(word));
+
+    }
 
 
 }

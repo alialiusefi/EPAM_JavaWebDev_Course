@@ -11,11 +11,11 @@ public class TextParser {
     private static TextParser instance = null;
 
     private static final String DELIMITERS = "\n\t";
+
     private TextParser() {
     }
 
-    private ParagraphParser getNextParser()
-    {
+    private ParagraphParser getNextParser() {
         return ParagraphParser.getInstance();
     }
 
@@ -29,8 +29,7 @@ public class TextParser {
     public List<Component> parse(String text) {
         ArrayList<Component> paragraphArrayList = new ArrayList<>();
         String[] paragraphs = text.split(DELIMITERS);
-        for(String i : paragraphs)
-        {
+        for (String i : paragraphs) {
             paragraphArrayList.add(new Paragraph(i));
         }
         return paragraphArrayList;

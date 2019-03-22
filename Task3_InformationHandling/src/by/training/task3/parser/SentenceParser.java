@@ -10,6 +10,7 @@ public class SentenceParser {
 
     private static SentenceParser instance = null;
     private static final String DELIMITERS = " ";
+
     private SentenceParser() {
     }
 
@@ -23,8 +24,7 @@ public class SentenceParser {
     public List<Component> parse(String sentence) {
         ArrayList<Component> lexemeArrayList = new ArrayList<>();
         String[] lexemeArray = sentence.split(DELIMITERS);
-        for(String i : lexemeArray)
-        {
+        for (String i : lexemeArray) {
             lexemeArrayList.add(new Lexeme(i));
         }
         return lexemeArrayList;

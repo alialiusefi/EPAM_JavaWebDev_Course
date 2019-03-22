@@ -2,13 +2,13 @@ package by.training.task3.entity;
 
 import by.training.task3.parser.PunctuationParser;
 import by.training.task3.pattern.Component;
-import by.training.task3.pattern.Composite;
+import by.training.task3.pattern.TextComposite;
 
-public class Punctuation extends Composite implements Component {
+public class Punctuation extends TextComposite implements Component {
 
-    Punctuation(String punctuation)
-    {
+    public Punctuation(String punctuation) {
         super(PunctuationParser.getInstance().parse(punctuation));
     }
+
 
 }
