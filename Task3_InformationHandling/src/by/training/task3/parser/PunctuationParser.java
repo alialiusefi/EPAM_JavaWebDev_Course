@@ -1,8 +1,8 @@
 package by.training.task3.parser;
 
-import by.training.task3.entity.Expression;
 import by.training.task3.entity.Lexeme;
-import by.training.task3.entity.Punctuation;
+import by.training.task3.entity.Symbol;
+import by.training.task3.pattern.Composite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ public class PunctuationParser {
         return instance;
     }
 
-    public List<Character> parse(Lexeme punctuation) {
-        ArrayList<Character> charArrayList = new ArrayList<>();
+    public List<Composite> parse(Lexeme punctuation) {
+        ArrayList<Symbol> charArrayList = new ArrayList<>();
         //Implementation Here
         return charArrayList;
 

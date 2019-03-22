@@ -1,8 +1,14 @@
 package by.training.task3.entity;
 
-import java.util.List;
+import by.training.task3.parser.PunctuationParser;
+import by.training.task3.pattern.Component;
+import by.training.task3.pattern.Composite;
 
-public class Punctuation extends Lexeme {
+public class Punctuation extends Composite implements Component {
 
-    List<Character> characterList;
+    Punctuation(String punctuation)
+    {
+        super(PunctuationParser.getInstance().parse(punctuation));
+    }
+
 }

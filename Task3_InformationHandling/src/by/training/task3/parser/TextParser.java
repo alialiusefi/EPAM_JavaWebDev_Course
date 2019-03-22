@@ -1,7 +1,7 @@
 package by.training.task3.parser;
 
 import by.training.task3.entity.Paragraph;
-import by.training.task3.entity.Text;
+import by.training.task3.pattern.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,8 @@ public class TextParser {
         return instance;
     }
 
-    public List<Paragraph> parse(String text) {
-        ArrayList<Paragraph> paragraphArrayList = new ArrayList<>();
+    public List<Component> parse(String text) {
+        ArrayList<Component> paragraphArrayList = new ArrayList<>();
         String[] paragraphs = text.split(DELIMITERS);
         for(String i : paragraphs)
         {

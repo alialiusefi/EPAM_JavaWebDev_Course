@@ -1,8 +1,8 @@
 package by.training.task3.parser;
 
-import by.training.task3.entity.Paragraph;
 import by.training.task3.entity.Sentence;
-import by.training.task3.entity.Text;
+import by.training.task3.pattern.Component;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,8 @@ import java.util.List;
 public class ParagraphParser {
 
     private static ParagraphParser instance = null;
-    private static final String delimiters = "\\.\\?\\!\\.[1-3]";
+    private static final String DELIMITERS = "\\?|(\\...|\\.)|\\!";
+
     private ParagraphParser() {
     }
 
@@ -21,10 +22,12 @@ public class ParagraphParser {
         return instance;
     }
 
-    public List<Sentence> parse(String str) {
-        ArrayList<Sentence> sentenceArrayList = new ArrayList<>();
-
-        //Implementation Here
+    public List<Component> parse(String str) {
+        ArrayList<Component> sentenceArrayList = new ArrayList<>();
+        String[] sentenceArray = str.split(DELIMITERS);
+        for (String i : sentenceArray) {
+            sentenceArrayList.add(new Sentence(i));
+        }
         return sentenceArrayList;
 
     }

@@ -1,16 +1,15 @@
 package by.training.task3.entity;
 
 import by.training.task3.parser.ParagraphParser;
+import by.training.task3.pattern.Component;
+import by.training.task3.pattern.Composite;
 
-import java.util.List;
+public class Paragraph extends Composite implements Component {
 
-public class Paragraph {
-
-    private List<Sentence> sentenceList;
-
-    Paragraph(String str)
+    public Paragraph(String str)
     {
-        sentenceList = ParagraphParser.getInstance().parse(str);
+        super(ParagraphParser.getInstance().parse(str));
     }
+
 
 }

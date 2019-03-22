@@ -1,0 +1,8 @@
+
+Ksquid:S1172"-Remove this unused method parameter "lexeme".(ÃŞÙƒ8àÓÍ™-
+Usquid:S1068"7Remove this unused "PUNCTUATION_PATTERN" private field.(¤ÁµÁ8æÂÛ™-
+Ssquid:S1068
+"0Remove this unused "WORD_PATTERN" private field.(ü“­™şÿÿÿÿ8æÂÛ™-
+~squid:S1488"[Immediately return this expression instead of assigning it to the temporary variable "res".(ÊÃÒÏùÿÿÿÿ8¾èÁÎ™-
+isquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(µÑıÎ8Äí»Î™-
+Ysquid:S1068	"6Remove this unused "EXPRESSION_PATTERN" private field.(òŒ„şÿÿÿÿ8æÂÛ™-
