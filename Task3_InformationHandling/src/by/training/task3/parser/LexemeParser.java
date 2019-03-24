@@ -11,8 +11,9 @@ import java.util.List;
 public class LexemeParser {
 
     private static LexemeParser instance = null;
-    private static final String PUNCTUATION_PATTERN = "\\?|(\\...|\\.)|\\!";
-    private static final String EXPRESSION_PATTERN = "\\~|\\&|\\||\\^\\>>|\\>>>|\\<<";
+    private static final String PUNCTUATION_PATTERN = "\\?|(\\.\\.\\.|\\.)|!";
+    private static final String EXPRESSION_PATTERN = "~|&|(\\|)|\\^|>>|>>>|<<";
+    private static final String WORDWITHPUNCT_PATTERN = "(?<=(\\?|\\.\\.\\.|\\.|!))";
 
     private LexemeParser() {
     }
@@ -26,13 +27,18 @@ public class LexemeParser {
 
     // TODO: split lexeme to word and punctuation else to an expression
     public List<Component> parse(String lexeme) {
+        String trimmedString = lexeme.trim();
         List<Component> componentList = new ArrayList<>();
-        if (lexeme.matches(EXPRESSION_PATTERN)) {
-            componentList.add(new Expression(lexeme));
-        } else if (lexeme.matches(PUNCTUATION_PATTERN)) {
-            componentList.add(new Punctuation(lexeme));
+        if (trimmedString.matches(EXPRESSION_PATTERN)) {
+            componentList.add(new Expression(trimmedString));
         } else {
-            componentList.add(new Word(lexeme));
+            if (trimmedString.matches(WORDWITHPUNCT_PATTERN)) {
+                String[] splittedString = trimmedString.split(WORDWITHPUNCT_PATTERN);
+                componentList.add(new Word(splittedString[0]));
+                componentList.add(new Punctuation(splittedString[1]));
+            } else {
+                componentList.add(new Word(trimmedString));
+            }
         }
         return componentList;
 

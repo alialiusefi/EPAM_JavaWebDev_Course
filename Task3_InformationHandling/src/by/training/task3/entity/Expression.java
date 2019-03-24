@@ -10,7 +10,14 @@ public class Expression extends TextComposite implements Component {
         super(ExpressionParser.getInstance().parse(expression));
     }
 
-    private Object getValue() {
-        return null;
+    @Override
+    public String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
+        for(Component i : this.textComponents) {
+            buffer.append(i.getComponent(0));
+        }
+        return buffer.toString();
+
     }
 }

@@ -22,6 +22,7 @@ public class SentenceParser {
     }
 
     public List<Component> parse(String sentence) {
+        String trimmedString = sentence.trim();
         ArrayList<Component> lexemeArrayList = new ArrayList<>();
         String[] lexemeArray = sentence.split(DELIMITERS);
         for (String i : lexemeArray) {

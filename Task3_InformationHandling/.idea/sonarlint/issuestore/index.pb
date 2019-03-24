@@ -27,14 +27,10 @@ a
 0src/by/training/task3/parser/SentenceParser.java,5\0\5010dcf5b1b05b9dc5caafa90881e246e7b377cd
 ^
 .src/by/training/task3/parser/LexemeParser.java,8\4\842d22e6226283c4d524e32859ed74b5afca7794
-[
-+src/by/training/task3/entity/Component.java,7\b\7b996c56516bd7e8682aa362c6ac1907d6e3c36d
 ]
 -src/by/training/task3/entity/Punctuation.java,8\e\8e86036cf90880949e9738415c5b980792877fc6
 \
 ,src/by/training/task3/entity/Expression.java,2\e\2e0b1403f62085e4de5eeb2ecc0eff4b65b8f47a
-[
-+src/by/training/task3/entity/Composite.java,e\1\e1b4dc3617caf638f37ed675338189e922bc9c03
 B
 test/TextTest.java,0\e\0e860b72261cebec1003e0fb8a450141e33569e9
 X

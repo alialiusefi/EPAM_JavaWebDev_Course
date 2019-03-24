@@ -10,5 +10,15 @@ public class Punctuation extends TextComposite implements Component {
         super(PunctuationParser.getInstance().parse(punctuation));
     }
 
+    @Override
+    public String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
 
+        for(Component i : this.textComponents) {
+            buffer.append(i.getComponent(0));
+        }
+        return buffer.toString();
+
+    }
 }

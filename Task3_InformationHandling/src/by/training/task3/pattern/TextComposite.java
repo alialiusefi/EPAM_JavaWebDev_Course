@@ -26,15 +26,6 @@ public abstract class TextComposite {
         this.textComponents.remove(component);
     }
 
-    @Override
-    public String toString() {
-        String str = "";
-        StringBuffer buffer = new StringBuffer(str);
-        for(Component i : this.textComponents) {
-            buffer.append(i.toString());
-        }
-        return buffer.toString();
-    }
 
 
 }

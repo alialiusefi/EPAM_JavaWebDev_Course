@@ -9,7 +9,7 @@ import java.util.List;
 public class ParagraphParser {
 
     private static ParagraphParser instance = null;
-    private static final String DELIMITERS = "\\?|(\\...|\\.)|\\!";
+    private static final String DELIMITERS = "(?<=\\?)|(?<=\\!)|(?<=(\\.\\.\\.|\\.))";
 
     private ParagraphParser() {
     }
@@ -25,6 +25,7 @@ public class ParagraphParser {
         ArrayList<Component> sentenceArrayList = new ArrayList<>();
         String[] sentenceArray = str.split(DELIMITERS);
         for (String i : sentenceArray) {
+            i = i.trim();
             sentenceArrayList.add(new Sentence(i));
         }
         return sentenceArrayList;

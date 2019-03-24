@@ -14,5 +14,14 @@ public class Lexeme extends TextComposite implements Component {
         super(LexemeParser.getInstance().parse(lexemeString));
     }
 
-
+    @Override
+    public String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
+        for(Component i : this.textComponents) {
+            buffer.append(i.toString());
+        }
+        buffer.append(' ');
+        return buffer.toString();
+    }
 }

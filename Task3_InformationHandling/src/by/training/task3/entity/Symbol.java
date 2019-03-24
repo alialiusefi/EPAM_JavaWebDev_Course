@@ -12,14 +12,7 @@ public class Symbol implements Component {
     }
 
     @Override
-    public String toString() {
-        String str;
-        str = this.character + "";
-        return str;
-    }
-
-    @Override
-    public Component getComponent(int idx) {
-        return null;
+    public Object getComponent(int idx) {
+        return this.character;
     }
 }

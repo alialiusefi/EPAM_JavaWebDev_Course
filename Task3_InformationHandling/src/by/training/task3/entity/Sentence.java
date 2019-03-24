@@ -12,5 +12,13 @@ public class Sentence extends TextComposite implements Component {
         super(SentenceParser.getInstance().parse(sentence));
     }
 
+    public String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
+        for(Component i : this.textComponents) {
+            buffer.append(i.toString());
+        }
+        return buffer.toString();
+    }
 
 }

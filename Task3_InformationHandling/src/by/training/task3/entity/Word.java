@@ -11,5 +11,14 @@ public class Word extends TextComposite implements Component {
 
     }
 
+    @Override
+    public String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
+        for(Component i : this.textComponents) {
+            buffer.append(i.getComponent(0));
+        }
+        return buffer.toString();
+    }
 
 }

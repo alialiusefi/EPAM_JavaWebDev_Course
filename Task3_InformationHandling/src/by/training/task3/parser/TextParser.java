@@ -10,7 +10,7 @@ public class TextParser {
 
     private static TextParser instance = null;
 
-    private static final String DELIMITERS = "\n\t";
+    private static final String DELIMITERS = "\t";
 
     private TextParser() {
     }
@@ -27,8 +27,9 @@ public class TextParser {
     }
 
     public List<Component> parse(String text) {
+        String trimmedText = text.trim();
         ArrayList<Component> paragraphArrayList = new ArrayList<>();
-        String[] paragraphs = text.split(DELIMITERS);
+        String[] paragraphs = trimmedText.split(DELIMITERS);
         for (String i : paragraphs) {
             paragraphArrayList.add(new Paragraph(i));
         }

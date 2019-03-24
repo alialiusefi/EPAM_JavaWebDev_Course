@@ -10,5 +10,16 @@ public class Paragraph extends TextComposite implements Component {
         super(ParagraphParser.getInstance().parse(str));
     }
 
+    @Override
+    public String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append('\t');
+        for(Component i : this.textComponents) {
+            buffer.append(i.toString());
+        }
+        buffer.append('\n');
+        return buffer.toString();
 
+    }
 }

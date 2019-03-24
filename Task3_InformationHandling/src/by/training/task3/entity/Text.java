@@ -5,20 +5,31 @@ package by.training.task3.entity;
 //                                   \ |->Punctuation-->char
 
 /*
-    TODO: Fix Output toString(), especially the Symbol class
-    TODO: Fix regular expressions
     TODO: Interpreter
-    TODO:
+    TODO: Individual Task
+    TODO: Logs and Exceptions
+    TODO: Tests
+    TODO: Javadoc
 */
 
 import by.training.task3.parser.TextParser;
+import by.training.task3.pattern.Component;
 import by.training.task3.pattern.TextComposite;
 
 public class Text extends TextComposite {
 
     public Text(String text) {
-        // parses into paragraph components
         super(TextParser.getInstance().parse(text));
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        for (Component i : this.textComponents) {
+            buffer.append(i.toString());
+        }
+        return buffer.toString();
+
     }
 
 }
