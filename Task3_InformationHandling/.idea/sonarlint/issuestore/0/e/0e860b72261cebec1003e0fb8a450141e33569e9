@@ -1,10 +1,0 @@
-
-Csquid:S2129" Remove this "String" constructor(ª¢ê¦úÿÿÿÿ8¢Ï™¹š-
->squid:S2129" Remove this "String" constructor(Æ¯äà8õóì¹š-
-Š"squid:ClassVariableVisibilityCheck	"PMake text a static final constant or non-public and provide accessors if needed.(øò¨ıÿÿÿÿ8¢Ï™¹š-
-[
-squid:S106"9Replace this use of System.out or System.err by a logger.(«ÄŞãúÿÿÿÿ8­ò²¹š-
-U
-squid:S106"9Replace this use of System.out or System.err by a logger.(Æ¾É?8õóì¹š-
-†"squid:ClassVariableVisibilityCheck
-"QMake text2 a static final constant or non-public and provide accessors if needed.(ÍÒ‘“8õóì¹š-

@@ -31,8 +31,6 @@ a
 -src/by/training/task3/entity/Punctuation.java,8\e\8e86036cf90880949e9738415c5b980792877fc6
 \
 ,src/by/training/task3/entity/Expression.java,2\e\2e0b1403f62085e4de5eeb2ecc0eff4b65b8f47a
-B
-test/TextTest.java,0\e\0e860b72261cebec1003e0fb8a450141e33569e9
 X
 (src/by/training/task3/entity/Symbol.java,5\0\50b8eac1ffad0de7d5c27bb621d57f6b6f456b48
 \

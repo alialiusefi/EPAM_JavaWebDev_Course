@@ -7,10 +7,10 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.testng.Assert.*;
-
 public class TextTest {
     public static final String FILE_PATH = "data/input.txt";
+    public static final String FILE_PATH2 = "data/input2.txt";
+
     public String text;
     public String text2;
     @BeforeClass
@@ -19,7 +19,7 @@ public class TextTest {
         try {
             text = new DataReader().readData(new File(FILE_PATH));
         } catch (IOException e) {
-            e.printStackTrace();
+            DataReader.logger.warn(e.getMessage(),e);
         }
     }
 

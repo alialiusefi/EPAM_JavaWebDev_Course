@@ -4,4 +4,5 @@ public interface Component {
 
     public Object getComponent(int idx);
 
+
 }

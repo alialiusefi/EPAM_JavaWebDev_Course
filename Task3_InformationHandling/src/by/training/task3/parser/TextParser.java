@@ -9,7 +9,6 @@ import java.util.List;
 public class TextParser {
 
     private static TextParser instance = null;
-
     private static final String DELIMITERS = "\t";
 
     private TextParser() {
