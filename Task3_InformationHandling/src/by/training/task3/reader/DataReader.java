@@ -8,9 +8,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class DataReader {
+/**
+ * Reads text from file into one string.
+ */
+public final class DataReader {
 
-    public static final Logger logger = LogManager.getLogger(DataReader.class);
+    public static final Logger LOGGER = LogManager.getLogger(DataReader.class);
 
     public String readData(final File inputFile) throws IOException {
         StringBuffer buffer = new StringBuffer();
@@ -18,7 +21,7 @@ public class DataReader {
                 BufferedReader(new FileReader(inputFile))) {
             String readString;
             while ((readString = bufferedReader.readLine()) != null) {
-                buffer.append(readString);
+                buffer.append(readString + "\n");
             }
         }
         return buffer.toString();

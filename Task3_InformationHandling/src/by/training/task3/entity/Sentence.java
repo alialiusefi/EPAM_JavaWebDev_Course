@@ -5,8 +5,7 @@ import by.training.task3.pattern.Component;
 import by.training.task3.pattern.TextComposite;
 
 
-public class Sentence extends TextComposite implements Component {
-
+public class Sentence extends TextComposite {
 
     public Sentence(String sentence) {
         super(SentenceParser.getInstance().parse(sentence));

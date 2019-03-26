@@ -22,8 +22,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Symbol.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="70">
+              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Text.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,10 +41,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/training/task3/action/LexemeSorter.java">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Word.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="126">
+              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,67 +53,47 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSentencesInParagraphComparator.java">
+        <entry file="file://$PROJECT_DIR$/test/by/training/task3/reader/DataReaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="11" column="103" selection-start-line="11" selection-start-column="103" selection-end-line="11" selection-end-column="103" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymbolsInLexemeComparator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="12" column="75" selection-start-line="12" selection-start-column="75" selection-end-line="12" selection-end-column="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeComparator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/by/training/task3/entity/TextTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="252">
+              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/parser.plantuml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+            <state relative-caret-position="199">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/ParagraphParser.java">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/interpreter.plantuml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="174">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/entity.plantuml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/pattern/pattern.plantuml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Punctuation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,19 +102,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java">
+        <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Sentence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="26" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/by/training/task3/interpreter/ClientCalculatorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="98">
+              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,9 +118,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="package-info" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="package-info" />
         <option value="TestNG Test Class" />
       </list>
     </option>
@@ -156,24 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/NonTerminalExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/TerminalExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/AbstractMathExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/AbstractMathExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionRIGHTSHIFT.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionUNSIGNEDRIGHTSHIFT.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/TerminalExpressionNumber.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/NoNTerminalExpressionNumber.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/NonTerminalExpressionNumber.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/NonTerminalMathExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/TerminalMathExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/reader/DataReader.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeIfEqualByAlphaComparator.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexeme.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSentencesInParagraphComparator.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Expression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/base/AbstractExpression.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/Context.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionAND.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionLeftShift.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionNOT.java" />
@@ -183,30 +148,48 @@
         <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionXOR.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/NonTerminalExpression.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/Calculator.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/ClientCalculator.java" />
-        <option value="$PROJECT_DIR$/data/input.txt" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/pattern/Component.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/pattern/TextComposite.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Text.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/action/ParagraphSorter.java" />
-        <option value="$PROJECT_DIR$/test/by/training/task3/interpreter/ClientCalculatorTest.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Symbol.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Lexeme.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Punctuation.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Sentence.java" />
-        <option value="$PROJECT_DIR$/test/by/training/task3/entity/TextTest.java" />
-        <option value="$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/comparator/LexemeLengthComparator.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfLexemeInSentenceComparator.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymbolsInLexemeComparator.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymboIsInLexemeComparator.java" />
+        <option value="$PROJECT_DIR$/test/by/training/task3/entity/TextTest.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymbolsInLexemeRevComparator.java" />
+        <option value="$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeComparator.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/action/package-info.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/package-info.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/action/LexemeSorter.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/action/ParagraphSorter.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeRevComparator.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSentencesInParagraphComparator.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/package-info.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymbolsInLexemeComparator.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/parser/ExpressionParser.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/parser/TextParser.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/parser/SentenceParser.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/parser/PunctuationParser.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/parser/ParagraphParser.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/parser/LexemeParser.java" />
         <option value="$PROJECT_DIR$/src/by/training/task3/parser/WordParser.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/parser/ParagraphParser.java" />
-        <option value="$PROJECT_DIR$/src/by/training/task3/action/LexemeSorter.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/pattern/Component.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/ClientCalculator.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/interpreter/package-info.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/parser/package-info.java" />
         <option value="$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java" />
+        <option value="$PROJECT_DIR$/test/by/training/task3/interpreter/ClientCalculatorTest.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/pattern/package-info.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/reader/package-info.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/reader/DataReader.java" />
+        <option value="$PROJECT_DIR$/data/input.txt" />
+        <option value="$PROJECT_DIR$/test/by/training/task3/reader/DataReaderTest.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Expression.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Lexeme.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Paragraph.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Punctuation.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Sentence.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Symbol.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Text.java" />
+        <option value="$PROJECT_DIR$/src/by/training/task3/entity/Word.java" />
       </list>
     </option>
   </component>
@@ -283,14 +266,6 @@
               <item name="Task3_InformationHandling" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="task3" type="462c0819:PsiDirectoryNode" />
-              <item name="interpreter" type="462c0819:PsiDirectoryNode" />
-              <item name="base" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Task3_InformationHandling" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Task3_InformationHandling" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="task3" type="462c0819:PsiDirectoryNode" />
               <item name="parser" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -339,6 +314,13 @@
               <item name="task3" type="462c0819:PsiDirectoryNode" />
               <item name="interpreter" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Task3_InformationHandling" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task3_InformationHandling" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="task3" type="462c0819:PsiDirectoryNode" />
+              <item name="reader" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -353,7 +335,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553612490929" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553626087774" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.TestNG" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -368,6 +350,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="by.training.task3.reader" />
       <recent name="by.training.task3.action" />
       <recent name="by.training.task3.interpreter" />
       <recent name="by.training.task3.entity" />
@@ -399,7 +382,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.LexemeSorterTest.testSort">
+  <component name="RunManager" selected="TestNG.&lt;default&gt;">
     <configuration name="ClientCalculatorTest.testCalculateExpression" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Task3_InformationHandling" />
       <extension name="coverage">
@@ -418,7 +401,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LexemeSorterTest.testSort" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="DataReaderTest.testReadData" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Task3_InformationHandling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="by.training.task3.reader.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="by.training.task3.reader" />
+      <option name="MAIN_CLASS_NAME" value="by.training.task3.reader.DataReaderTest" />
+      <option name="METHOD_NAME" value="testReadData" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LexemeSorterTest.testSortAllLexemes" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Task3_InformationHandling" />
       <extension name="coverage">
         <pattern>
@@ -428,7 +429,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="by.training.task3.action" />
       <option name="MAIN_CLASS_NAME" value="by.training.task3.action.LexemeSorterTest" />
-      <option name="METHOD_NAME" value="testSort" />
+      <option name="METHOD_NAME" value="testSortAllLexemes" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -436,7 +437,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ParagraphSorterTest.testSort" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="LexemeSorterTest.testSortEachSentence" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Task3_InformationHandling" />
       <extension name="coverage">
         <pattern>
@@ -445,8 +446,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="by.training.task3.action" />
-      <option name="MAIN_CLASS_NAME" value="by.training.task3.action.ParagraphSorterTest" />
-      <option name="METHOD_NAME" value="testSort" />
+      <option name="MAIN_CLASS_NAME" value="by.training.task3.action.LexemeSorterTest" />
+      <option name="METHOD_NAME" value="testSortEachSentence" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -454,36 +455,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TextTest.testToString" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Task3_InformationHandling" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="by.training.task3.entity.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="by.training.task3.entity" />
-      <option name="MAIN_CLASS_NAME" value="by.training.task3.entity.TextTest" />
-      <option name="METHOD_NAME" value="testToString" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TextTests.testToString" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="Task3_InformationHandling" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="by.training.task3.entity" />
-      <option name="MAIN_CLASS_NAME" value="TextTests" />
-      <option name="METHOD_NAME" value="testToString" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
       <properties />
       <listeners />
       <method v="2">
@@ -492,11 +467,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.LexemeSorterTest.testSort" />
-        <item itemvalue="TestNG.ParagraphSorterTest.testSort" />
-        <item itemvalue="TestNG.TextTest.testToString" />
+        <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="TestNG.DataReaderTest.testReadData" />
         <item itemvalue="TestNG.ClientCalculatorTest.testCalculateExpression" />
-        <item itemvalue="TestNG.TextTests.testToString" />
+        <item itemvalue="TestNG.LexemeSorterTest.testSortAllLexemes" />
+        <item itemvalue="TestNG.LexemeSorterTest.testSortEachSentence" />
       </list>
     </recent_temporary>
   </component>
@@ -522,44 +497,44 @@
       <workItem from="1553433972400" duration="14779000" />
       <workItem from="1553502298430" duration="9873000" />
       <workItem from="1553536092425" duration="326000" />
-      <workItem from="1553598678361" duration="13530000" />
+      <workItem from="1553598678361" duration="25801000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ParagraphSorterTest_testSort - 2019.03.26 at 17h 13m 23s.xml">
-      <configuration name="ParagraphSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="_default_ - 2019.03.26 at 21h 25m 53s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 42m 36s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="_default_ - 2019.03.26 at 21h 27m 26s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 42m 57s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="DataReaderTest_testReadData - 2019.03.26 at 21h 35m 58s.xml">
+      <configuration name="DataReaderTest.testReadData" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 43m 33s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="DataReaderTest_testReadData - 2019.03.26 at 21h 36m 17s.xml">
+      <configuration name="DataReaderTest.testReadData" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 47m 34s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="DataReaderTest_testReadData - 2019.03.26 at 21h 37m 40s.xml">
+      <configuration name="DataReaderTest.testReadData" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 48m 50s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="DataReaderTest_testReadData - 2019.03.26 at 21h 37m 57s.xml">
+      <configuration name="DataReaderTest.testReadData" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 51m 19s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="DataReaderTest_testReadData - 2019.03.26 at 21h 38m 12s.xml">
+      <configuration name="DataReaderTest.testReadData" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 53m 02s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="DataReaderTest_testReadData - 2019.03.26 at 21h 38m 29s.xml">
+      <configuration name="DataReaderTest.testReadData" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 55m 04s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="_default_ - 2019.03.26 at 21h 38m 38s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="LexemeSorterTest_testSort - 2019.03.26 at 17h 55m 52s.xml">
-      <configuration name="LexemeSorterTest.testSort" configurationId="TestNG" />
+    <history-entry file="_default_ - 2019.03.26 at 21h 46m 27s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80206000" />
+    <option name="totallyTimeSpent" value="92477000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -572,9 +547,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.599018" visible="true" weight="0.27760968" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.599018" visible="true" weight="0.27760968" />
       <window_info id="Structure" order="1" sideWeight="0.400982" side_tool="true" weight="0.27760968" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -583,7 +557,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32840723" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4140753" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3764321" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40752864" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -592,7 +566,7 @@
       <window_info anchor="bottom" id="Analysis" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="CheckStyle" order="11" />
+      <window_info anchor="bottom" id="CheckStyle" order="11" weight="0.35679215" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="SonarLint" order="13" weight="0.3289689" />
       <window_info anchor="bottom" id="Database Changes" order="14" />
@@ -607,7 +581,7 @@
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="PlantUML" order="9" />
+      <window_info anchor="right" id="PlantUML" order="9" visible="true" weight="0.30862328" />
       <window_info anchor="right" id="Coverage" order="10" side_tool="true" weight="0.32980332" />
     </layout>
   </component>
@@ -618,127 +592,177 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/by/training/task3/interpreter/ClientCalculatorTest.java</url>
-          <line>12</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java</url>
-          <line>41</line>
+          <line>35</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java</url>
-          <line>43</line>
+          <line>37</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java</url>
-          <line>42</line>
+          <line>36</line>
           <properties />
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java</url>
-          <line>54</line>
+          <line>58</line>
           <properties />
-          <option name="timeStamp" value="52" />
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java</url>
-          <line>53</line>
+          <url>file://$PROJECT_DIR$/src/by/training/task3/action/LexemeSorter.java</url>
+          <line>48</line>
           <properties />
-          <option name="timeStamp" value="53" />
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeRevComparator.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeRevComparator.java</url>
+          <line>25</line>
+          <properties />
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeRevComparator.java</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java</url>
-          <line>51</line>
-          <properties class="by.training.task3.action.LexemeSorterTest" method="testSort">
+          <url>file://$PROJECT_DIR$/test/by/training/task3/reader/DataReaderTest.java</url>
+          <line>24</line>
+          <properties class="by.training.task3.reader.DataReaderTest" method="testReadData">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="51" />
+          <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="TestNG">
+        <watch expression="((Paragraph)text.textComponents.get(0)).textComponents" custom="by.training.task3.entity.Paragraph" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator.java" />
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/action.java" />
-    <entry file="file://$PROJECT_DIR$/test/TextTest.java" />
-    <entry file="file://$PROJECT_DIR$/test/by/training/task3/entity/TextTests.java" />
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeRevComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSentencesInParagraphComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymbolsInLexemeComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/base/AbstractExpression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/ExpressionParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+        <state relative-caret-position="70">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/LexemeParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/ParagraphParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/PunctuationParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        <state relative-caret-position="98">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/AbstractMathExpression.java" />
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/base/TerminalExpressionNumber.java" />
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/base/TerminalMathExpression.java" />
-    <entry file="file://$PROJECT_DIR$/src/log4j2.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionUnsignedRightShift.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/SentenceParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/Arrays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="3840" selection-start-line="3840" selection-end-line="3840" />
-          <folding>
-            <element signature="e#177457#177458#0" expanded="true" />
-            <element signature="e#177496#177497#0" expanded="true" />
-            <element signature="e#178121#178122#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionXOR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionRightShift.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="622" selection-start-line="622" selection-end-line="622" />
-          <folding>
-            <element signature="e#22821#22822#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/ClientCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-417">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="154">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/TextParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#443#444#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/WordParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -754,6 +778,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/ClientCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionNOT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
@@ -761,17 +795,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionOR.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionRightShift.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state relative-caret-position="70">
+          <caret line="5" column="63" selection-start-line="5" selection-start-column="63" selection-end-line="5" selection-end-column="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/NonTerminalExpressionNumber.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionUnsignedRightShift.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
-          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+          <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/TerminalExpressionXOR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -789,126 +830,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="1" column="45" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/NonTerminalExpressionNumber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/package-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="1" column="41" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/pattern/Component.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/reader/DataReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/testng-7.0.0-beta3.jar!/org/testng/internal/TestInvoker.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="521" selection-start-line="521" selection-end-line="521" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/action/ParagraphSorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="13" column="51" selection-start-line="13" selection-start-column="51" selection-end-line="13" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="56">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/pattern/TextComposite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="103">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#257#258#0" expanded="true" />
+            <element signature="e#309#310#0" expanded="true" />
+            <element signature="e#797#798#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/WordParser.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/pattern/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="14">
+          <caret line="1" column="54" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Word.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/reader/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="14">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/interpreter/ClientCalculatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/entity/TextTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="14" column="411" selection-start-line="14" selection-start-column="411" selection-end-line="14" selection-end-column="411" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/LexemeParser.java">
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="224">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Lexeme.java">
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="166">
+          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/TextParser.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/reader/DataReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Text.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="234" column="18" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="18" />
-          <folding>
-            <element signature="e#10065#10066#0" expanded="true" />
-            <element signature="e#10148#10149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/SentenceParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="178">
+          <caret line="23" column="46" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -918,21 +929,39 @@
     <entry file="file://$PROJECT_DIR$/data/input.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
-          <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/base/AbstractExpression.java">
+    <entry file="file://$PROJECT_DIR$/Task3_InformationHandling.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/entity/entity.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/action.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/reader/reader.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/action/action.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Expression.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        <state relative-caret-position="126">
+          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Punctuation.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Lexeme.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+        <state relative-caret-position="126">
+          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -941,30 +970,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Paragraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="126">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Punctuation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Sentence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#283#284#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Expression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="98">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -973,92 +1000,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Symbol.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="70">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Text.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/action/LexemeSorter.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/Word.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="126">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfFoundSymbolsInLexemeComparator.java">
+    <entry file="file://$PROJECT_DIR$/test/by/training/task3/reader/DataReaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="252">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSentencesInParagraphComparator.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/pattern/pattern.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/interpreter/interpreter.plantuml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="11" column="103" selection-start-line="11" selection-start-column="103" selection-end-line="11" selection-end-column="103" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="174">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/comparator/AmountOfSymbolsInLexemeComparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" column="75" selection-start-line="12" selection-start-column="75" selection-end-line="12" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/entity/entity.plantuml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/training/task3/interpreter/ClientCalculatorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/parser.plantuml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/training/task3/entity/TextTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/ParagraphSorterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="26" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/by/training/task3/parser/ParagraphParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/by/training/task3/action/LexemeSorterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="44" column="34" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+        <state relative-caret-position="199">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>

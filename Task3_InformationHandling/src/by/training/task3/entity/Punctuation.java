@@ -4,18 +4,20 @@ import by.training.task3.parser.PunctuationParser;
 import by.training.task3.pattern.Component;
 import by.training.task3.pattern.TextComposite;
 
-public class Punctuation extends TextComposite implements Component {
+/**
+ * Puctuation contains a symobol/symbols.
+ */
+public class Punctuation extends TextComposite {
 
-    public Punctuation(String punctuation) {
+    public Punctuation(final String punctuation) {
         super(PunctuationParser.getInstance().parse(punctuation));
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuffer buffer = new StringBuffer();
 
-        for(Component i : this.textComponents) {
+        for (Component i : this.textComponents) {
             buffer.append(i.getComponent(0));
         }
         return buffer.toString();

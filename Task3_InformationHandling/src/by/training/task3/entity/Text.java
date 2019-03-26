@@ -5,8 +5,6 @@ package by.training.task3.entity;
 //                                   \ |->Punctuation-->char
 
 /*
-    TODO: Interpreter
-    TODO: Logs and Exceptions
     TODO: Tests
     TODO: Javadoc
 */
@@ -15,9 +13,12 @@ import by.training.task3.parser.TextParser;
 import by.training.task3.pattern.Component;
 import by.training.task3.pattern.TextComposite;
 
-public class Text extends TextComposite implements Component{
+/**
+ * Text contains paragraphs.
+ */
+public final class Text extends TextComposite  {
 
-    public Text(String text) {
+    public Text(final String text) {
         super(TextParser.getInstance().parse(text));
     }
 

@@ -10,6 +10,7 @@ public class ClientCalculatorTest {
     public void testCalculateExpression() {
         ClientCalculator clientCalculator = new ClientCalculator();
         String expression = "30>>3";
-        System.out.println(clientCalculator.calculateExpression(expression));
+        int actual = clientCalculator.calculateExpression(expression);
+        assertEquals(actual,3);
     }
 }

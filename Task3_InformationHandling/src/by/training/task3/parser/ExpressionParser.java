@@ -6,7 +6,10 @@ import by.training.task3.pattern.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpressionParser {
+/**
+ * Parses Expression String into symbols
+ */
+public final class ExpressionParser {
 
     private static ExpressionParser instance = null;
 

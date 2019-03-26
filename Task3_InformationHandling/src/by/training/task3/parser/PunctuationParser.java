@@ -6,7 +6,10 @@ import by.training.task3.pattern.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PunctuationParser {
+/**
+ * Parses punctuation into symbols.
+ */
+public final class PunctuationParser {
 
     private static PunctuationParser instance = null;
 

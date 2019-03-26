@@ -1,0 +1,11 @@
+
+‚squid:S1149B"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¨âàøÿÿÿÿ8øºâÙ›-
+Psquid:S11994"-Extract this nested code block into a method.(Î—­Šşÿÿÿÿ8øºâÙ›-
+Rsquid:S1066P"/Merge this if statement with the enclosing one.(ĞáòËıÿÿÿÿ8øºâÙ›-
+?squid:S1643i"Use a StringBuilder instead.(ıµ…ÿÿÿÿÿ8øºâÙ›-
+?squid:S1643u"Use a StringBuilder instead.(ıµ…ÿÿÿÿÿ8øºâÙ›-
+usquid:S3776@"RRefactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.(›ù¤îùÿÿÿÿ8øºâÙ›-
+{
+squid:S135C"YReduce the total number of break and continue statements in this loop to use at most one.(¬êñ°øÿÿÿÿ8øºâÙ›-
+:squid:S1643a"Use a StringBuilder instead.(É£İ»8øºâÙ›-
+Qsquid:S1481A"4Remove this unused "infixwithspaces" local variable.(ğ™—h8øºâÙ›-

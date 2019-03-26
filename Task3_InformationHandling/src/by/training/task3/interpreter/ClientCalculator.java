@@ -4,6 +4,7 @@ import by.training.task3.interpreter.base.AbstractExpression;
 
 import java.util.*;
 
+
 public class ClientCalculator {
 
     private ArrayList<AbstractExpression> listExpression;
@@ -139,7 +140,7 @@ public class ClientCalculator {
         return -1;
     }
 
-    private boolean isOperator(String operator) {
+    private boolean isOperator(final String operator) {
         return operator.equals("~")
                 || operator.equals("&")
                 || operator.equals("|")

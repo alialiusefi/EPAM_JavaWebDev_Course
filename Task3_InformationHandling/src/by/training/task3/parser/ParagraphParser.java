@@ -6,10 +6,13 @@ import by.training.task3.pattern.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParagraphParser {
+/**
+ * Parses paragraph string into sentences
+ */
+public final class ParagraphParser {
 
     private static ParagraphParser instance = null;
-    private static final String DELIMITERS = "(?<=\\?)|(?<=\\!)|(?<=(\\.\\.\\.|\\.))";
+    private static final String DELIMITERS = "(?<=\\?)|(?<=\\!)|(?<=\\n)|(?<=(\\.\\.\\.|\\.))";
 
     private ParagraphParser() {
     }
@@ -25,7 +28,7 @@ public class ParagraphParser {
         ArrayList<Component> sentenceArrayList = new ArrayList<>();
         String[] sentenceArray = str.split(DELIMITERS);
         for (String i : sentenceArray) {
-            if(!i.isEmpty()) {
+            if(!i.contains("\n")) {
                 i = i.trim();
                 sentenceArrayList.add(new Sentence(i));
             }

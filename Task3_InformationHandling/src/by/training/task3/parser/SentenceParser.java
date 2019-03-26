@@ -6,7 +6,10 @@ import by.training.task3.pattern.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentenceParser {
+/**
+ * Parses sentence into lexemes
+ */
+public final class SentenceParser {
 
     private static SentenceParser instance = null;
     private static final String DELIMITERS = " ";
@@ -26,7 +29,7 @@ public class SentenceParser {
         ArrayList<Component> lexemeArrayList = new ArrayList<>();
         String[] lexemeArray = trimmedString.split(DELIMITERS);
         for (String i : lexemeArray) {
-            if(!i.isEmpty()) {
+            if(!i.contains("\n")) {
                 lexemeArrayList.add(new Lexeme(i));
             }
         }

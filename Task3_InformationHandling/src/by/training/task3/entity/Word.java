@@ -4,7 +4,10 @@ import by.training.task3.parser.WordParser;
 import by.training.task3.pattern.Component;
 import by.training.task3.pattern.TextComposite;
 
-public class Word extends TextComposite implements Component {
+/**
+ * Words contains symbols
+ */
+public class Word extends TextComposite {
 
     public Word(String word) {
         super(WordParser.getInstance().parse(word));

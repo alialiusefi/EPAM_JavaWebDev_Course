@@ -6,7 +6,7 @@ import by.training.task3.pattern.TextComposite;
 import java.util.Objects;
 
 
-public class Symbol extends TextComposite implements Component {
+public class Symbol extends TextComposite {
 
     private Character character;
 

@@ -6,7 +6,10 @@ import by.training.task3.pattern.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordParser {
+/**
+ * Parses word string into symbols
+ */
+public final class WordParser {
 
     private static WordParser instance = null;
 

@@ -6,7 +6,10 @@ import by.training.task3.pattern.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextParser {
+/**
+ * parse text into paragraphs
+ */
+public final class TextParser {
 
     private static TextParser instance = null;
     private static final String DELIMITERS = "\t";
@@ -30,7 +33,7 @@ public class TextParser {
         ArrayList<Component> paragraphArrayList = new ArrayList<>();
         String[] paragraphs = trimmedText.split(DELIMITERS);
         for (String i : paragraphs) {
-            if(!i.isEmpty()){
+            if (!i.isEmpty()) {
                 paragraphArrayList.add(new Paragraph(i));
             }
         }
