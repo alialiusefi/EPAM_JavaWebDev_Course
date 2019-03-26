@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Gems>
+    <Gem>
+        <name>Diamond</name>
+        <preciousness>PRECIOUS</preciousness>
+        <origin>
+            Antarctica
+        </origin>
+        <visual-parameters>
+            <color>blue</color>
+            <transperancy>50</transperancy>
+            <Cut>
+
+            </Cut>
+        </visual-parameters>
+        <value>40</value>
+    </Gem>
+    <Gem>
+        <name>Ruby</name>
+        <preciousness>SEMI-PRECIOUS</preciousness>
+        <origin>
+            Greenland
+        </origin>
+        <visual-parameters>
+
+        </visual-parameters>
+        <value>23</value>
+    </Gem>
+</Gems>
