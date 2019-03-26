@@ -24,9 +24,11 @@ public class SentenceParser {
     public List<Component> parse(String sentence) {
         String trimmedString = sentence.trim();
         ArrayList<Component> lexemeArrayList = new ArrayList<>();
-        String[] lexemeArray = sentence.split(DELIMITERS);
+        String[] lexemeArray = trimmedString.split(DELIMITERS);
         for (String i : lexemeArray) {
-            lexemeArrayList.add(new Lexeme(i));
+            if(!i.isEmpty()) {
+                lexemeArrayList.add(new Lexeme(i));
+            }
         }
         return lexemeArrayList;
 

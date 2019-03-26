@@ -27,8 +27,10 @@ public class LexemeParser {
 
     // TODO: split lexeme to word and punctuation else to an expression
     public List<Component> parse(String lexeme) {
+
         String trimmedString = lexeme.trim();
         List<Component> componentList = new ArrayList<>();
+        if(!trimmedString.isEmpty()){
         if (trimmedString.matches(EXPRESSION_PATTERN)) {
             componentList.add(new Expression(trimmedString));
         } else {
@@ -39,7 +41,7 @@ public class LexemeParser {
             } else {
                 componentList.add(new Word(trimmedString));
             }
-        }
+        }}
         return componentList;
 
     }

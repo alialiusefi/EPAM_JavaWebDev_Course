@@ -9,9 +9,8 @@ public class Context {
     public Integer popValue() {
         return contextValues.pop();
     }
-
     public void pushValue(Integer value) {
-        contextValues.push(value);
+        this.contextValues.push(value);
     }
 
 

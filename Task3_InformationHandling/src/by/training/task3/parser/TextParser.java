@@ -30,7 +30,9 @@ public class TextParser {
         ArrayList<Component> paragraphArrayList = new ArrayList<>();
         String[] paragraphs = trimmedText.split(DELIMITERS);
         for (String i : paragraphs) {
-            paragraphArrayList.add(new Paragraph(i));
+            if(!i.isEmpty()){
+                paragraphArrayList.add(new Paragraph(i));
+            }
         }
         return paragraphArrayList;
     }

@@ -7,12 +7,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Comparator;
 
-public class AmountOfFoundSymbolsInLexeme implements Comparator<Component> {
+public class AmountOfFoundSymbolsInLexemeComparator implements Comparator<Component> {
 
 
     private Character character;
-    public static final Logger logger = LogManager.getLogger(AmountOfFoundSymbolsInLexeme.class);
-    AmountOfFoundSymbolsInLexeme(Character character) {
+    public static final Logger logger = LogManager.getLogger(AmountOfFoundSymbolsInLexemeComparator.class);
+    AmountOfFoundSymbolsInLexemeComparator(Character character) {
         this.character = character;
     }
 

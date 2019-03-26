@@ -1,3 +1,2 @@
 
-Hsquid:S1172
-"+Remove this unused method parameter "file".(Å¸àf8ÿÜ½ß™-
+‚squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¨âàøÿÿÿÿ8”ÇÔŸ›-

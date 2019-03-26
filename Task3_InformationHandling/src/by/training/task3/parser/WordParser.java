@@ -24,7 +24,7 @@ public class WordParser {
         List<Component> symbolArrayList = new ArrayList<>();
         char[] symbolArray = word.toCharArray();
         for (char i : symbolArray) {
-            symbolArrayList.add(new Symbol(i));
+                symbolArrayList.add(new Symbol(i));
         }
         return symbolArrayList;
 

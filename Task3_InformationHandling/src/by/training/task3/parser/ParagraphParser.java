@@ -25,9 +25,12 @@ public class ParagraphParser {
         ArrayList<Component> sentenceArrayList = new ArrayList<>();
         String[] sentenceArray = str.split(DELIMITERS);
         for (String i : sentenceArray) {
-            i = i.trim();
-            sentenceArrayList.add(new Sentence(i));
+            if(!i.isEmpty()) {
+                i = i.trim();
+                sentenceArrayList.add(new Sentence(i));
+            }
         }
+
         return sentenceArrayList;
 
     }

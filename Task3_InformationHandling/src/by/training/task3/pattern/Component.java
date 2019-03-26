@@ -1,8 +1,12 @@
 package by.training.task3.pattern;
 
+import java.util.List;
+
 public interface Component {
 
-    public Object getComponent(int idx);
-
+    Object getComponent(int idx);
+    void remove(Component component);
+    void addComponent(Component component);
+    List<Component> getComponents();
 
 }
