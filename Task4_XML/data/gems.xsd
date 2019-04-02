@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--TODO: use java jdk exe to convert from xsd to java classes-->
+
+
+<schema version="1.0"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://www.example.com/gems"
+            targetNamespace="http://www.example.com/gems"
+            elementFormDefault="qualified">
+
+    <element name="AbstractGem" type="tns:AbstractGem" abstract="true"/>
+
+    <element name="Gems">
+        <complexType mixed="true">
+            <sequence>
+                <element ref="tns:AbstractGem" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="AbstractGem" mixed="true">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="preciousness" type="tns:Preciousness"/>
+            <element name="value" type="double"/>
+            <element name="gemArrival" type="date"/>
+        </sequence>
+        <attribute name="origin" type="tns:Origin" default="unknown"/>
+        <attribute name="id" type="integer" use="required"/>
+
+    </complexType>
+
+    <element name="Emerald" substitutionGroup="tns:AbstractGem">
+        <complexType mixed="true">
+            <complexContent>
+                <extension base="tns:AbstractGem">
+                    <sequence>
+                        <element name="color" type="string"/>
+                        <element name="transparency" type="tns:Transparency"/>
+                        <element name="amountofcuts" type="tns:amountOfCuts"/>
+                    </sequence>
+                </extension>
+            </complexContent>
+
+        </complexType>
+    </element>
+
+    <element name="Diamond" substitutionGroup="tns:AbstractGem">
+        <complexType mixed="true">
+            <complexContent>
+                <extension base="tns:AbstractGem">
+                    <sequence>
+                        <element name="transparency" type="tns:Transparency"/>
+                        <element name="amountofcuts" type="tns:amountOfCuts"/>
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+
+    <element name="Pearl" substitutionGroup="tns:AbstractGem">
+        <complexType mixed="true">
+            <complexContent>
+                <extension base="tns:AbstractGem">
+                    <all>
+                        <element name="color" type="string"/>
+                        <element name="luster" type="tns:Luster"/>
+                    </all>
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+
+    <simpleType name="Luster">
+        <restriction base="string">
+            <enumeration value="EXCELLENT"/>
+            <enumeration value="VERY-GOOD"/>
+            <enumeration value="GOOD"/>
+            <enumeration value="BAD"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="amountOfCuts">
+        <restriction base="integer">
+            <minInclusive value="4"/>
+            <maxInclusive value="15"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="Transparency">
+        <restriction base="double">
+            <minInclusive value="0"/>
+            <maxInclusive value="100"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="Preciousness">
+        <restriction base="string">
+            <enumeration value="PRECIOUS"/>
+            <enumeration value="SEMI-PRECIOUS"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="Origin">
+        <restriction base="string">
+            <enumeration value="AFRICA"/>
+            <enumeration value="ASIA"/>
+            <enumeration value="ANTARCTICA"/>
+            <enumeration value="SOUTH AMERICA"/>
+            <enumeration value="NORTH AMERICA"/>
+            <enumeration value="EUROPE"/>
+            <enumeration value="AUSTRALIA"/>
+            <enumeration value="OTHER"/>
+        </restriction>
+    </simpleType>
+</schema>
