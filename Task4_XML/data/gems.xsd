@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--TODO: use java jdk exe to convert from xsd to java classes-->
-
-
 <schema version="1.0"
-            xmlns="http://www.w3.org/2001/XMLSchema"
-            xmlns:tns="http://www.example.com/gems"
-            targetNamespace="http://www.example.com/gems"
-            elementFormDefault="qualified">
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.example.com/gems"
+        targetNamespace="http://www.example.com/gems"
+        elementFormDefault="qualified">
 
     <element name="AbstractGem" type="tns:AbstractGem" abstract="true"/>
 
@@ -23,10 +20,10 @@
         <sequence>
             <element name="name" type="string"/>
             <element name="preciousness" type="tns:Preciousness"/>
-            <element name="value" type="double"/>
+            <element name="weight" type="tns:Weight"/>
             <element name="gemArrival" type="date"/>
         </sequence>
-        <attribute name="origin" type="tns:Origin" default="unknown"/>
+        <attribute name="origin" type="tns:Origin" default="OTHER"/>
         <attribute name="id" type="integer" use="required"/>
 
     </complexType>
@@ -63,14 +60,28 @@
         <complexType mixed="true">
             <complexContent>
                 <extension base="tns:AbstractGem">
-                    <all>
+                    <sequence>
                         <element name="color" type="string"/>
                         <element name="luster" type="tns:Luster"/>
-                    </all>
+                    </sequence>
                 </extension>
             </complexContent>
         </complexType>
     </element>
+
+    <complexType name="Weight">
+        <all>
+            <element name="value" type="double"/>
+            <element name="unit">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="KG"/>
+                        <enumeration value="KARAT"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </all>
+    </complexType>
 
     <simpleType name="Luster">
         <restriction base="string">

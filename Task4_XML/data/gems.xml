@@ -6,16 +6,22 @@
     <Diamond origin="ASIA" id="2">
         <name>Red Velvet</name>
         <preciousness>SEMI-PRECIOUS</preciousness>
-        <value>40.4</value>
+        <weight>
+            <value>40.4</value>
+            <unit>KG</unit>
+        </weight>
         <gemArrival>2019-09-09</gemArrival>
         <transparency>50</transparency>
-        <amountofcuts>6</amountofcuts>>
+        <amountofcuts>6</amountofcuts>
     </Diamond>
 
     <Emerald id="1" origin="ANTARCTICA">
         <name>Princess</name>
         <preciousness>PRECIOUS</preciousness>
-        <value>40.7</value>
+        <weight>
+            <unit>KARAT</unit>
+            <value>4</value>
+        </weight>
         <gemArrival>2019-09-09</gemArrival>
         <color>red</color>
         <transparency>80</transparency>

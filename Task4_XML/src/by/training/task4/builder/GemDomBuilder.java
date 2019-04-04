@@ -1,6 +1,6 @@
 package by.training.task4.builder;
 
-public class BaseBuilder {
+public class GemDomBuilder {
 
 
 

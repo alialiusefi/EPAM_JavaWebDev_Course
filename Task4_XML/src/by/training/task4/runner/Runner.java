@@ -1,7 +1,5 @@
 package by.training.task4.runner;
 
-import com.sun.net.httpserver.HttpServer;
-import sun.net.httpserver.HttpServerImpl;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

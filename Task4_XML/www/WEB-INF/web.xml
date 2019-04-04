@@ -7,20 +7,34 @@
          metadata-complete="true">
 
     <description>
-        First Web Application - by.training.task4.runner.Runner
+        First Web Application
     </description>
     <display-name>Hello World</display-name>
 
     <request-character-encoding>UTF-8</request-character-encoding>
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
     <servlet>
-        <servlet-name>HelloName</servlet-name>
-        <servlet-class>by.training.task4.servlet.Servlet.class</servlet-class>
+        <servlet-name>Hello</servlet-name>
+        <servlet-class>by.training.task4.runner.Runner</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloName</servlet-name>
+        <servlet-name>Hello</servlet-name>
         <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TimeServlet</servlet-name>
+        <servlet-class>by.training.task4.demo.TimeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TimeServlet</servlet-name>
+        <url-pattern>/timeaction</url-pattern>
     </servlet-mapping>
 
 </web-app>
