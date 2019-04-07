@@ -9,7 +9,6 @@
 package by.training.task4.entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.JAXBElement;
@@ -70,7 +69,7 @@ public class AbstractGem {
     @XmlAttribute(name = "origin")
     protected Origin origin;
     @XmlAttribute(name = "id", required = true)
-    protected BigInteger id;
+    protected Integer id;
 
     /**
      * Gets the value of the content property.
@@ -138,10 +137,10 @@ public class AbstractGem {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public BigInteger getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -150,10 +149,10 @@ public class AbstractGem {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public void setId(BigInteger value) {
+    public void setId(Integer value) {
         this.id = value;
     }
 

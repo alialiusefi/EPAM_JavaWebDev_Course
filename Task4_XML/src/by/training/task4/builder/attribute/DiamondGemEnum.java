@@ -28,7 +28,7 @@ package by.training.task4.builder.attribute;
  */
 
 
-public enum DiamondGemAttributes {
+public enum DiamondGemEnum {
 
     NAME("name"),
     PRECIOUSNESS("preciousness"),
@@ -40,7 +40,7 @@ public enum DiamondGemAttributes {
     AMOUNTOFCUTS("amountofcuts");
 
     private String value;
-    DiamondGemAttributes(String str)
+    DiamondGemEnum(String str)
     {
         this.value = str;
     }

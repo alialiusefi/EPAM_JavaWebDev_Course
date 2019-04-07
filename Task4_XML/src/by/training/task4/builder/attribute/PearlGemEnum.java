@@ -28,7 +28,7 @@ package by.training.task4.builder.attribute;
 
  *  */
 
-public enum PearlGemAttributes {
+public enum PearlGemEnum {
     NAME("name"),
     PRECIOUSNESS("preciousness"),
     WEIGHT("weight"),
@@ -40,7 +40,7 @@ public enum PearlGemAttributes {
 
     private String value;
 
-    PearlGemAttributes (String str) {
+    PearlGemEnum(String str) {
         this.value = str;
     }
 

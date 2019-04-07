@@ -21,7 +21,7 @@
             <element name="name" type="string"/>
             <element name="preciousness" type="tns:Preciousness"/>
             <element name="weight" type="tns:Weight"/>
-            <element name="gemArrival" type="date"/>
+            <element name="gemArrival" type="date" default="01-01-2010"/>
         </sequence>
         <attribute name="origin" type="tns:Origin" default="OTHER"/>
         <attribute name="id" type="integer" use="required"/>

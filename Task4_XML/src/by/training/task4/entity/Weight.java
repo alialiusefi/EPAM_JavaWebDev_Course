@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 
 /**
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Weight", propOrder = {
 
 })
-public class Weight {
+public class Weight implements Serializable {
 
     protected double value;
     @XmlElement(required = true)

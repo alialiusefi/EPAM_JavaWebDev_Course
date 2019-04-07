@@ -27,6 +27,16 @@
         <transparency>80</transparency>
         <amountofcuts>5</amountofcuts>
     </Emerald>
-
+    <Pearl origin="ASIA" id="3">
+        <name>Round Whites </name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>23</value>
+            <unit>KARAT</unit>
+        </weight>
+        <gemArrival>2018-09-04</gemArrival>
+        <color>Milky White</color>
+        <luster>VERY-GOOD</luster>
+    </Pearl>
 
 </Gems>

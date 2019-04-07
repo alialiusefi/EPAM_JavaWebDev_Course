@@ -26,7 +26,7 @@ package by.training.task4.builder.attribute;
  * </complexType>
  * </element>
  */
-public enum EmeraldGemAttributes {
+public enum EmeraldGemEnum {
 
 
     NAME("name"),
@@ -49,7 +49,7 @@ public enum EmeraldGemAttributes {
 
     private String value;
 
-    EmeraldGemAttributes(String str) {
+    EmeraldGemEnum(String str) {
         this.value = str;
     }
 
