@@ -106,12 +106,8 @@ public class GemHandler extends DefaultHandler {
                     }
                     break;
                 case GEMARRIVAL:
-                    String[] datestr = str.split("-");
-                    GregorianCalendar gregorianCalendar = new GregorianCalendar(
-                            Integer.parseInt(datestr[2]),
-                            Integer.parseInt(datestr[1]) - 1,
-                            Integer.parseInt(datestr[0]));
-                    current.getContent().add(gregorianCalendar);
+                    String datestr = str;
+                    current.getContent().add(datestr);
                     break;
                 case TRANSPARENCY:
                     current.getContent().add(Double.parseDouble(str));

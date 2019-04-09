@@ -34,7 +34,7 @@ public class GemsSaxBuilder {
         return gems;
     }
 
-    public void buildSetStudents(String filename) {
+    public void buildSetGems(String filename) {
         try {
             xmlReader.parse(filename);
         } catch (SAXException | IOException e) {

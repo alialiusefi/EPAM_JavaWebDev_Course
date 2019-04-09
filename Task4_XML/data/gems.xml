@@ -3,7 +3,7 @@
       xmlns="http://www.example.com/gems"
       xsi:schemaLocation="http://www.example.com/gems gems.xsd">
 
-    <Diamond origin="ASIA" id="2">
+    <Diamond origin="ASIA" id="42">
         <name>Red Velvet</name>
         <preciousness>SEMIPRECIOUS</preciousness>
         <weight>
@@ -27,8 +27,34 @@
         <transparency>80</transparency>
         <amountofcuts>5</amountofcuts>
     </Emerald>
+
+    <Diamond origin="NORTH_AMERICA" id="32">
+        <name>Purple Crystal</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <value>4</value>
+            <unit>KG</unit>
+        </weight>
+        <gemArrival>1971-09-09</gemArrival>
+        <transparency>50</transparency>
+        <amountofcuts>7</amountofcuts>
+    </Diamond>
+
+    <Emerald id="80" origin="ANTARCTICA">
+        <name>Greeny</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <unit>KG</unit>
+            <value>0.70</value>
+        </weight>
+        <gemArrival>2019-01-09</gemArrival>
+        <color>Green</color>
+        <transparency>8</transparency>
+        <amountofcuts>9</amountofcuts>
+    </Emerald>
+
     <Pearl origin="ASIA" id="3">
-        <name>Round Whites </name>
+        <name>Round Whites</name>
         <preciousness>PRECIOUS</preciousness>
         <weight>
             <value>23</value>
@@ -38,5 +64,135 @@
         <color>Milky White</color>
         <luster>VERY-GOOD</luster>
     </Pearl>
+    <Pearl origin="ASIA" id="981">
+        <name>Moon Blue</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <value>0.11</value>
+            <unit>KG</unit>
+        </weight>
+        <gemArrival>2011-09-04</gemArrival>
+        <color>Milky Blue</color>
+        <luster>GOOD</luster>
+    </Pearl>
+    <Pearl origin="AUSTRALIA" id="981">
+        <name>Clear White</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <value>22</value>
+            <unit>KARAT</unit>
+        </weight>
+        <gemArrival>2011-09-04</gemArrival>
+        <color>White</color>
+        <luster>GOOD</luster>
+    </Pearl>
 
+    <Diamond origin="OTHER" id="2">
+        <name>Black Void</name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>69</value>
+            <unit>KG</unit>
+        </weight>
+        <gemArrival>2000-09-09</gemArrival>
+        <transparency>0</transparency>
+        <amountofcuts>7</amountofcuts>
+    </Diamond>
+
+    <Emerald id="1110" origin="ANTARCTICA">
+        <name>Yellowy</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <unit>KARAT</unit>
+            <value>100.0</value>
+        </weight>
+        <gemArrival>2019-01-09</gemArrival>
+        <color>Green Yellowish</color>
+        <transparency>99.9</transparency>
+        <amountofcuts>5</amountofcuts>
+    </Emerald>
+
+    <Pearl origin="EUROPE" id="4443">
+        <name>Quirky Brown</name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>1</value>
+            <unit>KARAT</unit>
+        </weight>
+        <gemArrival>2000-09-04</gemArrival>
+        <color>Brown</color>
+        <luster>BAD</luster>
+    </Pearl>
+    <Diamond origin="ANTARCTICA" id="562">
+        <name>Greymane</name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>11</value>
+            <unit>KG</unit>
+        </weight>
+        <gemArrival>2100-09-09</gemArrival>
+        <transparency>15</transparency>
+        <amountofcuts>12</amountofcuts>
+    </Diamond>
+
+    <Emerald id="2018" origin="AFRICA">
+        <name>Minecraft Emerald</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <unit>KARAT</unit>
+            <value>100.0</value>
+        </weight>
+        <gemArrival>2010-01-09</gemArrival>
+        <color>Green Bit</color>
+        <transparency>99.9</transparency>
+        <amountofcuts>5</amountofcuts>
+    </Emerald>
+
+    <Pearl origin="ANTARCTICA" id="411443">
+        <name>Rainbow</name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>71717</value>
+            <unit>KARAT</unit>
+        </weight>
+        <gemArrival>2000-09-04</gemArrival>
+        <color>Rainbow</color>
+        <luster>VERY-GOOD</luster>
+    </Pearl>
+    <Diamond origin="ANTARCTICA" id="562">
+        <name>Greymane</name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>11</value>
+            <unit>KG</unit>
+        </weight>
+        <gemArrival>2100-09-09</gemArrival>
+        <transparency>15</transparency>
+        <amountofcuts>12</amountofcuts>
+    </Diamond>
+
+    <Emerald id="2018" origin="AFRICA">
+        <name>Red Emerald</name>
+        <preciousness>SEMIPRECIOUS</preciousness>
+        <weight>
+            <unit>KARAT</unit>
+            <value>100.0</value>
+        </weight>
+        <gemArrival>2010-01-09</gemArrival>
+        <color>Green Bit</color>
+        <transparency>99.9</transparency>
+        <amountofcuts>5</amountofcuts>
+    </Emerald>
+
+    <Pearl origin="ANTARCTICA" id="411443">
+        <name>Rainbow</name>
+        <preciousness>PRECIOUS</preciousness>
+        <weight>
+            <value>71717</value>
+            <unit>KARAT</unit>
+        </weight>
+        <gemArrival>2000-09-04</gemArrival>
+        <color>Rainbow</color>
+        <luster>VERY-GOOD</luster>
+    </Pearl>
 </Gems>

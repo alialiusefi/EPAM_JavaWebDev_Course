@@ -7,9 +7,9 @@
          metadata-complete="true">
 
     <description>
-        First Web Application
+        My XML WebParser
     </description>
-    <display-name>Hello World</display-name>
+    <display-name>My XML WebParser</display-name>
 
     <request-character-encoding>UTF-8</request-character-encoding>
 
@@ -18,23 +18,13 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>Hello</servlet-name>
-        <servlet-class>by.training.task4.runner.ServletRunner</servlet-class>
+        <servlet-name>WebParser</servlet-name>
+        <servlet-class>by.training.task4.servlet.WebParser</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Hello</servlet-name>
-        <url-pattern>/hello</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>TimeServlet</servlet-name>
-        <servlet-class>by.training.task4.demo.TimeServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>TimeServlet</servlet-name>
-        <url-pattern>/timeaction</url-pattern>
+        <servlet-name>WebParser</servlet-name>
+        <url-pattern>/parse</url-pattern>
     </servlet-mapping>
 
 </web-app>

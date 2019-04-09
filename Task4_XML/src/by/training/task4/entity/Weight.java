@@ -42,7 +42,7 @@ import java.io.Serializable;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Weight", propOrder = {
+@XmlType(name = "Weight(Unit)", propOrder = {
 
 })
 public class Weight implements Serializable {

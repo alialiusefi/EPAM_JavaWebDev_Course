@@ -5,8 +5,6 @@ import by.training.task4.entity.AbstractGem;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 public class GemHandlerTest {
 
     private GemsSaxBuilder saxBuilder;
@@ -22,7 +20,7 @@ public class GemHandlerTest {
     @Test
     public void testGemHandler()
     {
-        saxBuilder.buildSetStudents(xmlPath);
+        saxBuilder.buildSetGems(xmlPath);
         for(AbstractGem i : saxBuilder.getGems())
         {
             System.out.println(i);

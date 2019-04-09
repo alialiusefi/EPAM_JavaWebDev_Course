@@ -99,12 +99,8 @@ public class GemsStaxBuilder {
                             if (name == null) {
                                 break;
                             }
-                            String[] datestr = name.split("-");
-                            GregorianCalendar gregorianCalendar = new GregorianCalendar(
-                                    Integer.parseInt(datestr[2]),
-                                    Integer.parseInt(datestr[1]) - 1,
-                                    Integer.parseInt(datestr[0]));
-                            diamond.getContent().add(gregorianCalendar);
+                            String datestr = name;
+                            diamond.getContent().add(datestr);
                             break;
                         //diamond specs here
                         case TRANSPARENCY:
@@ -156,12 +152,8 @@ public class GemsStaxBuilder {
                             if (name == null) {
                                 break;
                             }
-                            String[] datestr = name.split("-");
-                            GregorianCalendar gregorianCalendar = new GregorianCalendar(
-                                    Integer.parseInt(datestr[2]),
-                                    Integer.parseInt(datestr[1]) - 1,
-                                    Integer.parseInt(datestr[0]));
-                            emerald.getContent().add(gregorianCalendar);
+                            String datestr = name;
+                            emerald.getContent().add(datestr);
                             break;
                         //emerald specs here
                         case COLOR:
@@ -216,12 +208,8 @@ public class GemsStaxBuilder {
                             if (name == null) {
                                 break;
                             }
-                            String[] datestr = name.split("-");
-                            GregorianCalendar gregorianCalendar = new GregorianCalendar(
-                                    Integer.parseInt(datestr[2]),
-                                    Integer.parseInt(datestr[1]) - 1,
-                                    Integer.parseInt(datestr[0]));
-                            pearl.getContent().add(gregorianCalendar);
+                            String datestr = name;
+                            pearl.getContent().add(datestr);
                             break;
                         //pearl specs here
                         case COLOR:

@@ -118,8 +118,8 @@
             <enumeration value="AFRICA"/>
             <enumeration value="ASIA"/>
             <enumeration value="ANTARCTICA"/>
-            <enumeration value="SOUTH AMERICA"/>
-            <enumeration value="NORTH AMERICA"/>
+            <enumeration value="SOUTH_AMERICA"/>
+            <enumeration value="NORTH_AMERICA"/>
             <enumeration value="EUROPE"/>
             <enumeration value="AUSTRALIA"/>
             <enumeration value="OTHER"/>
