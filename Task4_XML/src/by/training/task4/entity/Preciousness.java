@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 public enum Preciousness {
 
     PRECIOUS("PRECIOUS"),
-    @XmlEnumValue("SEMI-PRECIOUS")
-    SEMI_PRECIOUS("SEMI-PRECIOUS");
+    SEMIPRECIOUS("SEMIPRECIOUS");
     private final String value;
 
     Preciousness(String v) {
@@ -46,7 +45,7 @@ public enum Preciousness {
 
     public static Preciousness fromValue(String v) {
         for (Preciousness c: Preciousness.values()) {
-            if (c.value.equals(v)) {
+            if (c.value.equals(v.toUpperCase())) {
                 return c;
             }
         }

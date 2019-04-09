@@ -91,4 +91,12 @@ public class Weight implements Serializable {
         this.unit = value;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Weight{");
+        sb.append("value=").append(value);
+        sb.append(", unit='").append(unit).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

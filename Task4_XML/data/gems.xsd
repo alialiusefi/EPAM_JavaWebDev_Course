@@ -109,7 +109,7 @@
     <simpleType name="Preciousness">
         <restriction base="string">
             <enumeration value="PRECIOUS"/>
-            <enumeration value="SEMI-PRECIOUS"/>
+            <enumeration value="SEMIPRECIOUS"/>
         </restriction>
     </simpleType>
 

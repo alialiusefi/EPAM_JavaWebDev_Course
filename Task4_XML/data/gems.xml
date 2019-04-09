@@ -5,7 +5,7 @@
 
     <Diamond origin="ASIA" id="2">
         <name>Red Velvet</name>
-        <preciousness>SEMI-PRECIOUS</preciousness>
+        <preciousness>SEMIPRECIOUS</preciousness>
         <weight>
             <value>40.4</value>
             <unit>KG</unit>

@@ -10,7 +10,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.io.IOException;
 import java.util.Set;
-//FIXED
+
 public class GemsSaxBuilder {
 
     public static final Logger LOGGER =
@@ -47,6 +47,6 @@ public class GemsSaxBuilder {
         {
             LOGGER.error(e.getMessage(),e);
         }
-        gems = this.getGems();
+        gems = gemHandler.getGems();
     }
 }

@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlType;
 public enum Luster {
 
     EXCELLENT("EXCELLENT"),
-    @XmlEnumValue("VERY-GOOD")
     VERY_GOOD("VERY-GOOD"),
     GOOD("GOOD"),
     BAD("BAD");

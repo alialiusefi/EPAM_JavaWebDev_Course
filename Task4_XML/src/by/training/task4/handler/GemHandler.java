@@ -1,15 +1,14 @@
 package by.training.task4.handler;
 
-import by.training.task4.builder.attribute.AbstractGemEnum;
-import by.training.task4.builder.attribute.DiamondGemEnum;
-import by.training.task4.builder.attribute.EmeraldGemEnum;
-import by.training.task4.builder.attribute.PearlGemEnum;
+import by.training.task4.builder.tag.GemEnum;
 import by.training.task4.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -21,120 +20,44 @@ public class GemHandler extends DefaultHandler {
             LogManager.getLogger(GemHandler.class);
     private Set<AbstractGem> allGems;
     private AbstractGem current = null;
-    private AbstractGemEnum currentGemEnum = null;
-    private DiamondGemEnum currentDiamondEnum = null;
-    private EmeraldGemEnum currentEmeraldEnum = null;
-    private PearlGemEnum currentPearlEnum = null;
-    private EnumSet<AbstractGemEnum> abstractGemAttr;
-    private EnumSet<DiamondGemEnum> diamondGemAttr;
-    private EnumSet<EmeraldGemEnum> emeraldGemAttr;
-    private EnumSet<PearlGemEnum> pearlGemAttr;
+    private GemEnum currentGemEnum = null;
+    private EnumSet<GemEnum> abstractGemAttr;
 
     public GemHandler() {
         allGems = new HashSet<>();
-        diamondGemAttr = EnumSet.range(DiamondGemEnum.NAME,
-                DiamondGemEnum.AMOUNTOFCUTS);
-        emeraldGemAttr = EnumSet.range(EmeraldGemEnum.NAME,
-                EmeraldGemEnum.AMOUNTOFCUTS);
-        pearlGemAttr = EnumSet.range(PearlGemEnum.NAME,
-                PearlGemEnum.LUSTER);
-        abstractGemAttr = EnumSet.range(AbstractGemEnum.NAME,
-                AbstractGemEnum.ID);
+        abstractGemAttr = EnumSet.range(GemEnum.GEMS,
+                GemEnum.LUSTER);
     }
 
-    public Set<AbstractGem> getAllGems() {
+    public Set<AbstractGem> getGems() {
         return allGems;
     }
 
     @Override
     public void startElement(String uri, String localName,
                              String qName, Attributes attrs) {
-
-        if ("Diamond".equals(localName) || "Pearl".equals(localName) || "Emerald".equals(localName))
-        {
+        if ("Diamond".equals(localName) ||
+                "Pearl".equals(localName) ||
+                "Emerald".equals(localName)) {
+            if ("Diamond".equals(localName)) {
+                current = new ObjectFactory().createDiamond();
+            }
+            if ("Pearl".equals(localName)) {
+                current = new ObjectFactory().createPearl();
+            }
+            if ("Emerald".equals(localName)) {
+                current = new ObjectFactory().createEmerald();
+            }
             int id = Integer.parseInt(attrs.getValue("id"));
             Origin origin = Origin.valueOf(attrs.getValue("origin"));
-            String name = attrs.getValue("name"));
-            Preciousness preciousness = Preciousness.valueOf(
-                    attrs.getValue("preciousness"));
-            Weight weight = new Weight();
-            double value = Double.parseDouble(attrs.getValue("value"));
-            weight.setValue(value);
-            String unit = attrs.getValue("unit");
-            weight.setUnit(unit);
-            String[] datestr = attrs.getValue("gemArrival").split("-");
-            GregorianCalendar gregorianCalendar = new GregorianCalendar(
-                    Integer.parseInt(datestr[2]),
-                    Integer.parseInt(datestr[1]) - 1,
-                    Integer.parseInt(datestr[0]));
-            if("Diamond".equals(localName))
-            {
-                double transparency = Double.parseDouble(attrs.getValue("transparency"));
-                int amountOfCuts = Integer.parseInt(attrs.getValue("amountofcuts"));
-                current = new Diamond();
-                current.setOrigin(origin);
-                current.setId(id);
-                current.getContent().add(name);
-                current.getContent().add(preciousness);
-                current.getContent().add(weight);
-                current.getContent().add(gregorianCalendar);
-                current.getContent().add(transparency);
-                current.getContent().add(amountOfCuts);
-            }
-            if("Emerald".equals(localName))
-            {
-                String color = attrs.getValue("color");
-                double transparency = Double.parseDouble(attrs.getValue("transparency"));
-                int amountOfCuts = Integer.parseInt(attrs.getValue("amountofcuts"));
-                current = new Emerald();
-                current.setOrigin(origin);
-                current.setId(id);
-                current.getContent().add(name);
-                current.getContent().add(preciousness);
-                current.getContent().add(weight);
-                current.getContent().add(gregorianCalendar);
-                current.getContent().add(transparency);
-                current.getContent().add(amountOfCuts);
-                current.getContent().add(color);
-            }
-            if("Pearl".equals(localName))
-            {
-                current = new Pearl();
-                current.setOrigin(origin);
-                current.setId(id);
-                current.getContent().add(name);
-                current.getContent().add(preciousness);
-                current.getContent().add(weight);
-                current.getContent().add(gregorianCalendar);
-                
-            }
-        }
-        else {
-            AbstractGemEnum temp = AbstractGemEnum.valueOf(localName.toUpperCase());
-            if(abstractGemAttr.contains(temp))
-            {
+            current.setId(id);
+            current.setOrigin(origin);
+        } else {
+            GemEnum temp = GemEnum.valueOf(localName.toUpperCase());
+            if (abstractGemAttr.contains(temp)) {
                 currentGemEnum = temp;
             }
         }
-
-        // if element is a diamond
-        if () {
-            Diamond diamond = new ObjectFactory().createDiamond();
-            //diamond.getContent().add(gregorianCalendar);
-            //diamond.getContent().add(Double.parseDouble(attrs.getValue("transparency")));
-            //diamond.getContent().add()));
-        }
-        if("Pearl".equals(localName))
-        {
-
-        }
-        if("Emerald".equals(localName))
-        {
-
-        }
-
-
-
     }
 
     @Override
@@ -142,9 +65,72 @@ public class GemHandler extends DefaultHandler {
         logger.debug("Parsing Started!");
     }
 
+    public void endElement(String uri, String localName, String qName) {
+        if ("Diamond".equals(localName) ||
+                "Pearl".equals(localName) ||
+                "Emerald".equals(localName)) {
+            allGems.add(current);
+        }
+
+    }
+
     @Override
-    public void characters(char[] ch, int start, int length) {
-        System.out.print(new String(ch, start, length));
+    public void characters(char[] ch, int start, int length) throws SAXException {
+        String str = new String(ch, start, length).trim();
+        if (currentGemEnum != null) {
+            switch (currentGemEnum) {
+                case GEMS:
+                    break;
+                case NAME:
+                    current.getContent().add(str);
+                    break;
+                case PRECIOUSNESS:
+                    current.getContent().add(Preciousness.valueOf(str));
+                    break;
+                case WEIGHT:
+                    current.getContent().add(new Weight());
+                    break;
+                case UNIT:
+                    for (Serializable i : current.getContent()) {
+                        if (i instanceof Weight) {
+                            ((Weight) i).setUnit(str);
+                            break;
+                        }
+                    }
+                    break;
+                case VALUE:
+                    for (Serializable i : current.getContent()) {
+                        if (i instanceof Weight) {
+                            ((Weight) i).setValue(Double.parseDouble(str));
+                        }
+                    }
+                    break;
+                case GEMARRIVAL:
+                    String[] datestr = str.split("-");
+                    GregorianCalendar gregorianCalendar = new GregorianCalendar(
+                            Integer.parseInt(datestr[2]),
+                            Integer.parseInt(datestr[1]) - 1,
+                            Integer.parseInt(datestr[0]));
+                    current.getContent().add(gregorianCalendar);
+                    break;
+                case TRANSPARENCY:
+                    current.getContent().add(Double.parseDouble(str));
+                    break;
+                case AMOUNTOFCUTS:
+                    current.getContent().add(Integer.parseInt(str));
+                    break;
+                case COLOR:
+                    current.getContent().add(str);
+                    break;
+                case LUSTER:
+                    current.getContent().add(Luster.fromValue(str.toUpperCase()));
+                    break;
+                default:
+                    throw new SAXException(
+                            currentGemEnum.name());
+            }
+        }
+        currentGemEnum = null;
     }
 
     @Override

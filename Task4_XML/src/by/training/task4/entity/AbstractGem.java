@@ -38,8 +38,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="weight" type="{http://www.example.com/gems}Weight"/>
  *         &lt;element name="gemArrival" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *       &lt;/sequence>
- *       &lt;attribute name="origin" type="{http://www.example.com/gems}Origin" default="OTHER" />
- *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}integer" />
+ *       &lt;tag name="origin" type="{http://www.example.com/gems}Origin" default="OTHER" />
+ *       &lt;tag name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}integer" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -156,4 +156,14 @@ public class AbstractGem {
         this.id = value;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("AbstractGem{");
+        sb.append("content=").append(content);
+        sb.append("\n");
+        sb.append(", origin=").append(origin);
+        sb.append(", id=").append(id);
+        sb.append('}');
+        return sb.toString();
+    }
 }

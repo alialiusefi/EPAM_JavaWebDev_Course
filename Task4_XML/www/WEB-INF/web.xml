@@ -19,7 +19,7 @@
 
     <servlet>
         <servlet-name>Hello</servlet-name>
-        <servlet-class>by.training.task4.runner.Runner</servlet-class>
+        <servlet-class>by.training.task4.runner.ServletRunner</servlet-class>
     </servlet>
 
     <servlet-mapping>
