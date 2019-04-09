@@ -20,32 +20,25 @@ public class GemsSaxBuilder {
     private GemHandler gemHandler;
     private XMLReader xmlReader;
 
-    public GemsSaxBuilder()
-    {
+    public GemsSaxBuilder() {
         gemHandler = new GemHandler();
-        try{
+        try {
             xmlReader = XMLReaderFactory.createXMLReader();
             xmlReader.setContentHandler(gemHandler);
-        }
-        catch (SAXException e)
-        {
-            LOGGER.error(e.getMessage(),e);
+        } catch (SAXException e) {
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
-    public Set<AbstractGem> getGems()
-    {
+    public Set<AbstractGem> getGems() {
         return gems;
     }
 
-    public void buildSetStudents(String filename)
-    {
-        try{
+    public void buildSetStudents(String filename) {
+        try {
             xmlReader.parse(filename);
-        }
-        catch(SAXException | IOException e)
-        {
-            LOGGER.error(e.getMessage(),e);
+        } catch (SAXException | IOException e) {
+            LOGGER.error(e.getMessage(), e);
         }
         gems = gemHandler.getGems();
     }

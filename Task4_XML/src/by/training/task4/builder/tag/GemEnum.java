@@ -2,6 +2,9 @@ package by.training.task4.builder.tag;
 
 public enum GemEnum {
     GEMS("Gems"),
+    DIAMOND("Diamond"),
+    EMERALD("Emerald"),
+    PEARL("Pearl"),
     NAME("name"),
     PRECIOUSNESS("preciousness"),
     UNIT("unit"),

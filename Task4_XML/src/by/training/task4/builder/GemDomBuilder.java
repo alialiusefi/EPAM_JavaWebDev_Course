@@ -72,27 +72,27 @@ public class GemDomBuilder {
         emerald.setOrigin(Origin.fromValue(
                 element.getAttribute("origin")));
         emerald.getContent().add(
-               getElementTextContent(element,"name"));
+                getElementTextContent(element, "name"));
         emerald.getContent().add(Preciousness.fromValue(
-                getElementTextContent(element,"preciousness")));
+                getElementTextContent(element, "preciousness")));
         Weight weight = new Weight();
         Element weightElem = (Element) element.getElementsByTagName(
                 "weight").item(0);
         weight.setUnit(getElementTextContent(weightElem, "unit"));
         weight.setValue(Double.parseDouble(getElementTextContent(weightElem, "value")));
         emerald.getContent().add(weight);
-        String[] datestr = getElementTextContent(element,"gemArrival").split("-");
+        String[] datestr = getElementTextContent(element, "gemArrival").split("-");
         GregorianCalendar gregorianCalendar = new GregorianCalendar(
                 Integer.parseInt(datestr[2]),
                 Integer.parseInt(datestr[1]) - 1,
                 Integer.parseInt(datestr[0]));
         emerald.getContent().add(gregorianCalendar);
         // till here
-        emerald.getContent().add(getElementTextContent(element,"color"));
+        emerald.getContent().add(getElementTextContent(element, "color"));
         emerald.getContent().add(Double.parseDouble(
-                getElementTextContent(element,"transparency")));
+                getElementTextContent(element, "transparency")));
         emerald.getContent().add(Integer.parseInt(
-                getElementTextContent(element,"amountofcuts")));
+                getElementTextContent(element, "amountofcuts")));
         return emerald;
     }
 
@@ -103,25 +103,25 @@ public class GemDomBuilder {
         diamond.setOrigin(Origin.fromValue(
                 element.getAttribute("origin")));
         diamond.getContent().add(
-                getElementTextContent(element,"name"));
+                getElementTextContent(element, "name"));
         diamond.getContent().add(Preciousness.fromValue(
-                getElementTextContent(element,"preciousness")));
+                getElementTextContent(element, "preciousness")));
         Weight weight = new Weight();
         Element weightElem = (Element) element.getElementsByTagName(
                 "weight").item(0);
         weight.setUnit(getElementTextContent(weightElem, "unit"));
         weight.setValue(Double.parseDouble(getElementTextContent(weightElem, "value")));
         diamond.getContent().add(weight);
-        String[] datestr = getElementTextContent(element,"gemArrival").split("-");
+        String[] datestr = getElementTextContent(element, "gemArrival").split("-");
         GregorianCalendar gregorianCalendar = new GregorianCalendar(
                 Integer.parseInt(datestr[2]),
                 Integer.parseInt(datestr[1]) - 1,
                 Integer.parseInt(datestr[0]));
         diamond.getContent().add(gregorianCalendar);
         diamond.getContent().add(Double.parseDouble(
-                getElementTextContent(element,"transparency")));
+                getElementTextContent(element, "transparency")));
         diamond.getContent().add(Integer.parseInt(
-                getElementTextContent(element,"amountofcuts")));
+                getElementTextContent(element, "amountofcuts")));
         return diamond;
     }
 
@@ -132,24 +132,24 @@ public class GemDomBuilder {
         pearl.setOrigin(Origin.fromValue(
                 element.getAttribute("origin")));
         pearl.getContent().add(
-                getElementTextContent(element,"name"));
+                getElementTextContent(element, "name"));
         pearl.getContent().add(Preciousness.fromValue(
-                getElementTextContent(element,"preciousness")));
+                getElementTextContent(element, "preciousness")));
         Weight weight = new Weight();
         Element weightElem = (Element) element.getElementsByTagName(
                 "weight").item(0);
         weight.setUnit(getElementTextContent(weightElem, "unit"));
         weight.setValue(Double.parseDouble(getElementTextContent(weightElem, "value")));
         pearl.getContent().add(weight);
-        String[] datestr = getElementTextContent(element,"gemArrival").split("-");
+        String[] datestr = getElementTextContent(element, "gemArrival").split("-");
         GregorianCalendar gregorianCalendar = new GregorianCalendar(
                 Integer.parseInt(datestr[2]),
                 Integer.parseInt(datestr[1]) - 1,
                 Integer.parseInt(datestr[0]));
         pearl.getContent().add(gregorianCalendar);
-        pearl.getContent().add(getElementTextContent(element,"color"));
+        pearl.getContent().add(getElementTextContent(element, "color"));
         pearl.getContent().add(Luster.fromValue(
-                getElementTextContent(element,"luster")));
+                getElementTextContent(element, "luster")));
         return pearl;
     }
 
