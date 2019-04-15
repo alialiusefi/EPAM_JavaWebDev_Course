@@ -1,0 +1,13 @@
+CREATE DATABASE if not exists petshelter DEFAULT CHAR SET utf8;
+
+CREATE USER petshelter_admin IDENTIFIED BY 'adminpass';
+
+grant select,insert,update,delete
+  on petshelter.*
+  to library_user@localhost
+  IDENTIFIED by 'adminpass';
+
+grant select,insert,update,delete
+  on petshelter.*
+  to library_user@'%'
+  IDENTIFIED by 'adminpass';

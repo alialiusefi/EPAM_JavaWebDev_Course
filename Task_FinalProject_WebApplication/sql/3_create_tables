@@ -1,0 +1,22 @@
+use petshelter;
+
+create table pets
+  (
+  id integer not null auto_increment primary key,
+  name nvarchar(32) not null,
+  photourl nvarchar(50) not null,
+  age integer not null,
+  weight double not null,
+  vaccination_id integer,
+  shelter_id integer not null,
+  breed nvarchar(20) not null
+) default charset utf8;
+
+use petshelter;
+
+create table vaccinations (
+  date_manufactured date not null,
+  diseasename nvarchar(32) not null,
+  
+) default charset utf8;
+
