@@ -1,22 +1,94 @@
+/*
+    nchar and nvarchar can store Unicode characters.
+    char and varchar cannot store Unicode characters.
+    char and nchar are fixed-length which will reserve storage space
+          for number of characters you specify even if you don't use
+          up all that space.
+    varchar and nvarchar are variable-length which will only use up
+    spaces for the characters you store. It will not reserve storage
+    like char or nchar.
+
+  TODO: create a table that will look after:
+        adopting a pet for time or indefinitely
+ */
+
+
 use petshelter;
 
-create table pets
-  (
-  id integer not null auto_increment primary key,
+create table if not exists pets
+(
+  id             integer                             not null auto_increment unique,
+  name           nvarchar(32)                        not null,
+  photourl       nvarchar(255)                       not null,
+  dateofbirth    date                                not null,
+  weight         double                              not null,
+  date_sheltered date                                not null,
+  shelter_id     integer                             not null,
+  breed_name     nvarchar(32),
+  status         enum ('adopted','sheltered','dead') not null,
+  CONSTRAINT PK_pets PRIMARY KEY (id),
+  foreign key (shelter_id) references shelters (id),
+  foreign key (breed_name) references breeds (name)
+) default charset utf8;
+
+use petshelter;
+
+create table if not exists vaccinations
+(
+  id   integer      not null auto_increment unique,
   name nvarchar(32) not null,
-  photourl nvarchar(50) not null,
-  age integer not null,
-  weight double not null,
-  vaccination_id integer,
-  shelter_id integer not null,
-  breed nvarchar(20) not null
+  constraint PK_vaccinations primary key (id)
 ) default charset utf8;
 
 use petshelter;
 
-create table vaccinations (
-  date_manufactured date not null,
-  diseasename nvarchar(32) not null,
-  
+create table if not exists vaccinations_made
+(
+  pet_id           integer not null,
+  vaccination_id   integer not null,
+  date_vaccination date    not null,
+  FOREIGN KEY (pet_id) references pets (id),
+  FOREIGN KEY (vaccination_id) references vaccinations (id)
 ) default charset utf8;
 
+use petshelter;
+create table if not exists shelters
+(
+  id       integer      not null unique,
+  name     nvarchar(32) not null,
+  location nvarchar(32) not null,
+  CONSTRAINT PK_shelters PRIMARY KEY (id)
+) default charset utf8;
+
+use petshelter;
+
+create table if not exists breeds
+(
+  name        nvarchar(32) not null,
+  description nvarchar(255),
+  origin      nvarchar(48) not null,
+  CONSTRAINT PK_breeds PRIMARY KEY (name)
+) default charset utf8;
+
+use petshelter;
+
+create table if not exists users
+(
+  user_id  integer    not null,
+  username nchar(16)  not null,
+  password nchar(32)  not null,
+  role     tinyint(1) not null,
+  FOREIGN KEY (user_id) references userinfo (id)
+) default charset utf8;
+
+use petshelter;
+
+create table if not exists userinfo
+(
+  id          integer       not null unique,
+  firstname   nvarchar(16)  not null,
+  lastname    nvarchar(16)  not null,
+  dateofbirth date          not null,
+  address     nvarchar(100) not null,
+  PRIMARY KEY (id)
+) default charset utf8;
