@@ -1,5 +1,6 @@
 package by.training.finaltask.entity;
 
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 //todo: should i use a builder here
@@ -9,22 +10,27 @@ public final class Pet {
     private int id;
     private String name;
     private String photoURL;
-    private int age;
+    private GregorianCalendar dateOfBirth;
     private double weight;
+    private GregorianCalendar dateSheltered;
     private int vaccinationID;
     private int shelterID;
     private String breedName;
+    private PetStatus status;
 
-    public Pet(int id, String name, String photoURL, int age,
-               double weight, int vaccinationID, int shelterID, String breed) {
+    public Pet(int id, String name, String photoURL, GregorianCalendar dateOfBirth,
+               double weight, GregorianCalendar dateSheltered, int vaccinationID,
+               int shelterID, String breedName, PetStatus status) {
         this.id = id;
         this.name = name;
         this.photoURL = photoURL;
-        this.age = age;
+        this.dateOfBirth = dateOfBirth;
         this.weight = weight;
+        this.dateSheltered = dateSheltered;
         this.vaccinationID = vaccinationID;
         this.shelterID = shelterID;
-        this.breedName = breed;
+        this.breedName = breedName;
+        this.status = status;
     }
 
     public int getId() {
@@ -51,12 +57,12 @@ public final class Pet {
         this.photoURL = photoURL;
     }
 
-    public int getAge() {
-        return age;
+    public GregorianCalendar getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDateOfBirth(GregorianCalendar dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public double getWeight() {
@@ -65,6 +71,14 @@ public final class Pet {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public GregorianCalendar getDateSheltered() {
+        return dateSheltered;
+    }
+
+    public void setDateSheltered(GregorianCalendar dateSheltered) {
+        this.dateSheltered = dateSheltered;
     }
 
     public int getVaccinationID() {
@@ -91,25 +105,34 @@ public final class Pet {
         this.breedName = breedName;
     }
 
+    public PetStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PetStatus status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
         return getId() == pet.getId() &&
-                getAge() == pet.getAge() &&
                 Double.compare(pet.getWeight(), getWeight()) == 0 &&
                 getVaccinationID() == pet.getVaccinationID() &&
                 getShelterID() == pet.getShelterID() &&
                 getName().equals(pet.getName()) &&
                 getPhotoURL().equals(pet.getPhotoURL()) &&
-                getBreedName().equals(pet.getBreedName());
+                getDateOfBirth().equals(pet.getDateOfBirth()) &&
+                getDateSheltered().equals(pet.getDateSheltered()) &&
+                getBreedName().equals(pet.getBreedName()) &&
+                getStatus() == pet.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPhotoURL(),
-                getAge(), getWeight(), getVaccinationID(), getShelterID(), getBreedName());
+        return Objects.hash(getId(), getName(), getPhotoURL(), getDateOfBirth(), getWeight(), getDateSheltered(), getVaccinationID(), getShelterID(), getBreedName(), getStatus());
     }
 
     @Override
@@ -118,11 +141,13 @@ public final class Pet {
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", photoURL='").append(photoURL).append('\'');
-        sb.append(", age=").append(age);
+        sb.append(", dateOfBirth=").append(dateOfBirth);
         sb.append(", weight=").append(weight);
+        sb.append(", dateSheltered=").append(dateSheltered);
         sb.append(", vaccinationID=").append(vaccinationID);
         sb.append(", shelterID=").append(shelterID);
         sb.append(", breedName='").append(breedName).append('\'');
+        sb.append(", status=").append(status);
         sb.append('}');
         return sb.toString();
     }

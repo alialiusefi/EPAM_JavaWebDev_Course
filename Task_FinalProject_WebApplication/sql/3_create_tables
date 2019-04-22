@@ -8,13 +8,9 @@
     spaces for the characters you store. It will not reserve storage
     like char or nchar.
 
-  TODO: create a table that will look after:
-        adopting a pet for time or indefinitely
  */
 
-
 use petshelter;
-
 create table if not exists pets
 (
   id             integer                             not null auto_increment unique,
@@ -32,7 +28,17 @@ create table if not exists pets
 ) default charset utf8;
 
 use petshelter;
+create table if not exists adoptions_made
+(
+  pet_id         integer not null,
+  adoption_start date    not null,
+  adoption_end   date,
+  user_id        integer not null,
+  foreign key (pet_id) references pets (id),
+  foreign key (user_id) references userinfo (id)
+) default charset utf8;
 
+use petshelter;
 create table if not exists vaccinations
 (
   id   integer      not null auto_increment unique,
@@ -41,7 +47,6 @@ create table if not exists vaccinations
 ) default charset utf8;
 
 use petshelter;
-
 create table if not exists vaccinations_made
 (
   pet_id           integer not null,
@@ -61,7 +66,6 @@ create table if not exists shelters
 ) default charset utf8;
 
 use petshelter;
-
 create table if not exists breeds
 (
   name        nvarchar(32) not null,
@@ -71,18 +75,16 @@ create table if not exists breeds
 ) default charset utf8;
 
 use petshelter;
-
 create table if not exists users
 (
   user_id  integer    not null,
-  username nchar(16)  not null,
+  username nchar(16)  not null unique,
   password nchar(32)  not null,
   role     tinyint(1) not null,
   FOREIGN KEY (user_id) references userinfo (id)
 ) default charset utf8;
 
 use petshelter;
-
 create table if not exists userinfo
 (
   id          integer       not null unique,

@@ -1,0 +1,29 @@
+INSERT INTO shelters (id, name, location)
+VALUES (1, "Manhattan Shelter", "New York");
+
+INSERT INTO breeds (name, description, origin)
+VALUES ("German Shepherd",
+        "Big Ears and Strong",
+        "Germany");
+
+
+INSERT INTO pets (id,
+                  name,
+                  photourl,
+                  dateofbirth,
+                  weight,
+                  date_sheltered,
+                  shelter_id,
+                  breed_name,
+                  status)
+values (1, "John", "photos\\1.jpg", "2000-06-06", 10.2, "2015-09-09", 1, "German Shepherd", 'sheltered');
+
+insert into userinfo (id, firstname, lastname, dateofbirth, address)
+values (1,"Michael","Scott","1999-09-09","TempsVille 21, 98193 Scranton,USA");
+
+insert into users (user_id, username, password, role)
+VALUES (
+        1,"Johnny11","d6d8b3550f38c81fadb4e463f121604b",0
+       );
+
+select userinfo.id,userinfo.firstname,userinfo.dateofbirth from petshelter.userinfo

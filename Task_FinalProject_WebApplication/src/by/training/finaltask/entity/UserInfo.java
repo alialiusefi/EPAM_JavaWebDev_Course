@@ -1,5 +1,6 @@
 package by.training.finaltask.entity;
 
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public final class UserInfo {
@@ -7,15 +8,15 @@ public final class UserInfo {
     private String email;
     private String firstName;
     private String lastName;
-    private int age;
+    private GregorianCalendar dateOfBirth;
     private int address;
 
-    public UserInfo(String email, String firstName,
-                    String lastName, int age, int address) {
+    public UserInfo(String email, String firstName, String lastName,
+                    GregorianCalendar dateOfBirth, int address) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
     }
 
@@ -43,12 +44,12 @@ public final class UserInfo {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
+    public GregorianCalendar getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDateOfBirth(GregorianCalendar dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public int getAddress() {
@@ -64,16 +65,16 @@ public final class UserInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return getAge() == userInfo.getAge() &&
-                getAddress() == userInfo.getAddress() &&
+        return getAddress() == userInfo.getAddress() &&
                 getEmail().equals(userInfo.getEmail()) &&
                 getFirstName().equals(userInfo.getFirstName()) &&
-                getLastName().equals(userInfo.getLastName());
+                getLastName().equals(userInfo.getLastName()) &&
+                getDateOfBirth().equals(userInfo.getDateOfBirth());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getEmail(), getFirstName(), getLastName(), getAge(), getAddress());
+        return Objects.hash(getEmail(), getFirstName(), getLastName(), getDateOfBirth(), getAddress());
     }
 
     @Override
@@ -82,7 +83,7 @@ public final class UserInfo {
         sb.append("email='").append(email).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", age=").append(age);
+        sb.append(", dateOfBirth=").append(dateOfBirth);
         sb.append(", address=").append(address);
         sb.append('}');
         return sb.toString();

@@ -1,18 +1,17 @@
 package by.training.finaltask.entity;
 
-import java.util.GregorianCalendar;
+//todo: should i create a class for vaccination_made table
+
 import java.util.Objects;
 
 public final class Vaccination {
 
     private int id;
-    private GregorianCalendar manufactureDate;
-    private String diseaseName;
+    private String name;
 
-    public Vaccination(int id, GregorianCalendar manufactureDate, String diseaseName) {
+    public Vaccination(int id, String name) {
         this.id = id;
-        this.manufactureDate = manufactureDate;
-        this.diseaseName = diseaseName;
+        this.name = name;
     }
 
     public int getId() {
@@ -23,20 +22,12 @@ public final class Vaccination {
         this.id = id;
     }
 
-    public GregorianCalendar getManufactureDate() {
-        return manufactureDate;
+    public String getName() {
+        return name;
     }
 
-    public void setManufactureDate(GregorianCalendar manufactureDate) {
-        this.manufactureDate = manufactureDate;
-    }
-
-    public String getDiseaseName() {
-        return diseaseName;
-    }
-
-    public void setDiseaseName(String diseaseName) {
-        this.diseaseName = diseaseName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -45,21 +36,19 @@ public final class Vaccination {
         if (o == null || getClass() != o.getClass()) return false;
         Vaccination that = (Vaccination) o;
         return getId() == that.getId() &&
-                getManufactureDate().equals(that.getManufactureDate()) &&
-                getDiseaseName().equals(that.getDiseaseName());
+                getName().equals(that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getManufactureDate(), getDiseaseName());
+        return Objects.hash(getId(), getName());
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Vaccination{");
         sb.append("id=").append(id);
-        sb.append(", manufactureDate=").append(manufactureDate);
-        sb.append(", diseaseName='").append(diseaseName).append('\'');
+        sb.append(", name='").append(name).append('\'');
         sb.append('}');
         return sb.toString();
     }

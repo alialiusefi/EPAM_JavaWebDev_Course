@@ -5,17 +5,12 @@ import java.util.Objects;
 public final class Breed {
 
     private String name;
-    private double minWeight;
-    private double maxWeight;
-    private int lifeExpectancy;
+    private String description;
     private String origin;
 
-    public Breed(String name, double minWeight, double maxWeight,
-                 int lifeExpectancy, String origin) {
+    public Breed(String name, String description, String origin) {
         this.name = name;
-        this.minWeight = minWeight;
-        this.maxWeight = maxWeight;
-        this.lifeExpectancy = lifeExpectancy;
+        this.description = description;
         this.origin = origin;
     }
 
@@ -27,28 +22,12 @@ public final class Breed {
         this.name = name;
     }
 
-    public double getMinWeight() {
-        return minWeight;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMinWeight(double minWeight) {
-        this.minWeight = minWeight;
-    }
-
-    public double getMaxWeight() {
-        return maxWeight;
-    }
-
-    public void setMaxWeight(double maxWeight) {
-        this.maxWeight = maxWeight;
-    }
-
-    public int getLifeExpectancy() {
-        return lifeExpectancy;
-    }
-
-    public void setLifeExpectancy(int lifeExpectancy) {
-        this.lifeExpectancy = lifeExpectancy;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getOrigin() {
@@ -64,25 +43,21 @@ public final class Breed {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Breed breed = (Breed) o;
-        return Double.compare(breed.getMinWeight(), getMinWeight()) == 0 &&
-                Double.compare(breed.getMaxWeight(), getMaxWeight()) == 0 &&
-                getLifeExpectancy() == breed.getLifeExpectancy() &&
-                getName().equals(breed.getName()) &&
+        return getName().equals(breed.getName()) &&
+                getDescription().equals(breed.getDescription()) &&
                 getOrigin().equals(breed.getOrigin());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getMinWeight(), getMaxWeight(), getLifeExpectancy(), getOrigin());
+        return Objects.hash(getName(), getDescription(), getOrigin());
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Breed{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", minWeight=").append(minWeight);
-        sb.append(", maxWeight=").append(maxWeight);
-        sb.append(", lifeExpectancy=").append(lifeExpectancy);
+        sb.append(", description='").append(description).append('\'');
         sb.append(", origin='").append(origin).append('\'');
         sb.append('}');
         return sb.toString();

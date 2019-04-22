@@ -4,23 +4,23 @@ import java.util.Objects;
 
 public final class User {
 
-    private String email;
+    private int id;
     private String username;
     private String password;
     private Role userRole;
 
-    public User(String email, String username, Role userRole) {
-        this.email = email;
+    public User(int id, String username, Role userRole) {
+        this.id = id;
         this.username = username;
         this.userRole = userRole;
     }
 
-    public String getEmail() {
-        return email;
+    public int getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -52,7 +52,7 @@ public final class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return getEmail().equals(user.getEmail()) &&
+        return getId() == user.getId() &&
                 getUsername().equals(user.getUsername()) &&
                 getPassword().equals(user.getPassword()) &&
                 getUserRole() == user.getUserRole();
@@ -60,13 +60,13 @@ public final class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getEmail(), getUsername(), getPassword(), getUserRole());
+        return Objects.hash(getId(), getUsername(), getPassword(), getUserRole());
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");
-        sb.append("email='").append(email).append('\'');
+        sb.append("id=").append(id);
         sb.append(", username='").append(username).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", userRole=").append(userRole);
