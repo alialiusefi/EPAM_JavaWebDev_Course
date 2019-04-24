@@ -2,19 +2,25 @@ package by.training.finaltask.entity;
 
 public enum Role {
 
-    ADMINISTRATOR("Administrator"),
-    STAFF("Staff"),
-    GUEST("Guest");
+    ADMINISTRATOR,
+    STAFF,
+    GUEST;
 
-    private String value;
+    private int value;
 
-    private Role(String value)
-    {
-        this.value = value;
+    public int getValue() {
+        return value;
     }
 
-    public String getValue() {
-        return value;
+    public static Role valueOf(int idx)
+    {
+        switch(idx)
+        {
+            case 0: return ADMINISTRATOR;
+            case 1: return STAFF;
+            case 2: return GUEST;
+            default: throw new IllegalArgumentException("Role was not found!");
+        }
     }
 
     public int getIdentity(){

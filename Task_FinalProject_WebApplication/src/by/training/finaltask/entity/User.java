@@ -9,9 +9,10 @@ public final class User {
     private String password;
     private Role userRole;
 
-    public User(int id, String username, Role userRole) {
+    public User(int id, String username, String password, Role userRole) {
         this.id = id;
         this.username = username;
+        this.password = password;
         this.userRole = userRole;
     }
 

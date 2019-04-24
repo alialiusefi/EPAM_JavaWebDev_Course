@@ -1,4 +1,4 @@
-package by.training.finaltask.dao;
+package by.training.finaltask.dao.daointerface;
 
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.entity.UserInfo;

@@ -19,11 +19,12 @@ INSERT INTO pets (id,
 values (1, "John", "photos\\1.jpg", "2000-06-06", 10.2, "2015-09-09", 1, "German Shepherd", 'sheltered');
 
 insert into userinfo (id, firstname, lastname, dateofbirth, address)
-values (1,"Michael","Scott","1999-09-09","TempsVille 21, 98193 Scranton,USA");
+values (1,"Michael","Scott","1999-09-09","TempsVille 21, 98193 Scranton,USA"),
+       (2,"Maria","George","1999-08-01","TempsVille 11, 92193 Scranton,USA");
 
 insert into users (user_id, username, password, role)
 VALUES (
         1,"Johnny11","d6d8b3550f38c81fadb4e463f121604b",0
-       );
+       ),(2,"Maria22","b10a8db164e0754105b7a99be72e3fe5",2);
 
-select userinfo.id,userinfo.firstname,userinfo.dateofbirth from petshelter.userinfo
+select * from petshelter.users

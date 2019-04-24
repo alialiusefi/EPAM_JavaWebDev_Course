@@ -9,6 +9,44 @@
     like char or nchar.
 
  */
+use petshelter;
+create table if not exists userinfo
+(
+  id          integer       not null unique,
+  firstname   nvarchar(16)  not null,
+  lastname    nvarchar(16)  not null,
+  dateofbirth date          not null,
+  address     nvarchar(100) not null,
+  PRIMARY KEY (id)
+) default charset utf8;
+
+use petshelter;
+create table if not exists breeds
+(
+  name        nvarchar(32) not null,
+  description nvarchar(255),
+  origin      nvarchar(48) not null,
+  CONSTRAINT PK_breeds PRIMARY KEY (name)
+) default charset utf8;
+
+use petshelter;
+create table if not exists shelters
+(
+  id       integer      not null unique,
+  name     nvarchar(32) not null,
+  location nvarchar(32) not null,
+  CONSTRAINT PK_shelters PRIMARY KEY (id)
+) default charset utf8;
+
+
+use petshelter;
+create table if not exists vaccinations
+(
+  id   integer      not null auto_increment unique,
+  name nvarchar(32) not null,
+  constraint PK_vaccinations primary key (id)
+) default charset utf8;
+
 
 use petshelter;
 create table if not exists pets
@@ -39,14 +77,6 @@ create table if not exists adoptions_made
 ) default charset utf8;
 
 use petshelter;
-create table if not exists vaccinations
-(
-  id   integer      not null auto_increment unique,
-  name nvarchar(32) not null,
-  constraint PK_vaccinations primary key (id)
-) default charset utf8;
-
-use petshelter;
 create table if not exists vaccinations_made
 (
   pet_id           integer not null,
@@ -56,23 +86,7 @@ create table if not exists vaccinations_made
   FOREIGN KEY (vaccination_id) references vaccinations (id)
 ) default charset utf8;
 
-use petshelter;
-create table if not exists shelters
-(
-  id       integer      not null unique,
-  name     nvarchar(32) not null,
-  location nvarchar(32) not null,
-  CONSTRAINT PK_shelters PRIMARY KEY (id)
-) default charset utf8;
 
-use petshelter;
-create table if not exists breeds
-(
-  name        nvarchar(32) not null,
-  description nvarchar(255),
-  origin      nvarchar(48) not null,
-  CONSTRAINT PK_breeds PRIMARY KEY (name)
-) default charset utf8;
 
 use petshelter;
 create table if not exists users
@@ -84,13 +98,4 @@ create table if not exists users
   FOREIGN KEY (user_id) references userinfo (id)
 ) default charset utf8;
 
-use petshelter;
-create table if not exists userinfo
-(
-  id          integer       not null unique,
-  firstname   nvarchar(16)  not null,
-  lastname    nvarchar(16)  not null,
-  dateofbirth date          not null,
-  address     nvarchar(100) not null,
-  PRIMARY KEY (id)
-) default charset utf8;
+
