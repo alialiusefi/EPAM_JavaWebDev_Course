@@ -1,2 +1,12 @@
 use petshelter;
-select users.user_id,users.username,users.password,users.role from users where user_id = ?;
+
+select userinfo.id,
+       userinfo.firstname,
+       userinfo.lastname,
+       userinfo.dateofbirth,
+       userinfo.address,
+       userinfo.phone
+from userinfo where userinfo.id = ?;
+
+select * from userinfo;
+

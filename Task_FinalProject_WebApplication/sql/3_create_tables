@@ -12,33 +12,36 @@
 use petshelter;
 create table if not exists userinfo
 (
-  id          integer       not null unique,
+  id          integer       not null unique auto_increment,
+  email       nvarchar(254) not null,
   firstname   nvarchar(16)  not null,
   lastname    nvarchar(16)  not null,
   dateofbirth date          not null,
   address     nvarchar(100) not null,
+  phone       bigint(20)    not null,
   PRIMARY KEY (id)
 ) default charset utf8;
 
 use petshelter;
 create table if not exists breeds
 (
+  id          integer      not null unique auto_increment,
   name        nvarchar(32) not null,
   description nvarchar(255),
   origin      nvarchar(48) not null,
-  CONSTRAINT PK_breeds PRIMARY KEY (name)
+  CONSTRAINT PK_breeds PRIMARY KEY (id)
 ) default charset utf8;
 
 use petshelter;
 create table if not exists shelters
 (
-  id       integer      not null unique,
+  id       integer      not null unique auto_increment,
   name     nvarchar(32) not null,
   location nvarchar(32) not null,
   CONSTRAINT PK_shelters PRIMARY KEY (id)
 ) default charset utf8;
 
-
+/*
 use petshelter;
 create table if not exists vaccinations
 (
@@ -46,7 +49,7 @@ create table if not exists vaccinations
   name nvarchar(32) not null,
   constraint PK_vaccinations primary key (id)
 ) default charset utf8;
-
+*/
 
 use petshelter;
 create table if not exists pets
@@ -58,11 +61,11 @@ create table if not exists pets
   weight         double                              not null,
   date_sheltered date                                not null,
   shelter_id     integer                             not null,
-  breed_name     nvarchar(32),
+  breed_id       integer,
   status         enum ('adopted','sheltered','dead') not null,
   CONSTRAINT PK_pets PRIMARY KEY (id),
   foreign key (shelter_id) references shelters (id),
-  foreign key (breed_name) references breeds (name)
+  foreign key (breed_id) references breeds (id)
 ) default charset utf8;
 
 use petshelter;
@@ -76,6 +79,7 @@ create table if not exists adoptions_made
   foreign key (user_id) references userinfo (id)
 ) default charset utf8;
 
+/*
 use petshelter;
 create table if not exists vaccinations_made
 (
@@ -86,7 +90,7 @@ create table if not exists vaccinations_made
   FOREIGN KEY (vaccination_id) references vaccinations (id)
 ) default charset utf8;
 
-
+*/
 
 use petshelter;
 create table if not exists users

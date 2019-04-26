@@ -1,3 +1,4 @@
+/*
 package by.training.finaltask.entity;
 
 //todo: should i create a class for vaccination_made table
@@ -53,3 +54,4 @@ public final class Vaccination {
         return sb.toString();
     }
 }
+*/

@@ -9,10 +9,10 @@ public final class UserInfo {
     private String firstName;
     private String lastName;
     private GregorianCalendar dateOfBirth;
-    private int address;
+    private String address;
 
     public UserInfo(String email, String firstName, String lastName,
-                    GregorianCalendar dateOfBirth, int address) {
+                    GregorianCalendar dateOfBirth, String address) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,11 +52,11 @@ public final class UserInfo {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(int address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -65,11 +65,11 @@ public final class UserInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
-        return getAddress() == userInfo.getAddress() &&
-                getEmail().equals(userInfo.getEmail()) &&
+        return getEmail().equals(userInfo.getEmail()) &&
                 getFirstName().equals(userInfo.getFirstName()) &&
                 getLastName().equals(userInfo.getLastName()) &&
-                getDateOfBirth().equals(userInfo.getDateOfBirth());
+                getDateOfBirth().equals(userInfo.getDateOfBirth()) &&
+                getAddress().equals(userInfo.getAddress());
     }
 
     @Override
@@ -84,7 +84,7 @@ public final class UserInfo {
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", dateOfBirth=").append(dateOfBirth);
-        sb.append(", address=").append(address);
+        sb.append(", address='").append(address).append('\'');
         sb.append('}');
         return sb.toString();
     }

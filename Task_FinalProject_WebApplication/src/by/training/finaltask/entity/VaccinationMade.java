@@ -1,3 +1,4 @@
+/*
 package by.training.finaltask.entity;
 
 import java.util.GregorianCalendar;
@@ -65,3 +66,4 @@ public final class VaccinationMade {
         return sb.toString();
     }
 }
+*/

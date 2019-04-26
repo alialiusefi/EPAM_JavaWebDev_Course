@@ -1,11 +1,11 @@
-INSERT INTO shelters (id, name, location)
-VALUES (1, "Manhattan Shelter", "New York");
+INSERT INTO shelters (name, location)
+VALUES ("Manhattan Shelter", "New York");
 
 INSERT INTO breeds (name, description, origin)
-VALUES ("German Shepherd",
+VALUES (
+        "German Shepherd",
         "Big Ears and Strong",
         "Germany");
-
 
 INSERT INTO pets (id,
                   name,
@@ -14,17 +14,16 @@ INSERT INTO pets (id,
                   weight,
                   date_sheltered,
                   shelter_id,
-                  breed_name,
+                  breed_id,
                   status)
-values (1, "John", "photos\\1.jpg", "2000-06-06", 10.2, "2015-09-09", 1, "German Shepherd", 'sheltered');
+values (1, "John", "photos\\1.jpg", "2000-06-06", 10.2, "2015-09-09", 1, 1, 'sheltered');
 
-insert into userinfo (id, firstname, lastname, dateofbirth, address)
-values (1,"Michael","Scott","1999-09-09","TempsVille 21, 98193 Scranton,USA"),
-       (2,"Maria","George","1999-08-01","TempsVille 11, 92193 Scranton,USA");
+insert into userinfo (firstname, lastname, dateofbirth, address,phone)
+values ("Michael","Scott","1999-09-09","TempsVille 21, 98193 Scranton,USA",154175431010),
+       ("Maria","George","1999-08-01","TempsVille 11, 92193 Scranton,USA",154175441010);
 
 insert into users (user_id, username, password, role)
-VALUES (
-        1,"Johnny11","d6d8b3550f38c81fadb4e463f121604b",0
-       ),(2,"Maria22","b10a8db164e0754105b7a99be72e3fe5",2);
+VALUES (1,"Johnny11","d6d8b3550f38c81fadb4e463f121604b",0),
+       (2,"Maria22","b10a8db164e0754105b7a99be72e3fe5",2);
 
 select * from petshelter.users

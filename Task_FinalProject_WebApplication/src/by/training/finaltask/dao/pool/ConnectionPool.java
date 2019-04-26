@@ -68,7 +68,7 @@ public final class ConnectionPool {
     }
 
 
-    /*TODO: Question: Why do we create a certain method init..() instead of doing all of this in constructor
+    /*TQuestion: Why do we create a certain method init..() instead of doing all of this in constructor
       Possible answer: We can't initialize using out constructor, since the class is a singleton
     */
     public void initialize(String driverClass, String URL, String userName,
