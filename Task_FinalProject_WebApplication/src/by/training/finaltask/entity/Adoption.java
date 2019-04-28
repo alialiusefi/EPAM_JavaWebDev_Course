@@ -58,11 +58,22 @@ public final class Adoption {
         return getPetID() == adoption.getPetID() &&
                 getUserID() == adoption.getUserID() &&
                 getAdoption_start().equals(adoption.getAdoption_start()) &&
-                getAdoption_end().equals(adoption.getAdoption_end());
+                Objects.equals(getAdoption_end(), adoption.getAdoption_end());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getPetID(), getAdoption_start(), getAdoption_end(), getUserID());
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("AdoptionDAO{");
+        sb.append("petID=").append(petID);
+        sb.append(", adoption_start=").append(adoption_start);
+        sb.append(", adoption_end=").append(adoption_end);
+        sb.append(", userID=").append(userID);
+        sb.append('}');
+        return sb.toString();
     }
 }

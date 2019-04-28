@@ -1,3 +1,4 @@
+/*
 package by.training.finaltask.dao.daointerface;
 
 import by.training.finaltask.exception.PersistentException;
@@ -11,3 +12,4 @@ public interface VaccinationDAO extends DAO<Vaccination>{
     List<Vaccination> getAll() throws PersistentException;
     boolean delete(Integer vaccID) throws PersistentException;
 }
+*/

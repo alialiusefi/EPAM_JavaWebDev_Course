@@ -13,23 +13,21 @@ public final class Pet {
     private GregorianCalendar dateOfBirth;
     private double weight;
     private GregorianCalendar dateSheltered;
-    private int vaccinationID;
     private int shelterID;
-    private String breedName;
+    private int breedID;
     private PetStatus status;
 
     public Pet(int id, String name, String photoURL, GregorianCalendar dateOfBirth,
-               double weight, GregorianCalendar dateSheltered, int vaccinationID,
-               int shelterID, String breedName, PetStatus status) {
+               double weight, GregorianCalendar dateSheltered,
+               int shelterID, int breedID, PetStatus status) {
         this.id = id;
         this.name = name;
         this.photoURL = photoURL;
         this.dateOfBirth = dateOfBirth;
         this.weight = weight;
         this.dateSheltered = dateSheltered;
-        this.vaccinationID = vaccinationID;
         this.shelterID = shelterID;
-        this.breedName = breedName;
+        this.breedID = breedID;
         this.status = status;
     }
 
@@ -81,14 +79,6 @@ public final class Pet {
         this.dateSheltered = dateSheltered;
     }
 
-    public int getVaccinationID() {
-        return vaccinationID;
-    }
-
-    public void setVaccinationID(int vaccinationID) {
-        this.vaccinationID = vaccinationID;
-    }
-
     public int getShelterID() {
         return shelterID;
     }
@@ -97,12 +87,12 @@ public final class Pet {
         this.shelterID = shelterID;
     }
 
-    public String getBreedName() {
-        return breedName;
+    public int getBreedID() {
+        return breedID;
     }
 
-    public void setBreedName(String breedName) {
-        this.breedName = breedName;
+    public void setBreedID(int breedID) {
+        this.breedID = breedID;
     }
 
     public PetStatus getStatus() {
@@ -120,19 +110,18 @@ public final class Pet {
         Pet pet = (Pet) o;
         return getId() == pet.getId() &&
                 Double.compare(pet.getWeight(), getWeight()) == 0 &&
-                getVaccinationID() == pet.getVaccinationID() &&
                 getShelterID() == pet.getShelterID() &&
+                getBreedID() == pet.getBreedID() &&
                 getName().equals(pet.getName()) &&
                 getPhotoURL().equals(pet.getPhotoURL()) &&
                 getDateOfBirth().equals(pet.getDateOfBirth()) &&
                 getDateSheltered().equals(pet.getDateSheltered()) &&
-                getBreedName().equals(pet.getBreedName()) &&
                 getStatus() == pet.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPhotoURL(), getDateOfBirth(), getWeight(), getDateSheltered(), getVaccinationID(), getShelterID(), getBreedName(), getStatus());
+        return Objects.hash(getId(), getName(), getPhotoURL(), getDateOfBirth(), getWeight(), getDateSheltered(), getShelterID(), getBreedID(), getStatus());
     }
 
     @Override
@@ -144,9 +133,8 @@ public final class Pet {
         sb.append(", dateOfBirth=").append(dateOfBirth);
         sb.append(", weight=").append(weight);
         sb.append(", dateSheltered=").append(dateSheltered);
-        sb.append(", vaccinationID=").append(vaccinationID);
         sb.append(", shelterID=").append(shelterID);
-        sb.append(", breedName='").append(breedName).append('\'');
+        sb.append(", breedID=").append(breedID);
         sb.append(", status=").append(status);
         sb.append('}');
         return sb.toString();

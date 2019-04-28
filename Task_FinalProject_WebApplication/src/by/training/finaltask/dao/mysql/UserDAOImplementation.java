@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class UserDAOImplementation extends BaseDAO implements UserDAO {
+public final class UserDAOImplementation extends BaseDAO implements UserDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(UserDAOImplementation.class);
     private final String PROPERTY_PATH = "daomysqlqueries";
@@ -114,10 +114,9 @@ public class UserDAOImplementation extends BaseDAO implements UserDAO {
     public boolean add(User element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addUserDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setInt(1, element.getId());
-            preparedStatement.setNString(2, element.getUsername());
-            preparedStatement.setNString(3, element.getPassword());
-            preparedStatement.setInt(4, element.getUserRole().getValue());
+            preparedStatement.setNString(1, element.getUsername());
+            preparedStatement.setNString(2, element.getPassword());
+            preparedStatement.setInt(3, element.getUserRole().getValue());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {

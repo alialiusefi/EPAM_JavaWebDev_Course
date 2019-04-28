@@ -42,7 +42,7 @@ public class UserDAOImplementationTest {
             e.printStackTrace();
         }
     }
-
+    //todo: fix deletion
     @Test
     public void testDelete() {
         try {
