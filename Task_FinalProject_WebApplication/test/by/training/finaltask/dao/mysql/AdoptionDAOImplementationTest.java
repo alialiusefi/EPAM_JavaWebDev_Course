@@ -15,7 +15,8 @@ public class AdoptionDAOImplementationTest {
     @Test
     public void testGet() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/petshelter","root","");
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:mysql://127.0.0.1:3306/petshelter","root","");
             AdoptionDAOImplementation adoptionDAOImplem = new AdoptionDAOImplementation(connection);
             Adoption adoption = adoptionDAOImplem.get(1);
             System.out.println(adoption);

@@ -1,6 +1,5 @@
 package by.training.finaltask.entity;
 
-import java.math.BigInteger;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 

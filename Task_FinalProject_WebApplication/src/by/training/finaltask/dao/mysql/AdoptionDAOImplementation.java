@@ -13,10 +13,27 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/*
+
+    TODO: Correctly use try with resources
+public List<User> getUser(int userId) {
+    try (Connection con = DriverManager.getConnection(myConnectionURL);
+         PreparedStatement ps = createPreparedStatement(con, userId);
+         ResultSet rs = ps.executeQuery()) {
+
+         // process the resultset here, all resources will be cleaned up
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+
+ */
 public final class AdoptionDAOImplementation extends BaseDAO implements AdoptionDAO {
 
     private Logger LOGGER = LogManager.getLogger(AdoptionDAOImplementation.class);
-    private final String PROPERTY_PATH = "daomysqlqueries";
+
 
     public AdoptionDAOImplementation(Connection connection) {
         super(connection);
@@ -58,7 +75,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     public List<Adoption> getAll() throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllAdoptionDAO"))) {
-            List<by.training.finaltask.entity.Adoption> adoptions = new LinkedList<>();
+            List<Adoption> adoptions = new LinkedList<>();
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {
                     GregorianCalendar adoptionStart = new GregorianCalendar();
@@ -87,7 +104,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     public List<Adoption> getAllByID(Integer petID) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllAdoptionDAO"))) {
-            List<by.training.finaltask.entity.Adoption> adoptions = new LinkedList<>();
+            List<Adoption> adoptions = new LinkedList<>();
             preparedStatement.setInt(1, petID);
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {

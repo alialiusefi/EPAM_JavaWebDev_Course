@@ -1,2 +1,0 @@
-Deleting records with refrences to primary key
-https://www.quora.com/How-to-delete-records-of-a-table-when-its-primary-key-is-referred-as-secondary-key-in-another-table

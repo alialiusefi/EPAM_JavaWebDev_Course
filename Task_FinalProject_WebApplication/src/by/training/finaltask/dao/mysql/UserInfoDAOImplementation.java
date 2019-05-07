@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.ResourceBundle;
 public final class UserInfoDAOImplementation extends BaseDAO implements UserInfoDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(UserInfoDAOImplementation.class);
-    private static final String PROPERTY_PATH = "daomysqlqueries";
 
     public UserInfoDAOImplementation(Connection connection) {
         super(connection);

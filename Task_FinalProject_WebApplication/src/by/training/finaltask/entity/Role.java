@@ -12,6 +12,7 @@ public enum Role {
         return value;
     }
 
+    //todo: fix static functions
     public static Role valueOf(int idx)
     {
         switch(idx)

@@ -10,8 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.testng.Assert.*;
-
 public class UserDAOImplementationTest {
 
     @Test

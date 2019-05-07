@@ -1,19 +1,14 @@
 package by.training.finaltask.dao.mysql;
 
-import by.training.finaltask.entity.Role;
-import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.PersistentException;
 import org.testng.annotations.Test;
 
-import javax.sound.midi.SysexMessage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import static org.testng.Assert.*;
 
 public class UserInfoDAOImplementationTest {
 

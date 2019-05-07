@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class PetPooledConnection implements Connection, Comparable<PooledConnection> {
+public final class PetPooledConnection implements Connection, Comparable<PooledConnection> {
 
     private Connection connection;
 

@@ -1,7 +1,7 @@
 package by.training.finaltask.dao.daointerface;
 
-import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.entity.Pet;
+import by.training.finaltask.exception.PersistentException;
 
 import java.util.List;
 
