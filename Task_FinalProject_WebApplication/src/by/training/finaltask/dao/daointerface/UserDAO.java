@@ -9,6 +9,7 @@ public interface UserDAO extends DAO<User> {
 
     User get(Integer userID) throws PersistentException;
     User get(String username) throws PersistentException;
+    User get(String user, String pass) throws PersistentException;
     List<User> getAll() throws PersistentException;
     boolean delete(Integer userID) throws PersistentException;
 }

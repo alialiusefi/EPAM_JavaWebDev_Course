@@ -17,8 +17,8 @@ public final class ConnectionPool {
     private String userName;
     private String password;
     private int timeoutConnectionLimit;
-    private ConcurrentLinkedDeque<PetPooledConnection> availableConnections;
-    private ConcurrentLinkedDeque<PetPooledConnection> busyConnections;
+    private ConcurrentLinkedDeque<PetPooledConnection> availableConnections = new ConcurrentLinkedDeque<>();
+    private ConcurrentLinkedDeque<PetPooledConnection> busyConnections = new ConcurrentLinkedDeque<>();
     private int maxConnections;
     private ReentrantLock classReentrantLock = new ReentrantLock();
     private static ConnectionPool INSTANCE = null;
@@ -119,16 +119,19 @@ public final class ConnectionPool {
     }
 
     public void destroy() {
-        busyConnections.addAll(availableConnections);
-        availableConnections.clear();
-        for (PetPooledConnection connection : busyConnections) {
-            try {
-                connection.getConnection().close();
-            } catch (SQLException e) {
-                LOGGER.warn(e.getMessage(), e);
+        if(availableConnections!=null && busyConnections!=null)
+        {
+            busyConnections.addAll(availableConnections);
+            availableConnections.clear();
+            for (PetPooledConnection connection : busyConnections) {
+                try {
+                    connection.getConnection().close();
+                } catch (SQLException e) {
+                    LOGGER.warn(e.getMessage(), e);
+                }
             }
+            busyConnections.clear();
         }
-        busyConnections.clear();
     }
 
     @Override

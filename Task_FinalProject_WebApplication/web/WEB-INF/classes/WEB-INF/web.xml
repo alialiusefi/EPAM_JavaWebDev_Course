@@ -10,7 +10,7 @@
     <request-character-encoding>utf-8</request-character-encoding>
 
     <welcome-file-list>
-        <welcome-file>*.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -20,7 +20,7 @@
 
     <servlet-mapping>
         <servlet-name>PetShelterServlet</servlet-name>
-        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>/web/jsp/login.jsp</url-pattern>
     </servlet-mapping>
 
     <context-param>

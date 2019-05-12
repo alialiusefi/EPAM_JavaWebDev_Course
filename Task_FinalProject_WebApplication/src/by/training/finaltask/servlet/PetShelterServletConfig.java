@@ -21,12 +21,12 @@ public final class PetShelterServletConfig {
         ResourceBundle resourceBundle = ResourceBundle.getBundle(
                 "servletconfig");
         logFilename = resourceBundle.getString("logFilename");
-        logLevel = Level.parse(resourceBundle.getString("ALL"));
+        logLevel = Level.parse(resourceBundle.getString("logLevel"));
         logFormat = resourceBundle.getString("logFormat");
         dbDriverClass = resourceBundle.getString("dbDriverClass");
         dbURL = resourceBundle.getString("dbURL");
         dbPoolStartSize = Integer.parseInt(
-                resourceBundle.getString("dbPoolMaxSize"));
+                resourceBundle.getString("dbPoolStartSize"));
         dbPoolMaxSize = Integer.parseInt(
                 resourceBundle.getString("dbPoolMaxSize"));
         dbPoolCheckTimeOut = Integer.parseInt(

@@ -97,6 +97,31 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     }
 
     @Override
+    public User get(String user,String pass) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getUserByUserNamePassWordDAO"))) {
+            preparedStatement.setNString(1,user );
+            preparedStatement.setNString(2,pass );
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id = resultSet.getInt(1);
+                    String username = resultSet.getNString("username");
+                    String password = resultSet.getNString("password");
+                    Role role = Role.valueOf(resultSet.getInt(4));
+                    return new User(id, username, password, role);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        } finally {
+            LOGGER.debug("getUserDAO Query Fulfilled");
+        }
+        //TODO: Question: Should i throw an exception instead of null
+        return null;
+    }
+
+    @Override
     public List<User> getAll() throws PersistentException {
         List<User> userList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
