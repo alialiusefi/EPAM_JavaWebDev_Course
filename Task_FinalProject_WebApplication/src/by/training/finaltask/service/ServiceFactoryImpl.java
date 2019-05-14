@@ -8,11 +8,11 @@ import by.training.finaltask.service.serviceinterface.ServiceFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.sql.PooledConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ServiceFactoryImpl implements ServiceFactory {
+
     private static Logger logger = LogManager.getLogger(ServiceFactoryImpl.class);
     private Connection aliveConnection;
 
@@ -30,13 +30,18 @@ public class ServiceFactoryImpl implements ServiceFactory {
     public Service createService(DAOEnum key) throws PersistentException {
         if (key != null) {
             Connection aliveConnection = ConnectionPool.getInstance().getConnection();
+            System.out.println("Inside servicefactorryimpl.createService():" + aliveConnection );
             ServiceImpl service = createServiceInstance(key,aliveConnection);
             return service;
         }
         return null;
     }
 
-    private ServiceImpl createServiceInstance(DAOEnum daoEnum,Connection aliveConnection) {
+    public Connection getConnecction() {
+        return aliveConnection;
+    }
+
+    private ServiceImpl createServiceInstance(DAOEnum daoEnum, Connection aliveConnection) {
         //todo: add services other than users
         switch (daoEnum) {
             case ADOPTION:

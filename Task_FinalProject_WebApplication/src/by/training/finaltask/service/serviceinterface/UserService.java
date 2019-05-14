@@ -2,7 +2,6 @@ package by.training.finaltask.service.serviceinterface;
 
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.service.serviceinterface.Service;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package by.training.finaltask.filter;
 
-import by.training.finaltask.action.Action;
-import by.training.finaltask.action.LoginAction;
-import by.training.finaltask.action.MainAction;
+import by.training.finaltask.action.*;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +16,10 @@ public class ActionURIFilter implements Filter {
         actions.put("/", MainAction.class);
         actions.put("/index", MainAction.class);
         actions.put("/login", LoginAction.class);
-        /*actions.put("/logout", LogoutAction.class);
-
-        actions.put("/profile/edit", ProfileEditAction.class);
+        actions.put("/logout", LogoutAction.class);
+        actions.put("/user/profile", ProfileAction.class);
+/*
+        actions.put("/profile/edit", ProfileAction.class);
         actions.put("/profile/save", ProfileSaveAction.class);
 
         actions.put("/reader/list", ReaderListAction.class);
@@ -60,17 +59,15 @@ public class ActionURIFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response,FilterChain chain)
     throws IOException, ServletException {
-        if(request instanceof HttpServletRequest)
-        {
-            System.out.println("Filter Reaction!");
-            HttpServletRequest httpRequest = (HttpServletRequest)request;
+        if (request instanceof HttpServletRequest) {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
             String contextPath = httpRequest.getContextPath();
             String uri = httpRequest.getRequestURI();
-            System.out.println("Filtering URI Request");
+            System.out.println(String.format("Starting of processing of request for URI \"%s\"", uri));
             int beginAction = contextPath.length();
             int endAction = uri.lastIndexOf('.');
             String actionName;
-            if(endAction >= 0) {
+            if (endAction >= 0) {
                 actionName = uri.substring(beginAction, endAction);
             } else {
                 actionName = uri.substring(beginAction);
@@ -82,13 +79,15 @@ public class ActionURIFilter implements Filter {
                 httpRequest.setAttribute("action", action);
                 chain.doFilter(request, response);
             } catch (InstantiationException | IllegalAccessException | NullPointerException e) {
-                System.out.println("It is impossible to create action handler object" + e.getMessage());
+                System.out.println("It is impossible to create action handler object" + e);
                 httpRequest.setAttribute("error", String.format("Запрошенный адрес %s не может быть обработан сервером", uri));
-                httpRequest.getSession().getServletContext().getRequestDispatcher("jsp/error.jsp").forward(request, response);
+                httpRequest.getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
             }
+        } else {
+            System.out.println("It is impossible to use HTTP filter");
+
         }
     }
-
     @Override
     public void destroy() {}
 

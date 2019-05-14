@@ -51,6 +51,12 @@ final public class PetShelterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String lang = (String)req.getAttribute("lang");
+        HttpSession session = req.getSession(false);
+        if(session != null)
+        {
+            session.setAttribute("lang",lang);
+        }
         requestHandler(req,resp);
 
     }
@@ -67,7 +73,6 @@ final public class PetShelterServlet extends HttpServlet {
     private void requestHandler(HttpServletRequest request, HttpServletResponse response)
      throws IOException, ServletException {
         Action action = (Action)request.getAttribute("action");
-        System.out.println(action);
         try {
             HttpSession session = request.getSession(false);
             if(session != null) {

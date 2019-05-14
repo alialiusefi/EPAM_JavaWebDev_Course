@@ -3,12 +3,12 @@ package by.training.finaltask.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Formatter;
 import java.util.List;
 
 import by.training.finaltask.dao.daointerface.UserDAO;
 import by.training.finaltask.dao.mysql.DAOEnum;
-import by.training.finaltask.dao.pool.ConnectionPool;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.UserService;
@@ -18,7 +18,6 @@ import by.training.finaltask.service.serviceinterface.UserService;
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
 
-	Connection connection;
 
 	UserServiceImpl(Connection aliveConnection)
 	{
@@ -39,8 +38,19 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 
 	@Override
 	public User findByUserNameAndPassword(String user, String pass) throws PersistentException {
-		UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
-		return dao.get(user,pass);
+		try{
+			connection.setAutoCommit(false);
+			String md5Pass = md5(pass);
+			UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
+			User userFound = dao.get(user,md5Pass);
+			commit();
+			connection.setAutoCommit(true);
+			return userFound;
+		} catch (SQLException e)
+		{
+			rollback();
+		}
+		return null;
 	}
 
 	@Override

@@ -21,26 +21,11 @@ import by.training.finaltask.service.serviceinterface.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class LoginAction extends Action {
 	private static Logger logger = LogManager.getLogger(LoginAction.class);
 
 	private static Map<Role, List<MenuItem>> menu = new ConcurrentHashMap<>();
 
-	//todo: change paths
-	static {
-		menu.put(Role.STAFF, new ArrayList<>(Arrays.asList(
-			new MenuItem("/search/book/form.html", "поиск книг"),
-			new MenuItem("/search/reader/form.html", "поиск читателей")
-		)));
-		menu.put(Role.ADMINISTRATOR, new ArrayList<>(Arrays.asList(
-			new MenuItem("/reader/list.html", "читатели"),
-			new MenuItem("/user/list.html", "сотрудники")
-		)));
-		menu.put(Role.GUEST, new ArrayList<>(Arrays.asList(
-			new MenuItem("/author/list.html", "авторы")
-		)));
-	}
 
 	@Override
 	public Set<Role> getAllowRoles() {
@@ -51,18 +36,25 @@ public class LoginAction extends Action {
 	public Action.Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
 		if(login != null && password != null) {
-			UserService service = (UserService)factory.createService(DAOEnum.USER);
-			User user = service.findByUserNameAndPassword(login, password);
-			if(user != null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("authorizedUser", user);
-				session.setAttribute("menu", menu.get(user.getUserRole()));
-				logger.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
-				return new Forward("/index.html");
+			if(session.getAttribute("authorizedUser") == null)
+			{
+				UserService service = (UserService) factory.createService(DAOEnum.USER);
+				User user = service.findByUserNameAndPassword(login, password);
+				if(user != null) {
+					session.setAttribute("authorizedUser", user);
+					session.setAttribute("username",user.getUsername());
+					session.setAttribute("menu", menu.get(user.getUserRole()));
+					logger.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
+					return new Forward("/index.html");
+				}else {
+
+					request.setAttribute("message", "Couldn't find login and password");
+					logger.info(String.format("user \"%s\" unsuccessfully tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
+				}
 			} else {
-				request.setAttribute("message", "Имя пользователя или пароль не опознанны");
-				logger.info(String.format("user \"%s\" unsuccessfully tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
+				request.setAttribute("message","You are already logged in");
 			}
 		}
 		return null;

@@ -1,9 +1,9 @@
 package by.training.finaltask.service;
 
-import by.training.finaltask.dao.daointerface.Transaction;
 import by.training.finaltask.dao.mysql.*;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.Service;
+import by.training.finaltask.service.serviceinterface.ServiceFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,12 +13,12 @@ import java.sql.SQLException;
 
 abstract public class ServiceImpl implements Service {
 
-    protected Connection connection = null;
+    protected Connection connection;
     private Logger logger = LogManager.getLogger(ServiceImpl.class);
+    private ServiceFactory serviceFactory;
 
 
-
-    private void commit() throws PersistentException {
+    protected void commit() throws PersistentException {
         try {
             connection.commit();
         } catch (SQLException e) {
@@ -27,13 +27,17 @@ abstract public class ServiceImpl implements Service {
         }
     }
 
-    private void rollback() throws PersistentException {
+    protected void rollback() throws PersistentException {
         try {
             connection.rollback();
         } catch (SQLException e) {
             logger.error("It is impossible to rollback transaction", e);
             throw new PersistentException(e.getMessage(),e);
         }
+    }
+
+    public ServiceFactory getServiceFactory() {
+        return serviceFactory;
     }
 
     protected BaseDAO createDao(DAOEnum daoEnum) {

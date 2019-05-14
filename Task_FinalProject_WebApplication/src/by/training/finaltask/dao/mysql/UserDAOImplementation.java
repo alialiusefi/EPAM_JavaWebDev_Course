@@ -42,7 +42,7 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
         } finally {
-            LOGGER.debug("getUserDAO Query Fulfilled");
+            LOGGER.debug("getUserDAO Query");
         }
         //TODO: Question: Should i throw an exception instead of null
         return null;
