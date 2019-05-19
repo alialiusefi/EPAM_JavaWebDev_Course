@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public final class UserInfo {
-    private int id;
+    private Integer id;
     private String email;
     private String firstName;
     private String lastName;
@@ -12,7 +12,7 @@ public final class UserInfo {
     private String address;
     private long phone;
 
-    public UserInfo(int id, String email, String firstName, String lastName,
+    public UserInfo(Integer id, String email, String firstName, String lastName,
                     GregorianCalendar dateOfBirth, String address, long phone) {
         this.id = id;
         this.email = email;

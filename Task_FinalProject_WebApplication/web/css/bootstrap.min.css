@@ -3421,7 +3421,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     flex-wrap: wrap;
     -ms-flex-align: stretch;
     align-items: stretch;
-    width: 100%
+    width: 200%
 }
 
 .input-group > .custom-file, .input-group > .custom-select, .input-group > .form-control, .input-group > .form-control-plaintext {

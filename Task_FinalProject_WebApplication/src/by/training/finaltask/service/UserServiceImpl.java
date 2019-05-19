@@ -18,10 +18,9 @@ import by.training.finaltask.service.serviceinterface.UserService;
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
 
-
 	UserServiceImpl(Connection aliveConnection)
 	{
-		this.connection = aliveConnection;
+		super(aliveConnection);
 	}
 
 	@Override
@@ -46,17 +45,28 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 			commit();
 			connection.setAutoCommit(true);
 			return userFound;
-		} catch (SQLException e)
+		} catch (PersistentException | SQLException e)
 		{
 			rollback();
+			throw new PersistentException(e);
 		}
-		return null;
 	}
 
 	@Override
-	public void add(User user) throws PersistentException {
-		UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
-		dao.add(user);
+	public Integer add(User user) throws PersistentException {
+		try{
+			connection.setAutoCommit(false);
+			String md5Pass = md5(user.getPassword());
+			UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
+			int userIDGenerated = dao.add(user);
+			commit();
+			connection.setAutoCommit(true);
+			return userIDGenerated;
+		} catch (SQLException e)
+		{
+			rollback();
+			throw new PersistentException(e);
+		}
 	}
 	@Override
 	public void update(User user) throws PersistentException
@@ -71,7 +81,8 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 		dao.delete(identity);
 	}
 
-	private String md5(String string) {
+	//todo: create seperate class for this method
+	public static String md5(String string) {
 		MessageDigest digest;
 		try {
 			digest = MessageDigest.getInstance("md5");

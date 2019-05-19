@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 abstract public class Action {
 
-	private Set<Role> allowRoles = new HashSet<>();
+	protected Set<Role> allowRoles = new HashSet<>();
 	private User authorizedUser;
 	private String name;
 

@@ -146,7 +146,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     }
 
     @Override
-    public boolean add(Adoption element) throws PersistentException {
+    public Integer add(Adoption element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addAdoptionDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, element.getPetID());
@@ -161,7 +161,12 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
             preparedStatement.setDate(3, sqlDateAdoptionend);
             preparedStatement.setInt(4, element.getUserID());
             preparedStatement.executeUpdate();
-            return true;
+            try (ResultSet set = preparedStatement.getGeneratedKeys()) {
+                return set.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException("Couldn't add row!\n" + e.getMessage(), e);
@@ -206,9 +211,8 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
                 sqlDateAdoptionend = new Date(
                         element.getAdoption_end().getTimeInMillis());
                 preparedStatement.setDate(3, sqlDateAdoptionend);
-            }
-            else {
-                preparedStatement.setNull(3,Types.DATE);
+            } else {
+                preparedStatement.setNull(3, Types.DATE);
             }
             preparedStatement.setInt(4, element.getUserID());
             preparedStatement.executeUpdate();

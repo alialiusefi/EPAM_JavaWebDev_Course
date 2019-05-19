@@ -76,7 +76,7 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     public User get(String user) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getUserByUserNameDAO"))) {
-            preparedStatement.setNString(1,user );
+            preparedStatement.setNString(1, user);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     int id = resultSet.getInt(1);
@@ -97,11 +97,11 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     }
 
     @Override
-    public User get(String user,String pass) throws PersistentException {
+    public User get(String user, String pass) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getUserByUserNamePassWordDAO"))) {
-            preparedStatement.setNString(1,user );
-            preparedStatement.setNString(2,pass );
+            preparedStatement.setNString(1, user);
+            preparedStatement.setNString(2, pass);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     int id = resultSet.getInt(1);
@@ -159,14 +159,23 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     }
 
     @Override
-    public boolean add(User element) throws PersistentException {
+    public Integer add(User element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addUserDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setNString(1, element.getUsername());
             preparedStatement.setNString(2, element.getPassword());
             preparedStatement.setInt(3, element.getUserRole().getValue());
             preparedStatement.executeUpdate();
-            return true;
+            try (ResultSet set = preparedStatement.getGeneratedKeys()) {
+                if (set.next()) {
+                    return set.getInt(1);
+                }
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException("Couldn't get generated keys!\n "
+                        + e.getMessage(), e);
+            }
+            return -1;
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException("Couldn't add row!\n" + e.getMessage(), e);

@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public final class User {
 
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private Role userRole;
 
-    public User(int id, String username, String password, Role userRole) {
+    public User(Integer id, String username, String password, Role userRole) {
         this.id = id;
         this.username = username;
         this.password = password;

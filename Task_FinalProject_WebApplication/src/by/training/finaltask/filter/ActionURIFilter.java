@@ -1,5 +1,7 @@
 package by.training.finaltask.filter;
 
+
+
 import by.training.finaltask.action.*;
 
 import javax.servlet.*;
@@ -17,6 +19,7 @@ public class ActionURIFilter implements Filter {
         actions.put("/index", MainAction.class);
         actions.put("/login", LoginAction.class);
         actions.put("/logout", LogoutAction.class);
+        actions.put("/register", RegisterAction.class);
         actions.put("/user/profile", ProfileAction.class);
 /*
         actions.put("/profile/edit", ProfileAction.class);

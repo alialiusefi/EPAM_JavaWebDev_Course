@@ -93,7 +93,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
     }
 
     @Override
-    public boolean add(UserInfo element) throws PersistentException {
+    public Integer add(UserInfo element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addUserInfoDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1,element.getId());
@@ -104,8 +104,8 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
             preparedStatement.setDate(5,sqlDate);
             preparedStatement.setNString(6,element.getAddress());
             preparedStatement.setLong(7,element.getPhone());
-            preparedStatement.executeUpdate();
-            return true;
+            int rows = preparedStatement.executeUpdate();
+            return rows;
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException("Couldn't add row!\n" + e.getMessage(), e);

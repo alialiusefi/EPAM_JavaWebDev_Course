@@ -1,12 +1,17 @@
-CREATE DATABASE if not exists petshelter DEFAULT CHAR SET utf8;
+CREATE DATABASE if not exists petshelter DEFAULT character set utf8;
 
 CREATE USER if not exists 'petshelter_admin'@'%' IDENTIFIED BY 'adminpass';
 
-grant select,insert,update,delete,alter,drop
+grant select,insert,update,delete
 on petshelter.*
   to 'petshelter_admin'@'%'
   IDENTIFIED by 'adminpass';
 
+grant select,insert,update,delete
+  on petshelter.*
+  to 'petshelter_admin'@'localhost'
+  IDENTIFIED by 'adminpass';
+/*
 CREATE USER if not exists 'petshelter_staff'@'%' IDENTIFIED BY 'staffpass';
 
 grant select,insert,update,delete
@@ -59,4 +64,4 @@ grant select,insert,update
 grant select,insert,update
   on petshelter.userinfo
   to 'petshelter_guest'@'%'
-  IDENTIFIED by 'guestpass';
+  IDENTIFIED by 'guestpass';*/

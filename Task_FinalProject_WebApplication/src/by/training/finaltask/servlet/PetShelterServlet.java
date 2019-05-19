@@ -51,14 +51,7 @@ final public class PetShelterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String lang = (String)req.getAttribute("lang");
-        HttpSession session = req.getSession(false);
-        if(session != null)
-        {
-            session.setAttribute("lang",lang);
-        }
         requestHandler(req,resp);
-
     }
 
     @Override

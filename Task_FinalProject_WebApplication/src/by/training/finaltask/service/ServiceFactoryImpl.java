@@ -51,7 +51,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case USER:
                 return new UserServiceImpl(aliveConnection);
             case USERINFO:
-                return null;
+                return new UserInfoServiceImpl(aliveConnection);
             default:
                 return null;
         }

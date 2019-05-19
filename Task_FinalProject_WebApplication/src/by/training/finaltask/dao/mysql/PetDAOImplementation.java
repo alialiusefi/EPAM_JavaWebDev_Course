@@ -110,7 +110,7 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     }
 
     @Override
-    public boolean add(Pet element) throws PersistentException {
+    public Integer add(Pet element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addPetDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1,element.getId());
@@ -126,7 +126,14 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
             preparedStatement.setInt(8,element.getBreedID());
             preparedStatement.setNString(9,element.getStatus().getValue());
             preparedStatement.executeUpdate();
-            return true;
+            try(ResultSet set = preparedStatement.getGeneratedKeys())
+            {
+                return set.getInt(1);
+            } catch (SQLException e)
+            {
+                LOGGER.warn(e.getMessage(),e);
+                throw new PersistentException(e.getMessage(),e);
+            }
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException("Couldn't add row!\n" + e.getMessage(), e);

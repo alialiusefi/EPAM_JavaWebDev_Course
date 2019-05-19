@@ -17,6 +17,10 @@ abstract public class ServiceImpl implements Service {
     private Logger logger = LogManager.getLogger(ServiceImpl.class);
     private ServiceFactory serviceFactory;
 
+    ServiceImpl(Connection aliveConnection)
+    {
+        this.connection = aliveConnection;
+    }
 
     protected void commit() throws PersistentException {
         try {
