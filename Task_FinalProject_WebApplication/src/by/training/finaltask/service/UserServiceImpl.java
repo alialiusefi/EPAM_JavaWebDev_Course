@@ -14,7 +14,7 @@ import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.UserService;
 
 
-//todo: all commits and rollbacks here
+//todo: add commits and rollbacks to all services!
 
 public class UserServiceImpl extends ServiceImpl implements UserService {
 
@@ -56,7 +56,6 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 	public Integer add(User user) throws PersistentException {
 		try{
 			connection.setAutoCommit(false);
-			String md5Pass = md5(user.getPassword());
 			UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
 			int userIDGenerated = dao.add(user);
 			commit();
@@ -71,14 +70,32 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 	@Override
 	public void update(User user) throws PersistentException
 	{
-		UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
-		dao.update(user);
+		try{
+			connection.setAutoCommit(false);
+			UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
+			dao.update(user);
+			commit();
+			connection.setAutoCommit(true);
+		} catch (SQLException e)
+		{
+			rollback();
+			throw new PersistentException(e);
+		}
 	}
 
 	@Override
 	public void delete(Integer identity) throws PersistentException {
-		UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
-		dao.delete(identity);
+		try{
+			connection.setAutoCommit(false);
+			UserDAO dao = (UserDAO)createDao(DAOEnum.USER);
+			dao.delete(identity);
+			commit();
+			connection.setAutoCommit(true);
+		} catch (SQLException e)
+		{
+			rollback();
+			throw new PersistentException(e);
+		}
 	}
 
 	//todo: create seperate class for this method

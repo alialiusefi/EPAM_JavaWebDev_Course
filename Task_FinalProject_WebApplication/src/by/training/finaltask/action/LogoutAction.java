@@ -17,8 +17,16 @@ public class LogoutAction extends AuthorizedUserAction {
         if(session != null)
         {
             User user = (User)session.getAttribute("authorizedUser");
-            logger.info(user.getUsername() + " has logged out!");
-            session.invalidate();
+            if(user != null)
+            {
+                logger.info(user.getUsername() + " has logged out!");
+                session.invalidate();
+                request.setAttribute("message","loggedOutSuccessfully");
+                return new Forward("/login.html");
+            } else {
+                request.setAttribute("message","logoutError");
+                return new Forward("/login.html");
+            }
         }
         return new Forward("/login.html");
     }

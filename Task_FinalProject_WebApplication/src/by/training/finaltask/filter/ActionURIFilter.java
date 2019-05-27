@@ -6,6 +6,7 @@ import by.training.finaltask.action.*;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +22,7 @@ public class ActionURIFilter implements Filter {
         actions.put("/logout", LogoutAction.class);
         actions.put("/register", RegisterAction.class);
         actions.put("/user/profile", ProfileAction.class);
+        actions.put("/user/userdelete", UserDeleteAction.class);
 /*
         actions.put("/profile/edit", ProfileAction.class);
         actions.put("/profile/save", ProfileSaveAction.class);
@@ -80,17 +82,28 @@ public class ActionURIFilter implements Filter {
                 Action action = actionClass.newInstance();
                 action.setName(actionName);
                 httpRequest.setAttribute("action", action);
+                clearSessionMessage(httpRequest);
                 chain.doFilter(request, response);
             } catch (InstantiationException | IllegalAccessException | NullPointerException e) {
                 System.out.println("It is impossible to create action handler object" + e);
                 httpRequest.setAttribute("error", String.format("Запрошенный адрес %s не может быть обработан сервером", uri));
-                httpRequest.getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+                httpRequest.getServletContext().getRequestDispatcher("/jsp/error.jsp").forward(request, response);
             }
         } else {
             System.out.println("It is impossible to use HTTP filter");
 
         }
     }
+
+    private void clearSessionMessage(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession(false);
+        if(session != null)
+        {
+            session.setAttribute("message",null);
+        }
+    }
+
     @Override
     public void destroy() {}
 

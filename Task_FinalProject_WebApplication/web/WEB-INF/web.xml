@@ -28,11 +28,11 @@
         <param-value>/WEB-INF/classes/log4j2.xml</param-value>
     </context-param>
 
-  <!--  <error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/jsp/error.jsp</location>
     </error-page>
--->
+
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>by.training.finaltask.filter.EncodingFilter</filter-class>

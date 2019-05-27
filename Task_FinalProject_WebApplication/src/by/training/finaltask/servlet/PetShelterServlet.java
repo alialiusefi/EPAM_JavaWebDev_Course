@@ -5,8 +5,8 @@ import by.training.finaltask.action.ActionManager;
 import by.training.finaltask.action.ActionManagerFactory;
 import by.training.finaltask.dao.pool.ConnectionPool;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.service.serviceinterface.ServiceFactory;
 import by.training.finaltask.service.ServiceFactoryImpl;
+import by.training.finaltask.service.serviceinterface.ServiceFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,10 +22,11 @@ final public class PetShelterServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(PetShelterServlet.class);
     private PetShelterServletConfig config;
+
     @Override
     public void init() throws ServletException {
         config = new PetShelterServletConfig();
-        try{
+        try {
             //TODO: correctly configure root logger
             ConnectionPool.getInstance().initialize(
                     config.getDbDriverClass(),
@@ -36,43 +37,38 @@ final public class PetShelterServlet extends HttpServlet {
                     config.getDbPoolMaxSize(),
                     config.getDbPoolCheckTimeOut()
             );
-
-        } catch (PersistentException /*| IOException*/ e)
-        {
-            LOGGER.error("Cannot Start Servlet:\n" + e.getMessage(),e);
+            LOGGER.debug("Servlet Initiated Succesfully!");
+        } catch (PersistentException e) {
+            LOGGER.error("Cannot Start Servlet:\n" + e.getMessage(), e);
             destroy();
         }
-        LOGGER.debug("Servlet Initiated Succesfully!");
-        System.out.println("Servlet Initiated Succesfully!");
-
     }
-
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        requestHandler(req,resp);
+        requestHandler(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        requestHandler(req,resp);
-}
+        requestHandler(req, resp);
+    }
 
     public ServiceFactory getFactory() throws PersistentException {
         return new ServiceFactoryImpl();
     }
 
     private void requestHandler(HttpServletRequest request, HttpServletResponse response)
-     throws IOException, ServletException {
-        Action action = (Action)request.getAttribute("action");
+            throws IOException, ServletException {
+        Action action = (Action) request.getAttribute("action");
         try {
             HttpSession session = request.getSession(false);
-            if(session != null) {
+            if (session != null) {
                 @SuppressWarnings("unchecked")
-                Map<String, Object> attributes = (Map<String, Object>)session.getAttribute("redirectedData");
-                if(attributes != null) {
-                    for(String key : attributes.keySet()) {
+                Map<String, Object> attributes = (Map<String, Object>) session.getAttribute("redirectedData");
+                if (attributes != null) {
+                    for (String key : attributes.keySet()) {
                         request.setAttribute(key, attributes.get(key));
                     }
                     session.removeAttribute("redirectedData");
@@ -81,17 +77,19 @@ final public class PetShelterServlet extends HttpServlet {
             ActionManager actionManager = ActionManagerFactory.getManager(getFactory());
             Action.Forward forward = actionManager.execute(action, request, response);
             actionManager.close();
-            if(session != null && forward != null && !forward.getAttributes().isEmpty()) {
+            if (session != null && forward != null && !forward.getAttributes().isEmpty()) {
                 session.setAttribute("redirectedData", forward.getAttributes());
             }
             String requestedUri = request.getRequestURI();
-            if(forward != null && forward.isRedirect()) {
+            if (forward != null && forward.isRedirect()) {
                 String redirectedUri = request.getContextPath() + forward.getForward();
-                LOGGER.debug(String.format("Request for URI \"%s\" id redirected to URI \"%s\"", requestedUri, redirectedUri));
+                LOGGER.debug(String.format(
+                        "Request for URI \"%s\" id redirected to URI \"%s\"", requestedUri,
+                        redirectedUri));
                 response.sendRedirect(redirectedUri);
             } else {
                 String jspPage;
-                if(forward != null) {
+                if (forward != null) {
                     jspPage = forward.getForward();
                 } else {
                     jspPage = action.getName() + ".jsp";
@@ -100,9 +98,9 @@ final public class PetShelterServlet extends HttpServlet {
                 LOGGER.debug(String.format("Request for URI \"%s\" is forwarded to JSP \"%s\"", requestedUri, jspPage));
                 getServletContext().getRequestDispatcher(jspPage).forward(request, response);
             }
-        } catch(PersistentException e) {
+        } catch (PersistentException e) {
             LOGGER.error("It is impossible to process request", e);
-            request.setAttribute("error", "Ошибка обработки данных");
+            request.setAttribute("message", "Error processing data!");
             getServletContext().getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
     }

@@ -9,9 +9,9 @@ import java.util.List;
 public interface UserInfoService extends Service {
     List<User> findAll() throws PersistentException;
 
-    User findByIdentity(Integer id) throws PersistentException;
+    UserInfo findById(Integer id) throws PersistentException;
 
-    void add(UserInfo userinfo) throws PersistentException;
+    Integer add(UserInfo userinfo) throws PersistentException;
 
     void update(UserInfo userinfo) throws PersistentException;
 

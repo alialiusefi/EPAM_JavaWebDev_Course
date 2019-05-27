@@ -19,48 +19,47 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterAction extends Action {
-
+public class UserEditAction extends AuthorizedUserAction {
 
     private static final FormValidatorFactory formValidatorFactory = new FormValidatorFactory();
 
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("authorizedUser") == null) {
-            List<String> userParameters = new ArrayList<>();
-            List<String> userInfoParameters = new ArrayList<>();
-            addUserParametersToList(request, userParameters);
-            addUserInfoParametersToList(request, userInfoParameters);
-            if (userParameters.stream().anyMatch(e -> e != null)
-                    && userInfoParameters.stream().anyMatch(e -> e != null)) {
+        if(session != null)
+        {
+            User user = (User)session.getAttribute("authorizedUser");
+            if(user != null)
+            {
+                List<String> userParameters = new ArrayList<>();
+                List<String> userInfoParameters = new ArrayList<>();
+                addUserParametersToList(request, userParameters);
+                addUserInfoParametersToList(request, userInfoParameters);
                 UserFormValidator userValidator = (UserFormValidator) formValidatorFactory.getValidator(
                         FormValidatorEnum.USERFORM);
                 UserInfoFormValidator userInfoFormValidator = (UserInfoFormValidator) formValidatorFactory.getValidator(
                         FormValidatorEnum.USERINFOFORM);
                 try {
-                    User user = userValidator.validate(userParameters);
+                    User userCreated = userValidator.validate(userParameters);
                     UserService userService = (UserService) new ServiceFactoryImpl().createService(
                             DAOEnum.USER);
                     UserInfo userInfo = userInfoFormValidator.validate(userInfoParameters);
                     UserInfoService userInfoService = (UserInfoService)
                             new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
-                    int userIDGenerated = userService.add(user);
-                    userInfo.setId(userIDGenerated);
-                    userInfoService.add(userInfo);
+                    userService.update(userCreated);
+                    userInfoService.update(userInfo);
                     request.setAttribute("message","registeredSuccessfully");
                 } catch (InvalidFormDataException e) {
                     request.setAttribute("message", e.getMessage());
                     return null;
                 }
-                return new Action.Forward("login.html");
             } else {
-                return null;
+                session.setAttribute("message","Forbidden Access!");
+                return new Forward("/jsp/error.html",true);
             }
-        } else {
-            session.setAttribute("message", "alreadyLoggedIn");
-            return null;
         }
+        session.setAttribute("message","Forbidden Access!");
+        return new Forward("/jsp/error.html",true);
     }
 
     private void addUserParametersToList(HttpServletRequest request, List<String> userParameters) {
@@ -77,5 +76,4 @@ public class RegisterAction extends Action {
         userInfoParameters.add(request.getParameter("address"));
         userInfoParameters.add(request.getParameter("contactnumber"));
     }
-
 }

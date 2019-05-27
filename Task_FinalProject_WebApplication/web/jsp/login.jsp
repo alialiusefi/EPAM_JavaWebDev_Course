@@ -12,6 +12,7 @@
     <c:url value="/logout.html" var="logoutActionURL"/>
     <c:url value="/index.html" var="titleActionURL"/>
     <c:url value="/register.html" var="registerActionURL"/>
+    <c:url value="/user/profile.html" var="profileActionURL"/>
     <fmt:setLocale value="${sessionLang}"/>
     <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
     <title><fmt:message key="login"/></title>
@@ -40,7 +41,8 @@
                 </li>
                 <c:if test="${not empty authorizedUser}">
                     <li class="nav-item">
-                        <a class="nav-link" href="${jspDirectory}/user/profile.html">${username}</a>
+                        <a class="nav-link" href="${profileActionURL}">
+                            <fmt:message key="profile"/>(${username})</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>
@@ -58,7 +60,6 @@
         </div>
     </div>
 </nav>
-<!-- TODO: Bind with session and with resource service interface -->
 <form action="${loginActionURL}" method="post" >
     <select name="lang" class="custom-select-sm float-right" >
         <option value ="${sessionLang}" ><fmt:message key="pickLanguage"/></option>

@@ -15,6 +15,7 @@
   <c:url value="/login.html" var="loginActionURL"/>
   <c:url value="/register.html" var="registerActionURL"/>
   <c:url value="/logout.html" var="logoutActionURL"/>
+  <c:url value="/user/profile.html" var="profileActionURL"/>
   <fmt:setLocale value="${sessionLang}"/>
   <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
   <title><fmt:message key="title"/></title>
@@ -48,7 +49,8 @@
         </li>
         <c:if test="${not empty authorizedUser}">
           <li class="nav-item">
-            <a class="nav-link" href="/user/profile.html">${username}</a>
+            <a class="nav-link" href="${profileActionURL}">
+              <fmt:message key="profile"/>(${username})</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>
@@ -66,7 +68,6 @@
     </div>
   </div>
 </nav>
-<!-- TODO: Bind with session and with resource serviceinterface -->
 <form action="${indexActionURL}" method="post" >
   <select name="lang" class="custom-select-sm float-right" >
     <option value ="${sessionLang}" ><fmt:message key="pickLanguage"/></option>
@@ -78,7 +79,11 @@
 </form>
 
 <br>
-
+<c:if test="${not empty message}">
+  <center>
+    <label class="text" for="navbarResponsive"><fmt:message key="${message}"/></label>
+  </center>
+</c:if>
 <!-- Page Content -->
 <center>
   <img src="img/title1.jpg" height="600" width="1000" class="img-fluid" alt="Title Image">

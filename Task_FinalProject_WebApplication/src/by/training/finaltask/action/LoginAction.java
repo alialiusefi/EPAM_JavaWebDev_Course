@@ -28,7 +28,8 @@ public class LoginAction extends Action {
     }
 
     @Override
-    public Action.Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
+    public Action.Forward exec(HttpServletRequest request, HttpServletResponse response)
+            throws PersistentException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
@@ -41,6 +42,7 @@ public class LoginAction extends Action {
                     session.setAttribute("username", user.getUsername());
                     session.setAttribute("menu", menu.get(user.getUserRole()));
                     logger.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
+                    request.setAttribute("message", "loggedInSuccessfully");
                     return new Forward("/index.html");
                 } else {
                     request.setAttribute("message", "Couldn't find login and password");

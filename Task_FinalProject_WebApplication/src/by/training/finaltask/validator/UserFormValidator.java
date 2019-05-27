@@ -8,7 +8,7 @@ import by.training.finaltask.service.UserServiceImpl;
 import java.util.List;
 
 public class UserFormValidator implements FormValidator {
-
+    //todo: to accept russian lang too
     private static final int USERNAME = 0;
     private static final int PASSWORD = 1;
     private static final String USERNAME_REGEX = "^[a-zA-Z0-9]{4,16}$";
