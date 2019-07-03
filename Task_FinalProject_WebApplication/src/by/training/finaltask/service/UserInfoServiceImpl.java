@@ -19,8 +19,18 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
 
 
     @Override
-    public List<User> findAll() throws PersistentException {
-        return null;
+    public List<UserInfo> findAll(int start,int end) throws PersistentException {
+        try{
+            connection.setAutoCommit(false);
+            UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
+            List<UserInfo> userInfos = dao.getAll(start,end);
+            commit();
+            connection.setAutoCommit(true);
+            return userInfos;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
     }
 
     @Override
@@ -80,4 +90,20 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
             throw new PersistentException(e);
         }
     }
+
+    @Override
+    public List<UserInfo> findAllStaff(int start,int end) throws PersistentException {
+        try{
+            connection.setAutoCommit(false);
+            UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
+            List<UserInfo> userInfos = dao.getAllStaff(start,end);
+            commit();
+            connection.setAutoCommit(true);
+            return userInfos;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
 }

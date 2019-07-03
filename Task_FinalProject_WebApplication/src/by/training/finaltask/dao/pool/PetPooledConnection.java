@@ -43,7 +43,7 @@ public final class PetPooledConnection implements Connection, Comparable<PooledC
 
     @Override
     public void close() throws SQLException {
-        ConnectionPool.getInstance().clearConnection(this);
+        ConnectionPool.getInstance().freeConnection(this);
     }
 
     @Override

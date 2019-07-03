@@ -42,7 +42,7 @@
                 <c:if test="${not empty authorizedUser}">
                     <li class="nav-item">
                         <a class="nav-link" href="${profileActionURL}">
-                            <fmt:message key="profile"/>(${username})</a>
+                            <fmt:message key="profile"/>(${authorizedUser.username})</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>

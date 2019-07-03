@@ -48,9 +48,21 @@
           <a class="nav-link" href="/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span class="sr-only">(current)</span></a>
         </li>
         <c:if test="${not empty authorizedUser}">
+          <c:choose>
+            <c:when test="${authorizedUser.userRole == 'ADMINISTRATOR'}">
+              <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/user/admin/findstaff.html"/>">
+                  <fmt:message key="findStaff"/></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/user/admin/addstaff.html"/>">
+                  <fmt:message key="addStaff"/></a>
+              </li>
+            </c:when>
+          </c:choose>
           <li class="nav-item">
             <a class="nav-link" href="${profileActionURL}">
-              <fmt:message key="profile"/>(${username})</a>
+              <fmt:message key="profile"/>(${authorizedUser.username})</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>

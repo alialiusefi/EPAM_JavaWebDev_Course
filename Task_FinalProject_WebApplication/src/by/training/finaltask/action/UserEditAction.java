@@ -31,34 +31,45 @@ public class UserEditAction extends AuthorizedUserAction {
             User user = (User)session.getAttribute("authorizedUser");
             if(user != null)
             {
+                UserInfoService userInfoService = (UserInfoService) new
+                        ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                UserInfo userInfo = userInfoService.findById(user.getId());
+                session.setAttribute("authorizedUserInfo",userInfo);
                 List<String> userParameters = new ArrayList<>();
                 List<String> userInfoParameters = new ArrayList<>();
                 addUserParametersToList(request, userParameters);
                 addUserInfoParametersToList(request, userInfoParameters);
+                if(userParameters.get(1) == null || userParameters.get(1).isEmpty())
+                {
+                    request.setAttribute("message","inputPasswordToSubmit");
+                    return null;
+                }
                 UserFormValidator userValidator = (UserFormValidator) formValidatorFactory.getValidator(
                         FormValidatorEnum.USERFORM);
                 UserInfoFormValidator userInfoFormValidator = (UserInfoFormValidator) formValidatorFactory.getValidator(
                         FormValidatorEnum.USERINFOFORM);
                 try {
-                    User userCreated = userValidator.validate(userParameters);
+                    User newUser = userValidator.validate(userParameters);
                     UserService userService = (UserService) new ServiceFactoryImpl().createService(
                             DAOEnum.USER);
-                    UserInfo userInfo = userInfoFormValidator.validate(userInfoParameters);
-                    UserInfoService userInfoService = (UserInfoService)
-                            new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
-                    userService.update(userCreated);
-                    userInfoService.update(userInfo);
-                    request.setAttribute("message","registeredSuccessfully");
+                    newUser.setId(user.getId());
+                    UserInfo newUserInfo = userInfoFormValidator.validate(userInfoParameters);
+                    newUserInfo.setId(user.getId());
+                    userService.update(newUser);
+                    userInfoService.update(newUserInfo);
+                    session.setAttribute("authorizedUser",newUser);
+                    session.setAttribute("userinfo",newUserInfo);
+                    return new Forward("/user/profile.html",true);
                 } catch (InvalidFormDataException e) {
                     request.setAttribute("message", e.getMessage());
                     return null;
                 }
             } else {
-                session.setAttribute("message","Forbidden Access!");
+                session.setAttribute("message","forbiddenAccess");
                 return new Forward("/jsp/error.html",true);
             }
         }
-        session.setAttribute("message","Forbidden Access!");
+        session.setAttribute("message","forbiddenAccess");
         return new Forward("/jsp/error.html",true);
     }
 

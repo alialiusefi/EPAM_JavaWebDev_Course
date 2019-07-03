@@ -33,11 +33,10 @@ public class UserDeleteAction extends AuthorizedUserAction {
                 return new Forward("/logout.html",true);
             }
             else {
-                session.setAttribute("message","Forbidden Access!");
+                session.setAttribute("message","forbiddenAccess");
                 return new Forward("/jsp/error.html",true);
             }
         }
-        session.setAttribute("message","Forbidden Access!");
         return new Forward("/jsp/error.html",true);
     }
 }

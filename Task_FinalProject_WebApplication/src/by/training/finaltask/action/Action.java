@@ -16,15 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 
 abstract public class Action {
 
-	protected Set<Role> allowRoles = new HashSet<>();
+
 	private User authorizedUser;
 	private String name;
 
 	protected ServiceFactory factory;
 
-	public Set<Role> getAllowRoles() {
-		return allowRoles;
-	}
 
 	public User getAuthorizedUser() {
 		return authorizedUser;

@@ -49,7 +49,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
     }
 
     @Override
-    public List<UserInfo> getAll() throws PersistentException {
+    public List<UserInfo> getAll(int start, int end) throws PersistentException {
         List<UserInfo> userInfoList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllUserInfoDAO"))) {
@@ -76,6 +76,36 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
             LOGGER.debug("getAllUserDAO Query Fulfilled!");
         }
     }
+
+    @Override
+    public List<UserInfo> getAllStaff(int start, int end) throws PersistentException {
+        List<UserInfo> userInfoList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllStaffInfoDAO"))) {
+            preparedStatement.setInt(1,start);
+            preparedStatement.setInt(2,end);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    GregorianCalendar gregCal = new GregorianCalendar();
+                    gregCal.setTime(resultSet.getDate("dateofbirth"));
+                    userInfoList.add(new UserInfo(
+                            null,
+                            resultSet.getString("email"),
+                            resultSet.getNString("firstname"),
+                            resultSet.getNString("lastname"),
+                            gregCal,
+                            resultSet.getNString("address"),
+                            resultSet.getLong("phone")
+                    ));
+                }
+            }
+            return userInfoList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
 
     @Override
     public boolean delete(Integer userID) throws PersistentException {

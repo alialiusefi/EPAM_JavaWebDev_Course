@@ -41,8 +41,6 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("getUserDAO Query");
         }
         //TODO: Question: Should i throw an exception instead of null
         return null;
@@ -65,8 +63,6 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("getUserDAO Query Fulfilled");
         }
         //TODO: Question: Should i throw an exception instead of null
         return null;
@@ -89,8 +85,6 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("getUserDAO Query Fulfilled");
         }
         //TODO: Question: Should i throw an exception instead of null
         return null;
@@ -114,18 +108,18 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("getUserDAO Query Fulfilled");
         }
-        //TODO: Question: Should i throw an exception instead of null
+        //  TODO: Question: Should i throw an exception instead of null
         return null;
     }
 
     @Override
-    public List<User> getAll() throws PersistentException {
+    public List<User> getAll(int start, int end) throws PersistentException {
         List<User> userList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllUserDAO"))) {
+            preparedStatement.setInt(1,start);
+            preparedStatement.setInt(2,end);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt(1);
@@ -139,8 +133,6 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("getAllUserDAO Query Fulfilled!");
         }
     }
 
@@ -153,8 +145,7 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("User Deleted!");
+
         }
     }
 
@@ -209,8 +200,46 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
-        } finally {
-            LOGGER.debug("User Deleted!");
+        }
+    }
+
+    @Override
+    public int getAmountOfAllStaff() throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAmountAllStaffDAO"))) {
+            try (ResultSet res = preparedStatement.executeQuery()) {
+                res.next();
+                return res.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<User> getAllStaff(int start, int end) throws PersistentException {
+        List<User> userList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllStaffDAO"))) {
+            preparedStatement.setInt(1,start);
+            preparedStatement.setInt(2,end);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt(1);
+                    String username = resultSet.getNString("username");
+                    String password = resultSet.getNString("password");
+                    Role role = Role.valueOf(resultSet.getInt(4));
+                    userList.add(new User(id, username, password, role));
+                }
+            }
+            return userList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
         }
     }
 

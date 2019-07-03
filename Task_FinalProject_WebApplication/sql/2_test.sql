@@ -1,6 +1,17 @@
 use petshelter;
 
+select email, firstname, lastname, dateofbirth, address, phone
+from userinfo inner join users on userinfo.user_id = users.id and users.role = 1 limit ?,?;
 
+select userinfo.user_id from userinfo inner join users on users.role = 1;
+
+select users.id,users.username,users.password,users.role from users where users.role=1 limit ?,? ;
+
+
+select users.id,users.username,users.password,users.role from users limit ?,?;
+
+
+select count(users.role) from users where users.role = 1;
 
 
 select userinfo.user_id,

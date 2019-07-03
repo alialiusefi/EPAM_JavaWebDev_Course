@@ -23,42 +23,12 @@ public class ActionURIFilter implements Filter {
         actions.put("/register", RegisterAction.class);
         actions.put("/user/profile", ProfileAction.class);
         actions.put("/user/userdelete", UserDeleteAction.class);
-/*
-        actions.put("/profile/edit", ProfileAction.class);
-        actions.put("/profile/save", ProfileSaveAction.class);
-
-        actions.put("/reader/list", ReaderListAction.class);
-        actions.put("/reader/edit", ReaderEditAction.class);
-        actions.put("/reader/save", ReaderSaveAction.class);
-        actions.put("/reader/delete", ReaderDeleteAction.class);
-
-        actions.put("/user/list", UserListAction.class);
-        actions.put("/user/edit", UserEditAction.class);
-        actions.put("/user/save", UserSaveAction.class);
-        actions.put("/user/delete", UserDeleteAction.class);
-
-        actions.put("/author/list", AuthorListAction.class);
-        actions.put("/author/edit", AuthorEditAction.class);
-        actions.put("/author/save", AuthorSaveAction.class);
-        actions.put("/author/delete", AuthorDeleteAction.class);
-
-        actions.put("/author/book/list", BookListAction.class);
-        actions.put("/author/book/edit", BookEditAction.class);
-        actions.put("/author/book/save", BookSaveAction.class);
-        actions.put("/author/book/delete", BookDeleteAction.class);
-
-        actions.put("/search/book/form", SearchBookFormAction.class);
-        actions.put("/search/book/result", SearchBookResultAction.class);
-        actions.put("/author/book/usages", BookUsageListAction.class);
-
-        actions.put("/search/reader/form", SearchReaderFormAction.class);
-        actions.put("/search/reader/result", SearchReaderResultAction.class);
-        actions.put("/reader/usages", ReaderUsageListAction.class);
-
-        actions.put("/author/book/deliver", DeliverBookAction.class);
-        actions.put("/author/book/return", ReturnBookAction.class);*/
+        actions.put("/user/useredit",UserEditAction.class);
+        actions.put("/user/admin/addstaff", AddStaffAction.class);
+        actions.put("/user/admin/findstaff", FindStaffAction.class);
 
     }
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
 
@@ -85,13 +55,12 @@ public class ActionURIFilter implements Filter {
                 clearSessionMessage(httpRequest);
                 chain.doFilter(request, response);
             } catch (InstantiationException | IllegalAccessException | NullPointerException e) {
-                System.out.println("It is impossible to create action handler object" + e);
+                System.out.println("It is impossible to create action handler object " + e);
                 httpRequest.setAttribute("error", String.format("Запрошенный адрес %s не может быть обработан сервером", uri));
                 httpRequest.getServletContext().getRequestDispatcher("/jsp/error.jsp").forward(request, response);
             }
         } else {
             System.out.println("It is impossible to use HTTP filter");
-
         }
     }
 

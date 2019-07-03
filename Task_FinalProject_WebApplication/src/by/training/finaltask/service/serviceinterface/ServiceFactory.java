@@ -9,6 +9,7 @@ public interface ServiceFactory {
 
 	Service createService(DAOEnum key) throws PersistentException;
 
-	Connection getConnecction();
+	Connection getConnection();
+
 	void close() throws PersistentException;
 }

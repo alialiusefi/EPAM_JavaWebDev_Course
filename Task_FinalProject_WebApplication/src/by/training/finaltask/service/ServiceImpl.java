@@ -1,6 +1,8 @@
 package by.training.finaltask.service;
 
 import by.training.finaltask.dao.mysql.*;
+import by.training.finaltask.dao.pool.ConnectionPool;
+import by.training.finaltask.dao.pool.PetPooledConnection;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.Service;
 import by.training.finaltask.service.serviceinterface.ServiceFactory;

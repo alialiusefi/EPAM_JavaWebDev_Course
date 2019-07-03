@@ -42,7 +42,7 @@
                 <c:if test="${not empty authorizedUser}">
                     <li class="nav-item">
                         <a class="nav-link" href="${profileActionURL}">
-                            <fmt:message key="profile"/>(${username})</a>
+                            <fmt:message key="profile"/>(${authorizedUser.username})</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>
@@ -72,10 +72,8 @@
 <br>
 
 <div class="container">
-
     <form class="form" action=" " method="post"  id="contact_form">
         <fieldset>
-
             <!-- Form Name -->
             <legend><center><h2><b><fmt:message key="registrationForm"/> </b></h2></center></legend><br>
             <c:if test="${not empty message}" >
@@ -169,7 +167,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-6 control-label"></label>
@@ -181,7 +178,7 @@
         </fieldset>
     </form>
 </div>
-</div>
+
 
 </body>
 </html>

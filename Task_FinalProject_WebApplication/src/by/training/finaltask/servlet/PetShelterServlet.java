@@ -27,7 +27,6 @@ final public class PetShelterServlet extends HttpServlet {
     public void init() throws ServletException {
         config = new PetShelterServletConfig();
         try {
-            //TODO: correctly configure root logger
             ConnectionPool.getInstance().initialize(
                     config.getDbDriverClass(),
                     config.getDbURL(),

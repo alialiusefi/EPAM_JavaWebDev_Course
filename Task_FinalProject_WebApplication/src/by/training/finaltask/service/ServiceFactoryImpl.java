@@ -2,6 +2,8 @@ package by.training.finaltask.service;
 
 import by.training.finaltask.dao.mysql.*;
 import by.training.finaltask.dao.pool.ConnectionPool;
+import by.training.finaltask.dao.pool.PetPooledConnection;
+import by.training.finaltask.entity.Pet;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.Service;
 import by.training.finaltask.service.serviceinterface.ServiceFactory;
@@ -30,19 +32,18 @@ public class ServiceFactoryImpl implements ServiceFactory {
     public Service createService(DAOEnum key) throws PersistentException {
         if (key != null) {
             Connection aliveConnection = ConnectionPool.getInstance().getConnection();
-            System.out.println("Inside servicefactorryimpl.createService():" + aliveConnection );
             ServiceImpl service = createServiceInstance(key,aliveConnection);
             return service;
         }
         return null;
     }
 
-    public Connection getConnecction() {
+    public Connection getConnection() {
         return aliveConnection;
     }
 
     private ServiceImpl createServiceInstance(DAOEnum daoEnum, Connection aliveConnection) {
-        //todo: add services other than users
+
         switch (daoEnum) {
             case ADOPTION:
                 return null;
@@ -53,7 +54,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case USERINFO:
                 return new UserInfoServiceImpl(aliveConnection);
             default:
-                return null;
+                throw new IllegalArgumentException("Cannot create service instance!");
         }
     }
 
@@ -61,6 +62,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
     public void close() throws PersistentException {
         try {
             aliveConnection.close();
+            ConnectionPool.getInstance().freeConnection((PetPooledConnection) aliveConnection);
         } catch (SQLException e) {
             logger.warn("Cannot close connection! \n" + e.getMessage(),e);
             throw new PersistentException(e.getMessage(),e);

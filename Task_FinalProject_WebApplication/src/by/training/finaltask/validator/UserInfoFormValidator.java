@@ -20,7 +20,7 @@ public class UserInfoFormValidator implements FormValidator {
     private static final int CONTACTNUMBER = 5;
     private static final String EMAIL_REGEX = "^((?!\\.)[\\w-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
     private static final String NAME_REGEX = "^[a-zA-Z]+$";
-    private static final String CONTACT_REGEX = "^\\+[1-9]{1,3}-[0-9]{1,3}-[0-9]{1,10}$";
+    private static final String CONTACT_REGEX = "^\\+[0-9]{1,15}$";
 
     @Override
     public UserInfo validate(List<String> userInfoParameters) throws InvalidFormDataException {
@@ -87,10 +87,6 @@ public class UserInfoFormValidator implements FormValidator {
         StringBuffer buffer = new StringBuffer(contactNumber);
         int plusPosition = buffer.indexOf("+");
         buffer.deleteCharAt(plusPosition);
-        int dashPosition1 = buffer.indexOf("-");
-        buffer.deleteCharAt(dashPosition1);
-        int dashPosition2 = buffer.indexOf("-",dashPosition1 + 1);
-        buffer.deleteCharAt(dashPosition2);
         return buffer.toString();
     }
 }

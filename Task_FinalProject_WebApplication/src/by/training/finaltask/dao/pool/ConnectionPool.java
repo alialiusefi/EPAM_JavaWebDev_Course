@@ -17,8 +17,10 @@ public final class ConnectionPool {
     private String userName;
     private String password;
     private int timeoutConnectionLimit;
-    private ConcurrentLinkedDeque<PetPooledConnection> availableConnections = new ConcurrentLinkedDeque<>();
-    private ConcurrentLinkedDeque<PetPooledConnection> busyConnections = new ConcurrentLinkedDeque<>();
+    private ConcurrentLinkedDeque<PetPooledConnection> availableConnections
+            = new ConcurrentLinkedDeque<>();
+    private ConcurrentLinkedDeque<PetPooledConnection> usedConnections
+            = new ConcurrentLinkedDeque<>();
     private int maxConnections;
     private ReentrantLock classReentrantLock = new ReentrantLock();
     private static ConnectionPool INSTANCE = null;
@@ -51,26 +53,24 @@ public final class ConnectionPool {
                             }
                             connection = null;
                         }
-                    } else {
+                    } else if (usedConnections.size() < maxConnections){
                         connection = createNewConnection();
+                    } else {
+                     LOGGER.error("The limit of number of database connections is exceeded");
+                     throw new PersistentException();
                     }
-
             } catch (SQLException e) {
                 LOGGER.error("Cannot connect to database", e);
                 throw new PersistentException(e.getMessage(), e);
             }
         }
-        busyConnections.add(connection);
+        usedConnections.add(connection);
         LOGGER.debug("Connection was used, Available connections:" + availableConnections.size()
-                + " Busy Connections: " + busyConnections.size()
+                + " Busy Connections: " + usedConnections.size()
         );
         return connection;
     }
 
-
-    /*TQuestion: Why do we create a certain method init..() instead of doing all of this in constructor
-      Possible answer: We can't initialize using out constructor, since the class is a singleton
-    */
     public void initialize(String driverClass, String URL, String userName,
                            String password, int startConnections, int maxConnections,
                            int timeout) throws PersistentException {
@@ -93,18 +93,19 @@ public final class ConnectionPool {
     }
 
     private PetPooledConnection createNewConnection() throws SQLException, PersistentException {
-        if ((busyConnections.size() + availableConnections.size()) < maxConnections) {
+        if ((usedConnections.size() + availableConnections.size()) < maxConnections) {
             return new PetPooledConnection(DriverManager.getConnection(this.URL, this.userName, this.password));
         }
-        throw new PersistentException("Cannot create connections more than max. amount of connections");
+        throw new PersistentException(
+                "Cannot create connections more than max. amount of connections");
     }
 
-    public void clearConnection(PetPooledConnection connection) {
+    public void freeConnection(PetPooledConnection connection) {
         try {
             if (connection.isValid(timeoutConnectionLimit)) {
                 connection.clearWarnings();
                 connection.setAutoCommit(true);
-                busyConnections.remove(connection);
+                usedConnections.remove(connection);
                 availableConnections.add(connection);
                 LOGGER.debug("Connection Cleared.");
             }
@@ -119,18 +120,18 @@ public final class ConnectionPool {
     }
 
     public void destroy() {
-        if(availableConnections!=null && busyConnections!=null)
+        if(availableConnections!=null && usedConnections !=null)
         {
-            busyConnections.addAll(availableConnections);
+            usedConnections.addAll(availableConnections);
             availableConnections.clear();
-            for (PetPooledConnection connection : busyConnections) {
+            for (PetPooledConnection connection : usedConnections) {
                 try {
                     connection.getConnection().close();
                 } catch (SQLException e) {
                     LOGGER.warn(e.getMessage(), e);
                 }
             }
-            busyConnections.clear();
+            usedConnections.clear();
         }
     }
 
