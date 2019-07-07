@@ -114,12 +114,12 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     }
 
     @Override
-    public List<User> getAll(int start, int end) throws PersistentException {
+    public List<User> getAll(int offset, int rowcount) throws PersistentException {
         List<User> userList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllUserDAO"))) {
-            preparedStatement.setInt(1,start);
-            preparedStatement.setInt(2,end);
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, rowcount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt(1);
@@ -221,12 +221,12 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     }
 
     @Override
-    public List<User> getAllStaff(int start, int end) throws PersistentException {
+    public List<User> getAllStaff(int offset, int rowcount) throws PersistentException {
         List<User> userList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllStaffDAO"))) {
-            preparedStatement.setInt(1,start);
-            preparedStatement.setInt(2,end);
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, rowcount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt(1);

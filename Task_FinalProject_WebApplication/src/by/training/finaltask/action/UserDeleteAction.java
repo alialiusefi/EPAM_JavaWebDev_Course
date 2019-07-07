@@ -1,6 +1,7 @@
 package by.training.finaltask.action;
 
 import by.training.finaltask.dao.mysql.DAOEnum;
+import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.ServiceFactoryImpl;
@@ -18,13 +19,18 @@ public class UserDeleteAction extends AuthorizedUserAction {
 
     private static Logger LOGGER = LogManager.getLogger(UserDeleteAction.class);
 
+    public UserDeleteAction(){
+        this.allowedRoles.add(Role.GUEST);
+        this.allowedRoles.add(Role.ADMINISTRATOR);
+    }
+
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
         HttpSession session = request.getSession(false);
         if(session != null)
         {
             User user = (User)session.getAttribute("authorizedUser");
-            if(user != null)
+            if(user != null && allowedRoles.contains(user.getUserRole()))
             {
                 UserService userService = (UserService)new ServiceFactoryImpl().createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService) new ServiceFactoryImpl().createService(DAOEnum.USERINFO);

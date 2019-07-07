@@ -86,5 +86,7 @@
         <label class="text text-danger" for="navbarResponsive"><fmt:message key="${message}"/></label>
     </center>
 </c:if>
+<jsp:include page="/jsp/tags/footer.jsp" flush="true"/>
+
 </body>
 </html>

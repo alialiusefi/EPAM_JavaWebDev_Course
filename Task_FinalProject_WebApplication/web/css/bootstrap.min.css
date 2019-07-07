@@ -4833,6 +4833,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 .pagination {
     display: -ms-flexbox;
     display: flex;
+    justify-content: center;
     padding-left: 0;
     list-style: none;
     border-radius: .25rem

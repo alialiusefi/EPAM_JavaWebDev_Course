@@ -49,7 +49,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
     }
 
     @Override
-    public List<UserInfo> getAll(int start, int end) throws PersistentException {
+    public List<UserInfo> getAll(int offset, int rowcount) throws PersistentException {
         List<UserInfo> userInfoList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllUserInfoDAO"))) {
@@ -78,12 +78,12 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
     }
 
     @Override
-    public List<UserInfo> getAllStaff(int start, int end) throws PersistentException {
+    public List<UserInfo> getAllStaff(int offset, int rowcount) throws PersistentException {
         List<UserInfo> userInfoList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllStaffInfoDAO"))) {
-            preparedStatement.setInt(1,start);
-            preparedStatement.setInt(2,end);
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, rowcount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     GregorianCalendar gregCal = new GregorianCalendar();

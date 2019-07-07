@@ -21,11 +21,11 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll(int start, int end) throws PersistentException {
+    public List<User> findAll(int offset, int rowcount) throws PersistentException {
         try {
             connection.setAutoCommit(false);
             UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
-            List<User> users = dao.getAll(start, end);
+            List<User> users = dao.getAll(offset, rowcount);
             commit();
             connection.setAutoCommit(true);
             return users;
@@ -136,11 +136,11 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllStaff(int start, int end) throws PersistentException {
+    public List<User> getAllStaff(int offset, int rowcount) throws PersistentException {
         try {
             connection.setAutoCommit(false);
             UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
-            List<User> staffs = dao.getAllStaff(start, end);
+            List<User> staffs = dao.getAllStaff(offset, rowcount);
             commit();
             connection.setAutoCommit(true);
             return staffs;

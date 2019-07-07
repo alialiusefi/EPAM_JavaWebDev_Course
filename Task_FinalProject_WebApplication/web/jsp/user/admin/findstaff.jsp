@@ -3,20 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <c:url value="/index.html" var="indexActionURL"/>
-    <c:url value="/login.html" var="loginActionURL"/>
-    <c:url value="/register.html" var="registerActionURL"/>
-    <c:url value="/logout.html" var="logoutActionURL"/>
-    <c:url value="/user/profile.html" var="profileActionURL"/>
-    <c:url value="/user/useredit.html" var="userEditActionURL"/>
-    <c:url value="/user/userdelete.html" var="userDeleteActionURL"/>
     <fmt:setLocale value="${sessionLang}"/>
     <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
     <title><fmt:message key="findStaff"/></title>
@@ -26,64 +18,9 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
+<jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
 
-        <a class="navbar-brand" href="${indexActionURL}">
-            <fmt:message key="title"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="${indexActionURL}">
-                        <fmt:message key="home"/></a>
-                    <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/pets/findpet.html"><fmt:message key="findAPet"/></a><span
-                        class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <c:if test="${not empty authorizedUser}">
-                    <c:choose>
-                        <c:when test="${authorizedUser.userRole == 'ADMINISTRATOR'}">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="<c:url value="/user/admin/findstaff.html"/>">
-                                    <fmt:message key="findStaff"/></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<c:url value="/user/admin/addstaff.html"/>">
-                                    <fmt:message key="addStaff"/></a>
-                            </li>
-                        </c:when>
-                    </c:choose>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${profileActionURL}">
-                            <fmt:message key="profile"/>(${authorizedUser.username})</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>
-                    </li>
-                </c:if>
-                <c:if test="${empty authorizedUser}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${loginActionURL}"><fmt:message key="login"/></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${registerActionURL}"><fmt:message key="register"/></a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </div>
-</nav>
-<form action="<c:url value="/user/admin/findstaff.html"/>" method="post">
+<form action="<c:url value="/user/admin/findstaff.html?page=1"/>" method="post">
     <select name="lang" class="custom-select-sm float-right">
         <option value="${sessionLang}"><fmt:message key="pickLanguage"/></option>
         <option value="en_US"><fmt:message key="english"/></option>
@@ -105,10 +42,8 @@
 </legend>
 <br>
 <div class="table">
-
     <table class="table">
         <thead>
-
         <tr>
             <th>ID</th>
             <th><fmt:message key="username"/></th>
@@ -119,6 +54,7 @@
             <th><fmt:message key="dateofbirth"/></th>
             <th><fmt:message key="address"/></th>
             <th><fmt:message key="contactNumber"/></th>
+            <th><fmt:message key="actions"/> </th>
         </tr>
         </thead>
         <tbody>
@@ -135,11 +71,34 @@
             </td>
             <td><c:out value="${resultsUserInfo[status.index].address}"/></td>
             <td>+<c:out value="${resultsUserInfo[status.index].phone}"/></td>
+                <td><form action="" method="POST">
+                    <select>
+                        <option value="/user/useredit.html">Edit Staff</option>
+                        <option value="/user/userdelete.html">Delete Staff</option>
+                    </select>
+                    <input type="submit" value="Apply">
+                </form></td>
             </tr>
         </c:forEach>
         </tbody>
-
     </table>
 </div>
+<nav aria-label="Page navigation">
+        <ul class="pagination">
+            <c:if test="${param.page > 1}">
+            <li class="page-item"><a class="page-link" href="<c:url value="/user/admin/findstaff.html?page=${param.page - 1}"/>">Previous</a></li>
+            </c:if>
+            <c:forEach var="i" begin="1" end="${amountOfPages}">
+            <li class="page-item"><a class="page-link" href="<c:url value="/user/admin/findstaff.html?page=${i}"/>">
+                <c:out value="${i}"/>
+            </a></li>
+            </c:forEach>
+            <c:if test="${param.page < amountOfPages}">
+                <li class="page-item"><a class="page-link" href="<c:url value="/user/admin/findstaff.html?page=${param.page + 1}"/>">Next</a></li>
+            </c:if>
+        </ul>
+    </nav>
+<jsp:include page="/jsp/tags/footer.jsp" flush="true"/>
+
 </body>
 </html>

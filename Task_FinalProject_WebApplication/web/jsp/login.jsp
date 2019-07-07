@@ -8,58 +8,12 @@
     <link href="${cssURL}" rel="stylesheet" type="text/css">
     <c:url value="/js/bootstrap.bundle.min.js" var="jsURL"/>
     <script src="${jsURL}" type="text/javascript"></script>
-    <c:url value="/login.html" var="loginActionURL"/>
-    <c:url value="/logout.html" var="logoutActionURL"/>
-    <c:url value="/index.html" var="titleActionURL"/>
-    <c:url value="/register.html" var="registerActionURL"/>
-    <c:url value="/user/profile.html" var="profileActionURL"/>
     <fmt:setLocale value="${sessionLang}"/>
     <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
     <title><fmt:message key="login"/></title>
 </head>
 <body>
-<!-- MenuItem -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="${titleActionURL}">
-            <fmt:message key="title"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="${titleActionURL}">
-                        <fmt:message key="home"/></a>
-                    <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${jspDirectory}/pets/findpet.html"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${jspDirectory}/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span class="sr-only">(current)</span></a>
-                </li>
-                <c:if test="${not empty authorizedUser}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${profileActionURL}">
-                            <fmt:message key="profile"/>(${authorizedUser.username})</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>
-                    </li>
-                </c:if>
-                <c:if test="${empty authorizedUser}">
-                    <li class="nav-item" >
-                        <a class="nav-link active" href="${loginActionURL}"><fmt:message key="login"/></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${registerActionURL}"><fmt:message key="register"/></a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
 <form action="${loginActionURL}" method="post" >
     <select name="lang" class="custom-select-sm float-right" >
         <option value ="${sessionLang}" ><fmt:message key="pickLanguage"/></option>
@@ -89,5 +43,7 @@
         </center>
     </c:if>
 </form>
+<jsp:include page="/jsp/tags/footer.jsp" flush="true"/>
+
 </body>
 </html>

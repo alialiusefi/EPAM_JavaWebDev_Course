@@ -16,13 +16,12 @@ import java.util.List;
 
 public class FindStaffAction extends AuthorizedUserAction {
 
-    private static String NUMBER_REGEX = "[0-9]+";
-    private static int PAGE_MULTIPLIER = 2;
+    private static int ROWS_PER_PAGE = 5;
+    private static String NUMBER_REGEX = "[1-9]+";
 
     public FindStaffAction() {
         allowedRoles.add(Role.ADMINISTRATOR);
     }
-
 
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response)
@@ -36,27 +35,18 @@ public class FindStaffAction extends AuthorizedUserAction {
                 UserInfoService userInfoService = (UserInfoService)
                         new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
                 int amountOfAllStaff = userService.getAmountOfAllStaff();
-                int amountOfPages = amountOfAllStaff % PAGE_MULTIPLIER == 0 ?
-                        amountOfAllStaff / PAGE_MULTIPLIER : amountOfAllStaff / PAGE_MULTIPLIER + 1;
+                int amountOfPages = amountOfAllStaff % ROWS_PER_PAGE == 0 ?
+                        amountOfAllStaff / ROWS_PER_PAGE : amountOfAllStaff / ROWS_PER_PAGE + 1;
                 request.setAttribute("amountOfPages", amountOfPages);
                 Integer pagenumber = 1;
                 pagenumber = validatePageNumber(
-                        request.getParameter("page"));
-                if (pagenumber == 1) {
-                    List<User> userList = userService.getAllStaff(0, PAGE_MULTIPLIER);
-                    request.setAttribute("resultUsers", userList);
-                    List<UserInfo> userInfoList = userInfoService.findAllStaff(0, PAGE_MULTIPLIER);
-                    request.setAttribute("resultsUserInfo", userInfoList);
-                    return null;
-                } else {
-                    int start = (pagenumber * PAGE_MULTIPLIER) - PAGE_MULTIPLIER;
-                    int end = (pagenumber * PAGE_MULTIPLIER) + 1;
-                    List<User> userList = userService.getAllStaff(start, end);
-                    request.setAttribute("resultUsers", userList);
-                    List<UserInfo> userInfoList = userInfoService.findAllStaff(start, end);
-                    request.setAttribute("resultsUserInfo", userInfoList);
-                    return null;
-                }
+                        request.getParameter("page"), amountOfPages);
+                int offset = (pagenumber - 1) * ROWS_PER_PAGE;
+                List<User> userList = userService.getAllStaff(offset, ROWS_PER_PAGE);
+                request.setAttribute("resultUsers", userList);
+                List<UserInfo> userInfoList = userInfoService.findAllStaff(offset, ROWS_PER_PAGE);
+                request.setAttribute("resultsUserInfo", userInfoList);
+                return null;
 
             } else {
                 return new Forward("/login.html", true);
@@ -65,18 +55,16 @@ public class FindStaffAction extends AuthorizedUserAction {
         return null;
     }
 
-    private Integer validatePageNumber(String pageParameter) {
-        if (pageParameter == null) {
-            return 1;
-        }
+    private Integer validatePageNumber(String pageParameter, int amountOfPages) {
         if (pageParameter.matches(NUMBER_REGEX)) {
-            Integer pagenumber = Integer.parseInt(
+            Integer pageNumber = Integer.parseInt(
                     pageParameter);
-            if (pagenumber > 0) {
-                return pagenumber;
+            if (pageNumber <= amountOfPages) {
+                return pageNumber;
+            } else {
+                return 1;
             }
         }
         return 1;
     }
-
 }

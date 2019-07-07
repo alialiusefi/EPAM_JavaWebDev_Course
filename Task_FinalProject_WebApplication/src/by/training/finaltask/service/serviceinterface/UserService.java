@@ -6,7 +6,7 @@ import by.training.finaltask.exception.PersistentException;
 import java.util.List;
 
 public interface UserService extends Service {
-    List<User> findAll(int start, int end) throws PersistentException;
+    List<User> findAll(int offset, int rowcount) throws PersistentException;
 
     User findById(Integer id) throws PersistentException;
 
@@ -20,6 +20,6 @@ public interface UserService extends Service {
 
     int getAmountOfAllStaff() throws PersistentException;
 
-    List<User> getAllStaff(int start, int end) throws PersistentException;
+    List<User> getAllStaff(int offset, int rowcount) throws PersistentException;
 
     }

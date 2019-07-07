@@ -74,28 +74,6 @@ create table if not exists userinfo
 ) default charset utf8;
 
 
-/*
-use petshelter;
-create table if not exists vaccinations_made
-(
-  pet_id           integer not null,
-  vaccination_id   integer not null,
-  date_vaccination date    not null,
-  FOREIGN KEY (pet_id) references pets (id),
-  FOREIGN KEY (vaccination_id) references vaccinations (id)
-) default charset utf8;
-
-*/
-
-/*
-use petshelter;
-create table if not exists vaccinations
-(
-  id   integer      not null auto_increment unique,
-  name nvarchar(32) not null,
-  constraint PK_vaccinations primary key (id)
-) default charset utf8;
-*/
 
 
 
