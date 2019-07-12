@@ -5,7 +5,6 @@ import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.ServiceFactoryImpl;
-import by.training.finaltask.service.UserServiceImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +18,7 @@ public class UserDeleteAction extends AuthorizedUserAction {
 
     private static Logger LOGGER = LogManager.getLogger(UserDeleteAction.class);
 
-    public UserDeleteAction(){
+    public UserDeleteAction() {
         this.allowedRoles.add(Role.GUEST);
         this.allowedRoles.add(Role.ADMINISTRATOR);
     }
@@ -27,22 +26,27 @@ public class UserDeleteAction extends AuthorizedUserAction {
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
         HttpSession session = request.getSession(false);
-        if(session != null)
-        {
-            User user = (User)session.getAttribute("authorizedUser");
-            if(user != null && allowedRoles.contains(user.getUserRole()))
-            {
-                UserService userService = (UserService)new ServiceFactoryImpl().createService(DAOEnum.USER);
+        if (session != null) {
+            User user = (User) session.getAttribute("authorizedUser");
+            if (user != null && allowedRoles.contains(user.getUserRole())) {
+                Integer userId = Integer.parseInt(
+                            request.getParameter("userToDelete"));
+                UserService userService = (UserService) new ServiceFactoryImpl().createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService) new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
-                userService.delete(user.getId());
-                userInfoService.delete(user.getId());
-                return new Forward("/logout.html",true);
-            }
-            else {
-                session.setAttribute("message","forbiddenAccess");
-                return new Forward("/jsp/error.html",true);
+                userService.delete(userId);
+                userInfoService.delete(userId);
+                if (user.getId() == userId) {
+                    return new Forward("/logout.html", true);
+                }
+                else {
+                    session.setAttribute("message","userDeleted");
+                    return new Forward(request.getHeader("referer"),true);
+                }
+            } else {
+                session.setAttribute("message", "forbiddenAccess");
+                return new Forward("/jsp/error.html", true);
             }
         }
-        return new Forward("/jsp/error.html",true);
+        return new Forward("/jsp/error.html", true);
     }
 }

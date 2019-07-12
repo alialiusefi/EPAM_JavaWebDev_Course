@@ -106,6 +106,66 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
         }
     }
 
+    @Override
+    public List<UserInfo> getAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException {
+        List<UserInfo> userInfoList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllStaffInfoByPhoneDAO"))) {
+            String phoneStr = "%" + phone + "%";
+            preparedStatement.setNString(1, phoneStr);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, rowcount);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    GregorianCalendar gregCal = new GregorianCalendar();
+                    gregCal.setTime(resultSet.getDate("dateofbirth"));
+                    userInfoList.add(new UserInfo(
+                            null,
+                            resultSet.getString("email"),
+                            resultSet.getNString("firstname"),
+                            resultSet.getNString("lastname"),
+                            gregCal,
+                            resultSet.getNString("address"),
+                            resultSet.getLong("phone")
+                    ));
+                }
+            }
+            return userInfoList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<UserInfo> getAllStaffByFirstName(String firstname, int offset, int rowcount) throws PersistentException {
+        List<UserInfo> userInfoList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllStaffInfoByFirstNameDAO"))) {
+            preparedStatement.setNString(1, firstname);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, rowcount);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    GregorianCalendar gregCal = new GregorianCalendar();
+                    gregCal.setTime(resultSet.getDate("dateofbirth"));
+                    userInfoList.add(new UserInfo(
+                            null,
+                            resultSet.getString("email"),
+                            resultSet.getNString("firstname"),
+                            resultSet.getNString("lastname"),
+                            gregCal,
+                            resultSet.getNString("address"),
+                            resultSet.getLong("phone")
+                    ));
+                }
+            }
+            return userInfoList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
 
     @Override
     public boolean delete(Integer userID) throws PersistentException {
@@ -142,7 +202,6 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
         }
     }
 
-    //TODO: should i implement base methods?
     @Override
     public UserInfo get() throws PersistentException {
         return null;

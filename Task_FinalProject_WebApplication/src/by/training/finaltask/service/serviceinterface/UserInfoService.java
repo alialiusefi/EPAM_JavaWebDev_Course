@@ -16,6 +16,13 @@ public interface UserInfoService extends Service {
 
     void delete(Integer identity) throws PersistentException;
 
-    List<UserInfo> findAllStaff(int offset,int rowcount) throws PersistentException;
+    List<UserInfo> findAllStaff(int offset, int rowcount) throws PersistentException;
 
-    }
+    List<UserInfo> findAllStaffByFirstName(String firstname, int offset, int rowcount)
+            throws PersistentException;
+
+    List<UserInfo> findAllStaffByPhone(long phone, int offset, int rowcount)
+            throws PersistentException;
+
+
+}

@@ -31,7 +31,6 @@ public class ServiceFactoryImpl implements ServiceFactory {
     @Override
     public Service createService(DAOEnum key) throws PersistentException {
         if (key != null) {
-            Connection aliveConnection = ConnectionPool.getInstance().getConnection();
             ServiceImpl service = createServiceInstance(key,aliveConnection);
             return service;
         }

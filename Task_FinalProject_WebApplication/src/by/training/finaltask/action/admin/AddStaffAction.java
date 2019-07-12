@@ -1,5 +1,7 @@
-package by.training.finaltask.action;
+package by.training.finaltask.action.admin;
 
+import by.training.finaltask.action.AuthorizedUserAction;
+import by.training.finaltask.action.LoginAction;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
@@ -13,6 +15,8 @@ import by.training.finaltask.validator.FormValidatorEnum;
 import by.training.finaltask.validator.FormValidatorFactory;
 import by.training.finaltask.validator.UserFormValidator;
 import by.training.finaltask.validator.UserInfoFormValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddStaffAction extends AuthorizedUserAction {
+
+    private static Logger logger = LogManager.getLogger(AddStaffAction.class);
+
 
     private static final FormValidatorFactory formValidatorFactory = new FormValidatorFactory();
 

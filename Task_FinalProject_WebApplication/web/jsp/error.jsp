@@ -25,49 +25,7 @@
 
 <body>
 <script src="js/popper.min.js"></script>
-<!-- MenuItem -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-
-        <a class="navbar-brand" href="${indexActionURL}">
-            <fmt:message key="title"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="${indexActionURL}">
-                        <fmt:message key="home"/></a>
-                    <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/pets/findpet.html"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span class="sr-only">(current)</span></a>
-                </li>
-                <c:if test="${not empty authorizedUser}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="${profileActionURL}">
-                            <fmt:message key="profile"/>(${username})</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${logoutActionURL}"><fmt:message key="logout"/></a>
-                    </li>
-                </c:if>
-                <c:if test="${empty authorizedUser}">
-                    <li class="nav-item" >
-                        <a class="nav-link" href="${loginActionURL}"><fmt:message key="login"/></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${registerActionURL}"><fmt:message key="register"/></a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
 <form action="${indexActionURL}" method="post" >
     <select name="lang" class="custom-select-sm float-right" >
         <option value ="${sessionLang}" ><fmt:message key="pickLanguage"/></option>

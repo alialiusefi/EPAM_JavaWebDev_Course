@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public final class PetPooledConnection implements Connection, Comparable<PooledConnection> {
+public final class PetPooledConnection implements Connection, Comparable<PetPooledConnection> {
 
     private Connection connection;
 
@@ -305,7 +305,7 @@ public final class PetPooledConnection implements Connection, Comparable<PooledC
     }
 
     @Override
-    public int compareTo(PooledConnection connection) {
+    public int compareTo(PetPooledConnection connection) {
         return hashCode() - connection.hashCode();
     }
 }

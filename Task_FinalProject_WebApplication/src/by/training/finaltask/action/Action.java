@@ -50,6 +50,8 @@ abstract public class Action {
 		private boolean redirect;
 		private Map<String, Object> attributes = new HashMap<>();
 
+		protected ServiceFactory factory;
+
 		public Forward(String forward, boolean redirect) {
 			this.forward = forward;
 			this.redirect = redirect;

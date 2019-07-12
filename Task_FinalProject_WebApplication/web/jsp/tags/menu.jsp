@@ -8,9 +8,6 @@
 <c:url value="/index.html" var="titleActionURL"/>
 <c:url value="/register.html" var="registerActionURL"/>
 <c:url value="/user/profile.html" var="profileActionURL"/>
-<%--
-<c:out value="${pageContext.request.requestURI}"/>
---%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
         <a class="navbar-brand" href="${titleActionURL}">
@@ -28,9 +25,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${jspDirectory}/pets/findpet.html"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${jspDirectory}/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span class="sr-only">(current)</span></a>
-                </li>
                 <c:if test="${not empty authorizedUser}">
                     <c:choose>
                         <c:when test="${authorizedUser.userRole == 'ADMINISTRATOR'}">
@@ -41,6 +35,16 @@
                             <li class="nav-item ${pageContext.request.requestURI eq '/jsp/user/admin/addstaff.jsp' ? 'active' : ''}">
                                 <a class="nav-link" href="<c:url value="/user/admin/addstaff.html"/>">
                                     <fmt:message key="addStaff"/></a>
+                            </li>
+                        </c:when>
+                        <c:when test="${authorizedUser.userRole == 'GUEST'}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${jspDirectory}/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:when test="${authorizedUser.userRole == 'STAFF'}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="${jspDirectory}/pets/staff/addpet.html"><fmt:message key="addPet"/><span class="sr-only">(current)</span></a>
                             </li>
                         </c:when>
                     </c:choose>

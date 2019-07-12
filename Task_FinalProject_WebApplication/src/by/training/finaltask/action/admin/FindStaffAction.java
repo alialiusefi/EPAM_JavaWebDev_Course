@@ -1,5 +1,7 @@
-package by.training.finaltask.action;
+package by.training.finaltask.action.admin;
 
+import by.training.finaltask.action.AuthorizedUserAction;
+import by.training.finaltask.action.LoginAction;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
@@ -8,6 +10,8 @@ import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +19,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class FindStaffAction extends AuthorizedUserAction {
+
+    private static Logger logger = LogManager.getLogger(FindStaffByPhoneAction.class);
+
 
     private static int ROWS_PER_PAGE = 5;
     private static String NUMBER_REGEX = "[1-9]+";
@@ -34,18 +41,25 @@ public class FindStaffAction extends AuthorizedUserAction {
                         new ServiceFactoryImpl().createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService)
                         new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
-                int amountOfAllStaff = userService.getAmountOfAllStaff();
-                int amountOfPages = amountOfAllStaff % ROWS_PER_PAGE == 0 ?
-                        amountOfAllStaff / ROWS_PER_PAGE : amountOfAllStaff / ROWS_PER_PAGE + 1;
-                request.setAttribute("amountOfPages", amountOfPages);
-                Integer pagenumber = 1;
-                pagenumber = validatePageNumber(
-                        request.getParameter("page"), amountOfPages);
-                int offset = (pagenumber - 1) * ROWS_PER_PAGE;
-                List<User> userList = userService.getAllStaff(offset, ROWS_PER_PAGE);
-                request.setAttribute("resultUsers", userList);
-                List<UserInfo> userInfoList = userInfoService.findAllStaff(offset, ROWS_PER_PAGE);
-                request.setAttribute("resultsUserInfo", userInfoList);
+                List<User> userList = (List<User>)request.getAttribute(
+                        "resultUsers");
+                List<UserInfo> userInfoList = (List<UserInfo>)request.getAttribute(
+                        "resultsUserInfo");
+                if(userList == null && userInfoList == null){
+                    int amountOfAllStaff = userService.getAmountOfAllStaff();
+                    int amountOfPages = amountOfAllStaff % ROWS_PER_PAGE == 0 ?
+                            amountOfAllStaff / ROWS_PER_PAGE : amountOfAllStaff / ROWS_PER_PAGE + 1;
+                    request.setAttribute("amountOfPages", amountOfPages);
+                    Integer pagenumber = 1;
+                    pagenumber = validatePageNumber(
+                            request.getParameter("page"), amountOfPages);
+                    int offset = (pagenumber - 1) * ROWS_PER_PAGE;
+                    userList = userService.getAllStaff(offset, ROWS_PER_PAGE);
+                    request.setAttribute("resultUsers", userList);
+                    userInfoList = userInfoService.findAllStaff(offset, ROWS_PER_PAGE);
+                    request.setAttribute("resultsUserInfo", userInfoList);
+                    request.setAttribute("paginationURL","/user/admin/findstaff.html");
+                }
                 return null;
 
             } else {

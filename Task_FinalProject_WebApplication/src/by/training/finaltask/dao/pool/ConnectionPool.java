@@ -7,7 +7,10 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
 public final class ConnectionPool {
@@ -17,10 +20,10 @@ public final class ConnectionPool {
     private String userName;
     private String password;
     private int timeoutConnectionLimit;
-    private ConcurrentLinkedDeque<PetPooledConnection> availableConnections
-            = new ConcurrentLinkedDeque<>();
-    private ConcurrentLinkedDeque<PetPooledConnection> usedConnections
-            = new ConcurrentLinkedDeque<>();
+    private BlockingQueue<PetPooledConnection> freeConnections
+            = new LinkedBlockingQueue<>();
+    private Set<PetPooledConnection> usedConnections
+            = new ConcurrentSkipListSet<>();
     private int maxConnections;
     private ReentrantLock classReentrantLock = new ReentrantLock();
     private static ConnectionPool INSTANCE = null;
@@ -43,8 +46,8 @@ public final class ConnectionPool {
         PetPooledConnection connection = null;
         while (connection == null) {
             try {
-                    if (!availableConnections.isEmpty()) {
-                        connection = availableConnections.pop();
+                    if (!freeConnections.isEmpty()) {
+                        connection = freeConnections.take();
                         if (!connection.isValid(timeoutConnectionLimit)) {
                             try {
                                 connection.getConnection().close();
@@ -59,13 +62,13 @@ public final class ConnectionPool {
                      LOGGER.error("The limit of number of database connections is exceeded");
                      throw new PersistentException();
                     }
-            } catch (SQLException e) {
+            } catch (InterruptedException | SQLException e) {
                 LOGGER.error("Cannot connect to database", e);
                 throw new PersistentException(e.getMessage(), e);
             }
         }
         usedConnections.add(connection);
-        LOGGER.debug("Connection was used, Available connections:" + availableConnections.size()
+        LOGGER.debug("Connection was used, Available connections:" + freeConnections.size()
                 + " Busy Connections: " + usedConnections.size()
         );
         return connection;
@@ -83,7 +86,7 @@ public final class ConnectionPool {
             this.password = password;
             this.timeoutConnectionLimit = timeout;
             for (int i = 0; i < startConnections; i++) {
-                availableConnections.add(createNewConnection());
+                freeConnections.add(createNewConnection());
             }
         } catch (ClassNotFoundException | SQLException e) {
             LOGGER.error("Couldn't create initial available Connections to database!", e);
@@ -93,7 +96,7 @@ public final class ConnectionPool {
     }
 
     private PetPooledConnection createNewConnection() throws SQLException, PersistentException {
-        if ((usedConnections.size() + availableConnections.size()) < maxConnections) {
+        if ((usedConnections.size() + freeConnections.size()) < maxConnections) {
             return new PetPooledConnection(DriverManager.getConnection(this.URL, this.userName, this.password));
         }
         throw new PersistentException(
@@ -106,10 +109,10 @@ public final class ConnectionPool {
                 connection.clearWarnings();
                 connection.setAutoCommit(true);
                 usedConnections.remove(connection);
-                availableConnections.add(connection);
+                freeConnections.put(connection);
                 LOGGER.debug("Connection Cleared.");
             }
-        } catch (SQLException e) {
+        } catch (InterruptedException | SQLException e) {
             LOGGER.error("Couldn't clear connection!", e);
             try {
                 connection.close();
@@ -120,10 +123,10 @@ public final class ConnectionPool {
     }
 
     public void destroy() {
-        if(availableConnections!=null && usedConnections !=null)
+        if(freeConnections !=null && usedConnections !=null)
         {
-            usedConnections.addAll(availableConnections);
-            availableConnections.clear();
+            usedConnections.addAll(freeConnections);
+            freeConnections.clear();
             for (PetPooledConnection connection : usedConnections) {
                 try {
                     connection.getConnection().close();

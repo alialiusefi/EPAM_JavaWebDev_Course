@@ -243,4 +243,87 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
         }
     }
 
+    @Override
+    public List<User> getAllStaffByFirstName(String firstname, int offset, int rowcount) throws PersistentException {
+        List<User> userList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllStaffByFirstNameDAO"))) {
+            preparedStatement.setNString(1, firstname);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, rowcount);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String username = resultSet.getNString("username");
+                    Role role = Role.valueOf(resultSet.getInt("role"));
+                    userList.add(new User(id, username, null, role));
+                }
+            }
+            return userList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getAmountOfAllStaffByFirstName(String firstname) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAmountAllStaffByFirstNameDAO"))) {
+            preparedStatement.setNString(1,firstname);
+            try (ResultSet res = preparedStatement.executeQuery()) {
+                res.next();
+                return res.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getAmountOfAllStaffByPhone(long phone) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAmountAllStaffByPhoneDAO"))) {
+            String phoneStr = "%" + phone + "%";
+            preparedStatement.setNString(1,phoneStr);
+            try (ResultSet res = preparedStatement.executeQuery()) {
+                res.next();
+                return res.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<User> getAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException {
+        List<User> userList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllStaffByPhoneDAO"))) {
+            String phoneStr = "%" + phone + "%";
+            preparedStatement.setNString(1, phoneStr);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, rowcount);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String username = resultSet.getNString("username");
+                    Role role = Role.valueOf(resultSet.getInt("role"));
+                    userList.add(new User(id, username, null, role));
+                }
+            }
+            return userList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
 }

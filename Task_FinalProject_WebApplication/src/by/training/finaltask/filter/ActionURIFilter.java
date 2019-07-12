@@ -3,6 +3,11 @@ package by.training.finaltask.filter;
 
 
 import by.training.finaltask.action.*;
+import by.training.finaltask.action.admin.AddStaffAction;
+import by.training.finaltask.action.admin.FindStaffAction;
+import by.training.finaltask.action.admin.FindStaffByFirstNameAction;
+import by.training.finaltask.action.admin.FindStaffByPhoneAction;
+import by.training.finaltask.action.staff.AddPetAction;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +31,9 @@ public class ActionURIFilter implements Filter {
         actions.put("/user/useredit",UserEditAction.class);
         actions.put("/user/admin/addstaff", AddStaffAction.class);
         actions.put("/user/admin/findstaff", FindStaffAction.class);
+        actions.put("/user/admin/findstaffbyfirstname", FindStaffByFirstNameAction.class);
+        actions.put("/user/admin/findstaffbyphone", FindStaffByPhoneAction.class);
+        actions.put("/pets/staff/addpet", AddPetAction.class);
 
     }
 

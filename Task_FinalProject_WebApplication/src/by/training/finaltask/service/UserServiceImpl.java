@@ -150,4 +150,64 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<User> getAllStaffByFirstName(String firstname, int offset, int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
+            List<User> staffs = dao.getAllStaffByFirstName(firstname, offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return staffs;
+        } catch (PersistentException | SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public List<User> getAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
+            List<User> staffs = dao.getAllStaffByPhone(phone, offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return staffs;
+        } catch (PersistentException | SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getAmountOfAllStaffByFirstName(String firstname) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
+            int res = dao.getAmountOfAllStaffByFirstName(firstname);
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getAmountOfAllStaffByPhone(long phone) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
+            int res = dao.getAmountOfAllStaffByPhone(phone);
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
 }

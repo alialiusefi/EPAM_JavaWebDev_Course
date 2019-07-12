@@ -65,7 +65,8 @@ final public class PetShelterServlet extends HttpServlet {
             HttpSession session = request.getSession(false);
             if (session != null) {
                 @SuppressWarnings("unchecked")
-                Map<String, Object> attributes = (Map<String, Object>) session.getAttribute("redirectedData");
+                Map<String, Object> attributes = (Map<String, Object>) session.getAttribute(
+                        "redirectedData");
                 if (attributes != null) {
                     for (String key : attributes.keySet()) {
                         request.setAttribute(key, attributes.get(key));

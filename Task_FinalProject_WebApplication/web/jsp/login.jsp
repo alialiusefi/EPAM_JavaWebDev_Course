@@ -39,7 +39,7 @@
     <br>
     <c:if test="${not empty message}">
     <center>
-            <label class="text" for="navbarResponsive"><fmt:message key="${message}"/></label>
+            <label class="text"><fmt:message key="${message}"/></label>
         </center>
     </c:if>
 </form>

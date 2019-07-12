@@ -2,7 +2,6 @@ package by.training.finaltask.service;
 
 import by.training.finaltask.dao.daointerface.UserInfoDAO;
 import by.training.finaltask.dao.mysql.DAOEnum;
-import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
@@ -20,7 +19,7 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
 
     @Override
     public List<UserInfo> findAll(int offset, int rowcount) throws PersistentException {
-        try{
+        try {
             connection.setAutoCommit(false);
             UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
             List<UserInfo> userInfos = dao.getAll(offset, rowcount);
@@ -93,7 +92,7 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
 
     @Override
     public List<UserInfo> findAllStaff(int offset, int rowcount) throws PersistentException {
-        try{
+        try {
             connection.setAutoCommit(false);
             UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
             List<UserInfo> userInfos = dao.getAllStaff(offset, rowcount);
@@ -106,4 +105,37 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
         }
     }
 
+    @Override
+    public List<UserInfo> findAllStaffByFirstName(String firstname,
+                                                  int offset, int rowcount)
+            throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
+            List<UserInfo> userInfos = dao.getAllStaffByFirstName(firstname,
+                    offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return userInfos;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public List<UserInfo> findAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
+            List<UserInfo> userInfos = dao.getAllStaffByPhone(phone,
+                    offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return userInfos;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
 }

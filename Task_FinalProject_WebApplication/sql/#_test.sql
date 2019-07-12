@@ -1,7 +1,7 @@
 use petshelter;
 
-select email, firstname, lastname, dateofbirth, address, phone
-from userinfo inner join users on userinfo.user_id = users.id and users.role = 1 limit ?,?;
+select count(users.role) from users inner join userinfo on (userinfo.user_id = users.id and users.role = 1) where userinfo.phone like ?;
+
 
 select userinfo.user_id from userinfo inner join users on users.role = 1;
 

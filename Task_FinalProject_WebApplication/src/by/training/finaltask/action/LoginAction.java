@@ -41,7 +41,7 @@ public class LoginAction extends Action {
 
                     return new Forward("/index.html");
                 } else {
-                    request.setAttribute("message", "Couldn't find login and password");
+                    request.setAttribute("message", "couldntFindPassword");
                     logger.info(String.format("user \"%s\" unsuccessfully tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
                 }
             } else {

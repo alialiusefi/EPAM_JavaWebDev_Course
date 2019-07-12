@@ -90,9 +90,10 @@
             </td>
             <c:if test="${authorizedUser.userRole != 'STAFF'}">
                 <td>
-                    <a class="btn btn-secondary" href="${userDeleteActionURL}">
-                        <fmt:message key="deleteProfile"/>
-                    </a>
+                    <form action="${userDeleteActionURL}" type="post">
+                        <input type="hidden" name="userToDelete" value="${authorizedUser.id}">
+                        <input type="submit" class="btn btn-secondary" value="<fmt:message key="deleteProfile"/>">
+                    </form>
                 </td>
             </c:if>
 

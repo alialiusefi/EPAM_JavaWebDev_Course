@@ -31,7 +31,6 @@
     <button class="btn float-right" type="submit"><fmt:message key="changeLanguage"/></button>
 </form>
 <br>
-
 <div class="container">
     <form class="form" action=" " method="post"  id="contact_form">
         <fieldset>

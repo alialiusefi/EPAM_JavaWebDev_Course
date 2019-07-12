@@ -20,6 +20,14 @@ public interface UserService extends Service {
 
     int getAmountOfAllStaff() throws PersistentException;
 
+    int getAmountOfAllStaffByFirstName(String firstname) throws PersistentException;
+
+    int getAmountOfAllStaffByPhone(long phone) throws PersistentException;
+
     List<User> getAllStaff(int offset, int rowcount) throws PersistentException;
+
+    List<User> getAllStaffByFirstName(String firstname, int offset, int rowcount) throws  PersistentException;
+
+    List<User> getAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException;
 
     }
