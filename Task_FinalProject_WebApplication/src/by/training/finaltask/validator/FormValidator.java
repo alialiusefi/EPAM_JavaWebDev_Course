@@ -1,11 +1,12 @@
 package by.training.finaltask.validator;
 
 import by.training.finaltask.exception.InvalidFormDataException;
+import by.training.finaltask.exception.PersistentException;
 
 import java.util.List;
 
-public interface FormValidator {
+public interface FormValidator<T> {
 
-    Object validate(List<String> parameters) throws InvalidFormDataException;
+    T validate(List<String> parameters) throws InvalidFormDataException, PersistentException;
 
 }

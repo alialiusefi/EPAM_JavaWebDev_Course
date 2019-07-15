@@ -1,5 +1,10 @@
 use petshelter;
 
+
+select shelters.id, shelters.name, shelters.location from shelters;
+
+
+
 select count(users.role) from users inner join userinfo on (userinfo.user_id = users.id and users.role = 1) where userinfo.phone like ?;
 
 

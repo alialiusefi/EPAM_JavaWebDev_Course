@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
-public class UserInfoFormValidator implements FormValidator {
+public class UserInfoFormValidator implements FormValidator<UserInfo> {
 
     private static final int EMAIL = 0;
     private static final int FIRSTNAME = 1;

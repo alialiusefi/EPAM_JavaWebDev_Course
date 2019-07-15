@@ -15,6 +15,8 @@ public class FormValidatorFactory {
                     return new UserFormValidator();
                 case USERINFOFORM:
                     return new UserInfoFormValidator();
+                case PETFORM:
+                    return new PetFormValidator();
                 default:
                     break;
             }

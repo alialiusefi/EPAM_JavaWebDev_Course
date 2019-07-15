@@ -27,6 +27,7 @@ abstract public class BaseDAO {
     protected ResourceBundle resourceBundle;
     protected final String PROPERTY_PATH = "daomysqlqueries";
 
+    /*TODO: Is connection at the base constructor enough?*/
     protected BaseDAO(Connection connection)
     {
         this.connection = connection;

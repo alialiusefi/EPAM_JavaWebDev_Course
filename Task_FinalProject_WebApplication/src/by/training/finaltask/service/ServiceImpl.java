@@ -17,7 +17,6 @@ abstract public class ServiceImpl implements Service {
 
     protected Connection connection;
     private Logger logger = LogManager.getLogger(ServiceImpl.class);
-    private ServiceFactory serviceFactory;
 
     ServiceImpl(Connection aliveConnection)
     {
@@ -42,10 +41,6 @@ abstract public class ServiceImpl implements Service {
         }
     }
 
-    public ServiceFactory getServiceFactory() {
-        return serviceFactory;
-    }
-
     protected BaseDAO createDao(DAOEnum daoEnum) {
         switch (daoEnum) {
             case ADOPTION:
@@ -56,6 +51,8 @@ abstract public class ServiceImpl implements Service {
                 return new UserDAOImplementation(connection);
             case USERINFO:
                 return new UserInfoDAOImplementation(connection);
+            case BREED:
+                return new BreedDAOImplementation(connection);
             default:
                 return null;
         }

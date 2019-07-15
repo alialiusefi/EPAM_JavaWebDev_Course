@@ -40,7 +40,7 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
                             PetStatus.valueOf(resultset.getNString("status").toUpperCase());
                     return new Pet(
                             resultset.getInt("id"),
-                            resultset.getNString("name"),
+                            resultset.getNString("petName"),
                             resultset.getNString("photourl"),
                             dateofbirth,
                             resultset.getDouble("weight"),
@@ -75,7 +75,7 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
                             PetStatus.valueOf(resultset.getNString("status").toUpperCase());
                     pets.add(new Pet(
                             resultset.getInt("id"),
-                            resultset.getNString("name"),
+                            resultset.getNString("petName"),
                             resultset.getNString("photourl"),
                             dateofbirth,
                             resultset.getDouble("weight"),

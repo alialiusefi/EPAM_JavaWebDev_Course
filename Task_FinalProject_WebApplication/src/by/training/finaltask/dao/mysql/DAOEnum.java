@@ -4,5 +4,6 @@ public enum DAOEnum {
     ADOPTION,
     PET,
     USER,
+    BREED,
     USERINFO;
 }

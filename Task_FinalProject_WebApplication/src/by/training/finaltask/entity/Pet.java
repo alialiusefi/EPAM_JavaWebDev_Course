@@ -3,8 +3,6 @@ package by.training.finaltask.entity;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-//todo: should i use a builder here
-
 public final class Pet {
 
     private int id;
