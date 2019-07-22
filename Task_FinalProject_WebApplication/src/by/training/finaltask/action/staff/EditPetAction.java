@@ -23,62 +23,93 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
-public class AddPetAction extends AuthorizedUserAction {
+public class EditPetAction extends AuthorizedUserAction {
 
-    public static final Logger LOGGER = LogManager.getLogger(
-            AddPetAction.class);
-
-    private static final FormValidatorFactory formValidatorFactory = new FormValidatorFactory();
+    private static final Logger LOGGER = LogManager.getLogger(EditPetAction.class);
     private static final String UPLOAD_PATH = "C:" + File.separator + "SERVERS"
             + File.separator + "apache-tomcat" + File.separator + "webapps" + File.separator
             + "Pet Shelter" + File.separator + "petpics";
     private static final String MESSAGE_ATTRIBUTE = "message";
-
-    public AddPetAction() {
+    private static final String PETID_PARAMETER = "petID";
+    public EditPetAction() {
         this.allowedRoles.add(Role.STAFF);
     }
 
     @Override
-    public Forward exec(HttpServletRequest request,
-                        HttpServletResponse response)
-            throws PersistentException {
+    public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            User authUser = (User) session.getAttribute("authorizedUser");
-            if (authUser != null &&
-                    this.allowedRoles.contains(authUser.getUserRole())) {
-                List<String> petParameters = new ArrayList<>();
+        if(session != null)
+        {
+            User authUser = (User)session.getAttribute("authorizedUser");
+            if(authUser != null && this.allowedRoles.contains(authUser.getUserRole()))
+            {
+                PetService service = (PetService) new ServiceFactoryImpl().createService(DAOEnum.PET);
+                String petIDParam = request.getParameter(PETID_PARAMETER);
+                int petID = Integer.parseInt(petIDParam);
+                Pet pet = service.get(petID);
+                request.setAttribute("pet",pet);
                 updateSelectionList(request);
-                addPetParametersToList(request, petParameters);
+                String petPic = getImage(pet);
+                request.setAttribute("currentPetPicture",petPic);
+                List<String> petParameters = new ArrayList<>();
+                addPetParametersToList(request,petParameters);
                 PetFormValidator validator = (PetFormValidator)
-                        formValidatorFactory.getValidator(
-                                FormValidatorEnum.PETFORM);
-                Pet pet;
-                try {
-                    pet = validator.validate(petParameters);
-                    PetService petService = (PetService)
-                            new ServiceFactoryImpl().createService(DAOEnum.PET);
-                    petService.add(pet);
+                        new FormValidatorFactory().getValidator(FormValidatorEnum.PETFORM);
+                try{
+                    Pet newPet = validator.validate(petParameters);
+                    newPet.setId(petID);
+                    if(newPet.getPhoto() == null)
+                    {
+                        newPet.setPhoto(pet.getPhoto());
+                    }
+                    service.update(newPet);
                     File fileToDelete = new File(UPLOAD_PATH +
                             File.separator + request.getSession(false).getId() + ".jpg");
                     if (fileToDelete.delete()) {
-                        Forward forward = new Forward("/pets/staff/addpet.html", true);
-                        forward.getAttributes().put("successMessage", "petAddedSuccesfully");
+                        Forward forward = new Forward("/pets/staff/editpet.html?petID=" + petID, true);
+                        forward.getAttributes().put("successMessage", "petUpdatedSuccessfully");
                         return forward;
                     } else {
                         LOGGER.warn("Cannot delete file " + fileToDelete);
-                        return new Forward("/pets/staff/addpet.html", true);
+                        return new Forward("/pets/staff/editpet.html", true);
                     }
                 } catch (InvalidFormDataException e) {
                     request.setAttribute(MESSAGE_ATTRIBUTE, e.getMessage());
                     return null;
                 }
             }
+            return null;
         }
         throw new PersistentException("forbiddenAccess");
+    }
+    private void updateSelectionList(HttpServletRequest request)
+            throws PersistentException {
+        BreedService breedService = (BreedService)
+                new ServiceFactoryImpl().createService(DAOEnum.BREED);
+        ShelterService shelterService = (ShelterService)
+                new ServiceFactoryImpl().createService(DAOEnum.SHELTER);
+        List<Breed> breeds = breedService.getAll();
+        List<Shelter> shelters = shelterService.getAll();
+        request.setAttribute("shelterList", shelters);
+        request.setAttribute("breedList", breeds);
+    }
+    private String getImage(Pet pet)
+            throws PersistentException {
+        String image;
+        byte[] array;
+        try {
+            array = pet.getPhoto().getBytes(1, (int) pet.getPhoto().length());
+            image = Base64.getEncoder().encodeToString(array);
+        } catch (SQLException r) {
+            LOGGER.warn(r.getMessage(), r);
+            throw new PersistentException(r.getMessage(), r);
+        }
+        return image;
     }
 
     private void addPetParametersToList(HttpServletRequest request,
@@ -98,16 +129,15 @@ public class AddPetAction extends AuthorizedUserAction {
             List<FileItem> formItems = upload.parseRequest(request);
             if (formItems != null && !formItems.isEmpty()) {
                 for (FileItem item : formItems) {
-                    if (!item.isFormField()) {
+                    if (item.isFormField()) {
+                        String param = item.getString("UTF-8");
+                        petParam.add(param);
+                    } else {
                         String fileName = request.getSession(false).getId();
                         String filePath = UPLOAD_PATH + File.separator + fileName + ".jpg";
                         storeFile = new File(filePath);
                         item.write(storeFile);
                         petParam.add(storeFile.getAbsolutePath());
-
-                    } else {
-                        String param = item.getString("UTF-8");
-                        petParam.add(param);
                     }
                 }
             }
@@ -118,15 +148,5 @@ public class AddPetAction extends AuthorizedUserAction {
 
     }
 
-    private void updateSelectionList(HttpServletRequest request)
-            throws PersistentException {
-        BreedService breedService = (BreedService)
-                new ServiceFactoryImpl().createService(DAOEnum.BREED);
-        ShelterService shelterService = (ShelterService)
-                new ServiceFactoryImpl().createService(DAOEnum.SHELTER);
-        List<Breed> breeds = breedService.getAll();
-        List<Shelter> shelters = shelterService.getAll();
-        request.setAttribute("shelterList", shelters);
-        request.setAttribute("breedList", breeds);
-    }
+
 }

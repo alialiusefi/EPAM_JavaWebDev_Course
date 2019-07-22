@@ -100,7 +100,8 @@ final public class PetShelterServlet extends HttpServlet {
             }
         } catch (PersistentException e) {
             LOGGER.error("It is impossible to process request", e);
-            request.setAttribute("message", "Error processing data!");
+            request.setAttribute("message", "cannotProcessData");
+            request.setAttribute("exception",e.getMessage());
             getServletContext().getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
     }

@@ -1,6 +1,5 @@
 package by.training.finaltask.validator;
 
-import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.service.UserServiceImpl;
@@ -15,34 +14,34 @@ public class UserFormValidator implements FormValidator<User> {
 
     @Override
     public User validate(List<String> userParameters) throws InvalidFormDataException {
-        if (userParameters != null) {
-            String username = userParameters.get(USERNAME);
-            String password = userParameters.get(PASSWORD);
-            if (username != null) {
-                if(password != null)
-                {
-                    if (!username.isEmpty() && username.matches(USERNAME_REGEX)) {
-                        if (!password.isEmpty() && password.matches(PASSWORD_REGEX)) {
-                            return new User(
-                                    null,
-                                    username,
-                                    UserServiceImpl.md5(password),
-                                    Role.GUEST
-                            );
+            if (!userParameters.isEmpty() && !userParameters.contains(null)
+                    && !userParameters.contains("")) {
+                String username = userParameters.get(USERNAME);
+                String password = userParameters.get(PASSWORD);
+                if (username != null) {
+                    if (password != null) {
+                        if (!username.isEmpty() && username.matches(USERNAME_REGEX)) {
+                            if (!password.isEmpty() && password.matches(PASSWORD_REGEX)) {
+                                return new User(
+                                        null,
+                                        username,
+                                        UserServiceImpl.md5(password),
+                                        null
+                                );
+                            } else {
+                                throw new InvalidFormDataException("incorrectPasswordFormat");
+                            }
                         } else {
-                            throw new InvalidFormDataException("incorrectPasswordFormat");
+                            throw new InvalidFormDataException("incorrectUsernameFormat");
                         }
                     } else {
-                        throw new InvalidFormDataException("incorrectUsernameFormat");
+                        throw new InvalidFormDataException("incorrectPasswordFormat");
                     }
                 } else {
-                    throw new InvalidFormDataException("incorrectPasswordFormat");
+                    throw new InvalidFormDataException("incorrectUsernameFormat");
                 }
-            } else {
-                throw new InvalidFormDataException("incorrectUsernameFormat");
             }
-        }
-        return null;
+            throw new InvalidFormDataException("fillAllFields");
     }
 
 }

@@ -53,6 +53,7 @@ public class UserEditAction extends AuthorizedUserAction {
                     UserService userService = (UserService) new ServiceFactoryImpl().createService(
                             DAOEnum.USER);
                     newUser.setId(user.getId());
+                    newUser.setUserRole(user.getUserRole());
                     UserInfo newUserInfo = userInfoFormValidator.validate(userInfoParameters);
                     newUserInfo.setId(user.getId());
                     userService.update(newUser);

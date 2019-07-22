@@ -3,12 +3,13 @@ package by.training.finaltask.validator;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
 
-import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class UserInfoFormValidator implements FormValidator<UserInfo> {
 
@@ -24,35 +25,32 @@ public class UserInfoFormValidator implements FormValidator<UserInfo> {
 
     @Override
     public UserInfo validate(List<String> userInfoParameters) throws InvalidFormDataException {
-        if (userInfoParameters != null) {
+        if(!userInfoParameters.isEmpty() && !userInfoParameters.contains(null)
+                && !userInfoParameters.contains("")) {
             String email = userInfoParameters.get(EMAIL);
             if (email != null && email.matches(EMAIL_REGEX)) {
                 String firstname = userInfoParameters.get(FIRSTNAME);
                 if (firstname != null && firstname.matches(NAME_REGEX)) {
                     String lastname = userInfoParameters.get(LASTNAME);
-                    if(lastname != null && lastname.matches(NAME_REGEX))
-                    {
+                    if (lastname != null && lastname.matches(NAME_REGEX)) {
                         String dateofbirth = userInfoParameters.get(DATEOFBIRTH);
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         Date date;
                         try {
                             date = dateFormat.parse(dateofbirth);
                         } catch (ParseException e) {
-                            date = new Date(2000,1,1);
+                            date = new Date(2000, 1, 1);
                         }
                         GregorianCalendar dateofbirthgreg = new GregorianCalendar();
                         dateofbirthgreg.setTime(date);
                         Calendar current = GregorianCalendar.getInstance();
-                        if(dateofbirthgreg.compareTo(current) > 0)
-                        {
+                        if (dateofbirthgreg.compareTo(current) > 0) {
                             throw new InvalidFormDataException("incorrectBirthDateFormat");
                         }
                         String address = userInfoParameters.get(ADDRESS);
-                        if(address != null)
-                        {
+                        if (address != null) {
                             String contactnumber = userInfoParameters.get(CONTACTNUMBER);
-                            if(contactnumber != null && contactnumber.matches(CONTACT_REGEX))
-                            {
+                            if (contactnumber != null && contactnumber.matches(CONTACT_REGEX)) {
                                 String contactNumberNoSymbols = removePhoneFormatSymbols(contactnumber);
                                 Long number = Long.parseLong(contactNumberNoSymbols);
                                 return new UserInfo(
@@ -68,9 +66,8 @@ public class UserInfoFormValidator implements FormValidator<UserInfo> {
                                 throw new InvalidFormDataException("incorrectNumberFormat");
                             }
                         }
-                    }
-                    else{
-                        throw new InvalidFormDataException("incorrectLastNameFormat") ;
+                    } else {
+                        throw new InvalidFormDataException("incorrectLastNameFormat");
                     }
                 } else {
                     throw new InvalidFormDataException("incorrectFirstNameFormat");
@@ -79,11 +76,10 @@ public class UserInfoFormValidator implements FormValidator<UserInfo> {
                 throw new InvalidFormDataException("incorrectEmailFormat");
             }
         }
-
-        return null;
+        throw new InvalidFormDataException("fillAllFields");
     }
-    private String removePhoneFormatSymbols(String contactNumber)
-    {
+
+    private String removePhoneFormatSymbols(String contactNumber) {
         StringBuffer buffer = new StringBuffer(contactNumber);
         int plusPosition = buffer.indexOf("+");
         buffer.deleteCharAt(plusPosition);

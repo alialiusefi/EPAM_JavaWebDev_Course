@@ -2,8 +2,6 @@ package by.training.finaltask.action;
 
 import by.training.finaltask.exception.PersistentException;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

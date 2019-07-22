@@ -1,16 +1,72 @@
 INSERT INTO shelters (name, location)
 VALUES ('Manhattan Shelter', 'New York'),
+        ('Carbon County', 'New Jersey'),
+        ('Silver County', 'Washington'),
        ('Scranton Main Shelter', 'Scranton');
 
 INSERT INTO breeds (name, description, origin)
-VALUES ('German Shepherd',
-        'Big Ears and Strong',
-        'Germany'),
+VALUES ('Alaskan husky','Big Ears and Strong','Germany'),
+('Bearded Collie','Big Ears and Strong','USA'),
+('German Shepherd','Big Ears and Strong','Germany'),
+('Beauceron','Big Ears and Strong','Russia'),
+       ('Alaskan husky','Big Ears and Strong','Germany'),
+       ('Himalayan Sheepdog','Big Ears and Strong','Germany'),
+       ('Alaskan husky','Big Ears and Strong','Germany'),
        ('Chihuahua', 'Small, Weak and Nimble', 'Mexico');
 
-INSERT INTO pets (id,name,photourl,dateofbirth,weight,date_sheltered,shelter_id,breed_id,status)
-values (1, 'John', 'photos\\1.jpg', '2000-06-06', 10.2, '2015-09-09', 1, 1, 'Sheltered'),
-       (2, 'Chichi', 'photos\\2.jpg', '2019-01-03', 2.1, '2019-01-06', 2, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (1, 'Ely', load_file('C:/Dogs.jpg'), '2012-05-29', 11, '2014-08-01', 2, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (2, 'Wake', load_file('C:/Dogs.jpg'), '2014-05-20', 11, '2015-05-24', 1, 1, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (3, 'Debora', load_file('C:/Dogs.jpg'), '2015-01-21', 7, '2015-02-26', 2, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (4, 'Stephie', load_file('C:/Dogs.jpg'), '2014-05-14', 14, '2015-01-10', 3, 2, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (5, 'Violetta', load_file('C:/Dogs.jpg'), '2010-11-17', 9, '2015-04-09', 3, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (6, 'Cris', load_file('C:/Dogs.jpg'), '2012-11-16', 11, '2014-11-11', 1, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (7, 'Ealasaid', load_file('C:/Dogs.jpg'), '2014-06-01', 6, '2014-10-16', 3, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (8, 'Patty', load_file('C:/Dogs.jpg'), '2011-05-17', 15, '2015-04-03', 3, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (9, 'Leo', load_file('C:/Dogs.jpg'), '2011-09-03', 10, '2014-11-24', 2, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (10, 'Terrijo', load_file('C:/Dogs.jpg'), '2014-01-20', 2, '2014-10-24', 3, 1, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (11, 'Aube', load_file('C:/Dogs.jpg'), '2014-09-07', 15, '2014-08-05', 3, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (12, 'Brock', load_file('C:/Dogs.jpg'), '2013-02-18', 14, '2014-07-26', 3, 1, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (13, 'Emlyn', load_file('C:/Dogs.jpg'), '2013-06-03', 14, '2014-09-25', 2, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (14, 'Gearalt', load_file('C:/Dogs.jpg'), '2014-11-10', 13, '2014-09-25', 2, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (15, 'Alfi', load_file('C:/Dogs.jpg'), '2014-03-19', 12, '2014-09-22', 1, 2, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (16, 'Jabez', load_file('C:/Dogs.jpg'), '2015-04-12', 7, '2014-12-31', 3, 2, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (17, 'Solly', load_file('C:/Dogs.jpg'), '2014-06-30', 8, '2015-02-04', 1, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (18, 'Pattie', load_file('C:/Dogs.jpg'), '2011-10-24', 15, '2014-12-17', 2, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (19, 'Zaccaria', load_file('C:/Dogs.jpg'), '2014-09-17', 15, '2015-06-29', 2, 3, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (20, 'Jade', load_file('C:/Dogs.jpg'), '2015-03-05', 5, '2014-09-27', 3, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (21, 'Crosby', load_file('C:/Dogs.jpg'), '2013-05-14', 5, '2015-06-22', 3, 2, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (22, 'Jacki', load_file('C:/Dogs.jpg'), '2014-03-08', 15, '2015-02-10', 3, 1, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (23, 'Renault', load_file('C:/Dogs.jpg'), '2014-10-23', 15, '2015-04-19', 2, 1, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (24, 'Angelia', load_file('C:/Dogs.jpg'), '2011-11-01', 12, '2015-07-14', 1, 2, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (25, 'Zeb', load_file('C:/Dogs.jpg'), '2010-10-08', 11, '2015-06-30', 2, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (26, 'Eilis', load_file('C:/Dogs.jpg'), '2011-12-09', 3, '2015-01-09', 1, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (27, 'Valry', load_file('C:/Dogs.jpg'), '2013-03-19', 13, '2014-12-16', 2, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (28, 'Tades', load_file('C:/Dogs.jpg'), '2011-11-21', 8, '2015-02-17', 2, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (29, 'Datha', load_file('C:/Dogs.jpg'), '2010-08-08', 6, '2014-07-29', 3, 3, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (30, 'Saloma', load_file('C:/Dogs.jpg'), '2012-06-07', 12, '2015-01-14', 1, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (31, 'Antin', load_file('C:/Dogs.jpg'), '2010-12-21', 4, '2014-10-24', 2, 1, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (32, 'Denys', load_file('C:/Dogs.jpg'), '2013-05-01', 8, '2015-02-16', 1, 2, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (33, 'Gav', load_file('C:/Dogs.jpg'), '2011-03-15', 2, '2015-05-17', 1, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (34, 'Fredrika', load_file('C:/Dogs.jpg'), '2011-11-20', 7, '2015-05-22', 2, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (35, 'Aleta', load_file('C:/Dogs.jpg'), '2013-05-01', 9, '2015-07-05', 1, 3, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (36, 'Maurizia', load_file('C:/Dogs.jpg'), '2013-10-21', 13, '2015-01-09', 3, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (37, 'Gil', load_file('C:/Dogs.jpg'), '2014-05-16', 15, '2015-02-17', 3, 1, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (38, 'Phyllis', load_file('C:/Dogs.jpg'), '2014-05-13', 6, '2014-09-22', 2, 3, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (39, 'Jelene', load_file('C:/Dogs.jpg'), '2014-03-14', 3, '2015-01-13', 3, 2, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (40, 'Darice', load_file('C:/Dogs.jpg'), '2015-01-25', 5, '2014-11-18', 1, 3, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (41, 'Hazel', load_file('C:/Dogs.jpg'), '2013-09-23', 10, '2015-03-15', 1, 3, 'Sheltered');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (42, 'Lacy', load_file('C:/Dogs.jpg'), '2010-09-14', 3, '2015-03-21', 1, 3, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (43, 'Ban', load_file('C:/Dogs.jpg'), '2012-11-28', 15, '2015-05-20', 1, 3, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (44, 'Lesley', load_file('C:/Dogs.jpg'), '2014-04-23', 9, '2015-05-05', 3, 2, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (45, 'Huey', load_file('C:/Dogs.jpg'), '2011-10-15', 5, '2014-11-19', 1, 1, 'Adopted');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (46, 'Pip', load_file('C:/Dogs.jpg'), '2012-08-23', 14, '2015-01-28', 1, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (47, 'Dredi', load_file('C:/Dogs.jpg'), '2013-08-30', 8, '2014-08-19', 3, 1, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (48, 'Cecily', load_file('C:/Dogs.jpg'), '2012-03-03', 8, '2014-09-02', 2, 1, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (49, 'Jacklin', load_file('C:/Dogs.jpg'), '2011-04-27', 5, '2015-06-13', 1, 3, 'Dead');
+insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (50, 'Thadeus', load_file('C:/Dogs.jpg'), '2012-11-14', 8, '2014-11-16', 1, 1, 'Dead');
+
+
+
 
 /*password: 'password' */
 insert into users (id, username, password, role) values (1, 'pattwoull0', '5f4dcc3b5aa765d61d8327deb882cf99', 0);

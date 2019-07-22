@@ -1,17 +1,13 @@
 package by.training.finaltask.action;
 
-import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.ServiceFactory;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 
 abstract public class Action {

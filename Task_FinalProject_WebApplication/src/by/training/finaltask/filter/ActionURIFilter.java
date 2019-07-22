@@ -8,6 +8,8 @@ import by.training.finaltask.action.admin.FindStaffAction;
 import by.training.finaltask.action.admin.FindStaffByFirstNameAction;
 import by.training.finaltask.action.admin.FindStaffByPhoneAction;
 import by.training.finaltask.action.staff.AddPetAction;
+import by.training.finaltask.action.staff.DeletePetAction;
+import by.training.finaltask.action.staff.EditPetAction;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +36,10 @@ public class ActionURIFilter implements Filter {
         actions.put("/user/admin/findstaffbyfirstname", FindStaffByFirstNameAction.class);
         actions.put("/user/admin/findstaffbyphone", FindStaffByPhoneAction.class);
         actions.put("/pets/staff/addpet", AddPetAction.class);
+        actions.put("/pets/staff/editpet", EditPetAction.class);
+        actions.put("/pets/findpet", FindPetAction.class);
+        actions.put("/pets/moreinfopet",MoreInfoPetAction.class);
+        actions.put("/pets/staff/deletepet", DeletePetAction.class);
 
     }
 

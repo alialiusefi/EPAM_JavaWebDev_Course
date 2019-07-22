@@ -1,7 +1,6 @@
 package by.training.finaltask.action.admin;
 
 import by.training.finaltask.action.AuthorizedUserAction;
-import by.training.finaltask.action.LoginAction;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
@@ -46,36 +45,34 @@ public class AddStaffAction extends AuthorizedUserAction {
                 List<String> userInfoParameters = new ArrayList<>();
                 addUserParametersToList(request, userParameters);
                 addUserInfoParametersToList(request, userInfoParameters);
-                if (userParameters.stream().anyMatch(e -> e != null)
-                        && userInfoParameters.stream().anyMatch(e -> e != null)) {
-                    UserFormValidator userValidator = (UserFormValidator) formValidatorFactory.getValidator(
-                            FormValidatorEnum.USERFORM);
-                    UserInfoFormValidator userInfoFormValidator = (UserInfoFormValidator) formValidatorFactory.getValidator(
-                            FormValidatorEnum.USERINFOFORM);
-                    try {
-                        User staff = userValidator.validate(userParameters);
-                        staff.setUserRole(Role.STAFF);
-                        UserService userService = (UserService) new ServiceFactoryImpl().createService(
-                                DAOEnum.USER);
-                        UserInfo staffuserInfo = userInfoFormValidator.validate(userInfoParameters);
-                        UserInfoService userInfoService = (UserInfoService)
-                                new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
-                        int userIDGenerated = userService.add(staff);
-                        staffuserInfo.setId(userIDGenerated);
-                        userInfoService.add(staffuserInfo);
-                        request.setAttribute("message","staffAdded");
-                    } catch (InvalidFormDataException e) {
-                        request.setAttribute("message", e.getMessage());
-                        return null;
-                    }
-                }  else {
+                UserFormValidator userValidator = (UserFormValidator) formValidatorFactory.getValidator(
+                        FormValidatorEnum.USERFORM);
+                UserInfoFormValidator userInfoFormValidator = (UserInfoFormValidator) formValidatorFactory.getValidator(
+                        FormValidatorEnum.USERINFOFORM);
+                try {
+                    User staff = userValidator.validate(userParameters);
+                    staff.setUserRole(Role.STAFF);
+                    UserService userService = (UserService) new ServiceFactoryImpl().createService(
+                            DAOEnum.USER);
+                    UserInfo staffuserInfo = userInfoFormValidator.validate(userInfoParameters);
+                    UserInfoService userInfoService = (UserInfoService)
+                            new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                    int userIDGenerated = userService.add(staff);
+                    staffuserInfo.setId(userIDGenerated);
+                    userInfoService.add(staffuserInfo);
+                    Forward forward = new Forward("/user/admin/addstaff.html", true);
+                    forward.getAttributes().put("successMessage", "staffAdded");
+                    return forward;
+                } catch (InvalidFormDataException e) {
+                    request.setAttribute("message", e.getMessage());
                     return null;
                 }
             }
-            return new Forward("/login.html",true);
+            return new Forward("/login.html", true);
         }
-        return new Forward("/login.html",true);
+        return new Forward("/login.html", true);
     }
+
     private void addUserParametersToList(HttpServletRequest request, List<String> userParameters) {
         userParameters.add(request.getParameter("username"));
         userParameters.add(request.getParameter("password"));

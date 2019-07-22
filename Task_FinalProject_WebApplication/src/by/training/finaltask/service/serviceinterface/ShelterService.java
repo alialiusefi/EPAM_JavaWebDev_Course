@@ -2,7 +2,6 @@ package by.training.finaltask.service.serviceinterface;
 
 import by.training.finaltask.entity.Shelter;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.service.ServiceImpl;
 
 import java.util.List;
 

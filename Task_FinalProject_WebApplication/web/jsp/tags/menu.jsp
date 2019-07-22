@@ -22,8 +22,8 @@
                         <fmt:message key="home"/></a>
                     <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${jspDirectory}/pets/findpet.html"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
+                <li class="nav-item ${pageContext.request.requestURI eq '/jsp/pets/findpet.jsp' ? 'active' : ''}">
+                    <a class="nav-link" href="<c:url value="/pets/findpet.html?page=1"/>"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
                 </li>
                 <c:if test="${not empty authorizedUser}">
                     <c:choose>
@@ -43,8 +43,9 @@
                             </li>
                         </c:when>
                         <c:when test="${authorizedUser.userRole == 'STAFF'}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="${jspDirectory}/pets/staff/addpet.html"><fmt:message key="addPet"/><span class="sr-only">(current)</span></a>
+                            <li class="nav-item ${pageContext.request.requestURI eq '/jsp/pets/staff/addpet.jsp' ? 'active' : ''}">
+                                <a class="nav-link" href="<c:url value="/pets/staff/addpet.html"/>">
+                                    <fmt:message key="addPet"/><span class="sr-only">(current)</span></a>
                             </li>
                         </c:when>
                     </c:choose>
@@ -68,3 +69,4 @@
         </div>
     </div>
 </nav>
+${exception}

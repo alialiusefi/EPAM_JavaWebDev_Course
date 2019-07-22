@@ -1,9 +1,8 @@
 package by.training.finaltask.service;
 
-import by.training.finaltask.dao.mysql.*;
+import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.dao.pool.ConnectionPool;
 import by.training.finaltask.dao.pool.PetPooledConnection;
-import by.training.finaltask.entity.Pet;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.service.serviceinterface.Service;
 import by.training.finaltask.service.serviceinterface.ServiceFactory;
@@ -44,16 +43,21 @@ public class ServiceFactoryImpl implements ServiceFactory {
     private ServiceImpl createServiceInstance(DAOEnum daoEnum, Connection aliveConnection) {
 
         switch (daoEnum) {
+            case SHELTER:
+                return new ShelterServiceImpl(aliveConnection);
+            case BREED:
+                return new BreedServiceImpl(aliveConnection);
             case ADOPTION:
                 return null;
             case PET:
-                return null;
+                return new PetServiceImpl(aliveConnection);
             case USER:
                 return new UserServiceImpl(aliveConnection);
             case USERINFO:
                 return new UserInfoServiceImpl(aliveConnection);
             default:
-                throw new IllegalArgumentException("Cannot create service instance!");
+                throw new IllegalArgumentException("Cannot create service instance! " +
+                        "- Incorrect ENUM");
         }
     }
 

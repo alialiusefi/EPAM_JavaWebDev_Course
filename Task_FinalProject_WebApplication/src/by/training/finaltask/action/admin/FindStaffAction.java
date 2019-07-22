@@ -1,7 +1,6 @@
 package by.training.finaltask.action.admin;
 
 import by.training.finaltask.action.AuthorizedUserAction;
-import by.training.finaltask.action.LoginAction;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;
@@ -22,8 +21,7 @@ public class FindStaffAction extends AuthorizedUserAction {
 
     private static Logger logger = LogManager.getLogger(FindStaffByPhoneAction.class);
 
-
-    private static int ROWS_PER_PAGE = 5;
+    private static int ROWCOUNT = 5;
     private static String NUMBER_REGEX = "[1-9]+";
 
     public FindStaffAction() {
@@ -41,22 +39,24 @@ public class FindStaffAction extends AuthorizedUserAction {
                         new ServiceFactoryImpl().createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService)
                         new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                @SuppressWarnings("unchecked")
                 List<User> userList = (List<User>)request.getAttribute(
                         "resultUsers");
+                @SuppressWarnings("unchecked")
                 List<UserInfo> userInfoList = (List<UserInfo>)request.getAttribute(
                         "resultsUserInfo");
                 if(userList == null && userInfoList == null){
                     int amountOfAllStaff = userService.getAmountOfAllStaff();
-                    int amountOfPages = amountOfAllStaff % ROWS_PER_PAGE == 0 ?
-                            amountOfAllStaff / ROWS_PER_PAGE : amountOfAllStaff / ROWS_PER_PAGE + 1;
+                    int amountOfPages = amountOfAllStaff % ROWCOUNT == 0 ?
+                            amountOfAllStaff / ROWCOUNT : amountOfAllStaff / ROWCOUNT + 1;
                     request.setAttribute("amountOfPages", amountOfPages);
                     Integer pagenumber = 1;
                     pagenumber = validatePageNumber(
                             request.getParameter("page"), amountOfPages);
-                    int offset = (pagenumber - 1) * ROWS_PER_PAGE;
-                    userList = userService.getAllStaff(offset, ROWS_PER_PAGE);
+                    int offset = (pagenumber - 1) * ROWCOUNT;
+                    userList = userService.getAllStaff(offset, ROWCOUNT);
                     request.setAttribute("resultUsers", userList);
-                    userInfoList = userInfoService.findAllStaff(offset, ROWS_PER_PAGE);
+                    userInfoList = userInfoService.findAllStaff(offset, ROWCOUNT);
                     request.setAttribute("resultsUserInfo", userInfoList);
                     request.setAttribute("paginationURL","/user/admin/findstaff.html");
                 }

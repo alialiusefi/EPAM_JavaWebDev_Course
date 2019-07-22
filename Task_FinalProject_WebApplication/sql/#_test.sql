@@ -1,9 +1,12 @@
 use petshelter;
 
 
+select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered, pets.shelter_id, pets.breed_id,pets.status from pets where pets.status = 'Sheltered' limit ?,?;
+
+
+select count(pets.id) from pets;
+
 select shelters.id, shelters.name, shelters.location from shelters;
-
-
 
 select count(users.role) from users inner join userinfo on (userinfo.user_id = users.id and users.role = 1) where userinfo.phone like ?;
 

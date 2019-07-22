@@ -18,10 +18,10 @@
     <title><fmt:message key="title"/></title>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/popper.min.js"></script>
 </head>
 
 <body>
-<script src="js/popper.min.js"></script>
 
 <jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
 <form action="${profileActionURL}" method="post">
@@ -45,6 +45,7 @@
     <center><h2><b><fmt:message key="profile"/> </b></h2></center>
 </legend>
 <br>
+
 <div class="table">
 
 <label class="text-center"><fmt:message key="userCredentials"/></label>
@@ -57,10 +58,10 @@
     </tbody>
 </table>
 </div>
+
 <div class="table">
 <label class="text-center"><fmt:message key="userInfo"/></label>
 <table class="table align-content-center ">
-    <tbody>
     <tr>
         <td><fmt:message key="firstName"/>: ${userinfo.firstName}</td>
         <td><fmt:message key="lastName"/>: ${userinfo.lastName}</td>
@@ -75,13 +76,11 @@
         </td>
         <td><fmt:message key="address"/>: ${userinfo.address}</td>
     </tr>
-    </tbody>
 </table>
 </div>
 <div class="table">
 <label class="text-center"><fmt:message key="userActions"/></label>
     <table class="table align-content-center">
-    <tbody>
         <tr>
             <td>
                 <a class="btn btn-secondary" href="${userEditActionURL}">
@@ -99,8 +98,9 @@
 
 
         </tr>
+    </table>
 </div>
-</table>
 
+<jsp:include page="/jsp/tags/footer.jsp" />
 </body>
 </html>

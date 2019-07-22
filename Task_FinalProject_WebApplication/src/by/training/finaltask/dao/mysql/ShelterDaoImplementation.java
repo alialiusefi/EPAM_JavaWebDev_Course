@@ -1,31 +1,65 @@
 package by.training.finaltask.dao.mysql;
 
 import by.training.finaltask.dao.daointerface.ShelterDAO;
-import by.training.finaltask.entity.Breed;
 import by.training.finaltask.entity.Shelter;
 import by.training.finaltask.exception.PersistentException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ShelterDaoImplementation extends BaseDAO implements ShelterDAO {
+public class ShelterDAOImplementation extends BaseDAO implements ShelterDAO {
 
-    public ShelterDaoImplementation(Connection aliveConnection)
-    {
+    private static final Logger LOGGER = LogManager.getLogger(ShelterDAOImplementation.class);
+
+    public ShelterDAOImplementation(Connection aliveConnection) {
         super(aliveConnection);
         this.resourceBundle = ResourceBundle.getBundle(PROPERTY_PATH);
     }
 
-
     @Override
-    public List<Breed> getAll() throws PersistentException {
-        return null;
+    public List<Shelter> getAll() throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllShelters"))) {
+            List<Shelter> shelters = new LinkedList<>();
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    Integer id = resultset.getInt("id");
+                    String name = resultset.getNString("name");
+                    String location = resultset.getNString("location");
+                    shelters.add(new Shelter(id, name, location));
+                }
+                return shelters;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
     }
 
     @Override
-    public Breed getByID(Integer id) throws PersistentException {
-        return null;
+    public Shelter getByID(Integer id) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getShelterByID"))) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                resultset.next();
+                int shelterID = resultset.getInt("id");
+                String name = resultset.getNString("name");
+                String location = resultset.getNString("location");
+                return new Shelter(shelterID, name, location);
+
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
     }
 
     @Override

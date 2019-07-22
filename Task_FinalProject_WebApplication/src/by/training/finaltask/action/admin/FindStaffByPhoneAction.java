@@ -1,7 +1,6 @@
 package by.training.finaltask.action.admin;
 
 import by.training.finaltask.action.AuthorizedUserAction;
-import by.training.finaltask.action.LoginAction;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Role;
 import by.training.finaltask.entity.User;

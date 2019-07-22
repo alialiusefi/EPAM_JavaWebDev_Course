@@ -33,7 +33,7 @@ create table if not exists pets
 (
   id             integer                             not null auto_increment,
   name           nvarchar(32)                        not null,
-  photourl       nvarchar(255)                       not null,
+  photo          blob                                not null,
   dateofbirth    date                                not null,
   weight         double                              not null,
   date_sheltered date                                not null,

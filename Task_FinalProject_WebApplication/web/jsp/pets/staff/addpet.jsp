@@ -33,12 +33,17 @@
 <br>
 
 <div class="container">
-    <form action="" method="post">
+    <form action="" enctype="multipart/form-data" method="post">
         <fieldset>
             <legend>
                 <center><h2><b><fmt:message key="addPet"/> </b></h2></center>
             </legend>
             <br>
+            <c:if test="${not empty successMessage}">
+                <div class="text-center text-info">
+                    <p>Attention: <fmt:message key="${successMessage}"/></p>
+                </div>
+            </c:if>
             <c:if test="${not empty message}">
                 <div class="text-center text-warning">
                     <p>Attention: <fmt:message key="${message}"/></p>
@@ -49,8 +54,7 @@
             <label>
                 <fmt:message key="petPicture"/>:
             </label>
-            <input type="file" name="petPicture"
-                   accept="image/jpeg">
+            <input type="file" name="petPicture">
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -84,7 +88,7 @@
                 <label for="inputShelter">
                     <fmt:message key="shelter"/>:
                 </label>
-                <select id="inputShelter" class="form-control">
+                <select name="shelter" id="inputShelter" class="form-control">
                     <c:forEach items="${shelterList}" var="i">
                         <option value="${i.id}">${i.name}</option>
                     </c:forEach>
@@ -94,7 +98,7 @@
                 <label for="inputBreed">
                     <fmt:message key="breed"/>:
                 </label>
-                <select id="inputBreed" class="form-control">
+                <select name="breed" id="inputBreed" class="form-control">
                     <c:forEach items="${breedList}" var="q">
                         <option value="${q.id}">${q.name}</option>
                     </c:forEach>
@@ -104,7 +108,7 @@
                 <label for="inputStatus">
                     <fmt:message key="petStatus"/>:
                 </label>
-                <select id="inputStatus" class="form-control">
+                <select name="petStatus" id="inputStatus" class="form-control">
                     <option selected value="SHELTERED">
                         <fmt:message key="sheltered"/>
                     </option>

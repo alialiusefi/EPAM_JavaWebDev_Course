@@ -21,7 +21,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll(int offset, int rowcount) throws PersistentException {
+    public List<User> getAll(int offset, int rowcount) throws PersistentException {
         try {
             connection.setAutoCommit(false);
             UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Integer id) throws PersistentException {
+    public User getById(Integer id) throws PersistentException {
         UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
         return dao.get(id);
     }
@@ -100,7 +100,6 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
         }
     }
 
-    //todo: create seperate class for this method
     public static String md5(String string) {
         MessageDigest digest;
         try {

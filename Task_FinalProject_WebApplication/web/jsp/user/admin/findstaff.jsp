@@ -16,6 +16,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/popper.min.js"></script>
 </head>
+
 <body>
 <jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
 <form action="<c:url value="/user/admin/findstaff.html?page=1"/>" method="post">
@@ -84,7 +85,9 @@
         </tbody>
     </table>
 </div>
+<%--
 <c:out value="${param.page}"/>
+--%>
 <nav aria-label="Page navigation">
     <ul class="pagination">
         <c:if test="${param.page > 1}">

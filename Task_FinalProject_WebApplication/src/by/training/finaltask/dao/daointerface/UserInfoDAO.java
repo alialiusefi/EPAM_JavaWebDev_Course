@@ -1,6 +1,5 @@
 package by.training.finaltask.dao.daointerface;
 
-import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.PersistentException;
 

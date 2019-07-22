@@ -6,9 +6,9 @@ import by.training.finaltask.exception.PersistentException;
 import java.util.List;
 
 public interface UserService extends Service {
-    List<User> findAll(int offset, int rowcount) throws PersistentException;
+    List<User> getAll(int offset, int rowcount) throws PersistentException;
 
-    User findById(Integer id) throws PersistentException;
+    User getById(Integer id) throws PersistentException;
 
     User findByUserNameAndPassword(String user, String pass) throws PersistentException;
 

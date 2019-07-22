@@ -1,5 +1,6 @@
 package by.training.finaltask.entity;
 
+import java.sql.Blob;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ public final class Pet {
 
     private int id;
     private String name;
-    private String photoURL;
+    private Blob photo;
     private GregorianCalendar dateOfBirth;
     private double weight;
     private GregorianCalendar dateSheltered;
@@ -15,12 +16,12 @@ public final class Pet {
     private int breedID;
     private PetStatus status;
 
-    public Pet(int id, String name, String photoURL, GregorianCalendar dateOfBirth,
+    public Pet(int id, String name, Blob photo, GregorianCalendar dateOfBirth,
                double weight, GregorianCalendar dateSheltered,
                int shelterID, int breedID, PetStatus status) {
         this.id = id;
         this.name = name;
-        this.photoURL = photoURL;
+        this.photo = photo;
         this.dateOfBirth = dateOfBirth;
         this.weight = weight;
         this.dateSheltered = dateSheltered;
@@ -45,12 +46,12 @@ public final class Pet {
         this.name = name;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public Blob getPhoto() {
+        return photo;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
     }
 
     public GregorianCalendar getDateOfBirth() {
@@ -111,7 +112,7 @@ public final class Pet {
                 getShelterID() == pet.getShelterID() &&
                 getBreedID() == pet.getBreedID() &&
                 getName().equals(pet.getName()) &&
-                getPhotoURL().equals(pet.getPhotoURL()) &&
+                getPhoto().equals(pet.getPhoto()) &&
                 getDateOfBirth().equals(pet.getDateOfBirth()) &&
                 getDateSheltered().equals(pet.getDateSheltered()) &&
                 getStatus() == pet.getStatus();
@@ -119,7 +120,7 @@ public final class Pet {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getPhotoURL(), getDateOfBirth(), getWeight(), getDateSheltered(), getShelterID(), getBreedID(), getStatus());
+        return Objects.hash(getId(), getName(), getPhoto(), getDateOfBirth(), getWeight(), getDateSheltered(), getShelterID(), getBreedID(), getStatus());
     }
 
     @Override
@@ -127,7 +128,7 @@ public final class Pet {
         final StringBuffer sb = new StringBuffer("Pet{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
-        sb.append(", photoURL='").append(photoURL).append('\'');
+        sb.append(", photo='").append(photo).append('\'');
         sb.append(", dateOfBirth=").append(dateOfBirth);
         sb.append(", weight=").append(weight);
         sb.append(", dateSheltered=").append(dateSheltered);

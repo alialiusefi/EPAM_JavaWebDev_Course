@@ -1,6 +1,5 @@
 package by.training.finaltask.dao.pool;
 
-import javax.sql.PooledConnection;
 import java.sql.*;
 import java.util.Map;
 import java.util.Objects;
