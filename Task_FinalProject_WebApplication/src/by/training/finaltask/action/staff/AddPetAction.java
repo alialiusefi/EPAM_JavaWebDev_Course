@@ -5,13 +5,13 @@ import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.*;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
+import by.training.finaltask.parser.PetFormParser;
 import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.BreedService;
 import by.training.finaltask.service.serviceinterface.PetService;
 import by.training.finaltask.service.serviceinterface.ShelterService;
-import by.training.finaltask.validator.FormValidatorEnum;
-import by.training.finaltask.validator.FormValidatorFactory;
-import by.training.finaltask.validator.PetFormValidator;
+import by.training.finaltask.parser.FormParserEnum;
+import by.training.finaltask.parser.FormParserFactory;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -31,7 +31,7 @@ public class AddPetAction extends AuthorizedUserAction {
     public static final Logger LOGGER = LogManager.getLogger(
             AddPetAction.class);
 
-    private static final FormValidatorFactory formValidatorFactory = new FormValidatorFactory();
+    private static final FormParserFactory FORM_PARSER_FACTORY = new FormParserFactory();
     private static final String UPLOAD_PATH = "C:" + File.separator + "SERVERS"
             + File.separator + "apache-tomcat" + File.separator + "webapps" + File.separator
             + "Pet Shelter" + File.separator + "petpics";
@@ -53,12 +53,12 @@ public class AddPetAction extends AuthorizedUserAction {
                 List<String> petParameters = new ArrayList<>();
                 updateSelectionList(request);
                 addPetParametersToList(request, petParameters);
-                PetFormValidator validator = (PetFormValidator)
-                        formValidatorFactory.getValidator(
-                                FormValidatorEnum.PETFORM);
+                PetFormParser validator = (PetFormParser)
+                        FORM_PARSER_FACTORY.getValidator(
+                                FormParserEnum.PETFORM);
                 Pet pet;
                 try {
-                    pet = validator.validate(petParameters);
+                    pet = validator.parse(petParameters);
                     PetService petService = (PetService)
                             new ServiceFactoryImpl().createService(DAOEnum.PET);
                     petService.add(pet);

@@ -11,7 +11,7 @@
 
     <fmt:setLocale value="${sessionLang}"/>
     <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
-    <title><fmt:message key="findStaff"/></title>
+    <title><fmt:message key="findAPet"/></title>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/popper.min.js"></script>
@@ -154,6 +154,9 @@
         <c:if test="${authorizedUser.userRole == 'STAFF'}">
             <div class="form-group p-lg-2">
                 <select name="petStatus" id="inputStatus" class="form-control">
+                    <option selected value="ALL">
+                        <fmt:message key="all"/>
+                    </option>
                     <option selected value="SHELTERED">
                         <fmt:message key="sheltered"/>
                     </option>
@@ -187,18 +190,21 @@
                    value="<fmt:message key="findByShelter"/>" class="btn-sm btn-primary">
         </div>
 
-            <div class="form-inline" style="padding-left: 15%">
-                <input type="date" name="birthDate">
-                &emsp;
-                <input type="radio" checked name="birthDateChoice"> <fmt:message key="birthDateBeforeChoice"/>
-                &emsp;
-                <input type="radio" name="birthDateChoice"> <fmt:message key="birthDateAfterChoice"/>
-                &emsp;
-                <input type="submit" name="findByBirthDate" onclick="document.pressed=this.name"
-                       value="<fmt:message key="findByBirthDate"/>" class="btn-sm btn-primary">
-            </div>
-
+        <div class="form-inline" style="padding-left: 15%">
+            <input type="date" name="birthDate">
+            &emsp;
+            <input type="radio" checked name="birthDateChoice"> <fmt:message key="birthDateBeforeChoice"/>
+            &emsp;
+            <input type="radio" name="birthDateChoice"> <fmt:message key="birthDateAfterChoice"/>
+            &emsp;
+            <input type="submit" name="findByBirthDate" onclick="document.pressed=this.name"
+                   value="<fmt:message key="findByBirthDate"/>" class="btn-sm btn-primary">
+        </div>
     </form>
+    <a class="btn btn-success" style="margin-right: 45%" type="button"
+       href="<c:url value="/pets/findpet.html?page=1"/>">
+        <fmt:message key="allPets"/>
+    </a>
 </div>
 
 <script type="text/javascript" src="/js/formscript.js"></script>

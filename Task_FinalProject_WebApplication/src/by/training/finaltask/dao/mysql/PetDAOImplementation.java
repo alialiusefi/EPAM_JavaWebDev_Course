@@ -17,7 +17,6 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
 
     private Logger LOGGER = LogManager.getLogger(PetDAOImplementation.class);
 
-
     public PetDAOImplementation(Connection connection) {
         super(connection);
         this.resourceBundle = ResourceBundle.getBundle(PROPERTY_PATH);
@@ -30,25 +29,7 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
             preparedStatement.setInt(1, ID);
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 if (resultset.next()) {
-                    GregorianCalendar dateofbirth = new GregorianCalendar();
-                    dateofbirth.setTime(resultset.getDate(
-                            "dateofbirth"));
-                    GregorianCalendar datesheltered = new GregorianCalendar();
-                    datesheltered.setTime(resultset.getDate(
-                            "date_sheltered"));
-                    PetStatus petStatus =
-                            PetStatus.valueOf(resultset.getNString("status").toUpperCase());
-                    return new Pet(
-                            resultset.getInt("id"),
-                            resultset.getNString("name"),
-                            resultset.getBlob("photo"),
-                            dateofbirth,
-                            resultset.getDouble("weight"),
-                            datesheltered,
-                            resultset.getInt("shelter_id"),
-                            resultset.getInt("breed_id"),
-                            petStatus
-                    );
+                    return getPet(resultset);
                 }
             }
         } catch (SQLException e) {
@@ -62,30 +43,12 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public List<Pet> getAllSheltered(int offset, int rowcount) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllShelteredPetDAO"))) {
-            preparedStatement.setInt(1,offset);
-            preparedStatement.setInt(2,rowcount);
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, rowcount);
             List<Pet> pets = new LinkedList<>();
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {
-                    GregorianCalendar dateofbirth = new GregorianCalendar();
-                    dateofbirth.setTime(resultset.getDate(
-                            "dateofbirth"));
-                    GregorianCalendar datesheltered = new GregorianCalendar();
-                    datesheltered.setTime(resultset.getDate(
-                            "date_sheltered"));
-                    PetStatus petStatus =
-                            PetStatus.valueOf(resultset.getNString("status").toUpperCase());
-                    pets.add(new Pet(
-                            resultset.getInt("id"),
-                            resultset.getNString("name"),
-                            resultset.getBlob("photo"),
-                            dateofbirth,
-                            resultset.getDouble("weight"),
-                            datesheltered,
-                            resultset.getInt("shelter_id"),
-                            resultset.getInt("breed_id"),
-                            petStatus
-                    ));
+                    pets.add(getPet(resultset));
                 }
                 return pets;
             }
@@ -99,32 +62,75 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public List<Pet> getAll(int offset, int rowcount) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllPetDAO"))) {
-            preparedStatement.setInt(1,offset);
-            preparedStatement.setInt(2,rowcount);
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, rowcount);
             List<Pet> pets = new LinkedList<>();
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {
-                    GregorianCalendar dateofbirth = new GregorianCalendar();
-                    dateofbirth.setTime(resultset.getDate(
-                            "dateofbirth"));
-                    GregorianCalendar datesheltered = new GregorianCalendar();
-                    datesheltered.setTime(resultset.getDate(
-                            "date_sheltered"));
-                    PetStatus petStatus =
-                            PetStatus.valueOf(resultset.getNString("status").toUpperCase());
-                    pets.add(new Pet(
-                            resultset.getInt("id"),
-                            resultset.getNString("name"),
-                            resultset.getBlob("photo"),
-                            dateofbirth,
-                            resultset.getDouble("weight"),
-                            datesheltered,
-                            resultset.getInt("shelter_id"),
-                            resultset.getInt("breed_id"),
-                            petStatus
-                    ));
+                    pets.add(getPet(resultset));
                 }
+                return pets;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
 
+    @Override
+    public List<Pet> getAllByShelter(PetStatus status, int shelterID, int offset, int rowcount)
+            throws PersistentException {
+        String query = resourceBundle.getString("getAllPetByShelterDAO");
+        if(status != null) {
+            query = addPetStatus(status,query);
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, shelterID);
+            if(status != null)
+            {
+                preparedStatement.setNString(2,status.getValue());
+                preparedStatement.setInt(3, offset);
+                preparedStatement.setInt(4, rowcount);
+            } else {
+                preparedStatement.setInt(2, offset);
+                preparedStatement.setInt(3, rowcount);
+            }
+            List<Pet> pets = new LinkedList<>();
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    pets.add(getPet(resultset));
+                }
+                return pets;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Pet> getAllByBreed(PetStatus status, int breedID, int offset, int rowcount)
+            throws PersistentException {
+        String query = resourceBundle.getString("getAllPetByBreedDAO");
+        if(status != null) {
+            query = addPetStatus(status,query);
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, breedID);
+            if(status != null)
+            {
+                preparedStatement.setNString(2,status.getValue());
+                preparedStatement.setInt(3, offset);
+                preparedStatement.setInt(4, rowcount);
+            } else {
+                preparedStatement.setInt(2, offset);
+                preparedStatement.setInt(3, rowcount);
+            }
+            List<Pet> pets = new LinkedList<>();
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                  pets.add(getPet(resultset));
+                }
                 return pets;
             }
         } catch (SQLException e) {
@@ -181,34 +187,75 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     }
 
     @Override
-    public Integer add(Pet element) throws PersistentException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                resourceBundle.getString("addPetDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setInt(1,element.getId());
-            preparedStatement.setNString(2,element.getName());
-            preparedStatement.setBlob(3,element.getPhoto());
-            Date dateOfBirth = new Date(element.getDateOfBirth().getTimeInMillis());
-            preparedStatement.setDate(4,dateOfBirth);
-            preparedStatement.setDouble(5,element.getWeight());
-            Date dateSheltered = new Date(
-                    element.getDateSheltered().getTimeInMillis());
-            preparedStatement.setDate(6,dateSheltered);
-            preparedStatement.setInt(7,element.getShelterID());
-            preparedStatement.setInt(8,element.getBreedID());
-            preparedStatement.setNString(9,element.getStatus().getValue());
-            preparedStatement.executeUpdate();
-            try(ResultSet set = preparedStatement.getGeneratedKeys())
+    public int getAmountOfAllPetsByShelter(PetStatus status, int shelterID) throws PersistentException {
+        String query = resourceBundle.getString("getAmountAllPetByShelterDAO");
+        if(status != null)
+        {
+            query = addPetStatus(status,query);
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setInt(1, shelterID);
+            if(status != null)
             {
-                set.next();
-                return set.getInt(1);
-            } catch (SQLException e)
-            {
-                LOGGER.warn(e.getMessage(),e);
-                throw new PersistentException(e.getMessage(),e);
+                preparedStatement.setNString(2,status.getValue());
+            }
+            try (ResultSet res = preparedStatement.executeQuery()) {
+                res.next();
+                return res.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
             }
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
-            throw new PersistentException("Couldn't add row!\n" + e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getAmountOfAllPetsByBreed(PetStatus status, int breedID)
+            throws PersistentException {
+        String query = resourceBundle.getString("getAmountAllPetByBreedDAO");
+        if(status != null)
+        {
+            query = addPetStatus(status,query);
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, breedID);
+            if(status != null)
+            {
+                preparedStatement.setNString(2,status.getValue());
+            }
+            try (ResultSet res = preparedStatement.executeQuery()) {
+                res.next();
+                return res.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int add(Pet element) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("addPetDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
+            setPreparedStatement(preparedStatement,element);
+            preparedStatement.executeUpdate();
+            try (ResultSet set = preparedStatement.getGeneratedKeys()) {
+                set.next();
+                return set.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException("Couldn't add row!\n"
+                    + e.getMessage(), e);
         }
     }
 
@@ -216,19 +263,8 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public boolean update(Pet element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("updatePetDAO"))) {
-            preparedStatement.setInt(1,element.getId());
-            preparedStatement.setNString(2,element.getName());
-            preparedStatement.setBlob(3,element.getPhoto());
-            Date dateOfBirth = new Date(element.getDateOfBirth().getTimeInMillis());
-            preparedStatement.setDate(4,dateOfBirth);
-            preparedStatement.setDouble(5,element.getWeight());
-            Date dateSheltered = new Date(
-                    element.getDateSheltered().getTimeInMillis());
-            preparedStatement.setDate(6,dateSheltered);
-            preparedStatement.setInt(7,element.getShelterID());
-            preparedStatement.setInt(8,element.getBreedID());
-            preparedStatement.setNString(9,element.getStatus().getValue());
-            preparedStatement.setInt(10,element.getId());
+            setPreparedStatement(preparedStatement,element);
+            preparedStatement.setInt(10, element.getId());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -240,12 +276,62 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
 
     @Override
     public boolean delete(Pet element) throws PersistentException {
-        //implementation here
-        return false;
+        return delete(element.getId());
     }
 
     @Override
     public Pet get() throws PersistentException {
         return get(1);
+    }
+
+    private Pet getPet(ResultSet resultSet) throws SQLException {
+        GregorianCalendar dateofbirth = new GregorianCalendar();
+        dateofbirth.setTime(resultSet.getDate(
+                "dateofbirth"));
+        GregorianCalendar datesheltered = new GregorianCalendar();
+        datesheltered.setTime(resultSet.getDate(
+                "date_sheltered"));
+        PetStatus petStatus =
+                PetStatus.valueOf(resultSet.getNString("status").toUpperCase());
+        return new Pet(
+                resultSet.getInt("id"),
+                resultSet.getNString("name"),
+                resultSet.getBlob("photo"),
+                dateofbirth,
+                resultSet.getDouble("weight"),
+                datesheltered,
+                resultSet.getInt("shelter_id"),
+                resultSet.getInt("breed_id"),
+                petStatus);
+    }
+    private void setPreparedStatement(PreparedStatement preparedStatement,
+                                      Pet element) throws SQLException
+    {
+        preparedStatement.setInt(1, element.getId());
+        preparedStatement.setNString(2, element.getName());
+        preparedStatement.setBlob(3, element.getPhoto());
+        Date dateOfBirth = new Date(element.getDateOfBirth().getTimeInMillis());
+        preparedStatement.setDate(4, dateOfBirth);
+        preparedStatement.setDouble(5, element.getWeight());
+        Date dateSheltered = new Date(
+                element.getDateSheltered().getTimeInMillis());
+        preparedStatement.setDate(6, dateSheltered);
+        preparedStatement.setInt(7, element.getShelterID());
+        preparedStatement.setInt(8, element.getBreedID());
+        preparedStatement.setNString(9, element.getStatus().getValue());
+
+    }
+
+    private String addPetStatus(PetStatus status, String query)
+    {
+            StringBuffer buffer = new StringBuffer(query);
+            int idxOfLimit = buffer.indexOf("limit");
+            if(idxOfLimit == -1)
+            {
+                buffer.insert(query.length() - 2,"and pets.status = ?");
+                return buffer.toString();
+            }
+            buffer.insert(idxOfLimit - 1,"and pets.status = ? ");
+            return buffer.toString();
     }
 }

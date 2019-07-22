@@ -1,4 +1,4 @@
-package by.training.finaltask.validator;
+package by.training.finaltask.parser;
 
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Breed;
@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class PetFormValidator implements FormValidator<Pet> {
+public class PetFormParser implements FormParser<Pet> {
 
     private static final int PICTURE_PATH = 0;
     private static final int PET_NAME = 1;
@@ -41,7 +41,7 @@ public class PetFormValidator implements FormValidator<Pet> {
     private static final String WEIGHT_REGEX = "^[0-9]+(.[0-9]+)?$";
 
     @Override
-    public Pet validate(List<String> parameters) throws
+    public Pet parse(List<String> parameters) throws
             InvalidFormDataException, PersistentException {
         if (!parameters.isEmpty() && !parameters.contains(null) && !parameters.contains("")) {
             Blob pictureBlob = validatePicture(parameters.get(PICTURE_PATH));

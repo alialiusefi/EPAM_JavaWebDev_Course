@@ -1,5 +1,6 @@
 use petshelter;
 
+select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered, pets.shelter_id, pets.breed_id,pets.status from pets where pets.shelter_id = ? and pets.status = ? limit ?,?;
 
 select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered, pets.shelter_id, pets.breed_id,pets.status from pets where pets.status = 'Sheltered' limit ?,?;
 
@@ -38,7 +39,7 @@ select pets.id, pets.name, pets.photourl, pets.dateofbirth, pets.weight, pets.da
 
 insert into pets (id, name, photourl, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (?,?,?,?,?,?,?,?,?);
 
-update pets set pets.id = ? , pets.name = ? , pets.photourl = ?, pets.dateofbirth = ?, pets.weight = ?, pets.date_sheltered = ? , pets.shelter_id = ?, pets.breed_id = ?, pets.status = ?
+update pets set pets.id = ? , pets.name = ? , pets.photourl = ?, pets.dateofbirth = ?, pets.weight = ?, pets.date_sheltered = ? , pets.shelter_id = ?, pets.breed_id = ?, pets.status = ?;
 
 
 select * from adoptions_made;

@@ -48,8 +48,7 @@ public class FindStaffByFirstNameAction extends AuthorizedUserAction {
                 int amountOfPages = amountOfAllStaffByFirstName % ROWS_PER_PAGE == 0 ?
                         amountOfAllStaffByFirstName / ROWS_PER_PAGE : amountOfAllStaffByFirstName / ROWS_PER_PAGE + 1;
                 forward.getAttributes().put("amountOfPages", amountOfPages);
-                Integer pagenumber = 1;
-                pagenumber = validatePageNumber(
+                Integer pagenumber = validatePageNumber(
                         request.getParameter("page"), amountOfPages);
                 int offset = (pagenumber - 1) * ROWS_PER_PAGE;
                 List<UserInfo> userInfoList = userInfoService.findAllStaffByFirstName(

@@ -39,7 +39,7 @@ public class FindPetAction extends AuthorizedUserAction {
                     .createService(DAOEnum.PET);
             updateSelectionList(request);
             @SuppressWarnings("unchecked")
-            List<Pet> pets = (List<Pet>) request.getAttribute("resultPets");
+            List<Pet> pets = (List<Pet>) request.getAttribute("petResults");
             @SuppressWarnings("unchecked")
             List<String> petPicturePaths = (List<String>) request.getAttribute(
                     "petPicturePaths");

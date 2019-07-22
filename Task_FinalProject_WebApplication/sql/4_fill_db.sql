@@ -11,7 +11,6 @@ VALUES ('Alaskan husky','Big Ears and Strong','Germany'),
 ('Beauceron','Big Ears and Strong','Russia'),
        ('Alaskan husky','Big Ears and Strong','Germany'),
        ('Himalayan Sheepdog','Big Ears and Strong','Germany'),
-       ('Alaskan husky','Big Ears and Strong','Germany'),
        ('Chihuahua', 'Small, Weak and Nimble', 'Mexico');
 
 insert into pets (id, name, photo, dateofbirth, weight, date_sheltered, shelter_id, breed_id, status) values (1, 'Ely', load_file('C:/Dogs.jpg'), '2012-05-29', 11, '2014-08-01', 2, 1, 'Sheltered');

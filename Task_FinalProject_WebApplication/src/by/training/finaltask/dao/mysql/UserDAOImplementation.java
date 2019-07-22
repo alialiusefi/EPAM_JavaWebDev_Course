@@ -150,7 +150,7 @@ public final class UserDAOImplementation extends BaseDAO implements UserDAO {
     }
 
     @Override
-    public Integer add(User element) throws PersistentException {
+    public int add(User element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addUserDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setNString(1, element.getUsername());

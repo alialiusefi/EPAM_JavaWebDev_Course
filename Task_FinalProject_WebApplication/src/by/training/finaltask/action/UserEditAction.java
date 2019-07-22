@@ -5,13 +5,13 @@ import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
+import by.training.finaltask.parser.UserFormParser;
 import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
-import by.training.finaltask.validator.FormValidatorEnum;
-import by.training.finaltask.validator.FormValidatorFactory;
-import by.training.finaltask.validator.UserFormValidator;
-import by.training.finaltask.validator.UserInfoFormValidator;
+import by.training.finaltask.parser.FormParserEnum;
+import by.training.finaltask.parser.FormParserFactory;
+import by.training.finaltask.parser.UserInfoFormParser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class UserEditAction extends AuthorizedUserAction {
 
-    private static final FormValidatorFactory formValidatorFactory = new FormValidatorFactory();
+    private static final FormParserFactory FORM_PARSER_FACTORY = new FormParserFactory();
 
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
@@ -44,17 +44,17 @@ public class UserEditAction extends AuthorizedUserAction {
                     request.setAttribute("message","inputPasswordToSubmit");
                     return null;
                 }
-                UserFormValidator userValidator = (UserFormValidator) formValidatorFactory.getValidator(
-                        FormValidatorEnum.USERFORM);
-                UserInfoFormValidator userInfoFormValidator = (UserInfoFormValidator) formValidatorFactory.getValidator(
-                        FormValidatorEnum.USERINFOFORM);
+                UserFormParser userValidator = (UserFormParser) FORM_PARSER_FACTORY.getValidator(
+                        FormParserEnum.USERFORM);
+                UserInfoFormParser userInfoFormValidator = (UserInfoFormParser) FORM_PARSER_FACTORY.getValidator(
+                        FormParserEnum.USERINFOFORM);
                 try {
-                    User newUser = userValidator.validate(userParameters);
+                    User newUser = userValidator.parse(userParameters);
                     UserService userService = (UserService) new ServiceFactoryImpl().createService(
                             DAOEnum.USER);
                     newUser.setId(user.getId());
                     newUser.setUserRole(user.getUserRole());
-                    UserInfo newUserInfo = userInfoFormValidator.validate(userInfoParameters);
+                    UserInfo newUserInfo = userInfoFormValidator.parse(userInfoParameters);
                     newUserInfo.setId(user.getId());
                     userService.update(newUser);
                     userInfoService.update(newUserInfo);

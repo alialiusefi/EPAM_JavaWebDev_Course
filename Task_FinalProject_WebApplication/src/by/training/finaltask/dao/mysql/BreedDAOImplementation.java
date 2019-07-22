@@ -68,8 +68,8 @@ public class BreedDAOImplementation extends BaseDAO implements BreedDAO {
     }
 
     @Override
-    public Integer add(Breed element) throws PersistentException {
-        return null;
+    public int add(Breed element) throws PersistentException {
+        return 0;
     }
 
     @Override

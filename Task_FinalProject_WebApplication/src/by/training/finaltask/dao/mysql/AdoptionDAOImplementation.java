@@ -146,7 +146,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     }
 
     @Override
-    public Integer add(Adoption element) throws PersistentException {
+    public int add(Adoption element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addAdoptionDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, element.getPetID());

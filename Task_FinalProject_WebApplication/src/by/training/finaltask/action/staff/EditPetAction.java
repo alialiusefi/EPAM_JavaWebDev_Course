@@ -5,13 +5,13 @@ import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.*;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
+import by.training.finaltask.parser.PetFormParser;
 import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.BreedService;
 import by.training.finaltask.service.serviceinterface.PetService;
 import by.training.finaltask.service.serviceinterface.ShelterService;
-import by.training.finaltask.validator.FormValidatorEnum;
-import by.training.finaltask.validator.FormValidatorFactory;
-import by.training.finaltask.validator.PetFormValidator;
+import by.training.finaltask.parser.FormParserEnum;
+import by.training.finaltask.parser.FormParserFactory;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -58,10 +58,10 @@ public class EditPetAction extends AuthorizedUserAction {
                 request.setAttribute("currentPetPicture",petPic);
                 List<String> petParameters = new ArrayList<>();
                 addPetParametersToList(request,petParameters);
-                PetFormValidator validator = (PetFormValidator)
-                        new FormValidatorFactory().getValidator(FormValidatorEnum.PETFORM);
+                PetFormParser validator = (PetFormParser)
+                        new FormParserFactory().getValidator(FormParserEnum.PETFORM);
                 try{
-                    Pet newPet = validator.validate(petParameters);
+                    Pet newPet = validator.parse(petParameters);
                     newPet.setId(petID);
                     if(newPet.getPhoto() == null)
                     {

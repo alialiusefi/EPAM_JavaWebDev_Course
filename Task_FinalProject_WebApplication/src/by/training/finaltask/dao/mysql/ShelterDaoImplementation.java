@@ -63,8 +63,8 @@ public class ShelterDAOImplementation extends BaseDAO implements ShelterDAO {
     }
 
     @Override
-    public Integer add(Shelter element) throws PersistentException {
-        return null;
+    public int add(Shelter element) throws PersistentException {
+        return 0;
     }
 
     @Override

@@ -40,6 +40,9 @@ public class ActionURIFilter implements Filter {
         actions.put("/pets/findpet", FindPetAction.class);
         actions.put("/pets/moreinfopet",MoreInfoPetAction.class);
         actions.put("/pets/staff/deletepet", DeletePetAction.class);
+        actions.put("/pets/findpetbybreed", FindPetByBreedAction.class);
+        actions.put("/pets/findpetbyshelter", FindPetByShelterAction.class);
+        actions.put("/pets/findpetbybirthdate", FindPetByBirthDateAction.class);
 
     }
 

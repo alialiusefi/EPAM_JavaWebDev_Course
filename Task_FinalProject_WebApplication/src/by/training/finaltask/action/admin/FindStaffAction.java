@@ -45,7 +45,7 @@ public class FindStaffAction extends AuthorizedUserAction {
                 @SuppressWarnings("unchecked")
                 List<UserInfo> userInfoList = (List<UserInfo>)request.getAttribute(
                         "resultsUserInfo");
-                if(userList == null && userInfoList == null){
+                if(userList == null && userInfoList == null) {
                     int amountOfAllStaff = userService.getAmountOfAllStaff();
                     int amountOfPages = amountOfAllStaff % ROWCOUNT == 0 ?
                             amountOfAllStaff / ROWCOUNT : amountOfAllStaff / ROWCOUNT + 1;

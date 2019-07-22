@@ -1,4 +1,4 @@
-package by.training.finaltask.validator;
+package by.training.finaltask.parser;
 
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.InvalidFormDataException;
@@ -6,14 +6,14 @@ import by.training.finaltask.service.UserServiceImpl;
 
 import java.util.List;
 
-public class UserFormValidator implements FormValidator<User> {
+public class UserFormParser implements FormParser<User> {
     private static final int USERNAME = 0;
     private static final int PASSWORD = 1;
     private static final String USERNAME_REGEX = "^[a-zA-Z0-9]{4,16}$";
     private static final String PASSWORD_REGEX = "^[a-zA-Z0-9]{6,32}$";
 
     @Override
-    public User validate(List<String> userParameters) throws InvalidFormDataException {
+    public User parse(List<String> userParameters) throws InvalidFormDataException {
             if (!userParameters.isEmpty() && !userParameters.contains(null)
                     && !userParameters.contains("")) {
                 String username = userParameters.get(USERNAME);

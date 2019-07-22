@@ -1,4 +1,4 @@
-package by.training.finaltask.validator;
+package by.training.finaltask.parser;
 
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class UserInfoFormValidator implements FormValidator<UserInfo> {
+public class UserInfoFormParser implements FormParser<UserInfo> {
 
     private static final int EMAIL = 0;
     private static final int FIRSTNAME = 1;
@@ -24,7 +24,7 @@ public class UserInfoFormValidator implements FormValidator<UserInfo> {
     private static final String CONTACT_REGEX = "^\\+[0-9]{1,15}$";
 
     @Override
-    public UserInfo validate(List<String> userInfoParameters) throws InvalidFormDataException {
+    public UserInfo parse(List<String> userInfoParameters) throws InvalidFormDataException {
         if(!userInfoParameters.isEmpty() && !userInfoParameters.contains(null)
                 && !userInfoParameters.contains("")) {
             String email = userInfoParameters.get(EMAIL);
