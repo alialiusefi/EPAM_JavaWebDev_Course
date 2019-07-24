@@ -43,8 +43,8 @@
 </c:if>
 
 <br>
-<div class="table">
-    <table class="table">
+<div class="table mx-auto">
+    <table>
         <thead>
         <tr>
             <th>ID</th>
@@ -165,13 +165,14 @@
         <div class="col-md-4">
             <form action="<c:url value="/user/admin/findstaff.html?page=1"/>" method="post" class="form-inline">
                 <div class="form-group">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">All Staff</button>
+                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        <fmt:message key="reset"/>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 <jsp:include page="/jsp/tags/footer.jsp" flush="true"/>
 

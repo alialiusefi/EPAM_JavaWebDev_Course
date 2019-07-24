@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService extends Service {
     List<User> getAll(int offset, int rowcount) throws PersistentException;
 
-    User getById(Integer id) throws PersistentException;
+    User get(Integer id) throws PersistentException;
 
     User findByUserNameAndPassword(String user, String pass) throws PersistentException;
 
@@ -26,7 +26,8 @@ public interface UserService extends Service {
 
     List<User> getAllStaff(int offset, int rowcount) throws PersistentException;
 
-    List<User> getAllStaffByFirstName(String firstname, int offset, int rowcount) throws  PersistentException;
+    List<User> getAllStaffByFirstName(String firstname, int offset, int rowcount)
+            throws PersistentException;
 
     List<User> getAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException;
 

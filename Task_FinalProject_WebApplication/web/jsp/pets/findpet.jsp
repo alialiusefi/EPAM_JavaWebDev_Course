@@ -67,13 +67,16 @@
                 </ul>
                 <div class="card-body">
                     <div class="form-row justify-content-center">
-                        <div class="form-inline p-xl-2">
-                            <form action="<c:url value="/pets/adoptpet.html"/>" method="post">
-                                <input type="hidden" name="petID" value="${i.id}">
-                                <input type="submit" value="<fmt:message key="adopt"/>"
-                                       class="btn-sm btn-primary">
-                            </form>
-                        </div>
+                        <c:if test="${authorizedUser.userRole != 'ADMINISTRATOR' &&
+                        authorizedUser.userRole != 'STAFF'}">
+                            <div class="form-inline p-xl-2">
+                                <form action="<c:url value="/adoptions/adoptpet.html"/>" method="post">
+                                    <input type="hidden" name="petID" value="${i.id}">
+                                    <input type="submit" value="<fmt:message key="adopt"/>"
+                                           class="btn-sm btn-primary">
+                                </form>
+                            </div>
+                        </c:if>
                         <div class="form-inline p-xl-2">
                             <form action="<c:url value="/pets/moreinfopet.html"/>" method="post">
                                 <input type="hidden" name="petID" value="${i.id}">
@@ -153,68 +156,71 @@
     </ul>
 </nav>
 
-<div class="form-row justify-content-center">
-    <div class="form-group">
-        <center><h3><fmt:message key="searchForm"/></h3></center>
-    </div>
-    <br>
-    <form name="searchForm" onsubmit="return OnSubmitForm();" method="post">
-        <c:if test="${authorizedUser.userRole == 'STAFF'}">
-            <div class="form-group p-lg-2">
-                <select name="petStatus" id="inputStatus" class="form-control">
-                    <option  value="ALL">
-                        <fmt:message key="allShelters"/>
-                    </option>
-                    <option value="SHELTERED">
-                        <fmt:message key="sheltered"/>
-                    </option>
-                    <option value="ADOPTED">
-                        <fmt:message key="adopted"/>
-                    </option>
-                    <option value="DEAD">
-                        <fmt:message key="dead"/>
-                    </option>
+<div class="table table-bordered justify-content-center mx-auto p-3">
+    <div class="form-row justify-content-center">
+        <div class="form-group">
+            <center><h3><fmt:message key="searchForm"/></h3></center>
+        </div>
+        <br>
+        <form name="searchForm" onsubmit="return OnSubmitForm();" method="post">
+            <c:if test="${authorizedUser.userRole == 'STAFF'}">
+                <div class="form-group p-lg-2">
+                    <select name="petStatus" id="inputStatus" class="form-control">
+                        <option value="ALL">
+                            <fmt:message key="allShelters"/>
+                        </option>
+                        <option value="SHELTERED">
+                            <fmt:message key="sheltered"/>
+                        </option>
+                        <option value="ADOPTED">
+                            <fmt:message key="adopted"/>
+                        </option>
+                        <option value="DEAD">
+                            <fmt:message key="dead"/>
+                        </option>
+                    </select>
+                    <i><fmt:message key="appliesToAllSearchTypes"/></i>
+                </div>
+            </c:if>
+            <div class="form-inline p-md-2">
+                <select name="breed" id="inputBreed" class="form-control">
+                    <c:forEach items="${breedList}" var="q">
+                        <option value="${q.id}">${q.name}</option>
+                    </c:forEach>
                 </select>
-                <i><fmt:message key="appliesToAllSearchTypes"/></i>
+                &emsp;
+                <input type="submit" name="findByBreedID" onclick="document.pressed=this.name"
+                       value="<fmt:message key="findByBreed"/>" class="btn-sm btn-primary"/>
+                &emsp;&emsp;&emsp;
+                <select name="shelter" id="inputShelter" class="form-control">
+                    <c:forEach items="${shelterList}" var="i">
+                        <option value="${i.id}">${i.name}</option>
+                    </c:forEach>
+                </select>
+                &emsp;
+                <input type="submit" name="findByShelterID" onclick="document.pressed=this.name"
+                       value="<fmt:message key="findByShelter"/>" class="btn-sm btn-primary">
             </div>
-        </c:if>
-        <div class="form-inline p-md-2">
-            <select name="breed" id="inputBreed" class="form-control">
-                <c:forEach items="${breedList}" var="q">
-                    <option value="${q.id}">${q.name}</option>
-                </c:forEach>
-            </select>
-            &emsp;
-            <input type="submit" name="findByBreedID" onclick="document.pressed=this.name"
-                   value="<fmt:message key="findByBreed"/>" class="btn-sm btn-primary"/>
-            &emsp;&emsp;&emsp;
-            <select name="shelter" id="inputShelter" class="form-control">
-                <c:forEach items="${shelterList}" var="i">
-                    <option value="${i.id}">${i.name}</option>
-                </c:forEach>
-            </select>
-            &emsp;
-            <input type="submit" name="findByShelterID" onclick="document.pressed=this.name"
-                   value="<fmt:message key="findByShelter"/>" class="btn-sm btn-primary">
-        </div>
 
-        <div class="form-inline" style="padding-left: 15%">
-            <input type="date" name="birthDate">
-            &emsp;
-            <input type="radio" checked name="birthDateChoice" value="lessthan"> <fmt:message key="birthDateBeforeChoice"/>
-            &emsp;
-            <input type="radio" name="birthDateChoice" value="greaterthan"> <fmt:message key="birthDateAfterChoice"/>
-            &emsp;
-            <input type="submit" name="findByBirthDate" onclick="document.pressed=this.name"
-                   value="<fmt:message key="findByBirthDate"/>" class="btn-sm btn-primary">
-        </div>
-    </form>
-    <a class="btn btn-success" style="margin-right: 45%" type="button"
-       href="<c:url value="/pets/findpet.html?page=1"/>">
-        <fmt:message key="allPets"/>
-    </a>
+            <div class="form-inline" style="padding-left: 15%">
+                <input type="date" name="birthDate">
+                &emsp;
+                <input type="radio" checked name="birthDateChoice" value="lessthan"> <fmt:message
+                    key="birthDateBeforeChoice"/>
+                &emsp;
+                <input type="radio" name="birthDateChoice" value="greaterthan"> <fmt:message
+                    key="birthDateAfterChoice"/>
+                &emsp;
+                <input type="submit" name="findByBirthDate" onclick="document.pressed=this.name"
+                       value="<fmt:message key="findByBirthDate"/>" class="btn-sm btn-primary">
+            </div>
+        </form>
+        <a class="btn btn-success" style="margin-right: 45%" type="button"
+           href="<c:url value="/pets/findpet.html?page=1"/>">
+            <fmt:message key="reset"/>
+        </a>
+    </div>
 </div>
-
 <script type="text/javascript" src="/js/formscript.js"></script>
 <jsp:include page="/jsp/tags/footer.jsp" flush="true"/>
 </body>

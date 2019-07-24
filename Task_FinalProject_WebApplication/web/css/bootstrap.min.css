@@ -1624,9 +1624,7 @@ pre code {
 }
 
 .table {
-    width: 100%;
-    padding-right: 15%;
-    padding-left: 15%;
+    width: 75%;
     margin-bottom: 1rem;
     background-color: transparent
 }

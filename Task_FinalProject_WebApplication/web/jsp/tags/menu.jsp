@@ -25,6 +25,7 @@
                 <li class="nav-item ${pageContext.request.requestURI eq '/jsp/pets/findpet.jsp' ? 'active' : ''}">
                     <a class="nav-link" href="<c:url value="/pets/findpet.html?page=1"/>"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
                 </li>
+
                 <c:if test="${not empty authorizedUser}">
                     <c:choose>
                         <c:when test="${authorizedUser.userRole == 'ADMINISTRATOR'}">
@@ -37,15 +38,14 @@
                                     <fmt:message key="addStaff"/></a>
                             </li>
                         </c:when>
-                        <c:when test="${authorizedUser.userRole == 'GUEST'}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="${jspDirectory}/adoptions/guest/adoptpet.html"><fmt:message key="adoptAPet"/><span class="sr-only">(current)</span></a>
-                            </li>
-                        </c:when>
                         <c:when test="${authorizedUser.userRole == 'STAFF'}">
                             <li class="nav-item ${pageContext.request.requestURI eq '/jsp/pets/staff/addpet.jsp' ? 'active' : ''}">
                                 <a class="nav-link" href="<c:url value="/pets/staff/addpet.html"/>">
                                     <fmt:message key="addPet"/><span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item ${pageContext.request.requestURI eq '/jsp/adoptions/staff/findadoption.jsp' ? 'active' : ''}">
+                                <a class="nav-link" href="<c:url value="/adoptions/staff/findadoption.html"/>">
+                                    <fmt:message key="allAdoptions"/><span class="sr-only">(current)</span></a>
                             </li>
                         </c:when>
                     </c:choose>

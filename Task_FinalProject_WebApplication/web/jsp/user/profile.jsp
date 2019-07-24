@@ -46,40 +46,40 @@
 </legend>
 <br>
 
-<div class="table">
+<div class="table mx-auto justify-content-center">
 
-<label class="text-center"><fmt:message key="userCredentials"/></label>
-<table class="table align-content-center">
-    <tbody>
-    <tr>
-        <td><fmt:message key="username"/>: ${user.username}</td>
-        <td><fmt:message key="role"/>: ${user.userRole.getName()}</td>
-    </tr>
-    </tbody>
-</table>
+    <label class="text-center"><fmt:message key="userCredentials"/></label>
+    <table class="table align-content-center">
+        <tbody>
+        <tr>
+            <td><fmt:message key="username"/>: ${user.username}</td>
+            <td><fmt:message key="role"/>: ${user.userRole.getName()}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-<div class="table">
-<label class="text-center"><fmt:message key="userInfo"/></label>
-<table class="table align-content-center ">
-    <tr>
-        <td><fmt:message key="firstName"/>: ${userinfo.firstName}</td>
-        <td><fmt:message key="lastName"/>: ${userinfo.lastName}</td>
-    </tr>
-    <tr>
-        <td><fmt:message key="email"/>: ${userinfo.email}</td>
-        <td><fmt:message key="contactNumber"/>: +${userinfo.phone}</td>
-    </tr>
-    <tr>
-        <td><fmt:message key="dateofbirth"/>:
-<fmt:formatDate type="date" dateStyle="medium" value="${userinfo.dateOfBirth.time}"/>
-        </td>
-        <td><fmt:message key="address"/>: ${userinfo.address}</td>
-    </tr>
-</table>
+<div class="table mx-auto justify-content-center">
+    <label class="text-center"><fmt:message key="userInfo"/></label>
+    <table class="table align-content-center ">
+        <tr>
+            <td><fmt:message key="firstName"/>: ${userinfo.firstName}</td>
+            <td><fmt:message key="lastName"/>: ${userinfo.lastName}</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="email"/>: ${userinfo.email}</td>
+            <td><fmt:message key="contactNumber"/>: +${userinfo.phone}</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="dateofbirth"/>:
+                <fmt:formatDate type="date" dateStyle="medium" value="${userinfo.dateOfBirth.time}"/>
+            </td>
+            <td><fmt:message key="address"/>: ${userinfo.address}</td>
+        </tr>
+    </table>
 </div>
-<div class="table">
-<label class="text-center"><fmt:message key="userActions"/></label>
+<div class="table mx-auto justify-content-center">
+    <label class="text-center"><fmt:message key="userActions"/></label>
     <table class="table align-content-center">
         <tr>
             <td>
@@ -87,6 +87,13 @@
                     <fmt:message key="editProfile"/>
                 </a>
             </td>
+            <c:if test="${authorizedUser.userRole == 'GUEST'}">
+                <td>
+                    <a class="btn btn-secondary" href="<c:url value="/adoptions/myadoptions.html"/>">
+                        <fmt:message key="myAdoptions"/>
+                    </a>
+                </td>
+            </c:if>
             <c:if test="${authorizedUser.userRole != 'STAFF'}">
                 <td>
                     <form action="${userDeleteActionURL}" type="post">
@@ -101,6 +108,6 @@
     </table>
 </div>
 
-<jsp:include page="/jsp/tags/footer.jsp" />
+<jsp:include page="/jsp/tags/footer.jsp"/>
 </body>
 </html>

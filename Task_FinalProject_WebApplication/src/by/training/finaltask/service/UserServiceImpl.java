@@ -36,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(Integer id) throws PersistentException {
+    public User get(Integer id) throws PersistentException {
         UserDAO dao = (UserDAO) createDao(DAOEnum.USER);
         return dao.get(id);
     }
