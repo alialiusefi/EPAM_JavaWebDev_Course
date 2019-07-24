@@ -1,7 +1,9 @@
 package by.training.finaltask.action;
 
+import by.training.finaltask.entity.Entity;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
+import by.training.finaltask.parser.FormParser;
 import by.training.finaltask.service.serviceinterface.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-abstract public class Action {
-
+public abstract class Action {
 
 	private User authorizedUser;
 	private String name;
 
-	protected ServiceFactory factory;
-
+	public ServiceFactory factory;
 
 	public User getAuthorizedUser() {
 		return authorizedUser;
@@ -35,13 +35,14 @@ abstract public class Action {
 		this.name = name;
 	}
 
-	public void setFactory(ServiceFactory factory) {
+	public void setServiceFactory(ServiceFactory factory) {
 		this.factory = factory;
 	}
 
 	abstract public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException;
 
 	public static class Forward {
+
 		private String forward;
 		private boolean redirect;
 		private Map<String, Object> attributes = new HashMap<>();

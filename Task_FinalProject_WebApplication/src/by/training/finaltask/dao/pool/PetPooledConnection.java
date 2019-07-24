@@ -291,19 +291,6 @@ public final class PetPooledConnection implements Connection, Comparable<PetPool
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PetPooledConnection that = (PetPooledConnection) o;
-        return Objects.equals(getConnection(), that.getConnection());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getConnection());
-    }
-
-    @Override
     public int compareTo(PetPooledConnection connection) {
         return hashCode() - connection.hashCode();
     }

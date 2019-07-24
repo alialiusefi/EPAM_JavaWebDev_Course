@@ -4,6 +4,7 @@ import by.training.finaltask.entity.Pet;
 import by.training.finaltask.entity.PetStatus;
 import by.training.finaltask.exception.PersistentException;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public interface PetService extends Service {
@@ -16,6 +17,10 @@ public interface PetService extends Service {
 
     List<Pet> getAllSheltered(int offset, int rowcount) throws PersistentException;
 
+    List<Pet> getAllByBirthDate(int relation, PetStatus status,
+                                GregorianCalendar calendar, int offset, int rowcount)
+    throws PersistentException;
+
     List<Pet> getAll(int offset, int rowcount) throws PersistentException;
 
     int getAmountOfAllPets() throws PersistentException;
@@ -25,6 +30,9 @@ public interface PetService extends Service {
     int getAmountOfAllPetsByBreed(PetStatus status,int breedID) throws PersistentException;
 
     int getAmountOfAllShelteredPets() throws PersistentException;
+
+    int getAmountOfAllPetsByBirthDate(int relation, PetStatus status, GregorianCalendar calendar)
+            throws PersistentException;
 
     Integer add(Pet pet) throws PersistentException;
 

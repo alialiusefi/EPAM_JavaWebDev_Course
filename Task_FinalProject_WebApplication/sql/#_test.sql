@@ -1,5 +1,11 @@
 use petshelter;
 
+
+
+select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered,
+       pets.shelter_id, pets.breed_id,pets.status from pets
+       where pets.dateofbirth >= ? limit ?,?;
+
 select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered, pets.shelter_id, pets.breed_id,pets.status from pets where pets.shelter_id = ? and pets.status = ? limit ?,?;
 
 select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered, pets.shelter_id, pets.breed_id,pets.status from pets where pets.status = 'Sheltered' limit ?,?;

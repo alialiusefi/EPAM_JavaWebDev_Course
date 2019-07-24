@@ -14,9 +14,6 @@ import javax.servlet.http.HttpSession;
 public class LoginAction extends Action {
     private static Logger logger = LogManager.getLogger(LoginAction.class);
 
-    //private static Map<Role, List<MenuItem>> menu = new ConcurrentHashMap<>();
-
-
     @Override
     public Action.Forward exec(HttpServletRequest request, HttpServletResponse response)
             throws PersistentException {
@@ -30,7 +27,6 @@ public class LoginAction extends Action {
                 if (user != null) {
                     session.setAttribute("authorizedUser", user);
                     session.setAttribute("username", user.getUsername());
-                    //session.setAttribute("menu", menu.get(user.getUserRole()));
                     logger.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
                     request.setAttribute("message", "loggedInSuccessfully");
 

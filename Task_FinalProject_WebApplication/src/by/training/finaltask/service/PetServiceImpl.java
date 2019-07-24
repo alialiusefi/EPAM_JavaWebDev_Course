@@ -9,6 +9,7 @@ import by.training.finaltask.service.serviceinterface.PetService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class PetServiceImpl extends ServiceImpl implements PetService {
@@ -97,6 +98,21 @@ public class PetServiceImpl extends ServiceImpl implements PetService {
     }
 
     @Override
+    public List<Pet> getAllByBirthDate(int relation, PetStatus status, GregorianCalendar calendar, int offset, int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            PetDAO dao = (PetDAO) createDao(DAOEnum.PET);
+            List<Pet> allPets = dao.getAllByBirthDate(relation,status,calendar,offset,rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return allPets;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
     public int getAmountOfAllPets() throws PersistentException {
         try {
             connection.setAutoCommit(false);
@@ -116,7 +132,7 @@ public class PetServiceImpl extends ServiceImpl implements PetService {
         try {
             connection.setAutoCommit(false);
             PetDAO dao = (PetDAO) createDao(DAOEnum.PET);
-            int amountOfAllPets = dao.getAmountOfAllPetsByShelter(shelterID);
+            int amountOfAllPets = dao.getAmountOfAllPetsByShelter(status,shelterID);
             commit();
             connection.setAutoCommit(true);
             return amountOfAllPets;
@@ -131,7 +147,7 @@ public class PetServiceImpl extends ServiceImpl implements PetService {
         try {
             connection.setAutoCommit(false);
             PetDAO dao = (PetDAO) createDao(DAOEnum.PET);
-            int amountOfAllPets = dao.getAmountOfAllPetsByBreed(breedID);
+            int amountOfAllPets = dao.getAmountOfAllPetsByBreed(status,breedID);
             commit();
             connection.setAutoCommit(true);
             return amountOfAllPets;
@@ -140,6 +156,8 @@ public class PetServiceImpl extends ServiceImpl implements PetService {
             throw new PersistentException(e);
         }
     }
+
+
 
     @Override
     public int getAmountOfAllShelteredPets() throws PersistentException {
@@ -150,6 +168,21 @@ public class PetServiceImpl extends ServiceImpl implements PetService {
             commit();
             connection.setAutoCommit(true);
             return result;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getAmountOfAllPetsByBirthDate(int relation, PetStatus status, GregorianCalendar calendar) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            PetDAO dao = (PetDAO) createDao(DAOEnum.PET);
+            int amountOfAllPets = dao.getAmountOfAllPetsByBirthDate(relation,status,calendar);
+            commit();
+            connection.setAutoCommit(true);
+            return amountOfAllPets;
         } catch (SQLException e) {
             rollback();
             throw new PersistentException(e);

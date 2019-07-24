@@ -1,13 +1,10 @@
 package by.training.finaltask.parser;
 
+import by.training.finaltask.action.Action;
 import by.training.finaltask.dao.mysql.DAOEnum;
-import by.training.finaltask.entity.Breed;
-import by.training.finaltask.entity.Pet;
-import by.training.finaltask.entity.PetStatus;
-import by.training.finaltask.entity.Shelter;
+import by.training.finaltask.entity.*;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.BreedService;
 import by.training.finaltask.service.serviceinterface.ShelterService;
 
@@ -25,7 +22,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class PetFormParser implements FormParser<Pet> {
+public class PetFormParser extends FormParser<Pet>{
 
     private static final int PICTURE_PATH = 0;
     private static final int PET_NAME = 1;
@@ -36,12 +33,11 @@ public class PetFormParser implements FormParser<Pet> {
     private static final int BREED = 6;
     private static final int PET_STATUS = 7;
     private static final String PET_NAME_REGEX = "^[a-zA-Z]+$";
-
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String WEIGHT_REGEX = "^[0-9]+(.[0-9]+)?$";
 
     @Override
-    public Pet parse(List<String> parameters) throws
+    public Pet parse(Action action, List<String> parameters) throws
             InvalidFormDataException, PersistentException {
         if (!parameters.isEmpty() && !parameters.contains(null) && !parameters.contains("")) {
             Blob pictureBlob = validatePicture(parameters.get(PICTURE_PATH));
@@ -53,9 +49,9 @@ public class PetFormParser implements FormParser<Pet> {
                     GregorianCalendar dateOfBirthGreg = validateDate(parameters.get(DATE_OF_BIRTH));
                     GregorianCalendar dateShelteredGreg = validateDate(
                             parameters.get(DATE_SHELTERED));
-                    Shelter shelter = validateShelter(
+                    Shelter shelter = validateShelter(action,
                             parameters.get(SHELTER));
-                    Breed breed = validateBreed(parameters.get(BREED));
+                    Breed breed = validateBreed(action,parameters.get(BREED));
                     PetStatus status = PetStatus.valueOf(parameters.get(PET_STATUS));
                     return new Pet(
                             0,
@@ -75,10 +71,10 @@ public class PetFormParser implements FormParser<Pet> {
         throw new InvalidFormDataException("fillAllFields");
     }
 
-    private Shelter validateShelter(String shelterID) throws
+    private Shelter validateShelter(Action action, String shelterID) throws
             InvalidFormDataException, PersistentException {
         ShelterService shelterService = (ShelterService)
-                new ServiceFactoryImpl().createService(DAOEnum.SHELTER);
+                action.factory.createService(DAOEnum.SHELTER);
         int id = Integer.parseInt(shelterID);
         Shelter shelter = shelterService.getByID(id);
         if (shelter != null) {
@@ -88,8 +84,8 @@ public class PetFormParser implements FormParser<Pet> {
         }
     }
 
-    private Breed validateBreed(String breedID) throws InvalidFormDataException, PersistentException {
-        BreedService breedService = (BreedService) new ServiceFactoryImpl()
+    private Breed validateBreed(Action action,String breedID) throws InvalidFormDataException, PersistentException {
+        BreedService breedService = (BreedService) action.factory
                 .createService(DAOEnum.BREED);
         int id = Integer.parseInt(breedID);
         Breed breed = breedService.getByID(id);
@@ -130,5 +126,6 @@ public class PetFormParser implements FormParser<Pet> {
             throw new InvalidFormDataException("fileUploadError");
         }
     }
+
 
 }

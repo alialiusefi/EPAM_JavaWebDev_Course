@@ -81,14 +81,13 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public List<Pet> getAllByShelter(PetStatus status, int shelterID, int offset, int rowcount)
             throws PersistentException {
         String query = resourceBundle.getString("getAllPetByShelterDAO");
-        if(status != null) {
-            query = addPetStatus(status,query);
+        if (status != null) {
+            query = addPetStatus(query);
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, shelterID);
-            if(status != null)
-            {
-                preparedStatement.setNString(2,status.getValue());
+            if (status != null) {
+                preparedStatement.setNString(2, status.getValue());
                 preparedStatement.setInt(3, offset);
                 preparedStatement.setInt(4, rowcount);
             } else {
@@ -112,14 +111,13 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public List<Pet> getAllByBreed(PetStatus status, int breedID, int offset, int rowcount)
             throws PersistentException {
         String query = resourceBundle.getString("getAllPetByBreedDAO");
-        if(status != null) {
-            query = addPetStatus(status,query);
+        if (status != null) {
+            query = addPetStatus(query);
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, breedID);
-            if(status != null)
-            {
-                preparedStatement.setNString(2,status.getValue());
+            if (status != null) {
+                preparedStatement.setNString(2, status.getValue());
                 preparedStatement.setInt(3, offset);
                 preparedStatement.setInt(4, rowcount);
             } else {
@@ -129,7 +127,40 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
             List<Pet> pets = new LinkedList<>();
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {
-                  pets.add(getPet(resultset));
+                    pets.add(getPet(resultset));
+                }
+                return pets;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Pet> getAllByBirthDate(int relation, PetStatus status,
+                                       GregorianCalendar calendar, int offset, int rowcount)
+            throws PersistentException {
+        String query = resourceBundle.getString("getAllPetByBirthDateDAO");
+        if (status != null) {
+            query = addPetStatus(query);
+        }
+        query = addRelation(query, relation);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            Date date = new Date(calendar.getTimeInMillis());
+            preparedStatement.setDate(1, date);
+            if (status != null) {
+                preparedStatement.setNString(2, status.getValue());
+                preparedStatement.setInt(3, offset);
+                preparedStatement.setInt(4, rowcount);
+            } else {
+                preparedStatement.setInt(2, offset);
+                preparedStatement.setInt(3, rowcount);
+            }
+            List<Pet> pets = new LinkedList<>();
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    pets.add(getPet(resultset));
                 }
                 return pets;
             }
@@ -146,6 +177,34 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
             preparedStatement.setInt(1, ID);
             preparedStatement.executeUpdate();
             return true;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+
+    @Override
+    public int getAmountOfAllPetsByBirthDate(int relation, PetStatus status,
+                                             GregorianCalendar calendar) throws PersistentException {
+        String query = resourceBundle.getString("getAmountAllPetByBirthDateDAO");
+        if (status != null) {
+            query = addPetStatus(query);
+        }
+        query = addRelation(query, relation);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            Date date = new Date(calendar.getTimeInMillis());
+            preparedStatement.setDate(1, date);
+            if (status != null) {
+                preparedStatement.setNString(2, status.getValue());
+            }
+            try (ResultSet res = preparedStatement.executeQuery()) {
+                res.next();
+                return res.getInt(1);
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage(), e);
+                throw new PersistentException(e.getMessage(), e);
+            }
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
@@ -189,15 +248,13 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     @Override
     public int getAmountOfAllPetsByShelter(PetStatus status, int shelterID) throws PersistentException {
         String query = resourceBundle.getString("getAmountAllPetByShelterDAO");
-        if(status != null)
-        {
-            query = addPetStatus(status,query);
+        if (status != null) {
+            query = addPetStatus(query);
         }
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, shelterID);
-            if(status != null)
-            {
-                preparedStatement.setNString(2,status.getValue());
+            if (status != null) {
+                preparedStatement.setNString(2, status.getValue());
             }
             try (ResultSet res = preparedStatement.executeQuery()) {
                 res.next();
@@ -216,15 +273,13 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public int getAmountOfAllPetsByBreed(PetStatus status, int breedID)
             throws PersistentException {
         String query = resourceBundle.getString("getAmountAllPetByBreedDAO");
-        if(status != null)
-        {
-            query = addPetStatus(status,query);
+        if (status != null) {
+            query = addPetStatus(query);
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, breedID);
-            if(status != null)
-            {
-                preparedStatement.setNString(2,status.getValue());
+            if (status != null) {
+                preparedStatement.setNString(2, status.getValue());
             }
             try (ResultSet res = preparedStatement.executeQuery()) {
                 res.next();
@@ -243,7 +298,7 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public int add(Pet element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("addPetDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
-            setPreparedStatement(preparedStatement,element);
+            setPreparedStatement(preparedStatement, element);
             preparedStatement.executeUpdate();
             try (ResultSet set = preparedStatement.getGeneratedKeys()) {
                 set.next();
@@ -263,7 +318,7 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
     public boolean update(Pet element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("updatePetDAO"))) {
-            setPreparedStatement(preparedStatement,element);
+            setPreparedStatement(preparedStatement, element);
             preparedStatement.setInt(10, element.getId());
             preparedStatement.executeUpdate();
             return true;
@@ -304,9 +359,9 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
                 resultSet.getInt("breed_id"),
                 petStatus);
     }
+
     private void setPreparedStatement(PreparedStatement preparedStatement,
-                                      Pet element) throws SQLException
-    {
+                                      Pet element) throws SQLException {
         preparedStatement.setInt(1, element.getId());
         preparedStatement.setNString(2, element.getName());
         preparedStatement.setBlob(3, element.getPhoto());
@@ -322,16 +377,32 @@ public final class PetDAOImplementation extends BaseDAO implements PetDAO {
 
     }
 
-    private String addPetStatus(PetStatus status, String query)
-    {
-            StringBuffer buffer = new StringBuffer(query);
-            int idxOfLimit = buffer.indexOf("limit");
-            if(idxOfLimit == -1)
-            {
-                buffer.insert(query.length() - 2,"and pets.status = ?");
+    private String addPetStatus(String query) {
+        StringBuffer buffer = new StringBuffer(query);
+        int idxOfLimit = buffer.indexOf("limit");
+        if (idxOfLimit == -1) {
+            buffer.insert(query.length() - 1, " and pets.status = ?");
+            return buffer.toString();
+        }
+        buffer.insert(idxOfLimit - 1, " and pets.status = ? ");
+        return buffer.toString();
+    }
+
+    private String addRelation(String query, int relation) {
+        String colName = "dateofbirth";
+        String greaterThan = " >= ";
+        String lessThan = " <= ";
+        StringBuffer buffer = new StringBuffer(query);
+        int idxOfdateofbirth = buffer.lastIndexOf(colName);
+        if (relation == 1) {
+            buffer.insert(idxOfdateofbirth + colName.length(), greaterThan);
+            return buffer.toString();
+        } else {
+            if (relation == -1) {
+                buffer.insert(idxOfdateofbirth + colName.length(), lessThan);
                 return buffer.toString();
             }
-            buffer.insert(idxOfLimit - 1,"and pets.status = ? ");
-            return buffer.toString();
+        }
+        return query;
     }
 }

@@ -27,7 +27,7 @@ public class DeletePetAction extends AuthorizedUserAction {
             if (allowedRoles.contains(authUser.getUserRole())) {
                 String petIDParam = request.getParameter("petID");
                 int petID = Integer.parseInt(petIDParam);
-                PetService service = (PetService) new ServiceFactoryImpl()
+                PetService service = (PetService) factory
                         .createService(DAOEnum.PET);
                 service.delete(petID);
                 Forward forward = new Forward("/pets/findpet.html?page=1",true);

@@ -3,7 +3,10 @@ package by.training.finaltask.action;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.Pet;
 import by.training.finaltask.entity.PetStatus;
+import by.training.finaltask.entity.Role;
+import by.training.finaltask.entity.User;
 import by.training.finaltask.exception.PersistentException;
+import by.training.finaltask.parser.FormParser;
 import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.PetService;
 import org.apache.logging.log4j.LogManager;
@@ -17,60 +20,55 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-public class FindPetByShelterAction extends Action {
+public class FindPetByShelterAction extends AuthorizedUserAction {
 
     private static final Logger LOGGER = LogManager.getLogger(
             FindPetByShelterAction.class);
 
+    public FindPetByShelterAction(){
+        this.allowedRoles.add(Role.STAFF);
+        this.allowedRoles.add(Role.ADMINISTRATOR);
+    }
+
     private static int ROWS_PER_PAGE = 6;
     private static String NUMBER_REGEX = "[1-9]+";
+    private static String PETSTATUS_ATTRIBUTE = "petStatus";
 
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
         HttpSession session = request.getSession(false);
-        if(session != null)
-        {
-            int shelterID = 1;
-            /*TODO: continue working on parsing pet status parameter and passing it through findpet.html*/
-            String petStatusParam = request.getParameter("petStatus");
-            if(request.getParameter("shelter") == null)
+        if (session != null) {
+            User authUser = (User)session.getAttribute("authorizedUser");
+            int shelterID = getShelterID(request);
+            PetStatus status;
+            if(authUser != null && this.allowedRoles.contains(authUser.getUserRole()))
             {
-                shelterID = Integer.parseInt(request.getParameter("search"));
+                status = FindPetAction.getStatus(request);
             } else {
-                shelterID = Integer.parseInt(request.getParameter("shelter"));
+                status = PetStatus.SHELTERED;
             }
             Forward forward = new Forward("/pets/findpet.html?page=1");
-            forward.getAttributes().put("searchParameter",shelterID);
-            PetService service = (PetService) new ServiceFactoryImpl().createService(DAOEnum.PET);
-            int amountOfPetsByShelter = service.getAmountOfAllPetsByShelter(shelterID);
+            forward.getAttributes().put("searchParameter", shelterID);
+            session.setAttribute(PETSTATUS_ATTRIBUTE,status);
+            PetService service = (PetService) factory.createService(DAOEnum.PET);
+            int amountOfPetsByShelter = service.getAmountOfAllPetsByShelter(status,shelterID);
             int amountOfPages = amountOfPetsByShelter % ROWS_PER_PAGE == 0 ?
                     amountOfPetsByShelter / ROWS_PER_PAGE : amountOfPetsByShelter / ROWS_PER_PAGE + 1;
             forward.getAttributes().put("amountOfPages", amountOfPages);
-            Integer pagenumber = validatePageNumber(
+            int pageNumber = FormParser.parsePageNumber(
                     request.getParameter("page"), amountOfPages);
-            int offset = (pagenumber - 1) * ROWS_PER_PAGE;
-            List<Pet> pets = service.getAllByShelter(shelterID,offset,ROWS_PER_PAGE);
-            forward.getAttributes().put("petResults",pets);
+            int offset = (pageNumber - 1) * ROWS_PER_PAGE;
+            List<Pet> pets = service.getAllByShelter(status,shelterID, offset, ROWS_PER_PAGE);
+            forward.getAttributes().put("petResults", pets);
             List<String> images = getImages(request, pets);
             forward.getAttributes().put("petPictures", images);
-            forward.getAttributes().put("paginationURL","/pets/findpetbyshelter.html");
+            forward.getAttributes().put("paginationURL", "/pets/findpetbyshelter.html");
             return forward;
         }
         throw new PersistentException("forbiddenAccess");
     }
 
-    private int validatePageNumber(String pageParameter, int amountOfPages) {
-        if (pageParameter.matches(NUMBER_REGEX)) {
-            Integer pageNumber = Integer.parseInt(
-                    pageParameter);
-            if (pageNumber <= amountOfPages) {
-                return pageNumber;
-            } else {
-                return 1;
-            }
-        }
-        return 1;
-    }
+
 
     private List<String> getImages(HttpServletRequest request, List<Pet> pets)
             throws PersistentException {
@@ -87,5 +85,14 @@ public class FindPetByShelterAction extends Action {
             }
         }
         return images;
+    }
+
+    private int getShelterID(HttpServletRequest request)
+    {
+        if (request.getParameter("shelter") == null) {
+            return Integer.parseInt(request.getParameter("search"));
+        } else {
+            return Integer.parseInt(request.getParameter("shelter"));
+        }
     }
 }

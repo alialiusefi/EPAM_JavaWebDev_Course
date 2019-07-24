@@ -3,7 +3,7 @@ package by.training.finaltask.action;
 import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.*;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.service.ServiceFactoryImpl;
+import by.training.finaltask.parser.FormParser;
 import by.training.finaltask.service.serviceinterface.BreedService;
 import by.training.finaltask.service.serviceinterface.PetService;
 import by.training.finaltask.service.serviceinterface.ShelterService;
@@ -23,6 +23,7 @@ public class FindPetAction extends AuthorizedUserAction {
     private static final Logger LOGGER = LogManager.getLogger(FindPetAction.class);
     private static int ROWCOUNT = 6;
     private static String NUMBER_REGEX = "[1-9]+";
+    private static String PETSTATUS_ATTRIBUTE = "petStatus";
 
     public FindPetAction() {
         this.allowedRoles.add(Role.STAFF);
@@ -35,7 +36,7 @@ public class FindPetAction extends AuthorizedUserAction {
         HttpSession session = request.getSession(false);
         if (session != null) {
             User user = (User) session.getAttribute("authorizedUser");
-            PetService petService = (PetService) new ServiceFactoryImpl()
+            PetService petService = (PetService) factory
                     .createService(DAOEnum.PET);
             updateSelectionList(request);
             @SuppressWarnings("unchecked")
@@ -53,8 +54,8 @@ public class FindPetAction extends AuthorizedUserAction {
                 int amountOfPages = amountOfAllPets % ROWCOUNT == 0 ?
                         amountOfAllPets / ROWCOUNT : amountOfAllPets / ROWCOUNT + 1;
                 request.setAttribute("amountOfPages", amountOfPages);
-                Integer pagenumber = 1;
-                pagenumber = validatePageNumber(
+                int pagenumber = 1;
+                pagenumber = FormParser.parsePageNumber(
                         request.getParameter("page"), amountOfPages);
                 int offset = (pagenumber - 1) * ROWCOUNT;
                 if (user != null && allowedRoles.contains(user.getUserRole())) {
@@ -74,7 +75,7 @@ public class FindPetAction extends AuthorizedUserAction {
     }
 
 
-    private List<String> getImages(HttpServletRequest request, List<Pet> pets)
+    static List<String> getImages(HttpServletRequest request, List<Pet> pets)
             throws PersistentException {
         List<String> images = new ArrayList<>();
         for (Pet pet : pets) {
@@ -94,25 +95,25 @@ public class FindPetAction extends AuthorizedUserAction {
     private void updateSelectionList(HttpServletRequest request)
             throws PersistentException {
         BreedService breedService = (BreedService)
-                new ServiceFactoryImpl().createService(DAOEnum.BREED);
+                factory.createService(DAOEnum.BREED);
         ShelterService shelterService = (ShelterService)
-                new ServiceFactoryImpl().createService(DAOEnum.SHELTER);
+                factory.createService(DAOEnum.SHELTER);
         List<Breed> breeds = breedService.getAll();
         List<Shelter> shelters = shelterService.getAll();
         request.setAttribute("shelterList", shelters);
         request.setAttribute("breedList", breeds);
     }
 
-    private Integer validatePageNumber(String pageParameter, int amountOfPages) {
-        if (pageParameter.matches(NUMBER_REGEX)) {
-            Integer pageNumber = Integer.parseInt(
-                    pageParameter);
-            if (pageNumber <= amountOfPages) {
-                return pageNumber;
-            } else {
-                return 1;
-            }
+    static PetStatus getStatus(HttpServletRequest request) {
+        String petStatusParam = request.getParameter(PETSTATUS_ATTRIBUTE);
+        if (petStatusParam == null) {
+            return (PetStatus) request.getSession(false)
+                    .getAttribute(PETSTATUS_ATTRIBUTE);
         }
-        return 1;
+        if (petStatusParam.equals("ALL")) {
+            return null;
+        }
+        return PetStatus.valueOf(petStatusParam);
     }
+
 }

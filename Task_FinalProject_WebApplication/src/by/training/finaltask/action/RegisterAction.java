@@ -6,11 +6,8 @@ import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.parser.UserFormParser;
-import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
-import by.training.finaltask.parser.FormParserEnum;
-import by.training.finaltask.parser.FormParserFactory;
 import by.training.finaltask.parser.UserInfoFormParser;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,8 @@ import java.util.List;
 public class RegisterAction extends Action {
 
 
-    private static final FormParserFactory FORM_PARSER_FACTORY = new FormParserFactory();
+    private static final UserFormParser userParser = new UserFormParser();
+    private static final UserInfoFormParser userInfoParser = new UserInfoFormParser();
 
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
@@ -34,17 +32,13 @@ public class RegisterAction extends Action {
             addUserInfoParametersToList(request, userInfoParameters);
             if (userParameters.stream().anyMatch(e -> e != null)
                     && userInfoParameters.stream().anyMatch(e -> e != null)) {
-                UserFormParser userValidator = (UserFormParser) FORM_PARSER_FACTORY.getValidator(
-                        FormParserEnum.USERFORM);
-                UserInfoFormParser userInfoFormValidator = (UserInfoFormParser) FORM_PARSER_FACTORY.getValidator(
-                        FormParserEnum.USERINFOFORM);
                 try {
-                    User user = userValidator.parse(userParameters);
-                    UserService userService = (UserService) new ServiceFactoryImpl().createService(
+                    User user = userParser.parse(this,userParameters);
+                    UserService userService = (UserService) factory.createService(
                             DAOEnum.USER);
-                    UserInfo userInfo = userInfoFormValidator.parse(userInfoParameters);
+                    UserInfo userInfo = userInfoParser.parse(this,userInfoParameters);
                     UserInfoService userInfoService = (UserInfoService)
-                            new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                            factory.createService(DAOEnum.USERINFO);
                     int userIDGenerated = userService.add(user);
                     userInfo.setId(userIDGenerated);
                     userInfoService.add(userInfo);

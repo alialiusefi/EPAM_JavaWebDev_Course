@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class ServiceFactoryImpl implements ServiceFactory {
 
     private static Logger logger = LogManager.getLogger(ServiceFactoryImpl.class);
-    private Connection aliveConnection;
+    private PetPooledConnection aliveConnection;
 
     public ServiceFactoryImpl() throws PersistentException {
         try {
@@ -65,7 +65,6 @@ public class ServiceFactoryImpl implements ServiceFactory {
     public void close() throws PersistentException {
         try {
             aliveConnection.close();
-            ConnectionPool.getInstance().freeConnection((PetPooledConnection) aliveConnection);
         } catch (SQLException e) {
             logger.warn("Cannot close connection! \n" + e.getMessage(),e);
             throw new PersistentException(e.getMessage(),e);

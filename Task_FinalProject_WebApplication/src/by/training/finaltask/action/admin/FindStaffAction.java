@@ -36,9 +36,9 @@ public class FindStaffAction extends AuthorizedUserAction {
             User user = (User) session.getAttribute("authorizedUser");
             if (user != null && allowedRoles.contains(user.getUserRole())) {
                 UserService userService = (UserService)
-                        new ServiceFactoryImpl().createService(DAOEnum.USER);
+                        factory.createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService)
-                        new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                        factory.createService(DAOEnum.USERINFO);
                 @SuppressWarnings("unchecked")
                 List<User> userList = (List<User>)request.getAttribute(
                         "resultUsers");

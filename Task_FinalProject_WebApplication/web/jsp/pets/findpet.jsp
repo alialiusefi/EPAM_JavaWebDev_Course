@@ -58,6 +58,12 @@
                         <fmt:formatDate type="date" dateStyle="medium"
                                         value="${i.dateOfBirth.time}"/>
                     </li>
+                    <c:if test="${authorizedUser.userRole == 'STAFF'}">
+                        <li class="list-group-item">
+                            <fmt:message key="petStatus"/>:
+                                ${i.status}
+                        </li>
+                    </c:if>
                 </ul>
                 <div class="card-body">
                     <div class="form-row justify-content-center">
@@ -103,12 +109,14 @@
             <li class="page-item">
                 <c:choose>
                     <c:when test="${not empty searchParameter}">
-                        <a class="page-link" href="<c:url value="${paginationURL += '?page=' += (param.page - 1)
+                        <a class="page-link"
+                           href="<c:url value="${paginationURL += '?page=' += (param.page - 1)
                     += '&' += 'search=' += searchParameter}"/>">
                             Previous</a>
                     </c:when>
                     <c:otherwise>
-                        <a class="page-link" href="<c:url value="${paginationURL += '?page=' += (param.page - 1)}"/>">
+                        <a class="page-link"
+                           href="<c:url value="${paginationURL += '?page=' += (param.page - 1)}"/>">
                             Previous</a>
                     </c:otherwise>
                 </c:choose>
@@ -154,10 +162,10 @@
         <c:if test="${authorizedUser.userRole == 'STAFF'}">
             <div class="form-group p-lg-2">
                 <select name="petStatus" id="inputStatus" class="form-control">
-                    <option selected value="ALL">
-                        <fmt:message key="all"/>
+                    <option  value="ALL">
+                        <fmt:message key="allShelters"/>
                     </option>
-                    <option selected value="SHELTERED">
+                    <option value="SHELTERED">
                         <fmt:message key="sheltered"/>
                     </option>
                     <option value="ADOPTED">
@@ -193,9 +201,9 @@
         <div class="form-inline" style="padding-left: 15%">
             <input type="date" name="birthDate">
             &emsp;
-            <input type="radio" checked name="birthDateChoice"> <fmt:message key="birthDateBeforeChoice"/>
+            <input type="radio" checked name="birthDateChoice" value="lessthan"> <fmt:message key="birthDateBeforeChoice"/>
             &emsp;
-            <input type="radio" name="birthDateChoice"> <fmt:message key="birthDateAfterChoice"/>
+            <input type="radio" name="birthDateChoice" value="greaterthan"> <fmt:message key="birthDateAfterChoice"/>
             &emsp;
             <input type="submit" name="findByBirthDate" onclick="document.pressed=this.name"
                    value="<fmt:message key="findByBirthDate"/>" class="btn-sm btn-primary">

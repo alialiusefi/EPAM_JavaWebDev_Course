@@ -50,10 +50,10 @@ public class FindStaffByPhoneAction extends AuthorizedUserAction {
                 }
                 Forward forward = new Forward("/user/admin/findstaff.html?page=1");
                 forward.getAttributes().put("searchParameter",phoneParameter);
-                UserService userService = (UserService) new ServiceFactoryImpl().
+                UserService userService = (UserService) factory.
                         createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService)
-                        new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                        factory.createService(DAOEnum.USERINFO);
                 int amountOfAllStaffByPhone =
                         userService.getAmountOfAllStaffByPhone(
                                 phone);

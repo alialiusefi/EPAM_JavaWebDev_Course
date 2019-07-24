@@ -17,10 +17,11 @@ public class ProfileAction extends AuthorizedUserAction {
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
         HttpSession session = request.getSession(false);
         User user = (User)session.getAttribute("authorizedUser");
+        //todo: fix session != null
         if(user != null && session != null){
             request.setAttribute("user",user);
             UserInfoService userInfoService = (UserInfoService)
-                    new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                    factory.createService(DAOEnum.USERINFO);
             UserInfo userInfo = userInfoService.findById(user.getId());
             if(userInfo != null)
             {

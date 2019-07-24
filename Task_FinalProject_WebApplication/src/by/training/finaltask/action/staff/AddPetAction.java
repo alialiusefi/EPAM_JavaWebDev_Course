@@ -6,12 +6,9 @@ import by.training.finaltask.entity.*;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.parser.PetFormParser;
-import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.BreedService;
 import by.training.finaltask.service.serviceinterface.PetService;
 import by.training.finaltask.service.serviceinterface.ShelterService;
-import by.training.finaltask.parser.FormParserEnum;
-import by.training.finaltask.parser.FormParserFactory;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -31,7 +28,7 @@ public class AddPetAction extends AuthorizedUserAction {
     public static final Logger LOGGER = LogManager.getLogger(
             AddPetAction.class);
 
-    private static final FormParserFactory FORM_PARSER_FACTORY = new FormParserFactory();
+    private static final PetFormParser parser = new PetFormParser();
     private static final String UPLOAD_PATH = "C:" + File.separator + "SERVERS"
             + File.separator + "apache-tomcat" + File.separator + "webapps" + File.separator
             + "Pet Shelter" + File.separator + "petpics";
@@ -53,14 +50,11 @@ public class AddPetAction extends AuthorizedUserAction {
                 List<String> petParameters = new ArrayList<>();
                 updateSelectionList(request);
                 addPetParametersToList(request, petParameters);
-                PetFormParser validator = (PetFormParser)
-                        FORM_PARSER_FACTORY.getValidator(
-                                FormParserEnum.PETFORM);
                 Pet pet;
                 try {
-                    pet = validator.parse(petParameters);
+                    pet = parser.parse(this,petParameters);
                     PetService petService = (PetService)
-                            new ServiceFactoryImpl().createService(DAOEnum.PET);
+                            factory.createService(DAOEnum.PET);
                     petService.add(pet);
                     File fileToDelete = new File(UPLOAD_PATH +
                             File.separator + request.getSession(false).getId() + ".jpg");
@@ -121,9 +115,9 @@ public class AddPetAction extends AuthorizedUserAction {
     private void updateSelectionList(HttpServletRequest request)
             throws PersistentException {
         BreedService breedService = (BreedService)
-                new ServiceFactoryImpl().createService(DAOEnum.BREED);
+                factory.createService(DAOEnum.BREED);
         ShelterService shelterService = (ShelterService)
-                new ServiceFactoryImpl().createService(DAOEnum.SHELTER);
+                factory.createService(DAOEnum.SHELTER);
         List<Breed> breeds = breedService.getAll();
         List<Shelter> shelters = shelterService.getAll();
         request.setAttribute("shelterList", shelters);

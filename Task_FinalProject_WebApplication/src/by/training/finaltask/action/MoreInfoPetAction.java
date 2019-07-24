@@ -33,11 +33,11 @@ public class MoreInfoPetAction extends AuthorizedUserAction {
         if (session != null) {
             User user = (User) session.getAttribute("authorizedUser");
             if (user != null && allowedRoles.contains(user.getUserRole())) {
-                PetService petService = (PetService) new ServiceFactoryImpl().
+                PetService petService = (PetService) factory.
                         createService(DAOEnum.PET);
-                BreedService breedService = (BreedService) new ServiceFactoryImpl().
+                BreedService breedService = (BreedService) factory.
                         createService(DAOEnum.BREED);
-                ShelterService shelterService = (ShelterService) new ServiceFactoryImpl().
+                ShelterService shelterService = (ShelterService) factory.
                         createService(DAOEnum.SHELTER);
                 String petIDParam = request.getParameter("petID");
                 if (petIDParam != null) {

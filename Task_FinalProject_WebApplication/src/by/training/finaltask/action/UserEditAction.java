@@ -5,12 +5,10 @@ import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
+import by.training.finaltask.parser.PetFormParser;
 import by.training.finaltask.parser.UserFormParser;
-import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
-import by.training.finaltask.parser.FormParserEnum;
-import by.training.finaltask.parser.FormParserFactory;
 import by.training.finaltask.parser.UserInfoFormParser;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +19,8 @@ import java.util.List;
 
 public class UserEditAction extends AuthorizedUserAction {
 
-    private static final FormParserFactory FORM_PARSER_FACTORY = new FormParserFactory();
+    private static final UserFormParser userParser = new UserFormParser();
+    private static final UserInfoFormParser userInfoParser = new UserInfoFormParser();
 
     @Override
     public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
@@ -31,8 +30,7 @@ public class UserEditAction extends AuthorizedUserAction {
             User user = (User)session.getAttribute("authorizedUser");
             if(user != null)
             {
-                UserInfoService userInfoService = (UserInfoService) new
-                        ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                UserInfoService userInfoService = (UserInfoService)factory.createService(DAOEnum.USERINFO);
                 UserInfo userInfo = userInfoService.findById(user.getId());
                 session.setAttribute("authorizedUserInfo",userInfo);
                 List<String> userParameters = new ArrayList<>();
@@ -44,17 +42,13 @@ public class UserEditAction extends AuthorizedUserAction {
                     request.setAttribute("message","inputPasswordToSubmit");
                     return null;
                 }
-                UserFormParser userValidator = (UserFormParser) FORM_PARSER_FACTORY.getValidator(
-                        FormParserEnum.USERFORM);
-                UserInfoFormParser userInfoFormValidator = (UserInfoFormParser) FORM_PARSER_FACTORY.getValidator(
-                        FormParserEnum.USERINFOFORM);
-                try {
-                    User newUser = userValidator.parse(userParameters);
-                    UserService userService = (UserService) new ServiceFactoryImpl().createService(
+                 try {
+                    User newUser = userParser.parse(this,userParameters);
+                    UserService userService = (UserService) factory.createService(
                             DAOEnum.USER);
                     newUser.setId(user.getId());
                     newUser.setUserRole(user.getUserRole());
-                    UserInfo newUserInfo = userInfoFormValidator.parse(userInfoParameters);
+                    UserInfo newUserInfo = userInfoParser.parse(this,userInfoParameters);
                     newUserInfo.setId(user.getId());
                     userService.update(newUser);
                     userInfoService.update(newUserInfo);

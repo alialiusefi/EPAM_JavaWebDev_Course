@@ -10,8 +10,6 @@ public class MainAction extends Action {
 	@Override
 	public Action.Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
 
-		/*List<MenuItem> menu = (List<MenuItem>)request.getSession(false).getAttribute("menu");
-		return new Forward(menu.get(0).getUrl());*/
 		return new Forward("/index.jsp");
 		}
 }

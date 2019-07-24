@@ -7,6 +7,9 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -20,10 +23,10 @@ public final class ConnectionPool {
     private String userName;
     private String password;
     private int timeoutConnectionLimit;
-    private BlockingQueue<PetPooledConnection> freeConnections
-            = new LinkedBlockingQueue<>();
+    private Queue<PetPooledConnection> freeConnections
+            = new LinkedList<>();
     private Set<PetPooledConnection> usedConnections
-            = new ConcurrentSkipListSet<>();
+            = new LinkedHashSet<>();
     private int maxConnections;
     private ReentrantLock classReentrantLock = new ReentrantLock();
     private static ConnectionPool INSTANCE = null;
@@ -42,17 +45,20 @@ public final class ConnectionPool {
     }
 
 
-    public Connection getConnection() throws PersistentException {
+    public PetPooledConnection getConnection() throws PersistentException {
         PetPooledConnection connection = null;
         while (connection == null) {
             try {
                     if (!freeConnections.isEmpty()) {
-                        connection = freeConnections.take();
+                        classReentrantLock.lock();
+                        connection = freeConnections.poll();
+                        classReentrantLock.unlock();
                         if (!connection.isValid(timeoutConnectionLimit)) {
                             try {
                                 connection.getConnection().close();
                             } catch (SQLException e) {
-
+                                LOGGER.warn(e.getMessage(),e);
+                                throw new PersistentException(e.getMessage(),e);
                             }
                             connection = null;
                         }
@@ -62,7 +68,7 @@ public final class ConnectionPool {
                      LOGGER.error("The limit of number of database connections is exceeded");
                      throw new PersistentException();
                     }
-            } catch (InterruptedException | SQLException e) {
+            } catch (SQLException e) {
                 LOGGER.error("Cannot connect to database", e);
                 throw new PersistentException(e.getMessage(), e);
             }
@@ -97,7 +103,8 @@ public final class ConnectionPool {
 
     private PetPooledConnection createNewConnection() throws SQLException, PersistentException {
         if ((usedConnections.size() + freeConnections.size()) < maxConnections) {
-            return new PetPooledConnection(DriverManager.getConnection(this.URL, this.userName, this.password));
+            return new PetPooledConnection(DriverManager.
+                    getConnection(this.URL, this.userName, this.password));
         }
         throw new PersistentException(
                 "Cannot create connections more than max. amount of connections");
@@ -108,25 +115,30 @@ public final class ConnectionPool {
             if (connection.isValid(timeoutConnectionLimit)) {
                 connection.clearWarnings();
                 connection.setAutoCommit(true);
+                classReentrantLock.lock();
                 usedConnections.remove(connection);
-                freeConnections.put(connection);
+                freeConnections.add(connection);
+                classReentrantLock.unlock();
                 LOGGER.debug("Connection Cleared.");
             }
-        } catch (InterruptedException | SQLException e) {
+        } catch (SQLException e) {
             LOGGER.error("Couldn't clear connection!", e);
             try {
                 connection.close();
-            } catch (SQLException e2) {
-                LOGGER.error(e2.getMessage(), e2);
+            } catch (SQLException e1) {
+                LOGGER.error("Couldn't clear connection!", e1);
             }
+
         }
     }
 
     public void destroy() {
         if(freeConnections !=null && usedConnections !=null)
         {
+            classReentrantLock.lock();
             usedConnections.addAll(freeConnections);
             freeConnections.clear();
+            classReentrantLock.unlock();
             for (PetPooledConnection connection : usedConnections) {
                 try {
                     connection.getConnection().close();

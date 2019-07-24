@@ -40,9 +40,9 @@ public class FindStaffByFirstNameAction extends AuthorizedUserAction {
                         "search");
                 Forward forward = new Forward("/user/admin/findstaff.html?page=1");
                 forward.getAttributes().put("searchParameter",firstnameParameter);
-                UserService userService = (UserService) new ServiceFactoryImpl().createService(DAOEnum.USER);
+                UserService userService = (UserService) factory.createService(DAOEnum.USER);
                 UserInfoService userInfoService = (UserInfoService)
-                        new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                        factory.createService(DAOEnum.USERINFO);
                 firstnameParameter = "%" + firstnameParameter + "%";
                 int amountOfAllStaffByFirstName = userService.getAmountOfAllStaffByFirstName(firstnameParameter);
                 int amountOfPages = amountOfAllStaffByFirstName % ROWS_PER_PAGE == 0 ?

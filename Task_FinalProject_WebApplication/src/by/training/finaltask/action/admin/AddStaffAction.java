@@ -8,11 +8,8 @@ import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
 import by.training.finaltask.parser.UserInfoFormParser;
-import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
-import by.training.finaltask.parser.FormParserEnum;
-import by.training.finaltask.parser.FormParserFactory;
 import by.training.finaltask.parser.UserFormParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +24,8 @@ public class AddStaffAction extends AuthorizedUserAction {
 
     private static Logger logger = LogManager.getLogger(AddStaffAction.class);
 
-    private static final FormParserFactory FORM_PARSER_FACTORY = new FormParserFactory();
+    private static final UserFormParser userParser = new UserFormParser();
+    private static final UserInfoFormParser userInfoParser = new UserInfoFormParser();
 
     public AddStaffAction() {
         allowedRoles.add(Role.ADMINISTRATOR);
@@ -44,18 +42,14 @@ public class AddStaffAction extends AuthorizedUserAction {
                 List<String> userInfoParameters = new ArrayList<>();
                 addUserParametersToList(request, userParameters);
                 addUserInfoParametersToList(request, userInfoParameters);
-                UserFormParser userValidator = (UserFormParser) FORM_PARSER_FACTORY.getValidator(
-                        FormParserEnum.USERFORM);
-                UserInfoFormParser userInfoFormValidator = (UserInfoFormParser) FORM_PARSER_FACTORY.getValidator(
-                        FormParserEnum.USERINFOFORM);
                 try {
-                    User staff = userValidator.parse(userParameters);
+                    User staff = userParser.parse(this,userParameters);
                     staff.setUserRole(Role.STAFF);
-                    UserService userService = (UserService) new ServiceFactoryImpl()
+                    UserService userService = (UserService) factory
                             .createService(DAOEnum.USER);
-                    UserInfo staffuserInfo = userInfoFormValidator.parse(userInfoParameters);
+                    UserInfo staffuserInfo = userInfoParser.parse(this,userInfoParameters);
                     UserInfoService userInfoService = (UserInfoService)
-                            new ServiceFactoryImpl().createService(DAOEnum.USERINFO);
+                            factory.createService(DAOEnum.USERINFO);
                     int userIDGenerated = userService.add(staff);
                     staffuserInfo.setId(userIDGenerated);
                     userInfoService.add(staffuserInfo);

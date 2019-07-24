@@ -15,7 +15,6 @@ public final class PetShelterServletConfig {
     private int dbPoolStartSize;
     private int dbPoolMaxSize;
     private int dbPoolCheckTimeOut;
-
     public PetShelterServletConfig()
     {
         ResourceBundle resourceBundle = ResourceBundle.getBundle(
@@ -74,4 +73,6 @@ public final class PetShelterServletConfig {
     public int getDbPoolCheckTimeOut() {
         return dbPoolCheckTimeOut;
     }
+
+
 }
