@@ -101,7 +101,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     }
 
     @Override
-    public List<Adoption> getAllByID(Integer petID) throws PersistentException {
+    public List<Adoption> getAll(Integer petID) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllAdoptionDAO"))) {
             List<Adoption> adoptions = new LinkedList<>();
@@ -130,6 +130,38 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
         }
     }
 
+    private final static int COUNTARGUMENTS = 10;
+
+    @Override
+    public int getCountByPetIDandDate(int petID, GregorianCalendar start, GregorianCalendar end)
+            throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAmountByPetIDandAdoptionDate"))) {
+            preparedStatement.setInt(1, petID);
+            for(int i = 2 ; i <= COUNTARGUMENTS; i++)
+            {
+                if(i % 2 == 0)
+                {
+                    preparedStatement.setDate(i,new Date(start.getTimeInMillis()));
+                    continue;
+                }
+                preparedStatement.setDate(i,new Date(end.getTimeInMillis()));
+            }
+            int res = 0;
+            try(ResultSet set = preparedStatement.executeQuery())
+            {
+                if(set.next())
+                {
+                    res = set.getInt(1);
+                }
+            }
+            return res;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
     @Override
     public boolean delete(Integer petID) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
@@ -152,17 +184,18 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
             preparedStatement.setInt(1, element.getPetID());
             Date sqlDateAdoptionStart = new Date(
                     element.getAdoption_start().getTimeInMillis());
-            Date sqlDateAdoptionend = null;
-            if (element.getAdoption_end() != null) {
-                sqlDateAdoptionend = new Date(
-                        element.getAdoption_end().getTimeInMillis());
-            }
             preparedStatement.setDate(2, sqlDateAdoptionStart);
-            preparedStatement.setDate(3, sqlDateAdoptionend);
+            if (element.getAdoption_end() != null) {
+                Date sqlDateAdoptionEnd = new Date(
+                        element.getAdoption_end().getTimeInMillis());
+                preparedStatement.setDate(3, sqlDateAdoptionEnd);
+            } else {
+                preparedStatement.setNull(3,Types.DATE);
+            }
             preparedStatement.setInt(4, element.getUserID());
             preparedStatement.executeUpdate();
             try (ResultSet set = preparedStatement.getGeneratedKeys()) {
-                return set.getInt(1);
+                return 0;
             } catch (SQLException e) {
                 LOGGER.warn(e.getMessage(), e);
                 throw new PersistentException(e.getMessage(), e);
@@ -197,7 +230,8 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
         }
     }
 
-    //todo: ask how to delete adoptions records using an adoption! delete IS STILL NOT DONE
+    //todo: ask how to delete adoptions records using an adoption!
+    // delete IS STILL NOT DONE
     @Override
     public boolean delete(Adoption element) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("deleteByElementAdoptionDAO"))) {
@@ -228,6 +262,6 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
 
     @Override
     public Adoption get() throws PersistentException {
-        return null;
+        return get(1);
     }
 }

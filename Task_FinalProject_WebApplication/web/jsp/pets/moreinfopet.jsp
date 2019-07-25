@@ -39,10 +39,9 @@
 </c:if>
 
 <br>
-<div class="table">
-
+<div class="table" style="margin-left: 15%;">
     <label class="text-center"><fmt:message key="petInfo"/></label>
-    <table class="table align-content-center">
+    <table>
         <tbody>
         <tr>
             <td><img class="card-img-top"
@@ -87,7 +86,6 @@
         </tbody>
     </table>
 </div>
-
 
 
 <jsp:include page="/jsp/tags/footer.jsp" flush="true"/>

@@ -1,10 +1,18 @@
 use petshelter;
 
 
+/*not null*/
 
-select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered,
-       pets.shelter_id, pets.breed_id,pets.status from pets
-       where pets.dateofbirth >= ? limit ?,?;
+select count(adoptions_made.pet_id) 
+from adoptions_made where pet_id = ? and (
+              (adoption_start <= ? and adoption_end >= ?)
+              or (adoption_start <= ? and adoption_end >= ?)
+              or (adoption_start <= ? and adoption_end >= ?)
+              or (adoption_start >= ? and adoption_end <= ?)
+              or (adoption_start <= ? and adoption_end is null)    
+  );
+
+
 
 select pets.id, pets.name, pets.photo, pets.dateofbirth, pets.weight, pets.date_sheltered, pets.shelter_id, pets.breed_id,pets.status from pets where pets.shelter_id = ? and pets.status = ? limit ?,?;
 

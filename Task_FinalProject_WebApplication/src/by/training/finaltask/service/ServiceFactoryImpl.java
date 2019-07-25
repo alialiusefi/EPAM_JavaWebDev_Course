@@ -48,7 +48,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
             case BREED:
                 return new BreedServiceImpl(aliveConnection);
             case ADOPTION:
-                return null;
+                return new AdoptionServiceImpl(aliveConnection);
             case PET:
                 return new PetServiceImpl(aliveConnection);
             case USER:

@@ -50,7 +50,7 @@ create table if not exists adoptions_made
 (
   pet_id         integer not null,
   adoption_start date    not null,
-  adoption_end   date,
+  adoption_end   date    null,
   user_id        integer not null,
   constraint fk_petid foreign key (pet_id) references pets (id)
     on delete cascade,

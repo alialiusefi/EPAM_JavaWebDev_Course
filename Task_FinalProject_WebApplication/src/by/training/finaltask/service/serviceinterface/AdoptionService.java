@@ -1,6 +1,7 @@
 package by.training.finaltask.service.serviceinterface;
 
 import by.training.finaltask.entity.Adoption;
+import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface AdoptionService extends Service{
 
     List<Adoption> getAll(int offset, int rowcount) throws PersistentException;
 
-    Integer add(Adoption adoption) throws PersistentException;
+    Integer add(Adoption adoption) throws PersistentException, InvalidFormDataException;
 
     void update(Adoption adoption) throws PersistentException;
 

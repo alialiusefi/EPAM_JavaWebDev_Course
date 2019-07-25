@@ -46,7 +46,7 @@
 </legend>
 <br>
 
-<div class="table mx-auto justify-content-center">
+<div class="table" style="margin: auto; width:50%; !important">
 
     <label class="text-center"><fmt:message key="userCredentials"/></label>
     <table class="table align-content-center">
@@ -59,7 +59,7 @@
     </table>
 </div>
 
-<div class="table mx-auto justify-content-center">
+<div class="table" style="margin: auto; width:50%; !important">
     <label class="text-center"><fmt:message key="userInfo"/></label>
     <table class="table align-content-center ">
         <tr>
@@ -78,7 +78,7 @@
         </tr>
     </table>
 </div>
-<div class="table mx-auto justify-content-center">
+<div class="table" style="margin: auto; width:50%; !important">
     <label class="text-center"><fmt:message key="userActions"/></label>
     <table class="table align-content-center">
         <tr>

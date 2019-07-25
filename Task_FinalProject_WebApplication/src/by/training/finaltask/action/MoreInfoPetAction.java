@@ -61,7 +61,6 @@ public class MoreInfoPetAction extends AuthorizedUserAction {
         }
         throw new PersistentException("forbiddenAccess");
     }
-
     private String getImage(HttpServletRequest request, Pet pet)
             throws PersistentException {
         String image;

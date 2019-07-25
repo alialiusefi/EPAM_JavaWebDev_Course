@@ -17,3 +17,9 @@ function OnSubmitForm()
     }
     return true;
 }
+
+function toggle_adoptionEnd()
+{
+    var cb1 = document.getElementById("adoptForTimeID").checked;
+    document.getElementById("adoptionEndID").disabled = !cb1;
+}
