@@ -5,7 +5,6 @@ import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.InvalidFormDataException;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.parser.PetFormParser;
 import by.training.finaltask.parser.UserFormParser;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 import by.training.finaltask.service.serviceinterface.UserService;
@@ -31,7 +30,7 @@ public class UserEditAction extends AuthorizedUserAction {
             if(user != null)
             {
                 UserInfoService userInfoService = (UserInfoService)factory.createService(DAOEnum.USERINFO);
-                UserInfo userInfo = userInfoService.findById(user.getId());
+                UserInfo userInfo = userInfoService.get(user.getId());
                 session.setAttribute("authorizedUserInfo",userInfo);
                 List<String> userParameters = new ArrayList<>();
                 List<String> userInfoParameters = new ArrayList<>();

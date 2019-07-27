@@ -48,9 +48,10 @@ create table if not exists pets
 use petshelter;
 create table if not exists adoptions_made
 (
+  id              integer not null primary key auto_increment,
   pet_id         integer not null,
   adoption_start date    not null,
-  adoption_end   date    null,
+  adoption_end  date    null,
   user_id        integer not null,
   constraint fk_petid foreign key (pet_id) references pets (id)
     on delete cascade,

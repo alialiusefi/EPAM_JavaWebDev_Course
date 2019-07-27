@@ -44,7 +44,7 @@
                                     <fmt:message key="addPet"/><span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item ${pageContext.request.requestURI eq '/jsp/adoptions/staff/findadoption.jsp' ? 'active' : ''}">
-                                <a class="nav-link" href="<c:url value="/adoptions/staff/findadoption.html"/>">
+                                <a class="nav-link" href="<c:url value="/adoptions/staff/findadoption.html?page=1"/>">
                                     <fmt:message key="allAdoptions"/><span class="sr-only">(current)</span></a>
                             </li>
                         </c:when>

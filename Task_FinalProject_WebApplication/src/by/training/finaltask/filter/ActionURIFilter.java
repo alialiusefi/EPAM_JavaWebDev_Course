@@ -49,7 +49,8 @@ public class ActionURIFilter implements Filter {
         actions.put("/adoptions/staff/findadoption", FindAdoptionAction.class);
         actions.put("/adoptions/myadoptions", MyAdoptionsAction.class);
         actions.put("/adoptions/adoptpet", AdoptPetAction.class);
-
+        actions.put("/adoptions/editadoption", EditAdoptionAction.class);
+        actions.put("/adoptions/deleteadoption", DeleteAdoptionAction.class);
     }
 
     @Override

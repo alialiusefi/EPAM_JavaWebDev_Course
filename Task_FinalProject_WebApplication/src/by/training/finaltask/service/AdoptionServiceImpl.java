@@ -12,6 +12,7 @@ import by.training.finaltask.service.serviceinterface.AdoptionService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService {
@@ -21,24 +22,41 @@ public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService 
     }
 
     @Override
-    public Adoption get(int ID) throws PersistentException {
-        return null;
+    public Adoption get(int adoptionID) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            Adoption adoption = dao.get(adoptionID);
+            commit();
+            connection.setAutoCommit(true);
+            return adoption;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
     }
 
     @Override
     public List<Adoption> getAll(int offset, int rowcount) throws PersistentException {
-        return null;
-    }
-
-    @Override
-    public Integer add(Adoption adoption) throws PersistentException, InvalidFormDataException {
         try {
             connection.setAutoCommit(false);
             AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
-            validateDate(adoption);
-            checkForExistingAdoptions(adoption);
-            int res = dao.add(adoption);
-            changePetStatusToAdopted(adoption);
+            List<Adoption> adoptions = dao.getAll(offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return adoptions;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getAllCount() throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            int res = dao.getAllCount();
             commit();
             connection.setAutoCommit(true);
             return res;
@@ -49,37 +67,104 @@ public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService 
     }
 
     @Override
-    public void update(Adoption adoption) throws PersistentException {
-
+    public Integer add(Adoption adoption) throws PersistentException, InvalidFormDataException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            validateDate(adoption);
+            isOverlapping(adoption);
+            int res = dao.add(adoption);
+            updatePetToAdopted(adoption);
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
     }
 
     @Override
-    public void delete(int ID) throws PersistentException {
+    public void update(Adoption adoption) throws PersistentException,InvalidFormDataException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            validateDate(adoption);
+            isOverlapping(adoption);
+            dao.update(adoption);
+            updatePetToAdopted(adoption);
+            commit();
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
 
+    @Override
+    public void delete(int adoptionID) throws InvalidFormDataException, PersistentException {
+        try {
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            isExpired(adoptionID);
+            connection.setAutoCommit(false);
+            dao.delete(adoptionID);
+            commit();
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
     }
 
     private void validateDate(Adoption adoption) throws InvalidFormDataException {
-        if (adoption.getAdoption_start().compareTo(adoption.getAdoption_end()) > 0) {
+        Calendar calendar = Calendar.getInstance();
+        if (adoption.getAdoptionEnd() != null) {
+            if (adoption.getAdoptionStart().compareTo(adoption.getAdoptionEnd()) > 0
+            || adoption.getAdoptionEnd().compareTo(calendar) < 0
+            ) {
+                throw new InvalidFormDataException("incorrectDateFormat");
+            }
+        }
+        if (adoption.getAdoptionStart().compareTo(calendar) < 0) {
             throw new InvalidFormDataException("incorrectDateFormat");
         }
     }
 
-    private void checkForExistingAdoptions(Adoption adoption)
+    private void isOverlapping(Adoption adoption)
             throws InvalidFormDataException, PersistentException {
 
         AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
-        int count = dao.getCountByPetIDandDate(adoption.getPetID(),
-                adoption.getAdoption_start(), adoption.getAdoption_end());
+        int count = 0;
+        if (adoption.getAdoptionEnd() != null) {
+            count = dao.getCountByPetIDandDateNotNull(adoption.getPetID(),
+                    adoption.getAdoptionStart(), adoption.getAdoptionEnd());
+        } else {
+            count = dao.getCountByPetIDandDateNull(adoption.getPetID(),
+                    adoption.getAdoptionStart());
+        }
         if (count != 0) {
             throw new InvalidFormDataException("petAlreadyAdopted");
         }
     }
 
-    private void changePetStatusToAdopted(Adoption adoption) throws PersistentException {
-        PetDAO dao = (PetDAO) createDao(DAOEnum.PET);
-        Pet pet = dao.get(adoption.getPetID());
-        pet.setStatus(PetStatus.ADOPTED);
-        dao.update(pet);
+    private void updatePetToAdopted(Adoption adoption) throws PersistentException {
+        Calendar calendar = Calendar.getInstance();
+        /*TODO; test this*/
+        if (calendar.compareTo(adoption.getAdoptionStart()) == 0) {
+            PetDAO dao = (PetDAO) createDao(DAOEnum.PET);
+            Pet pet = dao.get(adoption.getPetID());
+            pet.setStatus(PetStatus.ADOPTED);
+            dao.update(pet);
+        }
+    }
+
+    private void isExpired(int adoptionID) throws InvalidFormDataException, PersistentException{
+        Adoption adoption = get(adoptionID);
+        Calendar calendar = Calendar.getInstance();
+        if(adoption.getAdoptionStart().compareTo(calendar) < 0)
+        {
+            throw new InvalidFormDataException("cannotDeleteExpiredAdoption");
+        }
     }
 
 }

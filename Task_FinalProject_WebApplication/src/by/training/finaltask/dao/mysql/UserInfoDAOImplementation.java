@@ -28,17 +28,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
             preparedStatement.setInt(1, userID);
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 if (resultset.next()) {
-                    GregorianCalendar gregCal = new GregorianCalendar();
-                    gregCal.setTime(resultset.getDate("dateofbirth"));
-                    return new UserInfo(
-                            resultset.getInt("user_id"),
-                            resultset.getString("email"),
-                            resultset.getNString("firstname"),
-                            resultset.getNString("lastname"),
-                            gregCal,
-                            resultset.getNString("address"),
-                            resultset.getLong("phone")
-                    );
+                    return getUserInfo(resultset);
                 }
             }
         } catch (SQLException e) {
@@ -55,17 +45,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
                 resourceBundle.getString("getAllUserInfoDAO"))) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    GregorianCalendar gregCal = new GregorianCalendar();
-                    gregCal.setTime(resultSet.getDate("dateofbirth"));
-                    userInfoList.add(new UserInfo(
-                            resultSet.getInt("user_id"),
-                            resultSet.getString("email"),
-                            resultSet.getNString("firstname"),
-                            resultSet.getNString("lastname"),
-                            gregCal,
-                            resultSet.getNString("address"),
-                            resultSet.getLong("phone")
-                    ));
+                    userInfoList.add(getUserInfo(resultSet));
                 }
             }
             return userInfoList;
@@ -86,17 +66,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
             preparedStatement.setInt(2, rowcount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    GregorianCalendar gregCal = new GregorianCalendar();
-                    gregCal.setTime(resultSet.getDate("dateofbirth"));
-                    userInfoList.add(new UserInfo(
-                            null,
-                            resultSet.getString("email"),
-                            resultSet.getNString("firstname"),
-                            resultSet.getNString("lastname"),
-                            gregCal,
-                            resultSet.getNString("address"),
-                            resultSet.getLong("phone")
-                    ));
+                    userInfoList.add(getUserInfo(resultSet));
                 }
             }
             return userInfoList;
@@ -117,17 +87,27 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
             preparedStatement.setInt(3, rowcount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    GregorianCalendar gregCal = new GregorianCalendar();
-                    gregCal.setTime(resultSet.getDate("dateofbirth"));
-                    userInfoList.add(new UserInfo(
-                            null,
-                            resultSet.getString("email"),
-                            resultSet.getNString("firstname"),
-                            resultSet.getNString("lastname"),
-                            gregCal,
-                            resultSet.getNString("address"),
-                            resultSet.getLong("phone")
-                    ));
+                    userInfoList.add(getUserInfo(resultSet));
+                }
+            }
+            return userInfoList;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    /*@Override
+    public List<UserInfo> getAllByAdoptionUserID(int userID, int offset, int rowcount) throws PersistentException {
+        List<UserInfo> userInfoList = new LinkedList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllByAdoptionUserIDDAO"))) {
+            preparedStatement.setInt(1, userID);
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(3, rowcount);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    userInfoList.add(getUserInfo(resultSet));
                 }
             }
             return userInfoList;
@@ -138,6 +118,21 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
     }
 
     @Override
+    public int getCountByAdoptionUserID(int userID) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getCountByAdoptionUserIDDAO"))) {
+            preparedStatement.setInt(1, userID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                resultSet.next();
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+*/
+    @Override
     public List<UserInfo> getAllStaffByFirstName(String firstname, int offset, int rowcount) throws PersistentException {
         List<UserInfo> userInfoList = new LinkedList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
@@ -147,17 +142,7 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
             preparedStatement.setInt(3, rowcount);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    GregorianCalendar gregCal = new GregorianCalendar();
-                    gregCal.setTime(resultSet.getDate("dateofbirth"));
-                    userInfoList.add(new UserInfo(
-                            null,
-                            resultSet.getString("email"),
-                            resultSet.getNString("firstname"),
-                            resultSet.getNString("lastname"),
-                            gregCal,
-                            resultSet.getNString("address"),
-                            resultSet.getLong("phone")
-                    ));
+                    userInfoList.add(getUserInfo(resultSet));
                 }
             }
             return userInfoList;
@@ -233,5 +218,20 @@ public final class UserInfoDAOImplementation extends BaseDAO implements UserInfo
     @Override
     public boolean delete(UserInfo element) throws PersistentException {
         return false;
+    }
+
+    private UserInfo getUserInfo(ResultSet resultSet) throws SQLException
+    {
+        GregorianCalendar gregCal = new GregorianCalendar();
+        gregCal.setTime(resultSet.getDate("dateofbirth"));
+        return new UserInfo(
+                resultSet.getInt("user_id"),
+                resultSet.getString("email"),
+                resultSet.getNString("firstname"),
+                resultSet.getNString("lastname"),
+                gregCal,
+                resultSet.getNString("address"),
+                resultSet.getLong("phone")
+        );
     }
 }

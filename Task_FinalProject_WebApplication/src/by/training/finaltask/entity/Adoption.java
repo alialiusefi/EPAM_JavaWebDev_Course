@@ -5,17 +5,29 @@ import java.util.Objects;
 
 public final class Adoption {
 
+    private int id;
     private int petID;
-    private GregorianCalendar adoption_start;
-    private GregorianCalendar adoption_end;
+    private GregorianCalendar adoptionStart;
+    private GregorianCalendar adoptionEnd;
     private int userID;
 
-    public Adoption(int petID, GregorianCalendar adoption_start,
-                    GregorianCalendar adoption_end, int userID) {
+    public Adoption(int id,int petID, GregorianCalendar adoptionStart,
+                    GregorianCalendar adoptionEnd, int userID) {
+        this.id = id;
         this.petID = petID;
-        this.adoption_start = adoption_start;
-        this.adoption_end = adoption_end;
+        this.adoptionStart = adoptionStart;
+        this.adoptionEnd = adoptionEnd;
         this.userID = userID;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public int getPetID() {
@@ -26,20 +38,20 @@ public final class Adoption {
         this.petID = petID;
     }
 
-    public GregorianCalendar getAdoption_start() {
-        return adoption_start;
+    public GregorianCalendar getAdoptionStart() {
+        return adoptionStart;
     }
 
-    public void setAdoption_start(GregorianCalendar adoption_start) {
-        this.adoption_start = adoption_start;
+    public void setAdoptionStart(GregorianCalendar adoptionStart) {
+        this.adoptionStart = adoptionStart;
     }
 
-    public GregorianCalendar getAdoption_end() {
-        return adoption_end;
+    public GregorianCalendar getAdoptionEnd() {
+        return adoptionEnd;
     }
 
-    public void setAdoption_end(GregorianCalendar adoption_end) {
-        this.adoption_end = adoption_end;
+    public void setAdoptionEnd(GregorianCalendar adoptionEnd) {
+        this.adoptionEnd = adoptionEnd;
     }
 
     public int getUserID() {
@@ -55,23 +67,25 @@ public final class Adoption {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Adoption adoption = (Adoption) o;
-        return getPetID() == adoption.getPetID() &&
+        return getId() == adoption.getId() &&
+                getPetID() == adoption.getPetID() &&
                 getUserID() == adoption.getUserID() &&
-                getAdoption_start().equals(adoption.getAdoption_start()) &&
-                Objects.equals(getAdoption_end(), adoption.getAdoption_end());
+                Objects.equals(getAdoptionStart(), adoption.getAdoptionStart()) &&
+                Objects.equals(getAdoptionEnd(), adoption.getAdoptionEnd());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetID(), getAdoption_start(), getAdoption_end(), getUserID());
+        return Objects.hash(getId(), getPetID(), getAdoptionStart(), getAdoptionEnd(), getUserID());
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("AdoptionDAO{");
-        sb.append("petID=").append(petID);
-        sb.append(", adoption_start=").append(adoption_start);
-        sb.append(", adoption_end=").append(adoption_end);
+        final StringBuffer sb = new StringBuffer("Adoption{");
+        sb.append("id=").append(id);
+        sb.append(", petID=").append(petID);
+        sb.append(", adoptionStart=").append(adoptionStart);
+        sb.append(", adoptionEnd=").append(adoptionEnd);
         sb.append(", userID=").append(userID);
         sb.append('}');
         return sb.toString();

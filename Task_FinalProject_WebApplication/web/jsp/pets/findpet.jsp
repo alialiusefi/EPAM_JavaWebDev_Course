@@ -19,7 +19,7 @@
 <body>
 
 <jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
-<form action="" method="post">
+<form action="<c:url value="/adoptions/staff/findpet.html?page=1"/>" method="post">
     <select name="lang" class="custom-select-sm float-right">
         <option value="${sessionLang}"><fmt:message key="pickLanguage"/></option>
         <option value="en_US"><fmt:message key="english"/></option>

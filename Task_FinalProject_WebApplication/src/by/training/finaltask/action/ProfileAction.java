@@ -4,7 +4,6 @@ import by.training.finaltask.dao.mysql.DAOEnum;
 import by.training.finaltask.entity.User;
 import by.training.finaltask.entity.UserInfo;
 import by.training.finaltask.exception.PersistentException;
-import by.training.finaltask.service.ServiceFactoryImpl;
 import by.training.finaltask.service.serviceinterface.UserInfoService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class ProfileAction extends AuthorizedUserAction {
             request.setAttribute("user",user);
             UserInfoService userInfoService = (UserInfoService)
                     factory.createService(DAOEnum.USERINFO);
-            UserInfo userInfo = userInfoService.findById(user.getId());
+            UserInfo userInfo = userInfoService.get(user.getId());
             if(userInfo != null)
             {
                 request.setAttribute("userinfo",userInfo);

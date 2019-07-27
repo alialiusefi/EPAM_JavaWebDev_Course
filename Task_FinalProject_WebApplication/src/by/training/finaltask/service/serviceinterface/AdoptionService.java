@@ -12,10 +12,12 @@ public interface AdoptionService extends Service{
 
     List<Adoption> getAll(int offset, int rowcount) throws PersistentException;
 
+    int getAllCount() throws PersistentException;
+
     Integer add(Adoption adoption) throws PersistentException, InvalidFormDataException;
 
-    void update(Adoption adoption) throws PersistentException;
+    void update(Adoption adoption) throws PersistentException, InvalidFormDataException;
 
-    void delete(int ID) throws PersistentException;
+    void delete(int adoptionID) throws PersistentException, InvalidFormDataException;
 
 }

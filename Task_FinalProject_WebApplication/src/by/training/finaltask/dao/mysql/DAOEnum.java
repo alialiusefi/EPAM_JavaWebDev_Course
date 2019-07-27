@@ -5,5 +5,6 @@ public enum DAOEnum {
     PET,
     USER,
     BREED,
-    USERINFO, SHELTER;
+    USERINFO,
+    SHELTER;
 }

@@ -60,11 +60,11 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${resultUsers}" var="users" varStatus="i">
+        <c:forEach items="${resultUsers}" var="adoptions" varStatus="i">
             <tr>
-                <td><c:out value="${users.id}"/></td>
-                <td><c:out value="${users.username}"/></td>
-                <td><c:out value="${users.userRole.getName()}"/></td>
+                <td><c:out value="${adoptions.id}"/></td>
+                <td><c:out value="${adoptions.username}"/></td>
+                <td><c:out value="${adoptions.userRole.getName()}"/></td>
                 <td><c:out value="${resultsUserInfo[i.index].email}"/></td>
                 <td><c:out value="${resultsUserInfo[i.index].firstName}"/></td>
                 <td><c:out value="${resultsUserInfo[i.index].lastName}"/></td>
@@ -76,7 +76,7 @@
                 <td>
                     <form action="<c:url value="/user/userdelete.html"/>"
                           method="post">
-                        <input type="hidden" name="userToDelete" value="${users.id}">
+                        <input type="hidden" name="userToDelete" value="${adoptions.id}">
                         <input type="submit" value="<fmt:message key="deleteUser"/>">
                     </form>
                 </td>

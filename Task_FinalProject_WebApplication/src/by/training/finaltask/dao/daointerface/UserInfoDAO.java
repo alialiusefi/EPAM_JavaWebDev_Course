@@ -19,4 +19,11 @@ public interface UserInfoDAO extends DAO<UserInfo> {
 
     List<UserInfo> getAllStaffByPhone(long phone, int offset, int rowcount) throws PersistentException;
 
+/*
+    List<UserInfo> getAllByAdoptionUserID(int userID, int offset, int rowcount) throws PersistentException;
+
+    int getCountByAdoptionUserID(int userID) throws PersistentException;
+*/
+
+
 }

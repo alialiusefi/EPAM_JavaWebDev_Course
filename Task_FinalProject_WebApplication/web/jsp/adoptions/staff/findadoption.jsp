@@ -43,51 +43,51 @@
 </c:if>
 
 <br>
-<%--<div class="table mx-auto">
+<div class="table mx-auto" style="margin-left: 15% !important;">
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th><fmt:message key="username"/></th>
-            <th><fmt:message key="role"/></th>
-            <th><fmt:message key="email"/></th>
+            <th><fmt:message key="petName"/></th>
+            <th><fmt:message key="adoptedFrom"/></th>
+            <th><fmt:message key="adoptedTo"/></th>
             <th><fmt:message key="firstName"/></th>
-            <th><fmt:message key="lastName"/></th>
-            <th><fmt:message key="dateofbirth"/></th>
+            <th><fmt:message key="email"/></th>
             <th><fmt:message key="address"/></th>
             <th><fmt:message key="contactNumber"/></th>
             <th><fmt:message key="actions"/></th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${resultUsers}" var="users" varStatus="i">
+        <c:forEach items="${adoptionResults}" var="adoptions" varStatus="i">
             <tr>
-                <td><c:out value="${users.id}"/></td>
-                <td><c:out value="${users.username}"/></td>
-                <td><c:out value="${users.userRole.getName()}"/></td>
-                <td><c:out value="${resultsUserInfo[i.index].email}"/></td>
-                <td><c:out value="${resultsUserInfo[i.index].firstName}"/></td>
-                <td><c:out value="${resultsUserInfo[i.index].lastName}"/></td>
+                <td><c:out value="${petResults[i.index].name}"/></td>
                 <td><fmt:formatDate type="date" dateStyle="medium"
-                                    value="${resultsUserInfo[i.index].dateOfBirth.time}"/>
+                value="${adoptions.adoptionStart.time}"/>
                 </td>
-                <td><c:out value="${resultsUserInfo[i.index].address}"/></td>
-                <td>+<c:out value="${resultsUserInfo[i.index].phone}"/></td>
+                <td><fmt:formatDate type="date" dateStyle="medium"
+                value="${adoptions.adoptionEnd.time}"/>
+                </td>
+                <td><c:out value="${userInfoResults[i.index].firstName}"/></td>
+                <td><c:out value="${userInfoResults[i.index].email}"/></td>
+                <td><c:out value="${userInfoResults[i.index].address}"/></td>
+                <td>+<c:out value="${userInfoResults[i.index].phone}"/></td>
                 <td>
-                    <form action="<c:url value="/user/userdelete.html"/>"
+                    <form action="<c:url value="/adoptions/editadoption.html"/>"
                           method="post">
-                        <input type="hidden" name="userToDelete" value="${users.id}">
-                        <input type="submit" value="<fmt:message key="deleteUser"/>">
+                        <input type="hidden" name="adoptionID" value="${adoptions.id}">
+                        <input type="submit" value="<fmt:message key="edit"/>">
+                    </form>
+                    <form action="<c:url value="/adoptions/deleteadoption.html"/>"
+                          method="post">
+                        <input type="hidden" name="adoptionID" value="${adoptions.id}">
+                        <input type="submit" value="<fmt:message key="delete"/>">
                     </form>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-</div>--%>
-<%--
-<c:out value="${param.page}"/>
---%>
+</div>
 <nav aria-label="Page navigation">
     <ul class="pagination">
         <c:if test="${param.page > 1}">

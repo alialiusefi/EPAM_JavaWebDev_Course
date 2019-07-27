@@ -67,7 +67,6 @@ public class FindPetAction extends AuthorizedUserAction {
                 List<String> images = getImages(request, pets);
                 request.setAttribute("petPictures", images);
                 request.setAttribute("paginationURL", "/pets/findpet.html");
-
             }
             return null;
         }

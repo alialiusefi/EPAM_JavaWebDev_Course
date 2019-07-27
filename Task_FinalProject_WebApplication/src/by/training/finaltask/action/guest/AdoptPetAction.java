@@ -15,7 +15,6 @@ import by.training.finaltask.service.serviceinterface.AdoptionService;
 import by.training.finaltask.service.serviceinterface.PetService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.security.krb5.internal.PAEncTSEnc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -78,6 +77,7 @@ public class AdoptPetAction extends AuthorizedUserAction {
 
     private void addAdoptionParametersToList(HttpServletRequest request, List<String> parameters)
     {
+        parameters.add("0");
         parameters.add(request.getParameter(PETID));
         parameters.add(request.getParameter("adoptionStart"));
         String adoptionEndDate = request.getParameter("adoptionEnd");

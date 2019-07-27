@@ -33,7 +33,7 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
     }
 
     @Override
-    public UserInfo findById(Integer id) throws PersistentException {
+    public UserInfo get(Integer id) throws PersistentException {
         try {
             connection.setAutoCommit(false);
             UserInfoDAO dao = (UserInfoDAO) createDao(DAOEnum.USERINFO);
@@ -138,4 +138,5 @@ public class UserInfoServiceImpl extends ServiceImpl implements UserInfoService 
             throw new PersistentException(e);
         }
     }
+
 }

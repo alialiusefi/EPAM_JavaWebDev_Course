@@ -41,27 +41,13 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     }
 
     @Override
-    public Adoption get(Integer petID) throws PersistentException {
+    public Adoption get(Integer adoptionID) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAdoptionDAO"))) {
-            preparedStatement.setInt(1, petID);
+            preparedStatement.setInt(1, adoptionID);
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 if (resultset.next()) {
-                    GregorianCalendar adoptionStart = new GregorianCalendar();
-                    adoptionStart.setTime(resultset.getDate(
-                            "adoption_start"));
-                    Date adoptionEndSqlDate = resultset.getDate(
-                            "adoption_end");
-                    GregorianCalendar adoptionEnd = new GregorianCalendar();
-                    if (adoptionEndSqlDate != null) {
-                        adoptionEnd.setTime(adoptionEndSqlDate);
-                    }
-                    return new by.training.finaltask.entity.Adoption(
-                            resultset.getInt(1),
-                            adoptionStart,
-                            adoptionEnd,
-                            resultset.getInt(4)
-                    );
+                    return getAdoption(resultset);
                 }
             }
         } catch (SQLException e) {
@@ -72,26 +58,16 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     }
 
     @Override
-    public List<Adoption> getAll() throws PersistentException {
+    public List<Adoption> getAll(int offset, int rowcount) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllAdoptionDAO"))) {
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, rowcount);
             List<Adoption> adoptions = new LinkedList<>();
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {
-                    GregorianCalendar adoptionStart = new GregorianCalendar();
-                    adoptionStart.setTime(resultset.getDate(
-                            "adoption_start"));
-                    GregorianCalendar adoptionEnd = new GregorianCalendar();
-                    adoptionEnd.setTime(resultset.getDate(
-                            "adoption_end"));
-                    adoptions.add(new by.training.finaltask.entity.Adoption(
-                            resultset.getInt(1),
-                            adoptionStart,
-                            adoptionEnd,
-                            resultset.getInt(4)
-                    ));
+                    adoptions.add(getAdoption(resultset));
                 }
-
                 return adoptions;
             }
         } catch (SQLException e) {
@@ -101,7 +77,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
     }
 
     @Override
-    public List<Adoption> getAll(Integer petID) throws PersistentException {
+    public List<Adoption> getAll(Integer petID, int offset, int rowcount) throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAllAdoptionDAO"))) {
             List<Adoption> adoptions = new LinkedList<>();
@@ -114,12 +90,7 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
                     GregorianCalendar adoptionEnd = new GregorianCalendar();
                     adoptionEnd.setTime(resultset.getDate(
                             "adoption_end"));
-                    adoptions.add(new by.training.finaltask.entity.Adoption(
-                            resultset.getInt(1),
-                            adoptionStart,
-                            adoptionEnd,
-                            resultset.getInt(4)
-                    ));
+                    adoptions.add(getAdoption(resultset));
                 }
 
                 return adoptions;
@@ -130,32 +101,68 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
         }
     }
 
-    private final static int COUNTARGUMENTS = 10;
+    private static final int COUNTARGUMENTS = 10;
 
     @Override
-    public int getCountByPetIDandDate(int petID, GregorianCalendar start, GregorianCalendar end)
+    public int getCountByPetIDandDateNotNull(int petID, GregorianCalendar start, GregorianCalendar end)
             throws PersistentException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAmountByPetIDandAdoptionDate"))) {
             preparedStatement.setInt(1, petID);
-            for(int i = 2 ; i <= COUNTARGUMENTS; i++)
-            {
-                if(i % 2 == 0)
-                {
-                    preparedStatement.setDate(i,new Date(start.getTimeInMillis()));
+            for (int i = 2; i <= COUNTARGUMENTS; i++) {
+                if (i == COUNTARGUMENTS) {
+                    preparedStatement.setDate(i, new Date(end.getTimeInMillis()));
                     continue;
                 }
-                preparedStatement.setDate(i,new Date(end.getTimeInMillis()));
+                if (i % 2 == 0) {
+                    preparedStatement.setDate(i, new Date(start.getTimeInMillis()));
+                    continue;
+                }
+                preparedStatement.setDate(i, new Date(end.getTimeInMillis()));
             }
             int res = 0;
-            try(ResultSet set = preparedStatement.executeQuery())
-            {
-                if(set.next())
-                {
+            try (ResultSet set = preparedStatement.executeQuery()) {
+                if (set.next()) {
                     res = set.getInt(1);
                 }
             }
             return res;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getCountByPetIDandDateNull(int petID, GregorianCalendar start)
+            throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAmountByPetIDandAdoptionDateNull"))) {
+            preparedStatement.setInt(1, petID);
+            preparedStatement.setDate(2,new Date(start.getTimeInMillis()));
+            preparedStatement.setDate(3,new Date(start.getTimeInMillis()));
+            preparedStatement.setDate(4,new Date(start.getTimeInMillis()));
+            int res = 0;
+            try (ResultSet set = preparedStatement.executeQuery()) {
+                if (set.next()) {
+                    res = set.getInt(1);
+                }
+            }
+            return res;
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+
+    @Override
+    public int getAllCount() throws PersistentException {
+        try (PreparedStatement statement = connection.prepareStatement(resourceBundle.getString("getAllAmountAdoptionDAO"))) {
+            try (ResultSet set = statement.executeQuery()) {
+                set.next();
+                return set.getInt(1);
+            }
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
             throw new PersistentException(e.getMessage(), e);
@@ -183,19 +190,21 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
                 resourceBundle.getString("addAdoptionDAO"), PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, element.getPetID());
             Date sqlDateAdoptionStart = new Date(
-                    element.getAdoption_start().getTimeInMillis());
+                    element.getAdoptionStart().getTimeInMillis());
             preparedStatement.setDate(2, sqlDateAdoptionStart);
-            if (element.getAdoption_end() != null) {
+            if (element.getAdoptionEnd() != null) {
                 Date sqlDateAdoptionEnd = new Date(
-                        element.getAdoption_end().getTimeInMillis());
+                        element.getAdoptionEnd().getTimeInMillis());
                 preparedStatement.setDate(3, sqlDateAdoptionEnd);
             } else {
-                preparedStatement.setNull(3,Types.DATE);
+                preparedStatement.setNull(3, Types.DATE);
             }
             preparedStatement.setInt(4, element.getUserID());
             preparedStatement.executeUpdate();
             try (ResultSet set = preparedStatement.getGeneratedKeys()) {
-                return 0;
+                set.next();
+                return set.getInt(1);
+
             } catch (SQLException e) {
                 LOGGER.warn(e.getMessage(), e);
                 throw new PersistentException(e.getMessage(), e);
@@ -212,11 +221,11 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
                 resourceBundle.getString("updateAdoptionDAO"))) {
             preparedStatement.setInt(1, element.getPetID());
             Date sqlDateAdoptionStart = new Date(
-                    element.getAdoption_start().getTimeInMillis());
+                    element.getAdoptionStart().getTimeInMillis());
             Date sqlDateAdoptionend = null;
-            if (element.getAdoption_end() != null) {
+            if (element.getAdoptionEnd() != null) {
                 sqlDateAdoptionend = new Date(
-                        element.getAdoption_end().getTimeInMillis());
+                        element.getAdoptionEnd().getTimeInMillis());
             }
             preparedStatement.setDate(2, sqlDateAdoptionStart);
             preparedStatement.setDate(3, sqlDateAdoptionend);
@@ -237,13 +246,13 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
         try (PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("deleteByElementAdoptionDAO"))) {
             preparedStatement.setInt(1, element.getPetID());
             Date sqlDateAdoptionStart = new Date(
-                    element.getAdoption_start().getTimeInMillis());
+                    element.getAdoptionStart().getTimeInMillis());
             System.out.println(sqlDateAdoptionStart);
             preparedStatement.setDate(2, sqlDateAdoptionStart);
             Date sqlDateAdoptionend = null;
-            if (element.getAdoption_end() != null) {
+            if (element.getAdoptionEnd() != null) {
                 sqlDateAdoptionend = new Date(
-                        element.getAdoption_end().getTimeInMillis());
+                        element.getAdoptionEnd().getTimeInMillis());
                 preparedStatement.setDate(3, sqlDateAdoptionend);
             } else {
                 preparedStatement.setNull(3, Types.DATE);
@@ -259,9 +268,31 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
         }
     }
 
-
     @Override
     public Adoption get() throws PersistentException {
         return get(1);
+    }
+
+    private Adoption getAdoption(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        int petID = resultSet.getInt("pet_id");
+        GregorianCalendar adoptionStart = new GregorianCalendar();
+        adoptionStart.setTime(resultSet.getDate(
+                "adoption_start"));
+        GregorianCalendar adoptionEndCal = new GregorianCalendar();
+        Date adoptionEndDate = resultSet.getDate(
+                "adoption_end");
+        if (adoptionEndDate != null) {
+            adoptionEndCal.setTime(adoptionEndDate);
+        } else {
+            adoptionEndCal = null;
+        }
+        int userID = resultSet.getInt("user_id");
+        return new Adoption(
+                id,
+                petID,
+                adoptionStart,
+                adoptionEndCal,
+                userID);
     }
 }

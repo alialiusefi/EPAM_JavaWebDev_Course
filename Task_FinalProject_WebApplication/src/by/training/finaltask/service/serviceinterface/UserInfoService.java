@@ -6,9 +6,10 @@ import by.training.finaltask.exception.PersistentException;
 import java.util.List;
 
 public interface UserInfoService extends Service {
+
     List<UserInfo> findAll(int offset, int rowcount) throws PersistentException;
 
-    UserInfo findById(Integer id) throws PersistentException;
+    UserInfo get(Integer id) throws PersistentException;
 
     Integer add(UserInfo userinfo) throws PersistentException;
 
@@ -23,6 +24,5 @@ public interface UserInfoService extends Service {
 
     List<UserInfo> findAllStaffByPhone(long phone, int offset, int rowcount)
             throws PersistentException;
-
 
 }
