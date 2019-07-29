@@ -1,5 +1,5 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionLang}"/>
 <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
@@ -12,7 +12,8 @@
     <div class="container">
         <a class="navbar-brand" href="${titleActionURL}">
             <fmt:message key="title"/></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -23,7 +24,8 @@
                     <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ${pageContext.request.requestURI eq '/jsp/pets/findpet.jsp' ? 'active' : ''}">
-                    <a class="nav-link" href="<c:url value="/pets/findpet.html?page=1"/>"><fmt:message key="findAPet"/></a><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<c:url value="/pets/findpet.html?page=1"/>"><fmt:message
+                            key="findAPet"/></a><span class="sr-only">(current)</span></a>
                 </li>
 
                 <c:if test="${not empty authorizedUser}">
@@ -48,6 +50,12 @@
                                     <fmt:message key="allAdoptions"/><span class="sr-only">(current)</span></a>
                             </li>
                         </c:when>
+                        <c:when test="${authorizedUser.userRole == 'GUEST'}">
+                            <li class="nav-item ${pageContext.request.requestURI eq '/adoptions/guest/myadoptions.jsp' ? 'active' : ''}">
+                                <a class="nav-link" href="<c:url value="/adoptions/guest/myadoptions.html"/>">
+                                    <fmt:message key="myAdoptions"/><span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
                     </c:choose>
                     <li class="nav-item ${pageContext.request.requestURI eq '/jsp/user/profile.jsp' ? 'active' : ''}">
                         <a class="nav-link" href="${profileActionURL}">
@@ -58,7 +66,7 @@
                     </li>
                 </c:if>
                 <c:if test="${empty authorizedUser}">
-                    <li class="nav-item ${pageContext.request.requestURI eq '/jsp/login.jsp' ? 'active' : ''}" >
+                    <li class="nav-item ${pageContext.request.requestURI eq '/jsp/login.jsp' ? 'active' : ''}">
                         <a class="nav-link" href="${loginActionURL}"><fmt:message key="login"/></a>
                     </li>
                     <li class="nav-item ${pageContext.request.requestURI eq '/jsp/register.jsp' ? 'active' : ''}">

@@ -31,14 +31,14 @@ public class FindAdoptionAction extends AuthorizedUserAction {
 
 
     @Override
-    public Forward exec(HttpServletRequest request, HttpServletResponse response) throws PersistentException {
+    public Forward exec(HttpServletRequest request, HttpServletResponse response)
+            throws PersistentException {
         HttpSession session = request.getSession(false);
         if (session != null) {
             User authUser = (User) session.getAttribute("authorizedUser");
             if (authUser != null && allowedRoles.contains(authUser.getUserRole())) {
                 @SuppressWarnings("unchecked")
                 List<Adoption> adoptions = (List<Adoption>) request.getAttribute("adoptionResults");
-
                 if (adoptions == null) {
                     AdoptionService service = (AdoptionService) factory
                             .createService(DAOEnum.ADOPTION);
@@ -46,17 +46,17 @@ public class FindAdoptionAction extends AuthorizedUserAction {
                     int amountOfPages = amountOfAllAdoptions % ROWCOUNT == 0 ?
                             amountOfAllAdoptions / ROWCOUNT : amountOfAllAdoptions / ROWCOUNT + 1;
                     request.setAttribute("amountOfPages", amountOfPages);
-                    int pagenumber = FormParser.parsePageNumber(
+                    int pageNumber = FormParser.parsePageNumber(
                             request.getParameter("page"), amountOfPages);
-                    int offset = (pagenumber - 1) * ROWCOUNT;
+                    int offset = (pageNumber - 1) * ROWCOUNT;
                     adoptions = service.getAll(offset, ROWCOUNT);
-                    List<UserInfo> userInfos = getUserInfoForEveryAdoption(adoptions);
-                    List<Pet> pets = getPetForEveryAdoption(adoptions);
-                    request.setAttribute("adoptionResults", adoptions);
-                    request.setAttribute("userInfoResults",userInfos);
-                    request.setAttribute("petResults",pets);
                     request.setAttribute("paginationURL", "/adoptions/staff/findadoption.html");
                 }
+                List<Pet> pets = getPetForEveryAdoption(adoptions);
+                List<UserInfo> userInfos = getUserInfoForEveryAdoption(adoptions);
+                request.setAttribute("adoptionResults", adoptions);
+                request.setAttribute("userInfoResults",userInfos);
+                request.setAttribute("petResults",pets);
                 return null;
             }
             Forward forward = new Forward("/login.html");

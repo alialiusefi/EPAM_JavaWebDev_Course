@@ -9,10 +9,7 @@ import by.training.finaltask.action.admin.FindStaffByFirstNameAction;
 import by.training.finaltask.action.admin.FindStaffByPhoneAction;
 import by.training.finaltask.action.guest.AdoptPetAction;
 import by.training.finaltask.action.guest.MyAdoptionsAction;
-import by.training.finaltask.action.staff.AddPetAction;
-import by.training.finaltask.action.staff.DeletePetAction;
-import by.training.finaltask.action.staff.EditPetAction;
-import by.training.finaltask.action.staff.FindAdoptionAction;
+import by.training.finaltask.action.staff.*;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +44,9 @@ public class ActionURIFilter implements Filter {
         actions.put("/pets/findpetbyshelter", FindPetByShelterAction.class);
         actions.put("/pets/findpetbybirthdate", FindPetByBirthDateAction.class);
         actions.put("/adoptions/staff/findadoption", FindAdoptionAction.class);
-        actions.put("/adoptions/myadoptions", MyAdoptionsAction.class);
+        actions.put("/adoptions/staff/findadoptionbetweendates", FindAdoptionBetweenDatesAction.class);
+        actions.put("/adoptions/staff/findadoptionbypetname", FindAdoptionByPetName.class);
+        actions.put("/adoptions/guest/myadoptions",MyAdoptionsAction.class);
         actions.put("/adoptions/adoptpet", AdoptPetAction.class);
         actions.put("/adoptions/editadoption", EditAdoptionAction.class);
         actions.put("/adoptions/deleteadoption", DeleteAdoptionAction.class);

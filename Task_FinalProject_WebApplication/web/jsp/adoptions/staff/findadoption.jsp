@@ -43,7 +43,7 @@
 </c:if>
 
 <br>
-<div class="table mx-auto" style="margin-left: 15% !important;">
+<div class="table mx-auto" style="max-width: 90%">
     <table>
         <thead>
         <tr>
@@ -62,10 +62,10 @@
             <tr>
                 <td><c:out value="${petResults[i.index].name}"/></td>
                 <td><fmt:formatDate type="date" dateStyle="medium"
-                value="${adoptions.adoptionStart.time}"/>
+                                    value="${adoptions.adoptionStart.time}"/>
                 </td>
                 <td><fmt:formatDate type="date" dateStyle="medium"
-                value="${adoptions.adoptionEnd.time}"/>
+                                    value="${adoptions.adoptionEnd.time}"/>
                 </td>
                 <td><c:out value="${userInfoResults[i.index].firstName}"/></td>
                 <td><c:out value="${userInfoResults[i.index].email}"/></td>
@@ -135,46 +135,36 @@
         </c:if>
     </ul>
 </nav>
-
-<%--Search--%>
-
-
-<%--
-<div class="table-light ">
+<div class="container">
     <div class="row">
-        <div class="col-md-4">
-            &lt;%&ndash;Search by first name&ndash;%&gt;
-            <form class="form-inline" method="post" action="<c:url value="/user/admin/findstaffbyfirstname.html?page=1"/>">
-                <div class="form-group">
-                    <label class="col-form-label"><fmt:message key="searchByFirstName"/></label>
-                    <input class="form-control mr-sm-2" name="search"
-                           type="search" placeholder="Search" aria-label="Search">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            &lt;%&ndash;Search by phone&ndash;%&gt;
-            <form class="form-inline" method="post" action="<c:url value="/user/admin/findstaffbyphone.html?page=1"/>">
-                <div class="form-group">
-                    <label class="col-form-label"><fmt:message key="searchByPhone"/></label>
-                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form action="<c:url value="/user/admin/findstaff.html?page=1"/>" method="post" class="form-inline">
-                <div class="form-group">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                        <fmt:message key="reset"/>
-                    </button>
-                </div>
-            </form>
-        </div>
+        <%--Search between 2 dates--%>
+        <form method="post" class="form-inline"
+              action="<c:url value="/adoptions/staff/findadoptionbetweendates.html?page=1"/>">
+            <div class="col">
+                <button class="btn btn-outline-success mx-sm-3"
+                        type="submit"><fmt:message key="searchBetweenTwoDates"/></button>
+                    <input class="form-control" name="dateFrom"
+                           type="date" aria-label="Search"/>
+                    <input class="form-control" name="dateTo"
+                           type="date" aria-label="Search"/>
+            </div>
+        </form>
+        <form method="post" class="form-inline"
+              action="<c:url value="/adoptions/staff/findadoptionbypetname.html?page=1"/>">
+            <div class="col">
+                <input class="form-control mx-lg-3"
+                       name="petName" type="search"
+                       placeholder="<fmt:message key="petName"/>" aria-label="Search"/>
+                <button class="btn btn-outline-success mx-sm-1" type="submit">
+                    <fmt:message key="searchByPetName"/></button>
+            </div>
+        </form>
     </div>
 </div>
---%>
+<%--Search by pet name--%>
+
+</div>
+</div>
 
 <jsp:include page="/jsp/tags/footer.jsp" flush="true"/>
 

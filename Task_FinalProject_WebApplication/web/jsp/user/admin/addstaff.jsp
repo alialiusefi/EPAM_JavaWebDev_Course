@@ -123,12 +123,11 @@
             </div>
 
             <!-- Button -->
-            <div class="form-row align-items-center">
-                <label class="col-md-6 control-label"></label>
-                    <div class="form-group col-md-2"><br>
+            <div class="form-row mx-auto" style="max-width: 55%">
+                    <div class="form-group col-md-5"><br>
                         <button type="submit" class="btn btn-primary"><fmt:message key="addStaff"/></button>
                     </div>
-                    <div class="form-group col-md-4"><br>
+                    <div class="form-group col-md-2"><br>
                         <button type="reset" class="btn btn-primary">
                             <fmt:message key="reset"/></button>
                     </div>

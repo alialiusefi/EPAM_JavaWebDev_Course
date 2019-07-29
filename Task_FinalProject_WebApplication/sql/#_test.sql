@@ -1,5 +1,18 @@
 use petshelter;
 
+select adoptions_made.id,adoptions_made.pet_id, adoptions_made.adoption_start, adoptions_made.adoption_end,adoptions_made.user_id from adoptions_made
+  inner join pets on (adoptions_made.pet_id = pets.id) where pets.name like ? limit ?,?;
+
+
+
+
+select adoptions_made.id,adoptions_made.pet_id, adoptions_made.adoption_start,
+       adoptions_made.adoption_end,adoptions_made.user_id
+from adoptions_made where
+  ((adoption_start between ? and ?) or (adoption_end between ? and ?)) and user_id = ?
+limit ?,?;
+
+
 
 select count(adoptions_made.pet_id) from adoptions_made where pet_id = ? and (
   (adoptions_made.adoption_start <= ? and adoption_end >= ?)

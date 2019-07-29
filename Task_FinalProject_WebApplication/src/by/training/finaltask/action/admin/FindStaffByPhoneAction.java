@@ -61,10 +61,10 @@ public class FindStaffByPhoneAction extends AuthorizedUserAction {
                         % ROWS_PER_PAGE == 0 ? amountOfAllStaffByPhone
                         / ROWS_PER_PAGE : amountOfAllStaffByPhone / ROWS_PER_PAGE + 1;
                 forward.getAttributes().put("amountOfPages", amountOfPages);
-                Integer pagenumber = 1;
-                pagenumber = validatePageNumber(
+                int pageNumber;
+                pageNumber = validatePageNumber(
                         request.getParameter("page"), amountOfPages);
-                int offset = (pagenumber - 1) * ROWS_PER_PAGE;
+                int offset = (pageNumber - 1) * ROWS_PER_PAGE;
                 List<UserInfo> userInfoList = userInfoService.findAllStaffByPhone(
                         phone, offset, ROWS_PER_PAGE);
                 List<User> userList = userService.getAllStaffByPhone(

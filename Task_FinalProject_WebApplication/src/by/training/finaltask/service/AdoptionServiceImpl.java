@@ -13,6 +13,7 @@ import by.training.finaltask.service.serviceinterface.AdoptionService;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService {
@@ -52,11 +53,137 @@ public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService 
     }
 
     @Override
+    public List<Adoption> getAllBetweenDates(GregorianCalendar start, GregorianCalendar end, int offset, int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            List<Adoption> adoptions = dao.getAllBetweenDates(start,end, offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return adoptions;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllPetName(String petName, int offset, int rowcount)
+            throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            List<Adoption> adoptions = dao.getAllPetName(petName, offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return adoptions;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getCountPetName(String petName)
+            throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            int res = dao.getCountPetName(petName);
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllPetNameCurrentUser(int userID, String petName, int offset,
+                                                   int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            List<Adoption> adoptions = dao.getAllPetNameCurrentUser(userID,petName,offset, rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return adoptions;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getCountPetNameCurrentUser(int userID, String petName)
+            throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            int res = dao.getCountPetNameCurrentUser(petName,userID);
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllBetweenDatesCurrentUser(int userID, GregorianCalendar start, GregorianCalendar end, int offset, int rowcount) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            List<Adoption> adoptions = dao.getAllBetweenDatesCurrentUser(userID,start,end,
+                    offset,rowcount);
+            commit();
+            connection.setAutoCommit(true);
+            return adoptions;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
     public int getAllCount() throws PersistentException {
         try {
             connection.setAutoCommit(false);
             AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
             int res = dao.getAllCount();
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getCountBetweenDates(GregorianCalendar start, GregorianCalendar end)
+            throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            int res = dao.getCountBetweenDates(start,end);
+            commit();
+            connection.setAutoCommit(true);
+            return res;
+        } catch (SQLException e) {
+            rollback();
+            throw new PersistentException(e);
+        }
+    }
+
+    @Override
+    public int getCountBetweenDatesCurrentUser(int userID, GregorianCalendar start, GregorianCalendar end) throws PersistentException {
+        try {
+            connection.setAutoCommit(false);
+            AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
+            int res = dao.getCountBetweenDatesCurrentUser(userID,start,end);
             commit();
             connection.setAutoCommit(true);
             return res;
@@ -120,8 +247,7 @@ public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService 
         Calendar calendar = Calendar.getInstance();
         if (adoption.getAdoptionEnd() != null) {
             if (adoption.getAdoptionStart().compareTo(adoption.getAdoptionEnd()) > 0
-            || adoption.getAdoptionEnd().compareTo(calendar) < 0
-            ) {
+            || adoption.getAdoptionEnd().compareTo(calendar) < 0) {
                 throw new InvalidFormDataException("incorrectDateFormat");
             }
         }
@@ -130,11 +256,11 @@ public class AdoptionServiceImpl extends ServiceImpl implements AdoptionService 
         }
     }
 
+    /*TODO: Bug: Exclude old adoption from validation*/
     private void isOverlapping(Adoption adoption)
             throws InvalidFormDataException, PersistentException {
-
         AdoptionDAO dao = (AdoptionDAO) createDao(DAOEnum.ADOPTION);
-        int count = 0;
+        int count;
         if (adoption.getAdoptionEnd() != null) {
             count = dao.getCountByPetIDandDateNotNull(adoption.getPetID(),
                     adoption.getAdoptionStart(), adoption.getAdoptionEnd());

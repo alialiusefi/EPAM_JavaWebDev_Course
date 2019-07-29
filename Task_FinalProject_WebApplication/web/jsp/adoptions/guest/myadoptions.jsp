@@ -11,7 +11,7 @@
 
     <fmt:setLocale value="${sessionLang}"/>
     <fmt:setBundle basename="by.training.finaltask.resource.localization"/>
-    <title><fmt:message key="findStaff"/></title>
+    <title><fmt:message key="myAdoptions"/></title>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/popper.min.js"></script>
@@ -19,7 +19,7 @@
 
 <body>
 <jsp:include page="/jsp/tags/menu.jsp" flush="true"/>
-<form action="<c:url value="/user/admin/findstaff.html?page=1"/>" method="post">
+<form action="" method="post">
     <select name="lang" class="custom-select-sm float-right">
         <option value="${sessionLang}"><fmt:message key="pickLanguage"/></option>
         <option value="en_US"><fmt:message key="english"/></option>
@@ -32,7 +32,7 @@
 <br>
 
 <legend>
-    <center><h2><b><fmt:message key="findStaff"/> </b></h2></center>
+    <center><h2><b><fmt:message key="myAdoptions"/> </b></h2></center>
 </legend>
 <c:if test="${not empty message}">
     <center>
@@ -43,41 +43,36 @@
 </c:if>
 
 <br>
-<div class="table mx-auto" style="max-width: 95%">
+<div class="table mx-auto" style="max-width: 90%">
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th><fmt:message key="username"/></th>
-            <th><fmt:message key="role"/></th>
-            <th><fmt:message key="email"/></th>
-            <th><fmt:message key="firstName"/></th>
-            <th><fmt:message key="lastName"/></th>
-            <th><fmt:message key="dateofbirth"/></th>
-            <th><fmt:message key="address"/></th>
-            <th><fmt:message key="contactNumber"/></th>
+            <th><fmt:message key="petName"/></th>
+            <th><fmt:message key="adoptedFrom"/></th>
+            <th><fmt:message key="adoptedTo"/></th>
             <th><fmt:message key="actions"/></th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${resultUsers}" var="adoptions" varStatus="i">
+        <c:forEach items="${adoptionResults}" var="adoptions" varStatus="i">
             <tr>
-                <td><c:out value="${adoptions.id}"/></td>
-                <td><c:out value="${adoptions.username}"/></td>
-                <td><c:out value="${adoptions.userRole.getName()}"/></td>
-                <td><c:out value="${resultsUserInfo[i.index].email}"/></td>
-                <td><c:out value="${resultsUserInfo[i.index].firstName}"/></td>
-                <td><c:out value="${resultsUserInfo[i.index].lastName}"/></td>
+                <td><c:out value="${petResults[i.index].name}"/></td>
                 <td><fmt:formatDate type="date" dateStyle="medium"
-                                    value="${resultsUserInfo[i.index].dateOfBirth.time}"/>
+                                    value="${adoptions.adoptionStart.time}"/>
                 </td>
-                <td><c:out value="${resultsUserInfo[i.index].address}"/></td>
-                <td>+<c:out value="${resultsUserInfo[i.index].phone}"/></td>
+                <td><fmt:formatDate type="date" dateStyle="medium"
+                                    value="${adoptions.adoptionEnd.time}"/>
+                </td>
                 <td>
-                    <form action="<c:url value="/user/userdelete.html"/>"
+                    <form action="<c:url value="/adoptions/editadoption.html"/>"
                           method="post">
-                        <input type="hidden" name="userToDelete" value="${adoptions.id}">
-                        <input type="submit" value="<fmt:message key="deleteUser"/>">
+                        <input type="hidden" name="adoptionID" value="${adoptions.id}">
+                        <input type="submit" value="<fmt:message key="edit"/>">
+                    </form>
+                    <form action="<c:url value="/adoptions/deleteadoption.html"/>"
+                          method="post">
+                        <input type="hidden" name="adoptionID" value="${adoptions.id}">
+                        <input type="submit" value="<fmt:message key="delete"/>">
                     </form>
                 </td>
             </tr>
@@ -85,9 +80,6 @@
         </tbody>
     </table>
 </div>
-<%--
-<c:out value="${param.page}"/>
---%>
 <nav aria-label="Page navigation">
     <ul class="pagination">
         <c:if test="${param.page > 1}">
@@ -99,7 +91,7 @@
                             Previous</a>
                     </c:when>
                     <c:otherwise>
-                    <a class="page-link" href="<c:url value="${paginationURL += '?page=' += (param.page - 1)}"/>">
+                        <a class="page-link" href="<c:url value="${paginationURL += '?page=' += (param.page - 1)}"/>">
                             Previous</a>
                     </c:otherwise>
                 </c:choose>
@@ -135,43 +127,33 @@
         </c:if>
     </ul>
 </nav>
-
-<%--Search--%>
-
-
-<div class="table-light ">
+<div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <%--Search by first name--%>
-            <form class="form-inline" method="post" action="<c:url value="/user/admin/findstaffbyfirstname.html?page=1"/>">
-                <div class="form-group">
-                    <label class="col-form-label"><fmt:message key="searchByFirstName"/></label>
-                    <input class="form-control mr-sm-2" name="search"
-                           type="search" placeholder="Search" aria-label="Search">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <%--Search by phone--%>
-            <form class="form-inline" method="post" action="<c:url value="/user/admin/findstaffbyphone.html?page=1"/>">
-                <div class="form-group">
-                    <label class="col-form-label"><fmt:message key="searchByPhone"/></label>
-                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4">
-            <form action="<c:url value="/user/admin/findstaff.html?page=1"/>" method="post" class="form-inline">
-                <div class="form-group">
-                    <button style="margin-left: 0; z-index: 999;" class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                        <fmt:message key="reset"/>
-                    </button>
-                </div>
-            </form>
-        </div>
+        <%--Search between 2 dates--%>
+        <form method="post" class="form-inline"
+              action="<c:url value="/adoptions/staff/findadoptionbetweendates.html?page=1"/>">
+            <div class="col">
+                <button class="btn btn-outline-success mx-sm-3"
+                        type="submit"><fmt:message key="searchBetweenTwoDates"/></button>
+                <input class="form-control" name="dateFrom"
+                       type="date" aria-label="Search"/>
+                <input class="form-control" name="dateTo"
+                       type="date" aria-label="Search"/>
+            </div>
+        </form>
+        <form method="post" class="form-inline"
+              action="<c:url value="/adoptions/staff/findadoptionbypetname.html?page=1"/>">
+            <div class="col">
+                <input class="form-control mx-lg-3"
+                       name="petName" type="search"
+                       placeholder="<fmt:message key="petName"/>" aria-label="Search"/>
+                <button class="btn btn-outline-success mx-sm-1" type="submit">
+                    <fmt:message key="searchByPetName"/></button>
+            </div>
+        </form>
     </div>
+</div>
+</div>
 </div>
 
 <jsp:include page="/jsp/tags/footer.jsp" flush="true"/>

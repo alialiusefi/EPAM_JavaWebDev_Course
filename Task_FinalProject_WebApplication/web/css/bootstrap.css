@@ -1502,9 +1502,6 @@ pre code {
 }
 
 .table {
-  margin:auto;
-  width:50% !important;
-  margin-bottom: 1rem;
   background-color: transparent;
 }
 

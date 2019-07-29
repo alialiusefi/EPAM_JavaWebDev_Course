@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <c:url value="/user/useredit.html" var="userEditActionURL"/>
     <c:url value="/user/userdelete.html" var="userDeleteActionURL"/>
     <fmt:setLocale value="${sessionLang}"/>
@@ -46,7 +45,7 @@
 </legend>
 <br>
 
-<div class="table" style="margin: auto; width:50%; !important">
+<div class="table mx-auto" style="max-width: 50%">
 
     <label class="text-center"><fmt:message key="userCredentials"/></label>
     <table class="table align-content-center">
@@ -59,7 +58,7 @@
     </table>
 </div>
 
-<div class="table" style="margin: auto; width:50%; !important">
+<div class="table mx-auto" style="max-width: 50%">
     <label class="text-center"><fmt:message key="userInfo"/></label>
     <table class="table align-content-center ">
         <tr>
@@ -78,7 +77,7 @@
         </tr>
     </table>
 </div>
-<div class="table" style="margin: auto; width:50%; !important">
+<div class="table mx-auto" style="max-width: 50%">
     <label class="text-center"><fmt:message key="userActions"/></label>
     <table class="table align-content-center">
         <tr>
@@ -89,7 +88,7 @@
             </td>
             <c:if test="${authorizedUser.userRole == 'GUEST'}">
                 <td>
-                    <a class="btn btn-secondary" href="<c:url value="/adoptions/myadoptions.html"/>">
+                    <a class="btn btn-secondary" href="<c:url value="/adoptions/guest/myadoptions.html"/>">
                         <fmt:message key="myAdoptions"/>
                     </a>
                 </td>
@@ -102,12 +101,9 @@
                     </form>
                 </td>
             </c:if>
-
-
         </tr>
     </table>
 </div>
-
 <jsp:include page="/jsp/tags/footer.jsp"/>
 </body>
 </html>

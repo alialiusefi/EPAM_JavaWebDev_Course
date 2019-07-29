@@ -84,16 +84,176 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
             preparedStatement.setInt(1, petID);
             try (ResultSet resultset = preparedStatement.executeQuery()) {
                 while (resultset.next()) {
-                    GregorianCalendar adoptionStart = new GregorianCalendar();
-                    adoptionStart.setTime(resultset.getDate(
-                            "adoption_start"));
-                    GregorianCalendar adoptionEnd = new GregorianCalendar();
-                    adoptionEnd.setTime(resultset.getDate(
-                            "adoption_end"));
                     adoptions.add(getAdoption(resultset));
                 }
 
                 return adoptions;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllBetweenDates(GregorianCalendar start, GregorianCalendar end,
+                                             int offset, int rowcount)
+            throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllAdoptionBetweenDatesDAO"))) {
+            List<Adoption> adoptions = new LinkedList<>();
+            Date startDate = new Date(start.getTimeInMillis());
+            Date endDate = new Date(end.getTimeInMillis());
+            preparedStatement.setDate(1, startDate);
+            preparedStatement.setDate(2, endDate);
+            preparedStatement.setDate(3, startDate);
+            preparedStatement.setDate(4, endDate);
+            preparedStatement.setInt(5, offset);
+            preparedStatement.setInt(6, rowcount);
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    adoptions.add(getAdoption(resultset));
+                }
+                return adoptions;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getCountBetweenDates(GregorianCalendar start, GregorianCalendar end) throws PersistentException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                resourceBundle.getString("getCountAdoptionBetweenDatesDAO"))) {
+            Date startDate = new Date(start.getTimeInMillis());
+            Date endDate = new Date(end.getTimeInMillis());
+            statement.setDate(1, startDate);
+            statement.setDate(2, endDate);
+            statement.setDate(3, startDate);
+            statement.setDate(4, endDate);
+            try (ResultSet set = statement.executeQuery()) {
+                set.next();
+                return set.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllBetweenDatesCurrentUser(int userID, GregorianCalendar start, GregorianCalendar end, int offset, int rowcount) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllAdoptionBetweenDatesCurrentUserDAO"))) {
+            List<Adoption> adoptions = new LinkedList<>();
+            Date startDate = new Date(start.getTimeInMillis());
+            Date endDate = new Date(end.getTimeInMillis());
+            preparedStatement.setDate(1, startDate);
+            preparedStatement.setDate(2, endDate);
+            preparedStatement.setDate(3, startDate);
+            preparedStatement.setDate(4, endDate);
+            preparedStatement.setInt(5, userID);
+            preparedStatement.setInt(6, offset);
+            preparedStatement.setInt(7, rowcount);
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    adoptions.add(getAdoption(resultset));
+                }
+                return adoptions;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllPetName(String petName, int offset, int rowcount)
+            throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllAdoptionPetNameDAO"))) {
+            List<Adoption> adoptions = new LinkedList<>();
+            preparedStatement.setNString(1,petName);
+            preparedStatement.setInt(2,offset);
+            preparedStatement.setInt(3,rowcount);
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    adoptions.add(getAdoption(resultset));
+                }
+                return adoptions;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Adoption> getAllPetNameCurrentUser(int userID, String petName, int offset, int rowcount) throws PersistentException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                resourceBundle.getString("getAllAdoptionPetNameCurrentUserDAO"))) {
+            List<Adoption> adoptions = new LinkedList<>();
+            preparedStatement.setNString(1,petName);
+            preparedStatement.setInt(2,userID);
+            preparedStatement.setInt(3,offset);
+            preparedStatement.setInt(4,rowcount);
+            try (ResultSet resultset = preparedStatement.executeQuery()) {
+                while (resultset.next()) {
+                    adoptions.add(getAdoption(resultset));
+                }
+                return adoptions;
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getCountPetName(String petName) throws PersistentException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                resourceBundle.getString("getCountAdoptionPetNameDAO"))) {
+            statement.setNString(1,petName);
+            try (ResultSet set = statement.executeQuery()) {
+                set.next();
+                return set.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getCountPetNameCurrentUser(String petName, int userID) throws PersistentException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                resourceBundle.getString("getCountAdoptionPetNameCurrentUserDAO"))) {
+            statement.setNString(1,petName);
+            try (ResultSet set = statement.executeQuery()) {
+                set.next();
+                return set.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn(e.getMessage(), e);
+            throw new PersistentException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public int getCountBetweenDatesCurrentUser(int userID, GregorianCalendar start, GregorianCalendar end) throws PersistentException {
+        try (PreparedStatement statement = connection.prepareStatement(
+                resourceBundle.getString("getCountAdoptionBetweenDatesCurrentUserDAO"))) {
+            Date startDate = new Date(start.getTimeInMillis());
+            Date endDate = new Date(end.getTimeInMillis());
+            statement.setDate(1, startDate);
+            statement.setDate(2, endDate);
+            statement.setDate(3, startDate);
+            statement.setDate(4, endDate);
+            statement.setInt(5, userID);
+            try (ResultSet set = statement.executeQuery()) {
+                set.next();
+                return set.getInt(1);
             }
         } catch (SQLException e) {
             LOGGER.warn(e.getMessage(), e);
@@ -139,9 +299,9 @@ public final class AdoptionDAOImplementation extends BaseDAO implements Adoption
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 resourceBundle.getString("getAmountByPetIDandAdoptionDateNull"))) {
             preparedStatement.setInt(1, petID);
-            preparedStatement.setDate(2,new Date(start.getTimeInMillis()));
-            preparedStatement.setDate(3,new Date(start.getTimeInMillis()));
-            preparedStatement.setDate(4,new Date(start.getTimeInMillis()));
+            preparedStatement.setDate(2, new Date(start.getTimeInMillis()));
+            preparedStatement.setDate(3, new Date(start.getTimeInMillis()));
+            preparedStatement.setDate(4, new Date(start.getTimeInMillis()));
             int res = 0;
             try (ResultSet set = preparedStatement.executeQuery()) {
                 if (set.next()) {
