@@ -28,12 +28,3 @@ EPAM Web Development
     * Subject: XML & Web Parsing
     * Design Patterns Used:
       * Builder
-
-5. Task_FinalProject-WebApplication
-    * Subject: Pet Shelter
-    * Design Patterns Used:
-      * Command
-      * Factory Method
-      * Singleton
-      * DAO
-    
